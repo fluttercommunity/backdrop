@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage>
         child: Text("Backpanel"),
       ),
       body: Center(
-        child: Text("Backpanel"),
+        child: Text("Body"),
       ),
     );
   }
