@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 21 July 2018.
 
-* TODO: Describe initial release.
+* Basic backdrop implementation.
+* BackdropScaffold widget implemented.

@@ -3,7 +3,7 @@ library backdrop;
 import 'package:flutter/material.dart';
 
 class BackdropScaffold extends StatefulWidget {
-  AnimationController controller;
+  final AnimationController controller;
   final Widget title;
   final Widget backpanel;
   final Widget body;
@@ -24,14 +24,17 @@ class BackdropScaffold extends StatefulWidget {
 class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerProviderStateMixin{
   static const header_height = 32.0;
   bool shouldDisposeController = false;
+  AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
     if (widget.controller == null) {
       shouldDisposeController = true;
-      widget.controller = AnimationController(
+      _controller = AnimationController(
           vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
+    }else{
+      _controller = widget.controller;
     }
   }
 
@@ -39,18 +42,18 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
   void dispose() {
     super.dispose();
     if(shouldDisposeController) {
-      widget.controller.dispose();
+      _controller.dispose();
     }
   }
 
   bool get isTopPanelVisible {
-    final AnimationStatus status = widget.controller.status;
+    final AnimationStatus status = _controller.status;
     return status == AnimationStatus.completed ||
         status == AnimationStatus.forward;
   }
 
   bool get isBackPanelVisible {
-    final AnimationStatus status = widget.controller.status;
+    final AnimationStatus status = _controller.status;
     return status == AnimationStatus.dismissed ||
         status == AnimationStatus.reverse;
   }
@@ -63,13 +66,13 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
     return RelativeRectTween(
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
-    ).animate(new CurvedAnimation(parent: widget.controller, curve: Curves.linear));
+    ).animate(new CurvedAnimation(parent: _controller, curve: Curves.linear));
   }
 
   Widget _buildInactiveLayer() {
     return isBackPanelVisible
         ? GestureDetector(
-      onTap: () => widget.controller.fling(velocity: 1.0),
+      onTap: () => _controller.fling(velocity: 1.0),
       behavior: HitTestBehavior.opaque,
       child: Center(),
     )
@@ -116,9 +119,9 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
         leading: IconButton(
           icon: AnimatedIcon(
             icon: AnimatedIcons.close_menu,
-            progress: widget.controller.view,
+            progress: _controller.view,
           ),
-          onPressed: () => widget.controller.fling(
+          onPressed: () => _controller.fling(
             velocity: isTopPanelVisible ? -1.0 : 1.0,
           ),
         ),
