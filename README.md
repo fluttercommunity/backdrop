@@ -4,6 +4,7 @@ Backdrop implementation in dart. (https:&#x2F;&#x2F;material.io&#x2F;design&#x2F
 
 ## Example
 check out sample code in [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
+
 ![Backdrop Example Screenshot](https://gitlab.com/daadu/backdrop/raw/master/.github/backdrop.gif)
 
 ## Contribute
