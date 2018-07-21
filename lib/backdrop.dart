@@ -60,7 +60,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
 
   Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints) {
     final height = constraints.biggest.height;
-    final backPanelHeight = height - header_height - 400;
+    final backPanelHeight = height - header_height;
     final frontPanelHeight = -backPanelHeight;
 
     return RelativeRectTween(
