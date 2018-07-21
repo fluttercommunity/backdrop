@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return BackdropScaffold(
       controller: controller,
-      title: Text("Backpanel Example"),
+      title: Text("Backdrop Example"),
       backpanel: Center(
         child: Text("Backpanel"),
       ),
