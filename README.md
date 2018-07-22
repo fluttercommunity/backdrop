@@ -2,7 +2,7 @@
 
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
-This widget is in active development. Wait for the stable v1.0.0.___Any contribution, idea, criticism or feedback is welcomed.___
+This widget is in active development. Wait for the stable v1.0.0. ___Any contribution, idea, criticism or feedback is welcomed.___
 
 ## Example
 check out sample code in [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
