@@ -2,6 +2,8 @@
 
 Backdrop implementation in dart. (https:&#x2F;&#x2F;material.io&#x2F;design&#x2F;components&#x2F;backdrop.htm)
 
+This widget is in active development. Wait for the stable v1.0.0.___Any contribution, idea, criticism or feedback is welcomed.___
+
 ## Example
 check out sample code in [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
 
