@@ -21,3 +21,10 @@ Please file feature requests and bugs at the [issue tracker](https://gitlab.com/
 - Properly document the usage of the widget in README.md
 - Properly document classes and public methods
 - ~~Write an example flutter app to demonstrate options and functionality~~
+- Using ScopedModel for storing controller in state and accessing it throughout
+- Dynamic height for backdrop - based on height of backpanel ??
+- Fixed height for backdrop - provided in argument of BackdropScaffold
+- BackdropNavigation : Using backpanel for navigation
+- BackdropTitle : Different title for backpanel and frontpanel visibility
+- BackdropAction : Action with view in backpanel
+- subheader argument (optional) in BackdropScaffold
