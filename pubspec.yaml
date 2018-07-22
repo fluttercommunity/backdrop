@@ -1,6 +1,6 @@
 name: backdrop
 description: Backdrop implementaion in dart. (https://material.io/design/components/backdrop.html)
-version: 0.0.12
+version: 0.0.13
 author: Harsh Bhikadia <harsh@bhikadia.com>
 homepage: https://gitlab.com/daadu/backdrop
 documentation: https://gitlab.com/daadu/backdrop

@@ -7,7 +7,7 @@ This widget is in active development. Wait for the stable v1.0.0. ___Any contrib
 ## Example
 check out sample code in [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
 
-![Backdrop Example Screenshot](https://gitlab.com/daadu/backdrop/raw/master/.github/backdrop.gif)
+![Backdrop Example Screenshot](https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop.gif)
 
 ## Contribute
 1. You'll need a gitlab account. (Sorry, if you had to create one!!)
@@ -15,6 +15,7 @@ check out sample code in [example directory](https://gitlab.com/daadu/backdrop/t
 3. Implement features from to-do, fix issues, etc.
 4. Send merge request.
 5. Star this project.
+6. Become a hero!!
 
 ## Features and bugs
 Please file feature requests and bugs at the [issue tracker](https://gitlab.com/daadu/backdrop/issues).
