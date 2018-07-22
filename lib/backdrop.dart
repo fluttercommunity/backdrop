@@ -21,7 +21,8 @@ class BackdropScaffold extends StatefulWidget {
   _BackdropScaffoldState createState() => _BackdropScaffoldState();
 }
 
-class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerProviderStateMixin{
+class _BackdropScaffoldState extends State<BackdropScaffold>
+    with SingleTickerProviderStateMixin {
   static const header_height = 32.0;
   bool shouldDisposeController = false;
   AnimationController _controller;
@@ -33,7 +34,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
       shouldDisposeController = true;
       _controller = AnimationController(
           vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
-    }else{
+    } else {
       _controller = widget.controller;
     }
   }
@@ -41,7 +42,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
   @override
   void dispose() {
     super.dispose();
-    if(shouldDisposeController) {
+    if (shouldDisposeController) {
       _controller.dispose();
     }
   }
@@ -72,14 +73,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
   Widget _buildInactiveLayer() {
     return isBackPanelVisible
         ? GestureDetector(
-      onTap: () => _controller.fling(velocity: 1.0),
-      behavior: HitTestBehavior.opaque,
-      child: Center(),
-    )
+            onTap: () => _controller.fling(velocity: 1.0),
+            behavior: HitTestBehavior.opaque,
+            child: Center(),
+          )
         : const SizedBox(
-      height: 0.0,
-      width: 0.0,
-    );
+            height: 0.0,
+            width: 0.0,
+          );
   }
 
   Widget _buildBackPanel() {
@@ -122,8 +123,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold> with SingleTickerPr
             progress: _controller.view,
           ),
           onPressed: () => _controller.fling(
-            velocity: isTopPanelVisible ? -1.0 : 1.0,
-          ),
+                velocity: isTopPanelVisible ? -1.0 : 1.0,
+              ),
         ),
       ),
       body: LayoutBuilder(

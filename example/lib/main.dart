@@ -23,27 +23,10 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
-      controller: controller,
       title: Text("Backdrop Example"),
       backpanel: Center(
         child: Text("Backpanel"),
