@@ -1,0 +1,6 @@
+is_package: true
+package_name: backdrop
+maintainer_name: Harsh Bhikadia
+maintainer_username: daadu
+package_description: Implementation of backdrop in flutter
+pub_package_name: backdrop
