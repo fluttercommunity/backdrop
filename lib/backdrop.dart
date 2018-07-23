@@ -8,6 +8,7 @@ class BackdropScaffold extends StatefulWidget {
   final Widget backpanel;
   final Widget body;
   final List<Widget> actions;
+  final double headerHeight;
 
   BackdropScaffold({
     this.controller,
@@ -15,6 +16,7 @@ class BackdropScaffold extends StatefulWidget {
     this.backpanel,
     this.body,
     this.actions,
+    this.headerHeight=32.0,
   });
 
   @override
@@ -23,7 +25,6 @@ class BackdropScaffold extends StatefulWidget {
 
 class _BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  static const header_height = 32.0;
   bool shouldDisposeController = false;
   AnimationController _controller;
 
@@ -61,7 +62,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints) {
     final height = constraints.biggest.height;
-    final backPanelHeight = height - header_height;
+    final backPanelHeight = height - widget.headerHeight;
     final frontPanelHeight = -backPanelHeight;
 
     return RelativeRectTween(
