@@ -31,4 +31,6 @@ Please file feature requests and bugs at the [issue tracker](https://gitlab.com/
 - BackdropNavigation : Using backpanel for navigation
 - BackdropTitle : Different title for backpanel and frontpanel visibility
 - BackdropAction : Action with view in backpanel
-- subheader argument (optional) in BackdropScaffold
+- subheader argument (optional) in BackdropScaffol
+- BackdropToggle : widget to fling backdrop anywhere inside the scaffol
+- BackdropButton : widget that build button with BackdropToggle with default menu_close icon. Can directly be used in actions.
