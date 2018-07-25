@@ -1,9 +1,10 @@
 # backdrop
-
-
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
 This widget is in active development. Wait for the stable v1.0.0. ___Any contribution, idea, criticism or feedback is welcomed.___
+
+## Getting started
+Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f) 
 
 ## Example
 check out sample code in [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
