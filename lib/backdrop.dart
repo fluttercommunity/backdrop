@@ -16,7 +16,7 @@ class BackdropScaffold extends StatefulWidget {
     this.backpanel,
     this.body,
     this.actions,
-    this.headerHeight=32.0,
+    this.headerHeight = 32.0,
   });
 
   @override
@@ -72,16 +72,30 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildInactiveLayer() {
-    return isBackPanelVisible
-        ? GestureDetector(
-            onTap: () => _controller.fling(velocity: 1.0),
-            behavior: HitTestBehavior.opaque,
-            child: Center(),
-          )
-        : const SizedBox(
-            height: 0.0,
-            width: 0.0,
-          );
+    if (isBackPanelVisible) {
+      return GestureDetector(
+        onTap: () => _controller.fling(velocity: 1.0),
+        behavior: HitTestBehavior.opaque,
+        child: SizedBox.expand(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200.withOpacity(0.7),
+            ),
+            child: Center(
+              child: SizedBox(
+                height: 0.0,
+                width: 0.0,
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return const SizedBox(
+        height: 0.0,
+        width: 0.0,
+      );
+    }
   }
 
   Widget _buildBackPanel() {
@@ -92,21 +106,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildFrontPanel() {
-    return AnimatedOpacity(
-      duration: Duration(milliseconds: 300),
-      opacity: isBackPanelVisible ? 0.85 : 1.0,
-      child: Material(
-        elevation: 12.0,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16.0),
-          topRight: Radius.circular(16.0),
-        ),
-        child: Stack(
-          children: <Widget>[
-            widget.body,
-            _buildInactiveLayer(),
-          ],
-        ),
+    return Material(
+      elevation: 12.0,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
+      ),
+      child: Stack(
+        children: <Widget>[
+          widget.body,
+          _buildInactiveLayer(),
+        ],
       ),
     );
   }
