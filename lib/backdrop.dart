@@ -9,6 +9,7 @@ class BackdropScaffold extends StatefulWidget {
   final Widget body;
   final List<Widget> actions;
   final double headerHeight;
+  final BorderRadius frontLayerBorderRadius;
 
   BackdropScaffold({
     this.controller,
@@ -17,6 +18,10 @@ class BackdropScaffold extends StatefulWidget {
     this.body,
     this.actions,
     this.headerHeight = 32.0,
+    this.frontLayerBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(16.0),
+      topRight: Radius.circular(16.0),
+    ),
   });
 
   @override
@@ -108,10 +113,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildFrontPanel() {
     return Material(
       elevation: 12.0,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16.0),
-        topRight: Radius.circular(16.0),
-      ),
+      borderRadius: widget.frontLayerBorderRadius,
       child: Stack(
         children: <Widget>[
           widget.body,
