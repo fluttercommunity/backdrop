@@ -25,6 +25,18 @@ class Backdrop extends InheritedWidget {
     controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
   }
 
+  void showBackLayer(){
+    if(isTopPanelVisible){
+      controller.fling(velocity: -1.0);
+    }
+  }
+
+  void showFrontLayer(){
+    if(isBackPanelVisible){
+      controller.fling(velocity: 1.0);
+    }
+  }
+
   static Backdrop of(BuildContext context) =>
       context.inheritFromWidgetOfExactType(Backdrop);
 
