@@ -16,6 +16,12 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: Text("Body"),
         ),
+        iconPosition: BackdropIconPosition.leading,
+        actions: <Widget>[
+          BackdropToggleButton(
+            icon: AnimatedIcons.list_view,
+          )
+        ],
       ),
     );
   }

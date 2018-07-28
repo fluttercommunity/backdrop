@@ -2,6 +2,36 @@ library backdrop;
 
 import 'package:flutter/material.dart';
 
+class Backdrop extends InheritedWidget {
+  final AnimationController controller;
+
+  Backdrop({Key key, @required Widget child, @required this.controller})
+      : assert(controller != null),
+        super(key: key, child: child);
+
+  bool get isTopPanelVisible {
+    final AnimationStatus status = controller.status;
+    return status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
+  }
+
+  bool get isBackPanelVisible {
+    final AnimationStatus status = controller.status;
+    return status == AnimationStatus.dismissed ||
+        status == AnimationStatus.reverse;
+  }
+
+  void fling() {
+    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+  }
+
+  static Backdrop of(BuildContext context) =>
+      context.inheritFromWidgetOfExactType(Backdrop);
+
+  @override
+  bool updateShouldNotify(Backdrop old) => controller != old.controller;
+}
+
 class BackdropScaffold extends StatefulWidget {
   final AnimationController controller;
   final Widget title;
@@ -10,19 +40,20 @@ class BackdropScaffold extends StatefulWidget {
   final List<Widget> actions;
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
+  final BackdropIconPosition iconPosition;
 
-  BackdropScaffold({
-    this.controller,
-    this.title,
-    this.backpanel,
-    this.body,
-    this.actions,
-    this.headerHeight = 32.0,
-    this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
-    ),
-  });
+  BackdropScaffold(
+      {this.controller,
+      this.title,
+      this.backpanel,
+      this.body,
+      this.actions = const <Widget>[],
+      this.headerHeight = 32.0,
+      this.frontLayerBorderRadius = const BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
+      ),
+      this.iconPosition = BackdropIconPosition.leading});
 
   @override
   _BackdropScaffoldState createState() => _BackdropScaffoldState();
@@ -53,19 +84,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
-  bool get isTopPanelVisible {
-    final AnimationStatus status = _controller.status;
-    return status == AnimationStatus.completed ||
-        status == AnimationStatus.forward;
-  }
-
-  bool get isBackPanelVisible {
-    final AnimationStatus status = _controller.status;
-    return status == AnimationStatus.dismissed ||
-        status == AnimationStatus.reverse;
-  }
-
-  Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints) {
+  Animation<RelativeRect> getPanelAnimation(
+      BuildContext context, BoxConstraints constraints) {
     final height = constraints.biggest.height;
     final backPanelHeight = height - widget.headerHeight;
     final frontPanelHeight = -backPanelHeight;
@@ -73,13 +93,16 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return RelativeRectTween(
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
-    ).animate(new CurvedAnimation(parent: _controller, curve: Curves.linear));
+    ).animate(CurvedAnimation(
+      parent: Backdrop.of(context).controller,
+      curve: Curves.linear,
+    ));
   }
 
-  Widget _buildInactiveLayer() {
-    if (isBackPanelVisible) {
+  Widget _buildInactiveLayer(BuildContext context) {
+    if (Backdrop.of(context).isBackPanelVisible) {
       return GestureDetector(
-        onTap: () => _controller.fling(velocity: 1.0),
+        onTap: () => Backdrop.of(context).fling(),
         behavior: HitTestBehavior.opaque,
         child: SizedBox.expand(
           child: Container(
@@ -110,14 +133,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  Widget _buildFrontPanel() {
+  Widget _buildFrontPanel(BuildContext context) {
     return Material(
       elevation: 12.0,
       borderRadius: widget.frontLayerBorderRadius,
       child: Stack(
         children: <Widget>[
           widget.body,
-          _buildInactiveLayer(),
+          _buildInactiveLayer(context),
         ],
       ),
     );
@@ -125,36 +148,56 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: widget.title,
-        actions: widget.actions,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.close_menu,
-            progress: _controller.view,
-          ),
-          onPressed: () => _controller.fling(
-                velocity: isTopPanelVisible ? -1.0 : 1.0,
-              ),
+    return Backdrop(
+      controller: _controller,
+      child: Scaffold(
+        appBar: AppBar(
+          title: widget.title,
+          actions: widget.iconPosition == BackdropIconPosition.action
+              ? <Widget>[BackdropToggleButton()] + widget.actions
+              : widget.actions,
+          elevation: 0.0,
+          leading: widget.iconPosition == BackdropIconPosition.leading
+              ? BackdropToggleButton()
+              : null,
         ),
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            child: Stack(
-              children: <Widget>[
-                _buildBackPanel(),
-                PositionedTransition(
-                  rect: getPanelAnimation(constraints),
-                  child: _buildFrontPanel(),
-                ),
-              ],
-            ),
-          );
-        },
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              child: Stack(
+                children: <Widget>[
+                  _buildBackPanel(),
+                  PositionedTransition(
+                    rect: getPanelAnimation(context, constraints),
+                    child: _buildFrontPanel(context),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
+
+class BackdropToggleButton extends StatelessWidget {
+  final AnimatedIconData icon;
+
+  const BackdropToggleButton({
+    this.icon = AnimatedIcons.close_menu,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: icon,
+        progress: Backdrop.of(context).controller.view,
+      ),
+      onPressed: () => Backdrop.of(context).fling(),
+    );
+  }
+}
+
+enum BackdropIconPosition { none, leading, action }
