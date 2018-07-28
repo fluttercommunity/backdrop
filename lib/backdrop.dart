@@ -112,8 +112,9 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildInactiveLayer(BuildContext context) {
-    if (Backdrop.of(context).isBackPanelVisible) {
-      return GestureDetector(
+    return Offstage(
+      offstage: Backdrop.of(context).isTopPanelVisible,
+      child: GestureDetector(
         onTap: () => Backdrop.of(context).fling(),
         behavior: HitTestBehavior.opaque,
         child: SizedBox.expand(
@@ -121,21 +122,10 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
             decoration: BoxDecoration(
               color: Colors.grey.shade200.withOpacity(0.7),
             ),
-            child: Center(
-              child: SizedBox(
-                height: 0.0,
-                width: 0.0,
-              ),
-            ),
           ),
         ),
-      );
-    } else {
-      return const SizedBox(
-        height: 0.0,
-        width: 0.0,
-      );
-    }
+      ),
+    );
   }
 
   Widget _buildBackPanel() {
