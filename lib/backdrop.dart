@@ -35,8 +35,8 @@ class Backdrop extends InheritedWidget {
 class BackdropScaffold extends StatefulWidget {
   final AnimationController controller;
   final Widget title;
-  final Widget backpanel;
-  final Widget body;
+  final Widget backLayer;
+  final Widget frontLayer;
   final List<Widget> actions;
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
@@ -45,8 +45,8 @@ class BackdropScaffold extends StatefulWidget {
   BackdropScaffold(
       {this.controller,
       this.title,
-      this.backpanel,
-      this.body,
+      this.backLayer,
+      this.frontLayer,
       this.actions = const <Widget>[],
       this.headerHeight = 32.0,
       this.frontLayerBorderRadius = const BorderRadius.only(
@@ -129,7 +129,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildBackPanel() {
     return Material(
       color: Theme.of(context).primaryColor,
-      child: widget.backpanel,
+      child: widget.backLayer,
     );
   }
 
@@ -139,7 +139,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       borderRadius: widget.frontLayerBorderRadius,
       child: Stack(
         children: <Widget>[
-          widget.body,
+          widget.frontLayer,
           _buildInactiveLayer(context),
         ],
       ),

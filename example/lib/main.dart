@@ -10,17 +10,17 @@ class MyApp extends StatelessWidget {
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         title: Text("Backdrop Example"),
-        backpanel: Center(
-          child: Text("Backpanel"),
+        backLayer: Center(
+          child: Text("Back Layer"),
         ),
-        body: Center(
-          child: Text("Body"),
+        frontLayer: Center(
+          child: Text("Front Layer"),
         ),
         iconPosition: BackdropIconPosition.leading,
         actions: <Widget>[
           BackdropToggleButton(
             icon: AnimatedIcons.list_view,
-          )
+          ),
         ],
       ),
     );
