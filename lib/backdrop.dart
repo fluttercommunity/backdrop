@@ -54,18 +54,19 @@ class BackdropScaffold extends StatefulWidget {
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
 
-  BackdropScaffold(
-      {this.controller,
-      this.title,
-      this.backLayer,
-      this.frontLayer,
-      this.actions = const <Widget>[],
-      this.headerHeight = 32.0,
-      this.frontLayerBorderRadius = const BorderRadius.only(
-        topLeft: Radius.circular(16.0),
-        topRight: Radius.circular(16.0),
-      ),
-      this.iconPosition = BackdropIconPosition.leading});
+  BackdropScaffold({
+    this.controller,
+    this.title,
+    this.backLayer,
+    this.frontLayer,
+    this.actions = const <Widget>[],
+    this.headerHeight = 32.0,
+    this.frontLayerBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(16.0),
+      topRight: Radius.circular(16.0),
+    ),
+    this.iconPosition = BackdropIconPosition.leading,
+  });
 
   @override
   _BackdropScaffoldState createState() => _BackdropScaffoldState();
@@ -148,10 +149,11 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Backdrop(
-      controller: _controller,
+  Widget _buildBody(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async => Backdrop.of(context).isBackPanelVisible
+          ? Backdrop.of(context).showFrontLayer()
+          : true,
       child: Scaffold(
         appBar: AppBar(
           title: widget.title,
@@ -178,6 +180,16 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Backdrop(
+      controller: _controller,
+      child: Builder(
+        builder: (context) => _buildBody(context),
       ),
     );
   }
