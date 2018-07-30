@@ -1,5 +1,7 @@
 library backdrop;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Backdrop extends InheritedWidget {
@@ -149,11 +151,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
+  Future<bool> _willPopCallback(BuildContext context) async {
+    if (Backdrop.of(context).isBackPanelVisible) {
+      Backdrop.of(context).showFrontLayer();
+      return null;
+    }
+    return true;
+  }
+
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => Backdrop.of(context).isBackPanelVisible
-          ? Backdrop.of(context).showFrontLayer()
-          : true,
+      onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         appBar: AppBar(
           title: widget.title,
