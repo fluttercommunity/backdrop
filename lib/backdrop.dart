@@ -5,45 +5,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Backdrop extends InheritedWidget {
-  final AnimationController controller;
+  final _BackdropScaffoldState data;
 
-  Backdrop({Key key, @required Widget child, @required this.controller})
-      : assert(controller != null),
-        super(key: key, child: child);
+  Backdrop({Key key, @required this.data, @required Widget child})
+      : super(key: key, child: child);
 
-  bool get isTopPanelVisible {
-    final AnimationStatus status = controller.status;
-    return status == AnimationStatus.completed ||
-        status == AnimationStatus.forward;
-  }
-
-  bool get isBackPanelVisible {
-    final AnimationStatus status = controller.status;
-    return status == AnimationStatus.dismissed ||
-        status == AnimationStatus.reverse;
-  }
-
-  void fling() {
-    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
-  }
-
-  void showBackLayer() {
-    if (isTopPanelVisible) {
-      controller.fling(velocity: -1.0);
-    }
-  }
-
-  void showFrontLayer() {
-    if (isBackPanelVisible) {
-      controller.fling(velocity: 1.0);
-    }
-  }
-
-  static Backdrop of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(Backdrop);
+  static _BackdropScaffoldState of(BuildContext context) =>
+      (context.inheritFromWidgetOfExactType(Backdrop) as Backdrop).data;
 
   @override
-  bool updateShouldNotify(Backdrop old) => controller != old.controller;
+  bool updateShouldNotify(Backdrop old) => true;
 }
 
 class BackdropScaffold extends StatefulWidget {
@@ -79,6 +50,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   bool shouldDisposeController = false;
   AnimationController _controller;
 
+  AnimationController get controller => _controller;
+
   @override
   void initState() {
     super.initState();
@@ -99,6 +72,34 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
+  bool get isTopPanelVisible {
+    final AnimationStatus status = controller.status;
+    return status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
+  }
+
+  bool get isBackPanelVisible {
+    final AnimationStatus status = controller.status;
+    return status == AnimationStatus.dismissed ||
+        status == AnimationStatus.reverse;
+  }
+
+  void fling() {
+    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+  }
+
+  void showBackLayer() {
+    if (isTopPanelVisible) {
+      controller.fling(velocity: -1.0);
+    }
+  }
+
+  void showFrontLayer() {
+    if (isBackPanelVisible) {
+      controller.fling(velocity: 1.0);
+    }
+  }
+
   Animation<RelativeRect> getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     final height = constraints.biggest.height;
@@ -109,16 +110,16 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     ).animate(CurvedAnimation(
-      parent: Backdrop.of(context).controller,
+      parent: controller,
       curve: Curves.linear,
     ));
   }
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: Backdrop.of(context).isTopPanelVisible,
+      offstage: isTopPanelVisible,
       child: GestureDetector(
-        onTap: () => Backdrop.of(context).fling(),
+        onTap: () => fling(),
         behavior: HitTestBehavior.opaque,
         child: SizedBox.expand(
           child: Container(
@@ -152,8 +153,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Future<bool> _willPopCallback(BuildContext context) async {
-    if (Backdrop.of(context).isBackPanelVisible) {
-      Backdrop.of(context).showFrontLayer();
+    if (isBackPanelVisible) {
+      showFrontLayer();
       return null;
     }
     return true;
@@ -195,7 +196,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   @override
   Widget build(BuildContext context) {
     return Backdrop(
-      controller: _controller,
+      data: this,
       child: Builder(
         builder: (context) => _buildBody(context),
       ),
