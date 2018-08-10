@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   # Add backdrop dependency here
   backdrop:
-    path: "../../backdrop"
+    path: "../"
 
 dev_dependencies:
   flutter_test:
