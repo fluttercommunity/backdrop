@@ -25,7 +25,7 @@ Please file feature requests and bugs at the [issue tracker](https://gitlab.com/
 ## TODO
 - Properly document the usage of the widget in README.md
 - Properly document classes and public methods
-- scaffoldKey provided to access scaffold directly.
+- ~~scaffoldKey provided to access scaffold directly~~
 - ~~Write an example flutter app to demonstrate options and functionality~~
 - ~~Using InheritedWIdget for storing controller in state and accessing it throughout~~
 - Dynamic height for backdrop - based on height of backpanel ??
