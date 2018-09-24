@@ -49,6 +49,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool shouldDisposeController = false;
   AnimationController _controller;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   AnimationController get controller => _controller;
 
@@ -164,6 +165,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(
           title: widget.title,
           actions: widget.iconPosition == BackdropIconPosition.action
