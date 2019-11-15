@@ -26,20 +26,21 @@ class BackdropScaffold extends StatefulWidget {
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
+  final Curve animationCurve;
 
-  BackdropScaffold({
-    this.controller,
-    this.title,
-    this.backLayer,
-    this.frontLayer,
-    this.actions = const <Widget>[],
-    this.headerHeight = 32.0,
-    this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
-    ),
-    this.iconPosition = BackdropIconPosition.leading,
-  });
+  BackdropScaffold(
+      {this.controller,
+      this.title,
+      this.backLayer,
+      this.frontLayer,
+      this.actions = const <Widget>[],
+      this.headerHeight = 32.0,
+      this.frontLayerBorderRadius = const BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
+      ),
+      this.iconPosition = BackdropIconPosition.leading,
+      this.animationCurve = Curves.linear});
 
   @override
   _BackdropScaffoldState createState() => _BackdropScaffoldState();
@@ -112,7 +113,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: controller,
-      curve: Curves.linear,
+      curve: widget.animationCurve,
     ));
   }
 
