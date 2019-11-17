@@ -26,6 +26,7 @@ class BackdropScaffold extends StatefulWidget {
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
+  final bool adaptHeightToBackLayer;
 
   BackdropScaffold({
     this.controller,
@@ -39,6 +40,7 @@ class BackdropScaffold extends StatefulWidget {
       topRight: Radius.circular(16.0),
     ),
     this.iconPosition = BackdropIconPosition.leading,
+    this.adaptHeightToBackLayer = true,
   });
 
   @override
@@ -50,6 +52,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   bool shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey _backLayerKey = GlobalKey();
+  double _backPanelHeight = 0;
 
   AnimationController get controller => _controller;
 
@@ -63,6 +67,12 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     } else {
       _controller = widget.controller;
     }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _backPanelHeight = _getBackPanelHeight();
+      });
+    });
   }
 
   @override
@@ -101,6 +111,38 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
+  double _getBackPanelHeight() {
+    RenderBox backLayerRenderBox =
+        _backLayerKey.currentContext?.findRenderObject();
+    if (backLayerRenderBox != null)
+      return backLayerRenderBox.size.height;
+    else
+      return 0.0;
+  }
+
+//  Animation<RelativeRect> getPanelAnimation(
+//      BuildContext context, BoxConstraints constraints) {
+//    var backPanelHeight, frontPanelHeight;
+//
+//    if (widget.adaptHeightToBackLayer) {
+//      // height is adapted to the height of the back panel
+//      backPanelHeight = _backPanelHeight;
+//      frontPanelHeight = -_backPanelHeight;
+//    } else {
+//      // height is set to fixed value defined in widget.headerHeight
+//      final height = constraints.biggest.height;
+//      backPanelHeight = height - widget.headerHeight;
+//      frontPanelHeight = -backPanelHeight;
+//    }
+//    return RelativeRectTween(
+//      begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
+//      end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
+//    ).animate(CurvedAnimation(
+//      parent: controller,
+//      curve: Curves.linear,
+//    ));
+//  }
+
   Animation<RelativeRect> getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     final height = constraints.biggest.height;
@@ -136,6 +178,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildBackPanel() {
     return Material(
+      key: _backLayerKey,
       color: Theme.of(context).primaryColor,
       child: widget.backLayer,
     );
