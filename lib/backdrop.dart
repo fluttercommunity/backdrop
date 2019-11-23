@@ -238,6 +238,82 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 }
 
+class NavigationTuple {
+  Widget menuItem;
+  Widget content;
+
+  NavigationTuple({@required this.menuItem, @required this.content});
+}
+
+class BackdropNavigationScaffold extends StatefulWidget {
+  final List<NavigationTuple> navigationComponents;
+  final AnimationController controller;
+  final Widget title;
+  final List<Widget> actions;
+  final double headerHeight;
+  final BorderRadius frontLayerBorderRadius;
+  final BackdropIconPosition iconPosition;
+  final bool enableDynamicBackdropHeight;
+
+  BackdropNavigationScaffold({
+    @required this.navigationComponents,
+    this.controller,
+    this.title,
+    this.actions = const <Widget>[],
+    this.headerHeight = 32.0,
+    this.frontLayerBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(16.0),
+      topRight: Radius.circular(16.0),
+    ),
+    this.iconPosition = BackdropIconPosition.leading,
+    this.enableDynamicBackdropHeight = false,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _BackdropNavigationScaffoldState();
+}
+
+class _BackdropNavigationScaffoldState
+    extends State<BackdropNavigationScaffold> {
+  Widget _frontLayer;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.navigationComponents == null ||
+        widget.navigationComponents.isEmpty)
+      throw ("BackdropNavigationScaffold's navigationComponents has to be defined and non-emtpy!");
+
+    _frontLayer = widget.navigationComponents.first.content;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BackdropScaffold(
+      controller: widget.controller,
+      title: widget.title,
+      actions: widget.actions,
+      headerHeight: widget.headerHeight,
+      frontLayerBorderRadius: widget.frontLayerBorderRadius,
+      iconPosition: widget.iconPosition,
+      enableDynamicBackdropHeight: widget.enableDynamicBackdropHeight,
+      backLayer: ListView.separated(
+          shrinkWrap: true,
+          itemCount: widget.navigationComponents.length,
+          itemBuilder: (context, position) => InkWell(
+              child: widget.navigationComponents[position].menuItem,
+              onTap: () {
+                setState(() {
+                  _frontLayer = widget.navigationComponents[position].content;
+                  Backdrop.of(context).fling();
+                });
+              }),
+          separatorBuilder: (builder, position) => Divider()),
+      frontLayer: _frontLayer,
+    );
+  }
+}
+
 class BackdropToggleButton extends StatelessWidget {
   final AnimatedIconData icon;
 
