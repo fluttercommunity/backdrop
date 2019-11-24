@@ -24,7 +24,7 @@ BackdropScaffold(
 )
 ```
 <div align="center">
-![BackdropScaffold example](https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop.gif)
+<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop.gif"  width="500" alt="BackdropScaffold example">
 </div>
 
 ### Navigation with backdrop
@@ -52,8 +52,8 @@ BackdropNavigationScaffold(
 ```
 
 <div align="center">
-![BackdropNavigationScaffold example](https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop_navigation.gif)
-</div>
+<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop_navigation.gif"  width="500" alt="BackdropNavigationScaffold example">
+</div><br/>
 
 For more information, check out sample code in the [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
 
