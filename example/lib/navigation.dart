@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
           NavigationTuple(
               menuItem: ListTile(title: Text("Widget 2")), content: Widget2())
         ],
+        onNavigationChange: (current) {
+          print("Navigation item changed");
+        },
       ),
     );
   }

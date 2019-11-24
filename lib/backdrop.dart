@@ -277,6 +277,7 @@ class BackdropNavigationScaffold extends StatefulWidget {
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
   final bool enableDynamicBackdropHeight;
+  final Function(NavigationTuple) onNavigationChange;
 
   BackdropNavigationScaffold({
     @required this.navigationComponents,
@@ -290,6 +291,7 @@ class BackdropNavigationScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.enableDynamicBackdropHeight = false,
+    this.onNavigationChange,
   });
 
   @override
@@ -330,6 +332,10 @@ class _BackdropNavigationScaffoldState
                   _frontLayer = widget.navigationComponents[position].content;
                   Backdrop.of(context).fling();
                 });
+
+                // call navigation change function and pass current selection
+                widget.onNavigationChange
+                    ?.call(widget.navigationComponents[position]);
               }),
           separatorBuilder: (builder, position) => Divider()),
       frontLayer: _frontLayer,
