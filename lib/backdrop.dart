@@ -277,6 +277,7 @@ class BackdropNavigationScaffold extends StatefulWidget {
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
   final bool enableDynamicBackdropHeight;
+  final Curve animationCurve;
   final Function(NavigationTuple) onNavigationChange;
 
   BackdropNavigationScaffold({
@@ -291,6 +292,7 @@ class BackdropNavigationScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.enableDynamicBackdropHeight = false,
+    this.animationCurve = Curves.linear,
     this.onNavigationChange,
   });
 
@@ -322,6 +324,7 @@ class _BackdropNavigationScaffoldState
       frontLayerBorderRadius: widget.frontLayerBorderRadius,
       iconPosition: widget.iconPosition,
       enableDynamicBackdropHeight: widget.enableDynamicBackdropHeight,
+      animationCurve: widget.animationCurve,
       backLayer: ListView.separated(
           shrinkWrap: true,
           itemCount: widget.navigationComponents.length,
