@@ -27,6 +27,7 @@ class BackdropScaffold extends StatefulWidget {
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
   final bool enableDynamicBackdropHeight;
+  final Curve animationCurve;
 
   BackdropScaffold({
     this.controller,
@@ -41,6 +42,7 @@ class BackdropScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.enableDynamicBackdropHeight = false,
+    this.animationCurve = Curves.linear,
   });
 
   @override
@@ -139,7 +141,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: controller,
-      curve: Curves.linear,
+      curve: widget.animationCurve,
     ));
   }
 
