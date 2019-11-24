@@ -238,6 +238,27 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 }
 
+class BackdropToggleButton extends StatelessWidget {
+  final AnimatedIconData icon;
+
+  const BackdropToggleButton({
+    this.icon = AnimatedIcons.close_menu,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: icon,
+        progress: Backdrop.of(context).controller.view,
+      ),
+      onPressed: () => Backdrop.of(context).fling(),
+    );
+  }
+}
+
+enum BackdropIconPosition { none, leading, action }
+
 class NavigationTuple {
   Widget menuItem;
   Widget content;
@@ -313,24 +334,3 @@ class _BackdropNavigationScaffoldState
     );
   }
 }
-
-class BackdropToggleButton extends StatelessWidget {
-  final AnimatedIconData icon;
-
-  const BackdropToggleButton({
-    this.icon = AnimatedIcons.close_menu,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: AnimatedIcon(
-        icon: icon,
-        progress: Backdrop.of(context).controller.view,
-      ),
-      onPressed: () => Backdrop.of(context).fling(),
-    );
-  }
-}
-
-enum BackdropIconPosition { none, leading, action }
