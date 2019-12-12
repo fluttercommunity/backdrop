@@ -22,6 +22,7 @@ class BackdropScaffold extends StatefulWidget {
   final Widget title;
   final Widget backLayer;
   final Widget frontLayer;
+  final BackdropNavigationBackLayer backdropNavigationBackLayer;
   final List<Widget> actions;
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
@@ -34,6 +35,7 @@ class BackdropScaffold extends StatefulWidget {
     this.title,
     this.backLayer,
     this.frontLayer,
+    this.backdropNavigationBackLayer,
     this.actions = const <Widget>[],
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
@@ -43,7 +45,9 @@ class BackdropScaffold extends StatefulWidget {
     this.iconPosition = BackdropIconPosition.leading,
     this.enableDynamicBackdropHeight = false,
     this.animationCurve = Curves.linear,
-  });
+  })
+  // either backLayer or backdropNavigationBackLayer have to be set
+  : assert((backLayer != null) ^ (backdropNavigationBackLayer != null));
 
   @override
   _BackdropScaffoldState createState() => _BackdropScaffoldState();
@@ -51,6 +55,7 @@ class BackdropScaffold extends StatefulWidget {
 
 class _BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
+  Widget _frontLayer;
   bool shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -69,6 +74,15 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     } else {
       _controller = widget.controller;
     }
+
+    // we know from assertion that either backLayer or backdropNavigationBackLayer is set
+    if (widget.backLayer != null)
+      // use frontLayer just like normal
+      _frontLayer = widget.frontLayer;
+    else
+      // use first of the defined front layers of backdropNavigationItems
+      _frontLayer = widget
+          .backdropNavigationBackLayer.backdropNavigationItems.first.frontLayer;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -164,11 +178,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildBackPanel() {
+    // given the assert in the constructor, either backLayer or
+    // backdropNavigationBackLayer is assumed to be set
+    var backLayer = widget.backLayer != null
+        ? widget.backLayer
+        : widget.backdropNavigationBackLayer;
+
     return Material(
       color: Theme.of(context).primaryColor,
       child: Column(
         children: <Widget>[
-          Container(key: _backLayerKey, child: widget.backLayer),
+          Container(key: _backLayerKey, child: backLayer),
         ],
       ),
     );
@@ -180,7 +200,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       borderRadius: widget.frontLayerBorderRadius,
       child: Stack(
         children: <Widget>[
-          widget.frontLayer,
+          _frontLayer,
           _buildInactiveLayer(context),
         ],
       ),
@@ -261,87 +281,51 @@ class BackdropToggleButton extends StatelessWidget {
 
 enum BackdropIconPosition { none, leading, action }
 
-class NavigationTuple {
-  Widget menuItem;
-  Widget content;
+class BackdropNavigationItem {
+  Widget item;
+  Widget frontLayer;
 
-  NavigationTuple({@required this.menuItem, @required this.content});
+  BackdropNavigationItem({@required this.item, @required this.frontLayer})
+      : assert(item != null),
+        assert(frontLayer != null);
 }
 
-class BackdropNavigationScaffold extends StatefulWidget {
-  final List<NavigationTuple> navigationComponents;
-  final AnimationController controller;
-  final Widget title;
-  final List<Widget> actions;
-  final double headerHeight;
-  final BorderRadius frontLayerBorderRadius;
-  final BackdropIconPosition iconPosition;
-  final bool enableDynamicBackdropHeight;
-  final Curve animationCurve;
-  final Function(NavigationTuple) onNavigationChange;
+class BackdropNavigationBackLayer extends StatefulWidget {
+  final List<BackdropNavigationItem> backdropNavigationItems;
+  final ValueChanged<int> onTap;
 
-  BackdropNavigationScaffold({
-    @required this.navigationComponents,
-    this.controller,
-    this.title,
-    this.actions = const <Widget>[],
-    this.headerHeight = 32.0,
-    this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
-    ),
-    this.iconPosition = BackdropIconPosition.leading,
-    this.enableDynamicBackdropHeight = false,
-    this.animationCurve = Curves.linear,
-    this.onNavigationChange,
-  });
+  BackdropNavigationBackLayer({
+    Key key,
+    @required this.backdropNavigationItems,
+    this.onTap,
+  })  : assert(backdropNavigationItems != null),
+        assert(backdropNavigationItems.isNotEmpty),
+        super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BackdropNavigationScaffoldState();
+  State<StatefulWidget> createState() => _BackdropNavigationBackLayerState();
 }
 
-class _BackdropNavigationScaffoldState
-    extends State<BackdropNavigationScaffold> {
-  Widget _frontLayer;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.navigationComponents == null ||
-        widget.navigationComponents.isEmpty)
-      throw ("BackdropNavigationScaffold's navigationComponents has to be defined and non-emtpy!");
-
-    _frontLayer = widget.navigationComponents.first.content;
-  }
-
+class _BackdropNavigationBackLayerState
+    extends State<BackdropNavigationBackLayer> {
   @override
   Widget build(BuildContext context) {
-    return BackdropScaffold(
-      controller: widget.controller,
-      title: widget.title,
-      actions: widget.actions,
-      headerHeight: widget.headerHeight,
-      frontLayerBorderRadius: widget.frontLayerBorderRadius,
-      iconPosition: widget.iconPosition,
-      enableDynamicBackdropHeight: widget.enableDynamicBackdropHeight,
-      animationCurve: widget.animationCurve,
-      backLayer: ListView.separated(
-          shrinkWrap: true,
-          itemCount: widget.navigationComponents.length,
-          itemBuilder: (context, position) => InkWell(
-              child: widget.navigationComponents[position].menuItem,
-              onTap: () {
-                setState(() {
-                  _frontLayer = widget.navigationComponents[position].content;
-                  Backdrop.of(context).fling();
-                });
+    return ListView.separated(
+        shrinkWrap: true,
+        itemCount: widget.backdropNavigationItems.length,
+        itemBuilder: (context, position) => InkWell(
+            child: widget.backdropNavigationItems[position].item,
+            onTap: () {
+              setState(() {
+                var backdropScaffoldState = Backdrop.of(context);
+                backdropScaffoldState._frontLayer =
+                    widget.backdropNavigationItems[position].frontLayer;
+                backdropScaffoldState.fling();
+              });
 
-                // call navigation change function and pass current selection
-                widget.onNavigationChange
-                    ?.call(widget.navigationComponents[position]);
-              }),
-          separatorBuilder: (builder, position) => Divider()),
-      frontLayer: _frontLayer,
-    );
+              // call onTap function and pass new selected index
+              widget.onTap?.call(position);
+            }),
+        separatorBuilder: (builder, position) => Divider());
   }
 }
