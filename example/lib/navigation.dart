@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Backdrop Demo',
-      home: BackdropNavigationScaffold(
+      home: BackdropScaffold(
         title: Text("Backdrop Example"),
         iconPosition: BackdropIconPosition.leading,
         actions: <Widget>[
@@ -16,15 +16,16 @@ class MyApp extends StatelessWidget {
             icon: AnimatedIcons.list_view,
           ),
         ],
-        navigationComponents: [
-          NavigationTuple(
-              menuItem: ListTile(title: Text("Widget 1")), content: Widget1()),
-          NavigationTuple(
-              menuItem: ListTile(title: Text("Widget 2")), content: Widget2())
-        ],
-        onNavigationChange: (current) {
-          print("Navigation item changed");
-        },
+        backdropNavigationBackLayer: BackdropNavigationBackLayer(
+          backdropNavigationItems: [
+            BackdropNavigationItem(
+                item: ListTile(title: Text("Widget1")), frontLayer: Widget1()),
+            BackdropNavigationItem(
+                item: ListTile(title: Text("Widget2")), frontLayer: Widget2()),
+          ],
+          onTap: (int position) =>
+              print("Navigation entry " + position.toString() + " tapped"),
+        ),
       ),
     );
   }
