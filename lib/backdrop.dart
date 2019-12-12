@@ -310,22 +310,25 @@ class _BackdropNavigationBackLayerState
     extends State<BackdropNavigationBackLayer> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        shrinkWrap: true,
-        itemCount: widget.backdropNavigationItems.length,
-        itemBuilder: (context, position) => InkWell(
-            child: widget.backdropNavigationItems[position].item,
-            onTap: () {
-              setState(() {
-                var backdropScaffoldState = Backdrop.of(context);
-                backdropScaffoldState._frontLayer =
-                    widget.backdropNavigationItems[position].frontLayer;
-                backdropScaffoldState.fling();
-              });
+    return Container(
+      margin: EdgeInsets.only(bottom: 8.0),
+      child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: widget.backdropNavigationItems.length,
+          itemBuilder: (context, position) => InkWell(
+              child: widget.backdropNavigationItems[position].item,
+              onTap: () {
+                setState(() {
+                  var backdropScaffoldState = Backdrop.of(context);
+                  backdropScaffoldState._frontLayer =
+                      widget.backdropNavigationItems[position].frontLayer;
+                  backdropScaffoldState.fling();
+                });
 
-              // call onTap function and pass new selected index
-              widget.onTap?.call(position);
-            }),
-        separatorBuilder: (builder, position) => Divider());
+                // call onTap function and pass new selected index
+                widget.onTap?.call(position);
+              }),
+          separatorBuilder: (builder, position) => Divider()),
+    );
   }
 }
