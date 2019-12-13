@@ -22,20 +22,20 @@ class BackdropScaffold extends StatefulWidget {
   final Widget title;
   final Widget backLayer;
   final Widget frontLayer;
-  final BackdropNavigationBackLayer backdropNavigationBackLayer;
   final List<Widget> actions;
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
   final bool enableDynamicBackdropHeight;
   final Curve animationCurve;
+  final int currentIndex;
+  final BackdropNavigationBackLayer backdropNavigationBackLayer;
 
   BackdropScaffold({
     this.controller,
     this.title,
     this.backLayer,
     this.frontLayer,
-    this.backdropNavigationBackLayer,
     this.actions = const <Widget>[],
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
@@ -45,6 +45,8 @@ class BackdropScaffold extends StatefulWidget {
     this.iconPosition = BackdropIconPosition.leading,
     this.enableDynamicBackdropHeight = false,
     this.animationCurve = Curves.linear,
+    this.currentIndex = 0,
+    this.backdropNavigationBackLayer,
   })
   // either backLayer or backdropNavigationBackLayer have to be set
   : assert((backLayer != null) ^ (backdropNavigationBackLayer != null));
@@ -55,7 +57,6 @@ class BackdropScaffold extends StatefulWidget {
 
 class _BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  Widget _frontLayer;
   bool shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -74,15 +75,6 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     } else {
       _controller = widget.controller;
     }
-
-    // we know from assertion that either backLayer or backdropNavigationBackLayer is set
-    if (widget.backLayer != null)
-      // use frontLayer just like normal
-      _frontLayer = widget.frontLayer;
-    else
-      // use first of the defined front layers of backdropNavigationItems
-      _frontLayer = widget
-          .backdropNavigationBackLayer.backdropNavigationItems.first.frontLayer;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -200,7 +192,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       borderRadius: widget.frontLayerBorderRadius,
       child: Stack(
         children: <Widget>[
-          _frontLayer,
+          widget.frontLayer,
           _buildInactiveLayer(context),
         ],
       ),
@@ -281,17 +273,8 @@ class BackdropToggleButton extends StatelessWidget {
 
 enum BackdropIconPosition { none, leading, action }
 
-class BackdropNavigationItem {
-  Widget item;
-  Widget frontLayer;
-
-  BackdropNavigationItem({@required this.item, @required this.frontLayer})
-      : assert(item != null),
-        assert(frontLayer != null);
-}
-
 class BackdropNavigationBackLayer extends StatefulWidget {
-  final List<BackdropNavigationItem> backdropNavigationItems;
+  final List<Widget> backdropNavigationItems;
   final ValueChanged<int> onTap;
 
   BackdropNavigationBackLayer({
@@ -316,14 +299,10 @@ class _BackdropNavigationBackLayerState
           shrinkWrap: true,
           itemCount: widget.backdropNavigationItems.length,
           itemBuilder: (context, position) => InkWell(
-              child: widget.backdropNavigationItems[position].item,
+              child: widget.backdropNavigationItems[position],
               onTap: () {
-                setState(() {
-                  var backdropScaffoldState = Backdrop.of(context);
-                  backdropScaffoldState._frontLayer =
-                      widget.backdropNavigationItems[position].frontLayer;
-                  backdropScaffoldState.fling();
-                });
+                var backdropScaffoldState = Backdrop.of(context);
+                backdropScaffoldState.fling();
 
                 // call onTap function and pass new selected index
                 widget.onTap?.call(position);
