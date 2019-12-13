@@ -3,28 +3,35 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _currentIndex = 0;
+  final List<Widget> _frontLayers = [Widget1(), Widget2()];
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-        title: Text("Backdrop Example"),
+        title: Text("Backdrop Navigation Example"),
         iconPosition: BackdropIconPosition.leading,
         actions: <Widget>[
           BackdropToggleButton(
             icon: AnimatedIcons.list_view,
           ),
         ],
+        currentIndex: _currentIndex,
+        frontLayer: _frontLayers[_currentIndex],
         backdropNavigationBackLayer: BackdropNavigationBackLayer(
           backdropNavigationItems: [
-            BackdropNavigationItem(
-                item: ListTile(title: Text("Widget1")), frontLayer: Widget1()),
-            BackdropNavigationItem(
-                item: ListTile(title: Text("Widget2")), frontLayer: Widget2()),
+            ListTile(title: Text("Widget 1")),
+            ListTile(title: Text("Widget 2")),
           ],
-          onTap: (int position) =>
-              print("Navigation entry " + position.toString() + " tapped"),
+          onTap: (int position) => {setState(() => _currentIndex = position)},
         ),
       ),
     );
@@ -34,9 +41,7 @@ class MyApp extends StatelessWidget {
 class Widget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Widget 1")),
-    );
+    return Center(child: Text("Widget 1"));
   }
 }
 
