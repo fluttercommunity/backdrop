@@ -24,10 +24,10 @@ class _MyAppState extends State<MyApp> {
             icon: AnimatedIcons.list_view,
           ),
         ],
-        currentIndex: _currentIndex,
+        stickyFrontPanel: true,
         frontLayer: _frontLayers[_currentIndex],
-        backdropNavigationBackLayer: BackdropNavigationBackLayer(
-          backdropNavigationItems: [
+        backLayer: BackdropNavigationBackLayer(
+          items: [
             ListTile(title: Text("Widget 1")),
             ListTile(title: Text("Widget 2")),
           ],
