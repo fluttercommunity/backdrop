@@ -40,6 +40,7 @@ captures/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
+.idea/codeStyles
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -344,5 +345,13 @@ playground.xcworkspace
 # Build files
 build/
 
+# Dart tool related
+.dart_tool
+
 # Flutter related
 .flutter-plugins
+
+# example app related
+example/.dart_tool/
+example/android/.idea/
+example/ios/Flutter/flutter_export_environment.sh

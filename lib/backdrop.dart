@@ -11,7 +11,7 @@ class Backdrop extends InheritedWidget {
       : super(key: key, child: child);
 
   static _BackdropScaffoldState of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(Backdrop) as Backdrop).data;
+      context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
 
   @override
   bool updateShouldNotify(Backdrop old) => true;
