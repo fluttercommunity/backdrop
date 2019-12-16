@@ -1,11 +1,11 @@
 ## Summary
 
-(Summarize the bug encountered concisely)
+(Summarize the feature requested concisely)
 
 
 ## What new feature do you want?
 
-(What are you suggesting should be added 
+(What are you suggesting should be added )
 
 
 ## What is reason for this change?
