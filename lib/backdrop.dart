@@ -113,9 +113,6 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       BuildContext context, BoxConstraints constraints) {
     var backPanelHeight, frontPanelHeight;
 
-    print("_backPanelHeight: $_backPanelHeight");
-    print("constraints.biggest.height: ${constraints.biggest.height}");
-
     if (widget.stickyFrontPanel &&
         _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
       // height is adapted to the height of the back panel
