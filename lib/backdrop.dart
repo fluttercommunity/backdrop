@@ -249,7 +249,7 @@ class BackdropToggleButton extends StatelessWidget {
 
 enum BackdropIconPosition { none, leading, action }
 
-class BackdropNavigationBackLayer extends StatefulWidget {
+class BackdropNavigationBackLayer extends StatelessWidget {
   final List<Widget> items;
   final ValueChanged<int> onTap;
   final Widget separator;
@@ -264,27 +264,21 @@ class BackdropNavigationBackLayer extends StatefulWidget {
         super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BackdropNavigationBackLayerState();
-}
-
-class _BackdropNavigationBackLayerState
-    extends State<BackdropNavigationBackLayer> {
-  @override
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: widget.items.length,
+      itemCount: items.length,
       itemBuilder: (context, position) => InkWell(
-        child: widget.items[position],
+        child: items[position],
         onTap: () {
           // fling backdrop
           Backdrop.of(context).fling();
 
           // call onTap function and pass new selected index
-          widget.onTap?.call(position);
+          onTap?.call(position);
         },
       ),
-      separatorBuilder: (builder, position) => widget.separator ?? Container(),
+      separatorBuilder: (builder, position) => separator ?? Container(),
     );
   }
 }
