@@ -252,11 +252,13 @@ enum BackdropIconPosition { none, leading, action }
 class BackdropNavigationBackLayer extends StatefulWidget {
   final List<Widget> items;
   final ValueChanged<int> onTap;
+  final Widget separator;
 
   BackdropNavigationBackLayer({
     Key key,
     @required this.items,
     this.onTap,
+    this.separator,
   })  : assert(items != null),
         assert(items.isNotEmpty),
         super(key: key);
@@ -269,23 +271,20 @@ class _BackdropNavigationBackLayerState
     extends State<BackdropNavigationBackLayer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 8.0),
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: widget.items.length,
-        itemBuilder: (context, position) => InkWell(
-          child: widget.items[position],
-          onTap: () {
-            // fling backdrop
-            Backdrop.of(context).fling();
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: widget.items.length,
+      itemBuilder: (context, position) => InkWell(
+        child: widget.items[position],
+        onTap: () {
+          // fling backdrop
+          Backdrop.of(context).fling();
 
-            // call onTap function and pass new selected index
-            widget.onTap?.call(position);
-          },
-        ),
-        separatorBuilder: (builder, position) => Divider(),
+          // call onTap function and pass new selected index
+          widget.onTap?.call(position);
+        },
       ),
+      separatorBuilder: (builder, position) => widget.separator ?? Container(),
     );
   }
 }
