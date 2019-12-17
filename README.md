@@ -28,27 +28,38 @@ BackdropScaffold(
 </div>
 
 ### Navigation with backdrop
-To use backdrop for navigation, use the provided `BackdropNavigationScaffold` widget.<br/>
-Instead of defining a front and back layer, a list of `NavigationTuple` has to be passed for the parameter `navigationComponents`. `NavigationTuple` contains the menu item displayed on the back layer and its corresponding main content of the front layer.
+To use backdrop for navigation, use the provided `BackdropNavigationBackLayer` as `backLayer`.<br/>
+The `BackdropNavigationBackLayer` contains a property `items` representing the list elements shown on the back layer. The front layer has to be "manually" set depending on the current index, which can be accessed with the `onTap` callback.
 
 ```dart
-BackdropNavigationScaffold(
-    title: Text("Backdrop Example"),
-    iconPosition: BackdropIconPosition.leading,
-    navigationComponents: [
-        NavigationTuple(
-            menuItem: ListTile(title: Text("Widget 1")),
-            content: Center(child: Text("Widget 1"),
+class _MyAppState extends State<MyApp> {
+  int _currentIndex = 0;
+  final List<Widget> _frontLayers = [Widget1(), Widget2()];
+
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Backdrop Demo',
+      home: BackdropScaffold(
+        title: Text("Backdrop Navigation Example"),
+        iconPosition: BackdropIconPosition.leading,
+        actions: <Widget>[
+          BackdropToggleButton(
+            icon: AnimatedIcons.list_view,
+          ),
+        ],
+        frontLayer: _frontLayers[_currentIndex],
+        backLayer: BackdropNavigationBackLayer(
+          items: [
+            ListTile(title: Text("Widget 1")),
+            ListTile(title: Text("Widget 2")),
+          ],
+          onTap: (int position) => {setState(() => _currentIndex = position)},
         ),
-        NavigationTuple(
-            menuItem: ListTile(title: Text("Widget 2")),
-            content: Center(child: Text("Widget 2"),
-        )
-    ],
-    onNavigationChange: (current) {
-        print("Navigation item changed");
-    },
-)
+      ),
+    );
+  }
+}
 ```
 
 <div align="center">
