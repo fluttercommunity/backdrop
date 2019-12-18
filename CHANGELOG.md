@@ -1,3 +1,7 @@
+## [0.2.2] - 18 December 2018
+
+* updated README.md with quick links
+
 ## [0.2.0] - 18 December 2018
 
 * `NavigationBackLayer` widget - for easily implement navigation with backdrop

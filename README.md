@@ -3,6 +3,15 @@
 
 This widget is in active development. Wait for the stable v1.0.0. ___Any contribution, idea, criticism or feedback is welcomed.___
 
+## Quick links
+
+| | | |
+|-|-|-|
+| __pub.dev__ | https://pub.dev/packages/backdrop |
+| __Git Repo__ | https://gitlab.com/daadu/backdrop |
+| __Issue Tracker__ | https://gitlab.com/daadu/backdrop/issues |
+| Github Mirror Repo  | |
+
 ## Getting started
 Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f) 
 
@@ -28,7 +37,8 @@ BackdropScaffold(
 </div>
 
 ### Navigation with backdrop
-To use backdrop for navigation, use the provided `BackdropNavigationBackLayer` as `backLayer`.<br/>
+To use backdrop for navigation, use the provided `BackdropNavigationBackLayer` as `backLayer`.
+
 The `BackdropNavigationBackLayer` contains a property `items` representing the list elements shown on the back layer. The front layer has to be "manually" set depending on the current index, which can be accessed with the `onTap` callback.
 
 ```dart
