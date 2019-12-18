@@ -26,7 +26,7 @@ class BackdropScaffold extends StatefulWidget {
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
-  final bool enableDynamicBackdropHeight;
+  final bool stickyFrontPanel;
   final Curve animationCurve;
 
   BackdropScaffold({
@@ -41,7 +41,7 @@ class BackdropScaffold extends StatefulWidget {
       topRight: Radius.circular(16.0),
     ),
     this.iconPosition = BackdropIconPosition.leading,
-    this.enableDynamicBackdropHeight = false,
+    this.stickyFrontPanel = false,
     this.animationCurve = Curves.linear,
   });
 
@@ -51,7 +51,7 @@ class BackdropScaffold extends StatefulWidget {
 
 class _BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  bool shouldDisposeController = false;
+  bool _shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey _backLayerKey = GlobalKey();
@@ -63,7 +63,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      shouldDisposeController = true;
+      _shouldDisposeController = true;
       _controller = AnimationController(
           vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
     } else {
@@ -80,16 +80,12 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void dispose() {
     super.dispose();
-    if (shouldDisposeController) {
-      _controller.dispose();
-    }
+    if (_shouldDisposeController) _controller.dispose();
   }
 
-  bool get isTopPanelVisible {
-    final AnimationStatus status = controller.status;
-    return status == AnimationStatus.completed ||
-        status == AnimationStatus.forward;
-  }
+  bool get isTopPanelVisible =>
+      controller.status == AnimationStatus.completed ||
+      controller.status == AnimationStatus.forward;
 
   bool get isBackPanelVisible {
     final AnimationStatus status = controller.status;
@@ -97,36 +93,28 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         status == AnimationStatus.reverse;
   }
 
-  void fling() {
-    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
-  }
+  void fling() => controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
 
   void showBackLayer() {
-    if (isTopPanelVisible) {
-      controller.fling(velocity: -1.0);
-    }
+    if (isTopPanelVisible) controller.fling(velocity: -1.0);
   }
 
   void showFrontLayer() {
-    if (isBackPanelVisible) {
-      controller.fling(velocity: 1.0);
-    }
+    if (isBackPanelVisible) controller.fling(velocity: 1.0);
   }
 
-  double _getBackPanelHeight() {
-    RenderBox backLayerRenderBox =
-        _backLayerKey.currentContext?.findRenderObject();
-    if (backLayerRenderBox != null)
-      return backLayerRenderBox.size.height;
-    else
-      return 0.0;
-  }
+  double _getBackPanelHeight() =>
+      ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
+          ?.size
+          ?.height) ??
+      0.0;
 
   Animation<RelativeRect> getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     var backPanelHeight, frontPanelHeight;
 
-    if (widget.enableDynamicBackdropHeight) {
+    if (widget.stickyFrontPanel &&
+        _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
       // height is adapted to the height of the back panel
       backPanelHeight = _backPanelHeight;
       frontPanelHeight = -_backPanelHeight;
@@ -168,7 +156,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       color: Theme.of(context).primaryColor,
       child: Column(
         children: <Widget>[
-          Container(key: _backLayerKey, child: widget.backLayer),
+          Flexible(key: _backLayerKey, child: widget.backLayer ?? Container()),
         ],
       ),
     );
@@ -261,87 +249,36 @@ class BackdropToggleButton extends StatelessWidget {
 
 enum BackdropIconPosition { none, leading, action }
 
-class NavigationTuple {
-  Widget menuItem;
-  Widget content;
+class BackdropNavigationBackLayer extends StatelessWidget {
+  final List<Widget> items;
+  final ValueChanged<int> onTap;
+  final Widget separator;
 
-  NavigationTuple({@required this.menuItem, @required this.content});
-}
-
-class BackdropNavigationScaffold extends StatefulWidget {
-  final List<NavigationTuple> navigationComponents;
-  final AnimationController controller;
-  final Widget title;
-  final List<Widget> actions;
-  final double headerHeight;
-  final BorderRadius frontLayerBorderRadius;
-  final BackdropIconPosition iconPosition;
-  final bool enableDynamicBackdropHeight;
-  final Curve animationCurve;
-  final Function(NavigationTuple) onNavigationChange;
-
-  BackdropNavigationScaffold({
-    @required this.navigationComponents,
-    this.controller,
-    this.title,
-    this.actions = const <Widget>[],
-    this.headerHeight = 32.0,
-    this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
-    ),
-    this.iconPosition = BackdropIconPosition.leading,
-    this.enableDynamicBackdropHeight = false,
-    this.animationCurve = Curves.linear,
-    this.onNavigationChange,
-  });
-
-  @override
-  State<StatefulWidget> createState() => _BackdropNavigationScaffoldState();
-}
-
-class _BackdropNavigationScaffoldState
-    extends State<BackdropNavigationScaffold> {
-  Widget _frontLayer;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.navigationComponents == null ||
-        widget.navigationComponents.isEmpty)
-      throw ("BackdropNavigationScaffold's navigationComponents has to be defined and non-emtpy!");
-
-    _frontLayer = widget.navigationComponents.first.content;
-  }
+  BackdropNavigationBackLayer({
+    Key key,
+    @required this.items,
+    this.onTap,
+    this.separator,
+  })  : assert(items != null),
+        assert(items.isNotEmpty),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BackdropScaffold(
-      controller: widget.controller,
-      title: widget.title,
-      actions: widget.actions,
-      headerHeight: widget.headerHeight,
-      frontLayerBorderRadius: widget.frontLayerBorderRadius,
-      iconPosition: widget.iconPosition,
-      enableDynamicBackdropHeight: widget.enableDynamicBackdropHeight,
-      animationCurve: widget.animationCurve,
-      backLayer: ListView.separated(
-          shrinkWrap: true,
-          itemCount: widget.navigationComponents.length,
-          itemBuilder: (context, position) => InkWell(
-              child: widget.navigationComponents[position].menuItem,
-              onTap: () {
-                setState(() {
-                  _frontLayer = widget.navigationComponents[position].content;
-                  Backdrop.of(context).fling();
-                });
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: items.length,
+      itemBuilder: (context, position) => InkWell(
+        child: items[position],
+        onTap: () {
+          // fling backdrop
+          Backdrop.of(context).fling();
 
-                // call navigation change function and pass current selection
-                widget.onNavigationChange
-                    ?.call(widget.navigationComponents[position]);
-              }),
-          separatorBuilder: (builder, position) => Divider()),
-      frontLayer: _frontLayer,
+          // call onTap function and pass new selected index
+          onTap?.call(position);
+        },
+      ),
+      separatorBuilder: (builder, position) => separator ?? Container(),
     );
   }
 }
