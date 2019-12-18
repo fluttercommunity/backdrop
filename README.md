@@ -7,7 +7,7 @@ This widget is in active development. Wait for the stable v1.0.0. ___Any contrib
 
 | | |
 |-|-|
-| __pub.dev__ | https://pub.dev/packages/backdrop |
+| __package__ | https://pub.dev/packages/backdrop |
 | __Git Repo__ | https://gitlab.com/daadu/backdrop |
 | __Issue Tracker__ | https://gitlab.com/daadu/backdrop/issues |
 | Github Mirror Repo  | https://github.com/daadu/backdrop |
