@@ -26,7 +26,7 @@ class BackdropScaffold extends StatefulWidget {
   final double headerHeight;
   final BorderRadius frontLayerBorderRadius;
   final BackdropIconPosition iconPosition;
-  final bool stickyFrontPanel;
+  final bool stickyFrontLayer;
   final Curve animationCurve;
 
   BackdropScaffold({
@@ -41,7 +41,7 @@ class BackdropScaffold extends StatefulWidget {
       topRight: Radius.circular(16.0),
     ),
     this.iconPosition = BackdropIconPosition.leading,
-    this.stickyFrontPanel = false,
+    this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
   });
 
@@ -113,7 +113,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       BuildContext context, BoxConstraints constraints) {
     var backPanelHeight, frontPanelHeight;
 
-    if (widget.stickyFrontPanel &&
+    if (widget.stickyFrontLayer &&
         _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
       // height is adapted to the height of the back panel
       backPanelHeight = _backPanelHeight;
