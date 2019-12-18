@@ -1,4 +1,4 @@
-## [0.2.2] - 18 December 2018
+## [0.2.3] - 18 December 2018
 
 * updated README.md with quick links
 

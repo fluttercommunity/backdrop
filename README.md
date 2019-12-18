@@ -5,19 +5,19 @@ This widget is in active development. Wait for the stable v1.0.0. ___Any contrib
 
 ## Quick links
 
-| | | |
-|-|-|-|
+| | |
+|-|-|
 | __pub.dev__ | https://pub.dev/packages/backdrop |
 | __Git Repo__ | https://gitlab.com/daadu/backdrop |
 | __Issue Tracker__ | https://gitlab.com/daadu/backdrop/issues |
-| Github Mirror Repo  | |
+| Github Mirror Repo  | https://github.com/daadu/backdrop |
 
 ## Getting started
-Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f) 
+Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f)
 
 ## Usage
 ### BackdropScaffold
-Use `BackdropScaffold` instead of the standard `Scaffold` in your app.<br/>
+Use `BackdropScaffold` instead of the standard `Scaffold` in your app.
 A `backLayer` and a `frontLayer` have to be defined for the backdrop to work.
 
 ```dart
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 
 <div align="center">
 <img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop_navigation.gif"  width="500" alt="BackdropNavigationScaffold example">
-</div><br/>
+</div>
 
 For more information, check out sample code in the [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
 
