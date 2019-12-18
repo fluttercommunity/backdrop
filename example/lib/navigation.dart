@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
             icon: AnimatedIcons.list_view,
           ),
         ],
-        stickyFrontPanel: true,
+        stickyFrontLayer: true,
         frontLayer: _frontLayers[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
           items: [
