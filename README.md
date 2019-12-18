@@ -82,9 +82,10 @@ For more information, check out sample code in the [example directory](https://g
 1. You'll need a gitlab account. (Sorry, if you had to create one!!)
 2. Fork the [repository](https://gitlab.com/daadu/backdrop).
 3. Implement features from to-do, fix issues, etc.
-4. Send merge request.
-5. Star this project.
-6. Become a hero!!
+4. Add your name and email in AUTHORS file
+5. Send merge request.
+6. Star this project.
+7. Become a hero!!
 
 ## Features and bugs
 Please file feature requests and bugs at the [issue tracker](https://gitlab.com/daadu/backdrop/issues).
