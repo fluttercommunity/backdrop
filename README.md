@@ -1,10 +1,10 @@
 # backdrop
 
-![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)
-![Gitlab Issues](https://img.shields.io/badge/dynamic/json?label=issues&query=%24.open_issues_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)
-![Gitlab Contributors](https://img.shields.io/github/contributors/daadu/backdrop?logo=gitlab)
-![Gitlab Stars](https://img.shields.io/badge/dynamic/json?label=stars&query=%24.star_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)
-![Gitlab Forks](https://img.shields.io/badge/dynamic/json?label=forks&query=%24.forks_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)
+[![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
+[![Gitlab Issues](https://img.shields.io/badge/dynamic/json?label=issues&query=%24.open_issues_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/issues)
+[![Gitlab Contributors](https://img.shields.io/github/contributors/daadu/backdrop?logo=gitlab)](https://gitlab.com/daadu/backdrop/blob/master/AUTHORS)
+[![Gitlab Stars](https://img.shields.io/badge/dynamic/json?label=stars&query=%24.star_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/starrers)
+[![Gitlab Forks](https://img.shields.io/badge/dynamic/json?label=forks&query=%24.forks_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/forks)
 
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
