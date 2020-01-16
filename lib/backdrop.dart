@@ -152,12 +152,15 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildBackPanel() {
-    return Material(
-      color: Theme.of(context).primaryColor,
-      child: Column(
-        children: <Widget>[
-          Flexible(key: _backLayerKey, child: widget.backLayer ?? Container()),
-        ],
+    return FocusScope(
+      canRequestFocus: isBackPanelVisible,
+      child: Material(
+        color: Theme.of(context).primaryColor,
+        child: Column(
+          children: <Widget>[
+            Flexible(key: _backLayerKey, child: widget.backLayer ?? Container()),
+          ],
+        ),
       ),
     );
   }
