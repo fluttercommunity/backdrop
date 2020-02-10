@@ -28,6 +28,7 @@ class BackdropScaffold extends StatefulWidget {
   final BackdropIconPosition iconPosition;
   final bool stickyFrontLayer;
   final Curve animationCurve;
+  final bool resizeToAvoidBottomInset;
 
   BackdropScaffold({
     this.controller,
@@ -43,6 +44,7 @@ class BackdropScaffold extends StatefulWidget {
     this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
+    this.resizeToAvoidBottomInset = true,
   });
 
   @override
@@ -216,6 +218,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
+        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       ),
     );
   }
