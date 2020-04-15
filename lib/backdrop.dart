@@ -11,13 +11,15 @@ import 'package:flutter/material.dart';
 /// ```dart
 /// Backdrop.of(context).fling();
 /// ```
-///
 class Backdrop extends InheritedWidget {
+  /// Holds the state of this widget.
   final _BackdropScaffoldState data;
 
+  /// Creates a [Backdrop] instance.
   Backdrop({Key key, @required this.data, @required Widget child})
       : super(key: key, child: child);
 
+  /// Provides access to the state from everywhere in the widget tree.
   static _BackdropScaffoldState of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
 
@@ -60,20 +62,71 @@ class Backdrop extends InheritedWidget {
 ///
 /// See also:
 ///  * [Scaffold], which is the plain scaffold used in material apps.
-///
 class BackdropScaffold extends StatefulWidget {
+  /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
+
+  /// The widget assigned to [Scaffold]'s [AppBar.title].
   final Widget title;
+
+  /// The content that should be displayed on the back layer.
   final Widget backLayer;
+
+  /// The widget that is shown on the front layer .
   final Widget frontLayer;
+
+  /// Actions passed to [AppBar.actions].
   final List<Widget> actions;
+
+  /// Defines the height of the front layer when it is in the opened state.
+  ///
+  /// This height value is only applied, if [stickyFrontLayer]
+  /// is set to `false` or if [stickyFrontLayer] is set to `true` and the back
+  /// layer's height is less than
+  /// [BoxConstraints.biggest.height]-[headerHeight].
+  ///
+  /// [headerHeight] is interpreted as the height of the front layer's remaining
+  /// part, when being opened. The back layer's height corresponds to
+  /// [BoxConstraints.biggest.height]-[headerHeight].
+  ///
+  /// Defaults to 32.0.
   final double headerHeight;
+
+  /// Defines the [BorderRadius] applied to the front layer.
+  ///
+  /// Defaults to
+  /// ```dart
+  /// const BorderRadius.only(
+  ///     topLeft: Radius.circular(16.0),
+  ///     topRight: Radius.circular(16.0),
+  /// )
+  /// ```
   final BorderRadius frontLayerBorderRadius;
+
+  /// The position of the icon button that toggles the backdrop functionality.
+  ///
+  /// Defaults to [BackdropIconPosition.leading].
   final BackdropIconPosition iconPosition;
+
+  /// A flag indicating whether the front layer should stick to the height of
+  /// the back layer when being opened.
+  ///
+  /// Defaults to `false`.
   final bool stickyFrontLayer;
+
+  /// The animation curve passed to [Tween.animate]() when triggering
+  /// the backdrop animation.
+  ///
+  /// Defaults tp [Curves.linear].
   final Curve animationCurve;
+
+  /// Passed to the [Scaffold] underlying [BackdropScaffold].
+  /// See [Scaffold.resizeToAvoidBottomInset].
+  ///
+  /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
     this.title,
@@ -306,8 +359,12 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 /// }
 /// ```
 class BackdropToggleButton extends StatelessWidget {
+  /// Animated icon that should be used for the contained [AnimatedIcon].
+  ///
+  /// Defaults to [AnimatedIcons.close_menu].
   final AnimatedIconData icon;
 
+  /// Creates an instance of [BackdropToggleButton].
   const BackdropToggleButton({
     this.icon = AnimatedIcons.close_menu,
   });
@@ -326,7 +383,18 @@ class BackdropToggleButton extends StatelessWidget {
 
 /// This enum is used to specify where [BackdropToggleButton] should appear
 /// within the [AppBar].
-enum BackdropIconPosition { none, leading, action }
+enum BackdropIconPosition {
+  /// Indicates that [BackdropToggleButton] should not appear at all.
+  none,
+
+  /// Indicates that [BackdropToggleButton] should appear at the start of the
+  /// [AppBar].
+  leading,
+
+  /// Indicates that [BackdropToggleButton] should appear as an action within
+  /// [AppBar.actions].
+  action
+}
 
 /// Implements the back layer to be used for navigation.
 ///
@@ -363,12 +431,21 @@ enum BackdropIconPosition { none, leading, action }
 ///   );
 /// }
 /// ```
-///
 class BackdropNavigationBackLayer extends StatelessWidget {
+  /// The items to be inserted into the underlying [ListView] of the
+  /// [BackdropNavigationBackLayer].
   final List<Widget> items;
+
+  /// Callback that is called whenever a list item is tapped by the user.
   final ValueChanged<int> onTap;
+
+  /// Customizable separator used with [ListView.separated].
   final Widget separator;
 
+  /// Creates an instance of [BackdropNavigationBackLayer] to be used with
+  /// [BackdropScaffold].
+  ///
+  /// The argument [items] is required and must not be `null` and not empty.
   BackdropNavigationBackLayer({
     Key key,
     @required this.items,
