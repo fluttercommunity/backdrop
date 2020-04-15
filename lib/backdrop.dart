@@ -4,6 +4,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+/// Provides a way for accessing backdrop functionality from everywhere in the
+/// widget tree.
+///
+/// Example:
+/// ```dart
+/// Backdrop.of(context).fling();
+/// ```
+///
 class Backdrop extends InheritedWidget {
   final _BackdropScaffoldState data;
 
@@ -17,6 +25,42 @@ class Backdrop extends InheritedWidget {
   bool updateShouldNotify(Backdrop old) => true;
 }
 
+/// Implements the basic functionality of backdrop.
+///
+/// This class offers to set a back layer and a front layer and manage
+/// the switching between the two. The implementation is inspired by the
+/// [material backdrop component](https://material.io/components/backdrop/).
+///
+/// In addition to the properties of [Scaffold], this class offers properties
+/// for defining and customizing the backdrop behaviour.
+///
+/// Usage example:
+/// ```dart
+/// Widget build(BuildContext context) {
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       title: Text("Backdrop Example"),
+///       backLayer: Center(
+///         child: Text("Back Layer"),
+///       ),
+///       frontLayer: Center(
+///         child: Text("Front Layer"),
+///       ),
+///       iconPosition: BackdropIconPosition.leading,
+///       actions: <Widget>[
+///         BackdropToggleButton(
+///           icon: AnimatedIcons.list_view,
+///         ),
+///       ],
+///     ),
+///   );
+/// }
+/// ```
+///
+/// See also:
+///  * [Scaffold], which is the plain scaffold used in material apps.
+///
 class BackdropScaffold extends StatefulWidget {
   final AnimationController controller;
   final Widget title;
@@ -160,7 +204,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         color: Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
-            Flexible(key: _backLayerKey, child: widget.backLayer ?? Container()),
+            Flexible(
+                key: _backLayerKey, child: widget.backLayer ?? Container()),
           ],
         ),
       ),
@@ -234,6 +279,32 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 }
 
+/// An animated button that can be used to trigger the backdrop functionality of
+/// [BackdropScaffold].
+///
+/// This button is used directly within [BackdropScaffold]. Its position can be
+/// specified using [BackdropIconPosition].
+/// This button can also be passed to the [AppBar.actions] of an [AppBar].
+///
+/// When being pressed, [BackdropToggleButton] looks for a [Backdrop] instance
+/// above it in the widget tree and toggles its opening/closing.
+///
+/// Example:
+/// ```dart
+/// Widget build(BuildContext context) {
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       ...
+///       actions: <Widget>[
+///         BackdropToggleButton(
+///           icon: AnimatedIcons.list_view,
+///         ),
+///       ],
+///     ),
+///   );
+/// }
+/// ```
 class BackdropToggleButton extends StatelessWidget {
   final AnimatedIconData icon;
 
@@ -253,8 +324,46 @@ class BackdropToggleButton extends StatelessWidget {
   }
 }
 
+/// This enum is used to specify where [BackdropToggleButton] should appear
+/// within the [AppBar].
 enum BackdropIconPosition { none, leading, action }
 
+/// Implements the back layer to be used for navigation.
+///
+/// This class can be used as a back layer for [BackdropScaffold]. It enables to
+/// use the back layer as a navigation list, similar to a [Drawer].
+///
+/// Usage example:
+/// ```dart
+/// int _currentIndex = 0;
+/// final List<Widget> _frontLayers = [Widget1(), Widget2()];
+///
+/// @override
+/// Widget build(BuildContext context) {
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       title: Text("Backdrop Navigation Example"),
+///       iconPosition: BackdropIconPosition.leading,
+///       actions: <Widget>[
+///         BackdropToggleButton(
+///           icon: AnimatedIcons.list_view,
+///         ),
+///       ],
+///       stickyFrontLayer: true,
+///       frontLayer: _frontLayers[_currentIndex],
+///       backLayer: BackdropNavigationBackLayer(
+///         items: [
+///           ListTile(title: Text("Widget 1")),
+///           ListTile(title: Text("Widget 2")),
+///         ],
+///         onTap: (int position) => {setState(() => _currentIndex = position)},
+///       ),
+///     ),
+///   );
+/// }
+/// ```
+///
 class BackdropNavigationBackLayer extends StatelessWidget {
   final List<Widget> items;
   final ValueChanged<int> onTap;
