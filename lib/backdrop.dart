@@ -29,12 +29,10 @@ class Backdrop extends InheritedWidget {
 
 /// Implements the basic functionality of backdrop.
 ///
-/// This class offers to set a back layer and a front layer and manage
-/// the switching between the two. The implementation is inspired by the
+/// This class internally uses [Scaffold]. It allows to set a back layer and a
+/// front layer and manage the switching between the two. The implementation is
+/// inspired by the
 /// [material backdrop component](https://material.io/components/backdrop/).
-///
-/// In addition to the properties of [Scaffold], this class offers properties
-/// for defining and customizing the backdrop behaviour.
 ///
 /// Usage example:
 /// ```dart
@@ -66,10 +64,10 @@ class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
 
-  /// The widget assigned to [Scaffold]'s [AppBar.title].
+  /// The widget assigned to the [Scaffold]'s [AppBar.title].
   final Widget title;
 
-  /// The content that should be displayed on the back layer.
+  /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
   /// The widget that is shown on the front layer .
@@ -85,7 +83,7 @@ class BackdropScaffold extends StatefulWidget {
   /// layer's height is less than
   /// [BoxConstraints.biggest.height]-[headerHeight].
   ///
-  /// [headerHeight] is interpreted as the height of the front layer's remaining
+  /// [headerHeight] is interpreted as the height of the front layer's visible
   /// part, when being opened. The back layer's height corresponds to
   /// [BoxConstraints.biggest.height]-[headerHeight].
   ///
@@ -117,7 +115,7 @@ class BackdropScaffold extends StatefulWidget {
   /// The animation curve passed to [Tween.animate]() when triggering
   /// the backdrop animation.
   ///
-  /// Defaults tp [Curves.linear].
+  /// Defaults to [Curves.linear].
   final Curve animationCurve;
 
   /// Passed to the [Scaffold] underlying [BackdropScaffold].
@@ -359,7 +357,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 /// }
 /// ```
 class BackdropToggleButton extends StatelessWidget {
-  /// Animated icon that should be used for the contained [AnimatedIcon].
+  /// Animated icon that is used for the contained [AnimatedIcon].
   ///
   /// Defaults to [AnimatedIcons.close_menu].
   final AnimatedIconData icon;
@@ -382,12 +380,12 @@ class BackdropToggleButton extends StatelessWidget {
 }
 
 /// This enum is used to specify where [BackdropToggleButton] should appear
-/// within the [AppBar].
+/// within [AppBar].
 enum BackdropIconPosition {
   /// Indicates that [BackdropToggleButton] should not appear at all.
   none,
 
-  /// Indicates that [BackdropToggleButton] should appear at the start of the
+  /// Indicates that [BackdropToggleButton] should appear at the start of
   /// [AppBar].
   leading,
 
