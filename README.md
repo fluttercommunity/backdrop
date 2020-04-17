@@ -40,7 +40,7 @@ BackdropScaffold(
 )
 ```
 <div align="center">
-<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop.gif"  width="500" alt="BackdropScaffold example">
+<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop.gif"  height="500" alt="BackdropScaffold example">
 </div>
 
 ### Navigation with backdrop
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
 ```
 
 <div align="center">
-<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop_navigation.gif"  width="500" alt="BackdropNavigationScaffold example">
+<img src="https://gitlab.com/daadu/backdrop/raw/master/.gitlab/backdrop_navigation.gif"  height="500" alt="BackdropNavigationScaffold example">
 </div>
 
 For more information, check out sample code in the [example directory](https://gitlab.com/daadu/backdrop/tree/master/example)
