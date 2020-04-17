@@ -211,7 +211,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Animation<RelativeRect> getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
-    var backPanelHeight, frontPanelHeight;
+    double backPanelHeight, frontPanelHeight;
 
     if (widget.stickyFrontLayer &&
         _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
