@@ -10,11 +10,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _frontLayers = [Widget1(), Widget2()];
+  final List<Widget> _pages = [Widget1(), Widget2()];
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         title: Text("Backdrop Navigation Example"),
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         stickyFrontLayer: true,
-        frontLayer: _frontLayers[_currentIndex],
+        frontLayer: _pages[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
           items: [
             ListTile(title: Text("Widget 1")),
