@@ -6,7 +6,7 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         title: Text("Backdrop Example"),
