@@ -405,7 +405,7 @@ enum BackdropIconPosition {
 /// Usage example:
 /// ```dart
 /// int _currentIndex = 0;
-/// final List<Widget> _frontLayers = [Widget1(), Widget2()];
+/// final List<Widget> _pages = [Widget1(), Widget2()];
 ///
 /// @override
 /// Widget build(BuildContext context) {
@@ -420,7 +420,7 @@ enum BackdropIconPosition {
 ///         ),
 ///       ],
 ///       stickyFrontLayer: true,
-///       frontLayer: _frontLayers[_currentIndex],
+///       frontLayer: _pages[_currentIndex],
 ///       backLayer: BackdropNavigationBackLayer(
 ///         items: [
 ///           ListTile(title: Text("Widget 1")),
