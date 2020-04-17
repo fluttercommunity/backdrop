@@ -4,8 +4,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-/// Provides a way for accessing backdrop functionality from everywhere in the
-/// widget tree.
+/// This class is an InheritedWidget that exposes state of [BackdropScaffold]
+/// [_BackdropScaffoldState] to be accessed from anywhere below the widget tree.
+///
+/// It can be used to explicitly call backdrop functionality like fling,
+/// showBackLayer, showFrontLayer, etc.
 ///
 /// Example:
 /// ```dart
