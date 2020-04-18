@@ -1,3 +1,7 @@
+## [0.2.11] - 18 April 2020
+
+* Reverting to v0.2.9
+
 ## [0.2.10] - 18 April 2020
 
 * Added documentation link in `pubspec.yaml`
