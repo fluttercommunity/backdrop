@@ -1,8 +1,8 @@
 name: backdrop
 description: Backdrop implementaion in dart. (https://material.io/design/components/backdrop.html)
-version: 0.2.9
+version: 0.2.10
 homepage: https://gitlab.com/daadu/backdrop
-documentation: https://gitlab.com/daadu/backdrop
+documentation: https://pub.dev/documentation/backdrop/
 
 environment:
   sdk: ">=1.19.0 <3.0.0"

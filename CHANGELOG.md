@@ -1,3 +1,7 @@
+## [0.2.10] - 18 April 2020
+
+* Added documentation link in `pubspec.yaml`
+
 ## [0.2.9] - 18 April 2020
 
 * Documentation of classes and attributes
