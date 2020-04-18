@@ -1,3 +1,7 @@
+## [0.2.9] - 18 April 2020
+
+* Documentation of classes and attributes
+
 ## [0.2.8] - 16 January 2020
 
 * disabling focus on `backLayer` when not visible
