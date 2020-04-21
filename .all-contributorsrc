@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "daadu",
+      "name": "Harsh Bhikadia",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4963236?v=4",
+      "profile": "http://bhikadia.com",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "backdrop",
+  "projectOwner": "daadu",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
