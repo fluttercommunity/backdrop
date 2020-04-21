@@ -1,3 +1,7 @@
+## [0.2.14] - 21 April 2020
+
+* Moved package from `gitlab.com/daadu/backdrop` to `github.com/fluttercommunity/backdrop`
+
 ## [0.2.13] - 21 April 2020
 
 * Moved package to Flutter Community
