@@ -3,9 +3,7 @@
 # backdrop
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg)](#contributors-)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop)](https://github.com/fluttercommunity/backdrop/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1)](https://github.com/fluttercommunity/backdrop/milestone/1)
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop)](https://github.com/fluttercommunity/backdrop/stargazers)
