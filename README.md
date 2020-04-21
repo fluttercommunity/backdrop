@@ -1,3 +1,5 @@
+[![Flutter Community: backdrop](https://fluttercommunity.dev/_github/header/backdrop)](https://github.com/fluttercommunity/community)
+
 # backdrop
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)

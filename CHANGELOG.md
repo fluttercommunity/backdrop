@@ -1,3 +1,7 @@
+## [0.2.13] - 21 April 2020
+
+* Moved package to Flutter Community
+
 ## [0.2.11] - 18 April 2020
 
 * Reverting to v0.2.9
