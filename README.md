@@ -113,7 +113,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://bhikadia.com"><img src="https://avatars1.githubusercontent.com/u/4963236?v=4" width="100px;" alt=""/><br /><sub><b>Harsh Bhikadia</b></sub></a><br /><a href="https://github.com/daadu/backdrop/commits?author=daadu" title="Code">💻</a> <a href="#ideas-daadu" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/WieFel"><img src="https://avatars0.githubusercontent.com/u/8345062?v=4" width="100px;" alt=""/><br /><sub><b>WieFel</b></sub></a><br /><a href="https://github.com/daadu/backdrop/commits?author=WieFel" title="Code">💻</a> <a href="https://github.com/daadu/backdrop/commits?author=WieFel" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/WieFel"><img src="https://avatars0.githubusercontent.com/u/8345062?v=4" width="100px;" alt=""/><br /><sub><b>Felix Wielander</b></sub></a><br /><a href="https://github.com/daadu/backdrop/commits?author=WieFel" title="Code">💻</a> <a href="https://github.com/daadu/backdrop/commits?author=WieFel" title="Documentation">📖</a></td>
   </tr>
 </table>
 
