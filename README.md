@@ -4,10 +4,10 @@
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg)](#contributors-)
-[![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop)](https://github.com/fluttercommunity/backdrop/issues)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1)](https://github.com/fluttercommunity/backdrop/milestone/1)
-[![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop)](https://github.com/fluttercommunity/backdrop/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/fluttercommunity/backdrop)](https://github.com/fluttercommunity/backdrop/network)
+[![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
+[![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/network)
 [![Gitlab stars](https://img.shields.io/badge/dynamic/json?label=stars&query=%24.star_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/starrers)
 [![Gitlab forks](https://img.shields.io/badge/dynamic/json?label=forks&query=%24.forks_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/forks)
 
