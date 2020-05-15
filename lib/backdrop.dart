@@ -193,7 +193,10 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         status == AnimationStatus.reverse;
   }
 
-  void fling() => controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+  void fling() {
+    FocusScope.of(context)?.unfocus();
+    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+  }
 
   void showBackLayer() {
     if (isTopPanelVisible) controller.fling(velocity: -1.0);
