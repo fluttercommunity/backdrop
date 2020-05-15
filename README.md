@@ -3,7 +3,7 @@
 # backdrop
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg)](#contributors-)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/stargazers)
