@@ -194,7 +194,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   void fling() {
-    FocusScope.of(context).unfocus();
+    FocusScope.of(context)?.unfocus();
     controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
   }
 
