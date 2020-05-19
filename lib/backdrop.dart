@@ -118,7 +118,7 @@ class BackdropScaffold extends StatefulWidget {
   /// The animation curve passed to [Tween.animate]() when triggering
   /// the backdrop animation.
   ///
-  /// Defaults to [Curves.linear].
+  /// Defaults to [Curves.easeInOut].
   final Curve animationCurve;
 
   /// Passed to the [Scaffold] underlying [BackdropScaffold].
@@ -141,7 +141,7 @@ class BackdropScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
-    this.animationCurve = Curves.linear,
+    this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
   });
 
