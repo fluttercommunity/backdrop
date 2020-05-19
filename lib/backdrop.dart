@@ -195,15 +195,19 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   void fling() {
     FocusScope.of(context)?.unfocus();
-    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+    if (isTopPanelVisible) {
+      showBackLayer();
+    } else {
+      showFrontLayer();
+    }
   }
 
   void showBackLayer() {
-    if (isTopPanelVisible) controller.fling(velocity: -1.0);
+    if (isTopPanelVisible) controller.animateBack(-1.0);
   }
 
   void showFrontLayer() {
-    if (isBackPanelVisible) controller.fling(velocity: 1.0);
+    if (isBackPanelVisible) controller.animateTo(1.0);
   }
 
   double _getBackPanelHeight() =>
