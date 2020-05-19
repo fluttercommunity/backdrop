@@ -165,7 +165,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (widget.controller == null) {
       _shouldDisposeController = true;
       _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
+          vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
     } else {
       _controller = widget.controller;
     }
