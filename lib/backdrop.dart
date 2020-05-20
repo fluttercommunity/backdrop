@@ -127,6 +127,12 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  /// Defines the color for the inactive front layer.
+  /// Implicitly an opacity of 0.7 is applied to the passed color.
+  ///
+  /// Defaults to `const Color(0xFFEEEEEE)`.
+  final Color inactiveOverlayColor;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -143,6 +149,7 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
     this.resizeToAvoidBottomInset = true,
+    this.inactiveOverlayColor = const Color(0xFFEEEEEE),
   });
 
   @override
@@ -238,15 +245,18 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: isTopPanelVisible,
-      child: GestureDetector(
-        onTap: () => fling(),
-        behavior: HitTestBehavior.opaque,
-        child: SizedBox.expand(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: widget.frontLayerBorderRadius,
-              color: Colors.grey.shade200.withOpacity(0.7),
+      offstage: controller.status == AnimationStatus.completed,
+      child: FadeTransition(
+        opacity: Tween(begin: 1.0, end: 0.0).animate(controller),
+        child: GestureDetector(
+          onTap: () => fling(),
+          behavior: HitTestBehavior.opaque,
+          child: SizedBox.expand(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: widget.frontLayerBorderRadius,
+                color: widget.inactiveOverlayColor.withOpacity(0.7),
+              ),
             ),
           ),
         ),
