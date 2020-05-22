@@ -1,3 +1,7 @@
+## [0.2.17] - 22 May 2020
+* add FloatingActionButton to BackdrawScaffold
+* Add more coloring options
+
 ## [0.2.15] - 15 May 2020
 
 * bug fix: unfocusing keyboard before fling.

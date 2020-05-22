@@ -127,6 +127,22 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  /// Background [Color] for the BackPanel
+  ///
+  /// Defaults to `Theme.of(context).primaryColor`.
+  final Color backPanelBackgroundColor;
+
+  /// Background [Color] for the [AppBar] of the [Scaffold]
+  ///
+  /// Defaults to `null`, which leads the [Scaffold] to use `Theme.of(context).primaryColor`.
+  final Color appBarBackgroundColor;
+
+  /// [FloatingActionButton] for the [Scaffold]
+  ///
+  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton]
+
+  final Widget floatingActionButton;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -143,6 +159,9 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
     this.resizeToAvoidBottomInset = true,
+    this.backPanelBackgroundColor,
+    this.appBarBackgroundColor,
+    this.floatingActionButton,
   });
 
   @override
@@ -258,7 +277,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return FocusScope(
       canRequestFocus: isBackPanelVisible,
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: this.widget.backPanelBackgroundColor ??
+            Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
             Flexible(
@@ -297,6 +317,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         key: scaffoldKey,
         appBar: AppBar(
           title: widget.title,
+          backgroundColor: this.widget.appBarBackgroundColor,
           actions: widget.iconPosition == BackdropIconPosition.action
               ? <Widget>[BackdropToggleButton()] + widget.actions
               : widget.actions,
@@ -320,6 +341,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
+        floatingActionButton: this.widget.floatingActionButton,
         resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       ),
     );
