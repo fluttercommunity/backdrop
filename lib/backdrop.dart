@@ -411,14 +411,14 @@ class BackdropToggleButton extends StatelessWidget {
 /// See also:
 ///  * [AppBar], which is the plain app bar used in material apps.
 class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Refer to [AppBar.leading].
+  /// See [AppBar.leading].
   ///
   /// If this is `null` and if [BackdropAppBar.automaticallyImplyLeading] is
   /// set to `true`, [BackdropAppBar] sets the underlying [AppBar.leading] to
   /// [BackdropToggleButton].
   final Widget leading;
 
-  /// Refer to [AppBar.automaticallyImplyLeading].
+  /// See [AppBar.automaticallyImplyLeading].
   ///
   /// If this is set to `true` and [BackdropAppBar.leading] is set to `null`,
   /// [BackdropAppBar] automatically sets the underlying [AppBar.leading]
@@ -430,63 +430,63 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The widget that should be displayed as the [AppBar] title.
   final Widget title;
 
-  /// Refer to [AppBar.actions].
+  /// See [AppBar.actions].
   final List<Widget> actions;
 
-  /// Refer to [AppBar.flexibleSpace].
+  /// See [AppBar.flexibleSpace].
   final Widget flexibleSpace;
 
-  /// Refer to [AppBar.bottom].
+  /// See [AppBar.bottom].
   final PreferredSizeWidget bottom;
 
-  /// Refer to [AppBar.elevation].
+  /// See [AppBar.elevation].
   ///
   /// Defaults to 0.0. This differs from [AppBar.elevation].
   final double elevation;
 
-  /// Refer to [AppBar.shape]
+  /// See [AppBar.shape]
   final ShapeBorder shape;
 
-  /// Refer to [AppBar.backgroundColor].
+  /// See [AppBar.backgroundColor].
   final Color backgroundColor;
 
-  /// Refer to [AppBar.brightness].
+  /// See [AppBar.brightness].
   final Brightness brightness;
 
-  /// Refer to [AppBar.iconTheme].
+  /// See [AppBar.iconTheme].
   final IconThemeData iconTheme;
 
-  /// Refer to [AppBar.actionsIconTheme].
+  /// See [AppBar.actionsIconTheme].
   final IconThemeData actionsIconTheme;
 
-  /// Refer to [AppBar.textTheme].
+  /// See [AppBar.textTheme].
   final TextTheme textTheme;
 
-  /// Refer to [AppBar.primary].
+  /// See [AppBar.primary].
   final bool primary;
 
-  /// Refer to [AppBar.centerTitle].
+  /// See [AppBar.centerTitle].
   final bool centerTitle;
 
-  /// Refer to [AppBar.excludeHeaderSemantics].
+  /// See [AppBar.excludeHeaderSemantics].
   final bool excludeHeaderSemantics;
 
-  /// Refer to [AppBar.iconTheme].titleSpacing
+  /// See [AppBar.iconTheme].titleSpacing
   final double titleSpacing;
 
-  /// Refer to [AppBar.toolbarOpacity].
+  /// See [AppBar.toolbarOpacity].
   final double toolbarOpacity;
 
-  /// Refer to [AppBar.bottomOpacity].
+  /// See [AppBar.bottomOpacity].
   final double bottomOpacity;
 
-  /// Refer to [AppBar.preferredSize].
+  /// See [AppBar.preferredSize].
   @override
   final Size preferredSize;
 
   /// Creates a backdrop app bar.
   ///
-  /// For more information refer to [AppBar].
+  /// For more information see [AppBar].
   BackdropAppBar({
     Key key,
     this.leading,
