@@ -68,14 +68,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
 
+  /// App bar used for [BackdropScaffold].
+  final PreferredSizeWidget appBar;
+
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
   /// The widget that is shown on the front layer .
   final Widget frontLayer;
-
-  /// App bar used for [BackdropScaffold].
-  final PreferredSizeWidget appBar;
 
   /// Defines the height of the front layer when it is in the opened state.
   ///
@@ -129,9 +129,9 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
+    this.appBar,
     this.backLayer,
     this.frontLayer,
-    this.appBar,
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
