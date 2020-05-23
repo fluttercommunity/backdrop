@@ -34,14 +34,20 @@ A `backLayer` and a `frontLayer` have to be defined for the backdrop to work.
 
 ```dart
 BackdropScaffold(
+  appBar: BackdropAppBar(
     title: Text("Backdrop Example"),
-    backLayer: Center(
-        child: Text("Back Layer"),
-    ),
-    frontLayer: Center(
-        child: Text("Front Layer"),
-    ),
-    iconPosition: BackdropIconPosition.leading,
+    actions: <Widget>[
+      BackdropToggleButton(
+        icon: AnimatedIcons.list_view,
+      )
+    ],
+  ),
+  backLayer: Center(
+    child: Text("Back Layer"),
+  ),
+  frontLayer: Center(
+    child: Text("Front Layer"),
+  ),
 )
 ```
 <div align="center">
@@ -54,33 +60,33 @@ To use backdrop for navigation, use the provided `BackdropNavigationBackLayer` a
 The `BackdropNavigationBackLayer` contains a property `items` representing the list elements shown on the back layer. The front layer has to be "manually" set depending on the current index, which can be accessed with the `onTap` callback.
 
 ```dart
-class _MyAppState extends State<MyApp> {
-  int _currentIndex = 0;
-  final List<Widget> _frontLayers = [Widget1(), Widget2()];
+int _currentIndex = 0;
+final List<Widget> _pages = [Widget1(), Widget2()];
 
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Backdrop Demo',
-      home: BackdropScaffold(
-        title: Text("Backdrop Navigation Example"),
-        iconPosition: BackdropIconPosition.leading,
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    title: 'Backdrop Demo',
+    home: BackdropScaffold(
+      appBar: BackdropAppBar(
+        title: Text("Navigation Example"),
         actions: <Widget>[
           BackdropToggleButton(
             icon: AnimatedIcons.list_view,
-          ),
+          )
         ],
-        frontLayer: _frontLayers[_currentIndex],
-        backLayer: BackdropNavigationBackLayer(
-          items: [
-            ListTile(title: Text("Widget 1")),
-            ListTile(title: Text("Widget 2")),
-          ],
-          onTap: (int position) => {setState(() => _currentIndex = position)},
-        ),
       ),
-    );
-  }
+      stickyFrontLayer: true,
+      frontLayer: _pages[_currentIndex],
+      backLayer: BackdropNavigationBackLayer(
+        items: [
+          ListTile(title: Text("Widget 1")),
+          ListTile(title: Text("Widget 2")),
+        ],
+        onTap: (int position) => {setState(() => _currentIndex = position)},
+      ),
+    ),
+  );
 }
 ```
 
