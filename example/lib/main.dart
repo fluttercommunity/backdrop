@@ -9,19 +9,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-        title: Text("Backdrop Example"),
+        appBar: BackdropAppBar(
+          title: Text("Backdrop Example"),
+          actions: <Widget>[
+            BackdropToggleButton(
+              icon: AnimatedIcons.list_view,
+            )
+          ],
+        ),
         backLayer: Center(
           child: Text("Back Layer"),
         ),
         frontLayer: Center(
           child: Text("Front Layer"),
         ),
-        iconPosition: BackdropIconPosition.leading,
-        actions: <Widget>[
-          BackdropToggleButton(
-            icon: AnimatedIcons.list_view,
-          ),
-        ],
       ),
     );
   }
