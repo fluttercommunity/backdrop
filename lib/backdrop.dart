@@ -118,7 +118,7 @@ class BackdropScaffold extends StatefulWidget {
   /// The animation curve passed to [Tween.animate]() when triggering
   /// the backdrop animation.
   ///
-  /// Defaults to [Curves.linear].
+  /// Defaults to [Curves.easeInOut].
   final Curve animationCurve;
 
   /// Passed to the [Scaffold] underlying [BackdropScaffold].
@@ -141,7 +141,7 @@ class BackdropScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
-    this.animationCurve = Curves.linear,
+    this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
   });
 
@@ -165,7 +165,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (widget.controller == null) {
       _shouldDisposeController = true;
       _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
+          vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
     } else {
       _controller = widget.controller;
     }
@@ -195,15 +195,19 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   void fling() {
     FocusScope.of(context)?.unfocus();
-    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+    if (isTopPanelVisible) {
+      showBackLayer();
+    } else {
+      showFrontLayer();
+    }
   }
 
   void showBackLayer() {
-    if (isTopPanelVisible) controller.fling(velocity: -1.0);
+    if (isTopPanelVisible) controller.animateBack(-1.0);
   }
 
   void showFrontLayer() {
-    if (isBackPanelVisible) controller.fling(velocity: 1.0);
+    if (isBackPanelVisible) controller.animateTo(1.0);
   }
 
   double _getBackPanelHeight() =>
