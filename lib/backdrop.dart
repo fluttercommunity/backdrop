@@ -67,17 +67,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
 
-  /// The widget assigned to the [Scaffold]'s [AppBar.title].
-  final Widget title;
-
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
   /// The widget that is shown on the front layer .
   final Widget frontLayer;
 
-  /// Actions passed to [AppBar.actions].
-  final List<Widget> actions;
+  /// App bar used for [BackdropScaffold].
+  final PreferredSizeWidget appBar;
 
   /// Defines the height of the front layer when it is in the opened state.
   ///
@@ -103,11 +100,6 @@ class BackdropScaffold extends StatefulWidget {
   /// )
   /// ```
   final BorderRadius frontLayerBorderRadius;
-
-  /// The position of the icon button that toggles the backdrop functionality.
-  ///
-  /// Defaults to [BackdropIconPosition.leading].
-  final BackdropIconPosition iconPosition;
 
   /// A flag indicating whether the front layer should stick to the height of
   /// the back layer when being opened.
@@ -136,16 +128,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
-    this.title,
     this.backLayer,
     this.frontLayer,
-    this.actions = const <Widget>[],
+    this.appBar,
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
-    this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
@@ -309,16 +299,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-          title: widget.title,
-          actions: widget.iconPosition == BackdropIconPosition.action
-              ? <Widget>[BackdropToggleButton()] + widget.actions
-              : widget.actions,
-          elevation: 0.0,
-          leading: widget.iconPosition == BackdropIconPosition.leading
-              ? BackdropToggleButton()
-              : null,
-        ),
+        appBar: widget.appBar,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
@@ -399,19 +380,144 @@ class BackdropToggleButton extends StatelessWidget {
   }
 }
 
-/// This enum is used to specify where [BackdropToggleButton] should appear
-/// within [AppBar].
-enum BackdropIconPosition {
-  /// Indicates that [BackdropToggleButton] should not appear at all.
-  none,
+/// A material app bar that offers functionality for triggering the
+/// [BackdropScaffold]'s functionality. It is internally implemented using the
+/// [AppBar] class.
+///
+/// What differs from the [AppBar] implementation is the behaviour of
+/// [BackdropScaffold.leading] and [BackdropScaffold.automaticallyImplyLeading].
+class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Refer to [AppBar.leading].
+  ///
+  /// If this is `null` and if [BackdropAppBar.automaticallyImplyLeading] is
+  /// set to `true`, [BackdropAppBar] sets the underlying [AppBar.leading] to
+  /// [BackdropToggleButton].
+  final Widget leading;
 
-  /// Indicates that [BackdropToggleButton] should appear at the start of
-  /// [AppBar].
-  leading,
+  /// Refer to [AppBar.automaticallyImplyLeading].
+  ///
+  /// If this is set to `true` and [BackdropAppBar.leading] is set to `null`,
+  /// [BackdropAppBar] automatically sets the underlying [AppBar.leading]
+  /// to [BackdropToggleButton].
+  ///
+  /// Defaults to `true`.
+  final bool automaticallyImplyLeading;
 
-  /// Indicates that [BackdropToggleButton] should appear as an action within
-  /// [AppBar.actions].
-  action
+  /// The widget that should be displayed as the [AppBar] title.
+  final Widget title;
+
+  /// Refer to [AppBar.actions].
+  final List<Widget> actions;
+
+  /// Refer to [AppBar.flexibleSpace].
+  final Widget flexibleSpace;
+
+  /// Refer to [AppBar.bottom].
+  final PreferredSizeWidget bottom;
+
+  /// Refer to [AppBar.elevation].
+  ///
+  /// Defaults to 0.0. This differs from [AppBar.elevation].
+  final double elevation;
+
+  /// Refer to [AppBar.shape]
+  final ShapeBorder shape;
+
+  /// Refer to [AppBar.backgroundColor].
+  final Color backgroundColor;
+
+  /// Refer to [AppBar.brightness].
+  final Brightness brightness;
+
+  /// Refer to [AppBar.iconTheme].
+  final IconThemeData iconTheme;
+
+  /// Refer to [AppBar.actionsIconTheme].
+  final IconThemeData actionsIconTheme;
+
+  /// Refer to [AppBar.textTheme].
+  final TextTheme textTheme;
+
+  /// Refer to [AppBar.primary].
+  final bool primary;
+
+  /// Refer to [AppBar.centerTitle].
+  final bool centerTitle;
+
+  /// Refer to [AppBar.excludeHeaderSemantics].
+  final bool excludeHeaderSemantics;
+
+  /// Refer to [AppBar.iconTheme].titleSpacing
+  final double titleSpacing;
+
+  /// Refer to [AppBar.toolbarOpacity].
+  final double toolbarOpacity;
+
+  /// Refer to [AppBar.bottomOpacity].
+  final double bottomOpacity;
+
+  /// Refer to [AppBar.preferredSize].
+  @override
+  final Size preferredSize;
+
+  /// Creates a backdrop app bar.
+  ///
+  /// For more information refer to [AppBar].
+  BackdropAppBar({
+    Key key,
+    this.leading,
+    this.automaticallyImplyLeading = true,
+    this.title,
+    this.actions,
+    this.flexibleSpace,
+    this.bottom,
+    this.elevation = 0.0,
+    this.shape,
+    this.backgroundColor,
+    this.brightness,
+    this.iconTheme,
+    this.actionsIconTheme,
+    this.textTheme,
+    this.primary = true,
+    this.centerTitle,
+    this.excludeHeaderSemantics = false,
+    this.titleSpacing = NavigationToolbar.kMiddleSpacing,
+    this.toolbarOpacity = 1.0,
+    this.bottomOpacity = 1.0,
+  })  : assert(automaticallyImplyLeading != null),
+        assert(elevation == null || elevation >= 0.0),
+        assert(primary != null),
+        assert(titleSpacing != null),
+        assert(toolbarOpacity != null),
+        assert(bottomOpacity != null),
+        preferredSize = Size.fromHeight(
+            kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: leading ??
+          (automaticallyImplyLeading ? BackdropToggleButton() : null),
+      title: title,
+      actions: actions,
+      flexibleSpace: flexibleSpace,
+      bottom: bottom,
+      elevation: elevation,
+      shape: shape,
+      backgroundColor: backgroundColor,
+      brightness: brightness,
+      iconTheme: iconTheme,
+      actionsIconTheme: actionsIconTheme,
+      textTheme: textTheme,
+      primary: primary,
+      centerTitle: centerTitle,
+      excludeHeaderSemantics: excludeHeaderSemantics,
+      titleSpacing: titleSpacing,
+      toolbarOpacity: toolbarOpacity,
+      bottomOpacity: bottomOpacity,
+    );
+  }
 }
 
 /// Implements the back layer to be used for navigation.
