@@ -273,11 +273,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return Material(
       elevation: 12.0,
       borderRadius: widget.frontLayerBorderRadius,
-      child: Stack(
-        children: <Widget>[
-          widget.frontLayer,
-          _buildInactiveLayer(context),
-        ],
+      child: ClipRRect(
+        borderRadius: widget.frontLayerBorderRadius,
+        child: Stack(
+          children: <Widget>[
+            widget.frontLayer,
+            _buildInactiveLayer(context),
+          ],
+        ),
       ),
     );
   }
