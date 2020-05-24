@@ -271,7 +271,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
-      elevation: 12.0,
+      elevation: 1.0,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
         borderRadius: widget.frontLayerBorderRadius,
