@@ -3,7 +3,8 @@
 # backdrop
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg)](#contributors-)
+[![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg)](#contributors-)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/stargazers)
@@ -23,6 +24,7 @@ ___Any contribution, idea, criticism or feedback is welcomed.___
 | __package__ | https://pub.dev/packages/backdrop |
 | __Git Repo__  | https://github.com/fluttercommunity/backdrop |
 | __Issue Tracker__ | https://github.com/fluttercommunity/backdrop/issues |
+| __Chat Room__ | https://gitter.im/flutter-backdrop |
 
 ## Getting started
 Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f)
@@ -114,7 +116,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://bhikadia.com"><img src="https://avatars1.githubusercontent.com/u/4963236?v=4" width="100px;" alt=""/><br /><sub><b>Harsh Bhikadia</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=daadu" title="Code">💻</a> <a href="#ideas-daadu" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/WieFel"><img src="https://avatars0.githubusercontent.com/u/8345062?v=4" width="100px;" alt=""/><br /><sub><b>Felix Wielander</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=WieFel" title="Code">💻</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=WieFel" title="Documentation">📖</a><a href="https://github.com/fluttercommunity/backdrop/issues/created_by/WieFel" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://bringmos.com/"><img src="https://avatars0.githubusercontent.com/u/64806665?v=4" width="100px;" alt=""/><br /><sub><b>Bringmos</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=bringmos" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/gspencergoog"><img src="https://avatars0.githubusercontent.com/u/8867023?v=4" width="100px;" alt=""/><br /><sub><b>Greg Spencer</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=gspencergoog" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/cicelcup"><img src="https://avatars0.githubusercontent.com/u/48078472?v=4" width="100px;" alt=""/><br /><sub><b>Jorge A Peroza M</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=cicelcup" title="Code">💻</a><a href="https://github.com/fluttercommunity/backdrop/issues/created_by/cicelcup" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/heath3n"><img src="https://avatars0.githubusercontent.com/u/8888204?v=4" width="100px;" alt=""/><br /><sub><b>Matt Newell</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=heath3n" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://danielborges93.com/"><img src="https://avatars0.githubusercontent.com/u/1283243?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Borges</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=danielborges93" title="Code">💻</a><a href="https://github.com/fluttercommunity/backdrop/issues/created_by/danielborges93" title="Bug reports">🐛</a></td>    
   </tr>
 </table>
 

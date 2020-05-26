@@ -118,7 +118,7 @@ class BackdropScaffold extends StatefulWidget {
   /// The animation curve passed to [Tween.animate]() when triggering
   /// the backdrop animation.
   ///
-  /// Defaults to [Curves.linear].
+  /// Defaults to [Curves.easeInOut].
   final Curve animationCurve;
 
   /// Passed to the [Scaffold] underlying [BackdropScaffold].
@@ -143,6 +143,12 @@ class BackdropScaffold extends StatefulWidget {
 
   final Widget floatingActionButton;
 
+  /// Defines the color for the inactive front layer.
+  /// Implicitly an opacity of 0.7 is applied to the passed color.
+  ///
+  /// Defaults to `const Color(0xFFEEEEEE)`.
+  final Color inactiveOverlayColor;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -157,11 +163,12 @@ class BackdropScaffold extends StatefulWidget {
     ),
     this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
-    this.animationCurve = Curves.linear,
+    this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
     this.backPanelBackgroundColor,
     this.appBarBackgroundColor,
     this.floatingActionButton,
+    this.inactiveOverlayColor = const Color(0xFFEEEEEE),
   });
 
   @override
@@ -184,7 +191,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (widget.controller == null) {
       _shouldDisposeController = true;
       _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
+          vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
     } else {
       _controller = widget.controller;
     }
@@ -214,15 +221,19 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   void fling() {
     FocusScope.of(context)?.unfocus();
-    controller.fling(velocity: isTopPanelVisible ? -1.0 : 1.0);
+    if (isTopPanelVisible) {
+      showBackLayer();
+    } else {
+      showFrontLayer();
+    }
   }
 
   void showBackLayer() {
-    if (isTopPanelVisible) controller.fling(velocity: -1.0);
+    if (isTopPanelVisible) controller.animateBack(-1.0);
   }
 
   void showFrontLayer() {
-    if (isBackPanelVisible) controller.fling(velocity: 1.0);
+    if (isBackPanelVisible) controller.animateTo(1.0);
   }
 
   double _getBackPanelHeight() =>
@@ -257,15 +268,18 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: isTopPanelVisible,
-      child: GestureDetector(
-        onTap: () => fling(),
-        behavior: HitTestBehavior.opaque,
-        child: SizedBox.expand(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: widget.frontLayerBorderRadius,
-              color: Colors.grey.shade200.withOpacity(0.7),
+      offstage: controller.status == AnimationStatus.completed,
+      child: FadeTransition(
+        opacity: Tween(begin: 1.0, end: 0.0).animate(controller),
+        child: GestureDetector(
+          onTap: () => fling(),
+          behavior: HitTestBehavior.opaque,
+          child: SizedBox.expand(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: widget.frontLayerBorderRadius,
+                color: widget.inactiveOverlayColor.withOpacity(0.7),
+              ),
             ),
           ),
         ),
@@ -291,13 +305,16 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
-      elevation: 12.0,
+      elevation: 1.0,
       borderRadius: widget.frontLayerBorderRadius,
-      child: Stack(
-        children: <Widget>[
-          widget.frontLayer,
-          _buildInactiveLayer(context),
-        ],
+      child: ClipRRect(
+        borderRadius: widget.frontLayerBorderRadius,
+        child: Stack(
+          children: <Widget>[
+            widget.frontLayer,
+            _buildInactiveLayer(context),
+          ],
+        ),
       ),
     );
   }
