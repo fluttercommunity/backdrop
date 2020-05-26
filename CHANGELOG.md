@@ -1,6 +1,12 @@
+## [0.2.17] - 26 May 2020
+
+* animation duration fix [https://github.com/fluttercommunity/backdrop/pull/19]
+* configurable inactive layer color with animating color change [https://github.com/fluttercommunity/backdrop/pull/20]
+* Improve the front layer border radius [https://github.com/fluttercommunity/backdrop/pull/22]
+
 ## [0.2.15] - 15 May 2020
 
-* bug fix: unfocusing keyboard before fling.
+* bug fix: unfocusing keyboard before fling. [https://github.com/fluttercommunity/backdrop/pull/16]
  
 ## [0.2.14] - 21 April 2020
 

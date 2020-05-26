@@ -36,6 +36,25 @@
         "code"
       ]
     },
+    {
+      "login": "heath3n",
+      "name": "Matt Newell",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8888204?v=4",
+      "profile": "https://github.com/heath3n",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "danielborges93",
+      "name": "Daniel Borges",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1283243?v=4",
+      "profile": "http://danielborges93.com/",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "backdrop",
