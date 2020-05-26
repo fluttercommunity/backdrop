@@ -24,6 +24,7 @@ ___Any contribution, idea, criticism or feedback is welcomed.___
 | __package__ | https://pub.dev/packages/backdrop |
 | __Git Repo__  | https://github.com/fluttercommunity/backdrop |
 | __Issue Tracker__ | https://github.com/fluttercommunity/backdrop/issues |
+| __Chat Room__ | https://gitter.im/flutter-backdrop |
 
 ## Getting started
 Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f)
