@@ -162,7 +162,7 @@ class BackdropScaffold extends StatefulWidget {
       topRight: Radius.circular(16.0),
     ),
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
-        "and BackdropAppBar.automaticallyImplyLeading"
+        "and BackdropAppBar.automaticallyImplyLeading."
         "This feature was deprecated after v0.2.17.")
         this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
