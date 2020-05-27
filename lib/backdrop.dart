@@ -71,7 +71,6 @@ class BackdropScaffold extends StatefulWidget {
   /// Deprecated. Use [BackdropAppBar.title].
   ///
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
-  @Deprecated("Replace by BackdropAppBar's title property.")
   final Widget title;
 
   /// App bar used for [BackdropScaffold].
@@ -86,7 +85,6 @@ class BackdropScaffold extends StatefulWidget {
   /// Deprecated. Use [BackdropAppBar.actions].
   ///
   /// Actions passed to [AppBar.actions].
-  @Deprecated("Replace by use of BackdropAppBar.")
   final List<Widget> actions;
 
   /// Defines the height of the front layer when it is in the opened state.
@@ -120,7 +118,6 @@ class BackdropScaffold extends StatefulWidget {
   /// The position of the icon button that toggles the backdrop functionality.
   ///
   /// Defaults to [BackdropIconPosition.leading].
-  @Deprecated("Replace by using BackdropAppBar.")
   final BackdropIconPosition iconPosition;
 
   /// A flag indicating whether the front layer should stick to the height of
@@ -150,17 +147,24 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
-    this.title,
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
+        "This feature was deprecated after v0.2.17.")
+        this.title,
     this.appBar,
     this.backLayer,
     this.frontLayer,
-    this.actions = const <Widget>[],
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
+        "This feature was deprecated after v0.2.17.")
+        this.actions = const <Widget>[],
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
-    this.iconPosition = BackdropIconPosition.leading,
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
+        "and BackdropAppBar.automaticallyImplyLeading"
+        "This feature was deprecated after v0.2.17.")
+        this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
