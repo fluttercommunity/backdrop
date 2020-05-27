@@ -68,6 +68,12 @@ class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
 
+  /// Deprecated. Use [BackdropAppBar.title].
+  ///
+  /// The widget assigned to the [Scaffold]'s [AppBar.title].
+  @Deprecated("Replace by BackdropAppBar's title property.")
+  final Widget title;
+
   /// App bar used for [BackdropScaffold].
   final PreferredSizeWidget appBar;
 
@@ -76,6 +82,12 @@ class BackdropScaffold extends StatefulWidget {
 
   /// The widget that is shown on the front layer .
   final Widget frontLayer;
+
+  /// Deprecated. Use [BackdropAppBar.actions].
+  ///
+  /// Actions passed to [AppBar.actions].
+  @Deprecated("Replace by use of BackdropAppBar.")
+  final List<Widget> actions;
 
   /// Defines the height of the front layer when it is in the opened state.
   ///
@@ -101,6 +113,15 @@ class BackdropScaffold extends StatefulWidget {
   /// )
   /// ```
   final BorderRadius frontLayerBorderRadius;
+
+  /// Deprecated. Use [BackdropAppBar]'s properties [BackdropAppBar.leading] and
+  /// [BackdropAppBar.automaticallyImplyLeading] to achieve the same behaviour.
+  ///
+  /// The position of the icon button that toggles the backdrop functionality.
+  ///
+  /// Defaults to [BackdropIconPosition.leading].
+  @Deprecated("Replace by using BackdropAppBar.")
+  final BackdropIconPosition iconPosition;
 
   /// A flag indicating whether the front layer should stick to the height of
   /// the back layer when being opened.
@@ -129,14 +150,17 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
+    this.title,
     this.appBar,
     this.backLayer,
     this.frontLayer,
+    this.actions = const <Widget>[],
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
+    this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
@@ -300,7 +324,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: widget.appBar,
+        appBar: widget.appBar ??
+            AppBar(
+              title: widget.title,
+              actions: widget.iconPosition == BackdropIconPosition.action
+                  ? <Widget>[BackdropToggleButton()] + widget.actions
+                  : widget.actions,
+              elevation: 0.0,
+              leading: widget.iconPosition == BackdropIconPosition.leading
+                  ? BackdropToggleButton()
+                  : null,
+            ),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
@@ -335,9 +369,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 /// An animated button that can be used to trigger the backdrop functionality of
 /// [BackdropScaffold].
 ///
-/// This button is used directly within [BackdropScaffold]. Its position can be
-/// specified using [BackdropIconPosition].
-/// This button can also be passed to the [AppBar.actions] of an [AppBar].
+/// This button is implicitly used within [BackdropAppBar].
+/// This button can also be passed to the [BackdropAppBar.actions].
 ///
 /// When being pressed, [BackdropToggleButton] looks for a [Backdrop] instance
 /// above it in the widget tree and toggles its opening/closing.
@@ -379,6 +412,24 @@ class BackdropToggleButton extends StatelessWidget {
       onPressed: () => Backdrop.of(context).fling(),
     );
   }
+}
+
+/// Deprecated. Not needed anymore when [BackdropAppBar] is used.
+///
+/// This enum is used to specify where [BackdropToggleButton] should appear
+/// within [AppBar].
+@Deprecated("Replace by the use of BackdropAppBar.")
+enum BackdropIconPosition {
+  /// Indicates that [BackdropToggleButton] should not appear at all.
+  none,
+
+  /// Indicates that [BackdropToggleButton] should appear at the start of
+  /// [AppBar].
+  leading,
+
+  /// Indicates that [BackdropToggleButton] should appear as an action within
+  /// [AppBar.actions].
+  action
 }
 
 /// A material app bar that offers functionality for triggering the
