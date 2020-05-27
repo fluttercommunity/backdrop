@@ -1,3 +1,7 @@
+## [0.3.0] - 27 May 2020
+
+* `BackdropAppBar` added [https://github.com/fluttercommunity/backdrop/pull/23]
+
 ## [0.2.17] - 26 May 2020
 
 * animation duration fix [https://github.com/fluttercommunity/backdrop/pull/19]
