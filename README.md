@@ -128,6 +128,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/heath3n"><img src="https://avatars0.githubusercontent.com/u/8888204?v=4" width="100px;" alt=""/><br /><sub><b>Matt Newell</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=heath3n" title="Bug reports">🐛</a></td>
     <td align="center"><a href="http://danielborges93.com/"><img src="https://avatars0.githubusercontent.com/u/1283243?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Borges</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=danielborges93" title="Code">💻</a><a href="https://github.com/fluttercommunity/backdrop/issues/created_by/danielborges93" title="Bug reports">🐛</a></td>    
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/felixwortmann"><img src="https://avatars0.githubusercontent.com/u/45035656?v=4" width="100px;" alt=""/><br /><sub><b>Felix Wortmann</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=felixwortmann" title="Code">💻</a></td>      
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->

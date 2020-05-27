@@ -1,3 +1,7 @@
+## [0.3.1] - 27 May 2020
+
+* `floatingActionButton` and other related attributes to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/21]
+
 ## [0.3.0] - 27 May 2020
 
 * `BackdropAppBar` added [https://github.com/fluttercommunity/backdrop/pull/23]
