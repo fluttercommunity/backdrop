@@ -1,5 +1,5 @@
 name: backdrop
-description: Backdrop implementaion in dart. (https://material.io/design/components/backdrop.html)
+description: Backdrop implementation in dart. (https://material.io/design/components/backdrop.html)
 version: 0.3.1
 homepage: https://github.com/fluttercommunity/backdrop
 documentation: https://github.com/fluttercommunity/backdrop
