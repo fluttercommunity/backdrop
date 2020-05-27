@@ -138,7 +138,7 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
-  /// Background [Color] for the BackPanel
+  /// Background [Color] for the back layer.
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
   final Color backLayerBackgroundColor;
