@@ -422,7 +422,8 @@ class BackdropToggleButton extends StatelessWidget {
 ///
 /// This enum is used to specify where [BackdropToggleButton] should appear
 /// within [AppBar].
-@Deprecated("Replace by the use of BackdropAppBar.")
+@Deprecated("Replace by the use of BackdropAppBar."
+    "This feature was deprecated after v0.2.17.")
 enum BackdropIconPosition {
   /// Indicates that [BackdropToggleButton] should not appear at all.
   none,
