@@ -138,6 +138,26 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  /// Background [Color] for the back layer.
+  ///
+  /// Defaults to `Theme.of(context).primaryColor`.
+  final Color backLayerBackgroundColor;
+
+  /// [FloatingActionButton] for the [Scaffold]
+  ///
+  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton]
+  final Widget floatingActionButton;
+
+  /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
+  /// 
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
+  final FloatingActionButtonLocation floatingActionButtonLocation;
+
+  /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
+  /// 
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
+  final FloatingActionButtonAnimator floatingActionButtonAnimator;
+
   /// Defines the color for the inactive front layer.
   /// Implicitly an opacity of 0.7 is applied to the passed color.
   ///
@@ -168,7 +188,11 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
+    this.backLayerBackgroundColor,
+    this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator
   });
 
   @override
@@ -291,7 +315,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return FocusScope(
       canRequestFocus: isBackPanelVisible,
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: this.widget.backLayerBackgroundColor ??
+            Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
             Flexible(
@@ -331,6 +356,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
+        floatingActionButtonLocation: this.widget.floatingActionButtonLocation,
+        floatingActionButtonAnimator: this.widget.floatingActionButtonAnimator,
         appBar: widget.appBar ??
             AppBar(
               title: widget.title,
@@ -357,6 +384,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
+        floatingActionButton: this.widget.floatingActionButton,
         resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       ),
     );

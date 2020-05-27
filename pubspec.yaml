@@ -9,6 +9,7 @@ authors:
   - Harsh Bhikadia <harsh.bhikadiya@gmail.com>
   - Felix Wielander <felix.wielander@gmail.com>
   - Daniel Borges <https://github.com/danielborges93>
+  - Felix Wortmann <https://github.com/felixwortmann>
 
 environment:
   sdk: ">=1.19.0 <3.0.0"
