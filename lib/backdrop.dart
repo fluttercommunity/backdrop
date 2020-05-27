@@ -141,18 +141,22 @@ class BackdropScaffold extends StatefulWidget {
   /// Background [Color] for the BackPanel
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
-  final Color backPanelBackgroundColor;
-
-  /// Background [Color] for the [AppBar] of the [Scaffold]
-  ///
-  /// Defaults to `null`, which leads the [Scaffold] to use `Theme.of(context).primaryColor`.
-  final Color appBarBackgroundColor;
+  final Color backLayerBackgroundColor;
 
   /// [FloatingActionButton] for the [Scaffold]
   ///
   /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton]
-
   final Widget floatingActionButton;
+
+  /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
+  /// 
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
+  final FloatingActionButtonLocation floatingActionButtonLocation;
+
+  /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
+  /// 
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
+  final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
   /// Defines the color for the inactive front layer.
   /// Implicitly an opacity of 0.7 is applied to the passed color.
@@ -184,10 +188,11 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
-    this.backPanelBackgroundColor,
-    this.appBarBackgroundColor,
+    this.backLayerBackgroundColor,
     this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator
   });
 
   @override
@@ -310,7 +315,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return FocusScope(
       canRequestFocus: isBackPanelVisible,
       child: Material(
-        color: this.widget.backPanelBackgroundColor ??
+        color: this.widget.backLayerBackgroundColor ??
             Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
@@ -351,6 +356,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
+        floatingActionButtonLocation: this.widget.floatingActionButtonLocation,
+        floatingActionButtonAnimator: this.widget.floatingActionButtonAnimator,
         appBar: widget.appBar ??
             AppBar(
               title: widget.title,
