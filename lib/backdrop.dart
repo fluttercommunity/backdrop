@@ -40,25 +40,26 @@ class Backdrop extends InheritedWidget {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-///   return MaterialApp(
-///     title: 'Backdrop Demo',
-///     home: BackdropScaffold(
-///       title: Text("Backdrop Example"),
-///       backLayer: Center(
-///         child: Text("Back Layer"),
-///       ),
-///       frontLayer: Center(
-///         child: Text("Front Layer"),
-///       ),
-///       iconPosition: BackdropIconPosition.leading,
-///       actions: <Widget>[
-///         BackdropToggleButton(
-///           icon: AnimatedIcons.list_view,
-///         ),
-///       ],
-///     ),
-///   );
-/// }
+//    return MaterialApp(
+//      title: 'Backdrop Demo',
+//      home: BackdropScaffold(
+//        appBar: BackdropAppBar(
+//          title: Text("Backdrop Example"),
+//          actions: <Widget>[
+//            BackdropToggleButton(
+//              icon: AnimatedIcons.list_view,
+//            )
+//          ],
+//        ),
+//        backLayer: Center(
+//          child: Text("Back Layer"),
+//        ),
+//        frontLayer: Center(
+//          child: Text("Front Layer"),
+//        ),
+//      ),
+//    );
+//  }
 /// ```
 ///
 /// See also:
@@ -67,8 +68,13 @@ class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController controller;
 
+  /// Deprecated. Use [BackdropAppBar.title].
+  ///
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
   final Widget title;
+
+  /// App bar used for [BackdropScaffold].
+  final PreferredSizeWidget appBar;
 
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
@@ -76,6 +82,8 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget that is shown on the front layer .
   final Widget frontLayer;
 
+  /// Deprecated. Use [BackdropAppBar.actions].
+  ///
   /// Actions passed to [AppBar.actions].
   final List<Widget> actions;
 
@@ -104,6 +112,9 @@ class BackdropScaffold extends StatefulWidget {
   /// ```
   final BorderRadius frontLayerBorderRadius;
 
+  /// Deprecated. Use [BackdropAppBar]'s properties [BackdropAppBar.leading] and
+  /// [BackdropAppBar.automaticallyImplyLeading] to achieve the same behaviour.
+  ///
   /// The position of the icon button that toggles the backdrop functionality.
   ///
   /// Defaults to [BackdropIconPosition.leading].
@@ -136,16 +147,24 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
-    this.title,
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
+        "This feature was deprecated after v0.2.17.")
+        this.title,
+    this.appBar,
     this.backLayer,
     this.frontLayer,
-    this.actions = const <Widget>[],
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
+        "This feature was deprecated after v0.2.17.")
+        this.actions = const <Widget>[],
     this.headerHeight = 32.0,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
-    this.iconPosition = BackdropIconPosition.leading,
+    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
+        "and BackdropAppBar.automaticallyImplyLeading."
+        "This feature was deprecated after v0.2.17.")
+        this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
@@ -312,16 +331,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-          title: widget.title,
-          actions: widget.iconPosition == BackdropIconPosition.action
-              ? <Widget>[BackdropToggleButton()] + widget.actions
-              : widget.actions,
-          elevation: 0.0,
-          leading: widget.iconPosition == BackdropIconPosition.leading
-              ? BackdropToggleButton()
-              : null,
-        ),
+        appBar: widget.appBar ??
+            AppBar(
+              title: widget.title,
+              actions: widget.iconPosition == BackdropIconPosition.action
+                  ? <Widget>[BackdropToggleButton()] + widget.actions
+                  : widget.actions,
+              elevation: 0.0,
+              leading: widget.iconPosition == BackdropIconPosition.leading
+                  ? BackdropToggleButton()
+                  : null,
+            ),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
@@ -356,9 +376,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 /// An animated button that can be used to trigger the backdrop functionality of
 /// [BackdropScaffold].
 ///
-/// This button is used directly within [BackdropScaffold]. Its position can be
-/// specified using [BackdropIconPosition].
-/// This button can also be passed to the [AppBar.actions] of an [AppBar].
+/// This button is implicitly used within [BackdropAppBar].
+/// This button can also be passed to the [BackdropAppBar.actions].
 ///
 /// When being pressed, [BackdropToggleButton] looks for a [Backdrop] instance
 /// above it in the widget tree and toggles its opening/closing.
@@ -402,8 +421,12 @@ class BackdropToggleButton extends StatelessWidget {
   }
 }
 
+/// Deprecated. Not needed anymore when [BackdropAppBar] is used.
+///
 /// This enum is used to specify where [BackdropToggleButton] should appear
 /// within [AppBar].
+@Deprecated("Replace by the use of BackdropAppBar."
+    "This feature was deprecated after v0.2.17.")
 enum BackdropIconPosition {
   /// Indicates that [BackdropToggleButton] should not appear at all.
   none,
@@ -417,6 +440,169 @@ enum BackdropIconPosition {
   action
 }
 
+/// A material app bar that offers functionality for triggering the
+/// [BackdropScaffold]'s functionality. It is internally implemented using the
+/// [AppBar] class.
+///
+/// What differs from the [AppBar] implementation is the behaviour of
+/// [BackdropScaffold.leading] and [BackdropScaffold.automaticallyImplyLeading].
+///
+/// Usage example:
+/// ```dart
+/// Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: 'Backdrop Demo',
+//      home: BackdropScaffold(
+//        appBar: BackdropAppBar(
+//          title: Text("Backdrop Example"),
+//          actions: <Widget>[
+//            BackdropToggleButton(
+//              icon: AnimatedIcons.list_view,
+//            )
+//          ],
+//        ),
+//        ...
+//      ),
+//    );
+//  }
+/// ```
+///
+/// See also:
+///  * [AppBar], which is the plain app bar used in material apps.
+class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// See [AppBar.leading].
+  ///
+  /// If this is `null` and if [BackdropAppBar.automaticallyImplyLeading] is
+  /// set to `true`, [BackdropAppBar] sets the underlying [AppBar.leading] to
+  /// [BackdropToggleButton].
+  final Widget leading;
+
+  /// See [AppBar.automaticallyImplyLeading].
+  ///
+  /// If this is set to `true` and [BackdropAppBar.leading] is set to `null`,
+  /// [BackdropAppBar] automatically sets the underlying [AppBar.leading]
+  /// to [BackdropToggleButton].
+  ///
+  /// Defaults to `true`.
+  final bool automaticallyImplyLeading;
+
+  /// The widget that should be displayed as the [AppBar] title.
+  final Widget title;
+
+  /// See [AppBar.actions].
+  final List<Widget> actions;
+
+  /// See [AppBar.flexibleSpace].
+  final Widget flexibleSpace;
+
+  /// See [AppBar.bottom].
+  final PreferredSizeWidget bottom;
+
+  /// See [AppBar.elevation].
+  ///
+  /// Defaults to 0.0. This differs from [AppBar.elevation].
+  final double elevation;
+
+  /// See [AppBar.shape]
+  final ShapeBorder shape;
+
+  /// See [AppBar.backgroundColor].
+  final Color backgroundColor;
+
+  /// See [AppBar.brightness].
+  final Brightness brightness;
+
+  /// See [AppBar.iconTheme].
+  final IconThemeData iconTheme;
+
+  /// See [AppBar.actionsIconTheme].
+  final IconThemeData actionsIconTheme;
+
+  /// See [AppBar.textTheme].
+  final TextTheme textTheme;
+
+  /// See [AppBar.primary].
+  final bool primary;
+
+  /// See [AppBar.centerTitle].
+  final bool centerTitle;
+
+  /// See [AppBar.excludeHeaderSemantics].
+  final bool excludeHeaderSemantics;
+
+  /// See [AppBar.iconTheme].titleSpacing
+  final double titleSpacing;
+
+  /// See [AppBar.toolbarOpacity].
+  final double toolbarOpacity;
+
+  /// See [AppBar.bottomOpacity].
+  final double bottomOpacity;
+
+  /// See [AppBar.preferredSize].
+  @override
+  final Size preferredSize;
+
+  /// Creates a backdrop app bar.
+  ///
+  /// For more information see [AppBar].
+  BackdropAppBar({
+    Key key,
+    this.leading,
+    this.automaticallyImplyLeading = true,
+    this.title,
+    this.actions,
+    this.flexibleSpace,
+    this.bottom,
+    this.elevation = 0.0,
+    this.shape,
+    this.backgroundColor,
+    this.brightness,
+    this.iconTheme,
+    this.actionsIconTheme,
+    this.textTheme,
+    this.primary = true,
+    this.centerTitle,
+    this.excludeHeaderSemantics = false,
+    this.titleSpacing = NavigationToolbar.kMiddleSpacing,
+    this.toolbarOpacity = 1.0,
+    this.bottomOpacity = 1.0,
+  })  : assert(automaticallyImplyLeading != null),
+        assert(elevation == null || elevation >= 0.0),
+        assert(primary != null),
+        assert(titleSpacing != null),
+        assert(toolbarOpacity != null),
+        assert(bottomOpacity != null),
+        preferredSize = Size.fromHeight(
+            kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: leading ??
+          (automaticallyImplyLeading ? BackdropToggleButton() : null),
+      title: title,
+      actions: actions,
+      flexibleSpace: flexibleSpace,
+      bottom: bottom,
+      elevation: elevation,
+      shape: shape,
+      backgroundColor: backgroundColor,
+      brightness: brightness,
+      iconTheme: iconTheme,
+      actionsIconTheme: actionsIconTheme,
+      textTheme: textTheme,
+      primary: primary,
+      centerTitle: centerTitle,
+      excludeHeaderSemantics: excludeHeaderSemantics,
+      titleSpacing: titleSpacing,
+      toolbarOpacity: toolbarOpacity,
+      bottomOpacity: bottomOpacity,
+    );
+  }
+}
+
 /// Implements the back layer to be used for navigation.
 ///
 /// This class can be used as a back layer for [BackdropScaffold]. It enables to
@@ -425,32 +611,33 @@ enum BackdropIconPosition {
 /// Usage example:
 /// ```dart
 /// int _currentIndex = 0;
-/// final List<Widget> _pages = [Widget1(), Widget2()];
-///
-/// @override
-/// Widget build(BuildContext context) {
-///   return MaterialApp(
-///     title: 'Backdrop Demo',
-///     home: BackdropScaffold(
-///       title: Text("Backdrop Navigation Example"),
-///       iconPosition: BackdropIconPosition.leading,
-///       actions: <Widget>[
-///         BackdropToggleButton(
-///           icon: AnimatedIcons.list_view,
-///         ),
-///       ],
-///       stickyFrontLayer: true,
-///       frontLayer: _pages[_currentIndex],
-///       backLayer: BackdropNavigationBackLayer(
-///         items: [
-///           ListTile(title: Text("Widget 1")),
-///           ListTile(title: Text("Widget 2")),
-///         ],
-///         onTap: (int position) => {setState(() => _currentIndex = position)},
-///       ),
-///     ),
-///   );
-/// }
+//  final List<Widget> _pages = [Widget1(), Widget2()];
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: 'Backdrop Demo',
+//      home: BackdropScaffold(
+//        appBar: BackdropAppBar(
+//          title: Text("Navigation Example"),
+//          actions: <Widget>[
+//            BackdropToggleButton(
+//              icon: AnimatedIcons.list_view,
+//            )
+//          ],
+//        ),
+//        stickyFrontLayer: true,
+//        frontLayer: _pages[_currentIndex],
+//        backLayer: BackdropNavigationBackLayer(
+//          items: [
+//            ListTile(title: Text("Widget 1")),
+//            ListTile(title: Text("Widget 2")),
+//          ],
+//          onTap: (int position) => {setState(() => _currentIndex = position)},
+//        ),
+//      ),
+//    );
+//  }
 /// ```
 class BackdropNavigationBackLayer extends StatelessWidget {
   /// The items to be inserted into the underlying [ListView] of the

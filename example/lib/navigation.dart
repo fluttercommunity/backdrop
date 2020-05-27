@@ -17,13 +17,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-        title: Text("Backdrop Navigation Example"),
-        iconPosition: BackdropIconPosition.leading,
-        actions: <Widget>[
-          BackdropToggleButton(
-            icon: AnimatedIcons.list_view,
-          ),
-        ],
+        appBar: BackdropAppBar(
+          title: Text("Navigation Example"),
+          actions: <Widget>[
+            BackdropToggleButton(
+              icon: AnimatedIcons.list_view,
+            )
+          ],
+        ),
         stickyFrontLayer: true,
         frontLayer: _pages[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
