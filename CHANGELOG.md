@@ -1,3 +1,7 @@
+## [0.3.2] - 28 May 2020
+
+* fix typo [https://github.com/fluttercommunity/backdrop/pull/27]
+
 ## [0.3.1] - 27 May 2020
 
 * `floatingActionButton` and other related attributes to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/21]
