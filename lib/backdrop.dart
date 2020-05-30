@@ -85,7 +85,7 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget that is shown as sub-header in front layer
   final Widget subHeader;
 
-  /// This boolean flag keeps subHeader active when [backLayer] is visible
+  /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
   final bool subHeaderAlwaysActive;
 
   /// Deprecated. Use [BackdropAppBar.actions].
