@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
         backLayer: Center(
           child: Text("Back Layer"),
         ),
+        subHeader: BackdropSubHeader(
+          title: Text("Sub Header"),
+        ),
         frontLayer: Center(
           child: Text("Front Layer"),
         ),

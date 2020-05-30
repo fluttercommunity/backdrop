@@ -82,6 +82,12 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget that is shown on the front layer .
   final Widget frontLayer;
 
+  /// The widget that is shown as sub-header in front layer
+  final Widget subHeader;
+
+  /// This boolean flag keeps subHeader active when [backLayer] is visible
+  final bool subHeaderAlwaysActive;
+
   /// Deprecated. Use [BackdropAppBar.actions].
   ///
   /// Actions passed to [AppBar.actions].
@@ -98,7 +104,8 @@ class BackdropScaffold extends StatefulWidget {
   /// part, when being opened. The back layer's height corresponds to
   /// [BoxConstraints.biggest.height]-[headerHeight].
   ///
-  /// Defaults to 32.0.
+  ///
+  /// if [subHeader] is defined then height of subHeader otherwise defaults to 32.0.
   final double headerHeight;
 
   /// Defines the [BorderRadius] applied to the front layer.
@@ -149,12 +156,12 @@ class BackdropScaffold extends StatefulWidget {
   final Widget floatingActionButton;
 
   /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
-  /// 
+  ///
   /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
   final FloatingActionButtonLocation floatingActionButtonLocation;
 
   /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
-  /// 
+  ///
   /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
@@ -173,10 +180,12 @@ class BackdropScaffold extends StatefulWidget {
     this.appBar,
     this.backLayer,
     this.frontLayer,
+    this.subHeader,
+    this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
         "This feature was deprecated after v0.2.17.")
         this.actions = const <Widget>[],
-    this.headerHeight = 32.0,
+    this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
@@ -192,7 +201,7 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator
+    this.floatingActionButtonAnimator,
   });
 
   @override
@@ -204,8 +213,10 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   bool _shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  GlobalKey _backLayerKey = GlobalKey();
+  GlobalKey _backLayerKey = GlobalKey(debugLabel: "backdrop:backLayer");
   double _backPanelHeight = 0;
+  GlobalKey _subHeaderKey = GlobalKey(debugLabel: "backdrop:subHeader");
+  double _headerHeight = 0;
 
   AnimationController get controller => _controller;
 
@@ -223,6 +234,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _backPanelHeight = _getBackPanelHeight();
+        _headerHeight = _getHeaderHeight();
       });
     });
   }
@@ -260,6 +272,20 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (isBackPanelVisible) controller.animateTo(1.0);
   }
 
+  double _getHeaderHeight() {
+    // if defined then use it
+    if (widget.headerHeight != null) return widget.headerHeight;
+
+    // if no subHeader then 32.0
+    if (widget.subHeader == null) return 32.0;
+
+    // if subHeader then height of subHeader
+    return ((_subHeaderKey.currentContext?.findRenderObject() as RenderBox)
+            ?.size
+            ?.height) ??
+        32.0;
+  }
+
   double _getBackPanelHeight() =>
       ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
           ?.size
@@ -271,14 +297,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     double backPanelHeight, frontPanelHeight;
 
     if (widget.stickyFrontLayer &&
-        _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
+        _backPanelHeight < constraints.biggest.height - _headerHeight) {
       // height is adapted to the height of the back panel
       backPanelHeight = _backPanelHeight;
       frontPanelHeight = -_backPanelHeight;
     } else {
       // height is set to fixed value defined in widget.headerHeight
       final height = constraints.biggest.height;
-      backPanelHeight = height - widget.headerHeight;
+      backPanelHeight = height - _headerHeight;
       frontPanelHeight = -backPanelHeight;
     }
     return RelativeRectTween(
@@ -298,13 +324,20 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
-          child: SizedBox.expand(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: widget.frontLayerBorderRadius,
-                color: widget.inactiveOverlayColor.withOpacity(0.7),
+          child: Column(
+            children: <Widget>[
+              widget.subHeader != null && widget.subHeaderAlwaysActive
+                  ? Container(height: _headerHeight)
+                  : Container(),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: widget.frontLayerBorderRadius,
+                    color: widget.inactiveOverlayColor.withOpacity(0.7),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
@@ -335,7 +368,26 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         borderRadius: widget.frontLayerBorderRadius,
         child: Stack(
           children: <Widget>[
-            widget.frontLayer,
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // subHeader
+                DefaultTextStyle(
+                  key: _subHeaderKey,
+                  style: Theme.of(context).textTheme.subtitle1,
+                  child: widget.subHeader != null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 12.0),
+                          child: widget.subHeader,
+                        )
+                      : Container(),
+                ),
+                // frontLayer
+                Flexible(child: widget.frontLayer),
+              ],
+            ),
             _buildInactiveLayer(context),
           ],
         ),
@@ -627,6 +679,61 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: titleSpacing,
       toolbarOpacity: toolbarOpacity,
       bottomOpacity: bottomOpacity,
+    );
+  }
+}
+
+class BackdropSubHeader extends StatelessWidget {
+  final Widget title;
+  final Widget divider;
+  final bool automaticallyImplyLeading;
+  final bool automaticallyImplyTrailing;
+  final Widget leading;
+  final Widget trailing;
+
+  const BackdropSubHeader({
+    Key key,
+    @required this.title,
+    this.divider,
+    this.automaticallyImplyLeading = false,
+    this.automaticallyImplyTrailing = true,
+    this.leading,
+    this.trailing,
+  })  : assert(title != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Widget _buildAutomaticLeadingOrTrailing(BuildContext context) =>
+        FadeTransition(
+          opacity: Tween(begin: 1.0, end: 0.0)
+              .animate(Backdrop.of(context).controller),
+          child: Icon(Icons.keyboard_arrow_up),
+        );
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            leading ??
+                (automaticallyImplyLeading
+                    ? _buildAutomaticLeadingOrTrailing(context)
+                    : Container()),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: title,
+              ),
+            ),
+            trailing ??
+                (automaticallyImplyTrailing
+                    ? _buildAutomaticLeadingOrTrailing(context)
+                    : Container()),
+          ],
+        ),
+        divider ?? Divider(height: 4.0, indent: 16.0),
+      ],
     );
   }
 }
