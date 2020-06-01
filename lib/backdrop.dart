@@ -332,10 +332,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
                   : Container(),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: widget.frontLayerBorderRadius,
-                    color: widget.inactiveOverlayColor.withOpacity(0.7),
-                  ),
+                  color: widget.inactiveOverlayColor.withOpacity(0.7),
                 ),
               ),
             ],
