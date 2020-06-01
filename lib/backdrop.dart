@@ -152,17 +152,17 @@ class BackdropScaffold extends StatefulWidget {
 
   /// [FloatingActionButton] for the [Scaffold]
   ///
-  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton]
+  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton].
   final Widget floatingActionButton;
 
   /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
   ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation].
   final FloatingActionButtonLocation floatingActionButtonLocation;
 
   /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
   ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator].
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
   /// Defines the color for the inactive front layer.
@@ -326,7 +326,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
           behavior: HitTestBehavior.opaque,
           child: Column(
             children: <Widget>[
-              // if subHeaderAlwaysActive then do not apply inactiveOverlayColor for area with _headerHeight 
+              // if subHeaderAlwaysActive then do not apply inactiveOverlayColor for area with _headerHeight
               widget.subHeader != null && widget.subHeaderAlwaysActive
                   ? Container(height: _headerHeight)
                   : Container(),
