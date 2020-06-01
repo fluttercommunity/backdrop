@@ -105,7 +105,7 @@ class BackdropScaffold extends StatefulWidget {
   /// [BoxConstraints.biggest.height]-[headerHeight].
   ///
   ///
-  /// if [subHeader] is defined then height of subHeader otherwise defaults to 32.0.
+  /// If [subHeader] is defined then height of subHeader otherwise defaults to 32.0.
   final double headerHeight;
 
   /// Defines the [BorderRadius] applied to the front layer.
