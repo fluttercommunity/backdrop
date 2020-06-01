@@ -40,26 +40,26 @@ class Backdrop extends InheritedWidget {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        backLayer: Center(
-//          child: Text("Back Layer"),
-//        ),
-//        frontLayer: Center(
-//          child: Text("Front Layer"),
-//        ),
-//      ),
-//    );
-//  }
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Backdrop Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       backLayer: Center(
+///         child: Text("Back Layer"),
+///       ),
+///       frontLayer: Center(
+///         child: Text("Front Layer"),
+///       ),
+///     ),
+///   );
+/// }
 /// ```
 ///
 /// See also:
@@ -79,10 +79,10 @@ class BackdropScaffold extends StatefulWidget {
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
-  /// The widget that is shown on the front layer .
+  /// The widget that is shown on the front layer.
   final Widget frontLayer;
 
-  /// The widget that is shown as sub-header in front layer
+  /// The widget that is shown as sub-header on top of the front layer.
   final Widget subHeader;
 
   /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
@@ -528,21 +528,21 @@ enum BackdropIconPosition {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        ...
-//      ),
-//    );
-//  }
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Backdrop Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       ...
+///     ),
+///   );
+/// }
 /// ```
 ///
 /// See also:
@@ -681,14 +681,58 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+/// A wrapper for adding a sub-header to the used backdrop front layer(s).
+/// This class can be passed to [BackdropScaffold] to specify the sub-header
+/// that should be shown while the front layer is "inactive" (the back layer is
+/// "showing").
+///
+/// Usage example:
+/// ```dart
+/// BackdropScaffold(
+///   appBar: ...,
+///   backLayer: ...,
+///   subHeader: BackdropSubHeader(
+///     title: Text("Sub Header"),
+///   ),
+///   frontLayer: ...,
+/// )
+/// ```
 class BackdropSubHeader extends StatelessWidget {
+  /// The primary content of the sub-header.
   final Widget title;
+
+  /// The divider that should be shown at the bottom of the sub-header.
   final Widget divider;
+
+  /// Flag indicating whether the leading widget for the sub-header should be
+  /// automatically determined by [BackdropSubHeader].
+  ///
+  /// If set to `true`, a leading `Icon(Icons.keyboard_arrow_up)` is added to
+  /// the sub-header.
+  ///
+  /// Defaults to `false`.
   final bool automaticallyImplyLeading;
+
+  /// Flag indicating whether the trailing widget for the sub-header should be
+  /// automatically determined by [BackdropSubHeader].
+  ///
+  /// If set to `true`, a trailing `Icon(Icons.keyboard_arrow_up)` is added to
+  /// the sub-header.
+  ///
+  /// Defaults to `true`.
   final bool automaticallyImplyTrailing;
+
+  /// Widget to be shown as leading element to the sub-header. If set, the value
+  /// of [automaticallyImplyLeading] is ignored.
   final Widget leading;
+
+  /// Widget to be shown as trailing element to the sub-header. If set, the value
+  /// of [automaticallyImplyTrailing] is ignored.
   final Widget trailing;
 
+  /// Creates a [BackdropSubHeader] instance.
+  ///
+  /// The [title] argument must not be `null`.
   const BackdropSubHeader({
     Key key,
     @required this.title,
@@ -744,33 +788,33 @@ class BackdropSubHeader extends StatelessWidget {
 /// Usage example:
 /// ```dart
 /// int _currentIndex = 0;
-//  final List<Widget> _pages = [Widget1(), Widget2()];
+/// final List<Widget> _pages = [Widget1(), Widget2()];
 //
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Navigation Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        stickyFrontLayer: true,
-//        frontLayer: _pages[_currentIndex],
-//        backLayer: BackdropNavigationBackLayer(
-//          items: [
-//            ListTile(title: Text("Widget 1")),
-//            ListTile(title: Text("Widget 2")),
-//          ],
-//          onTap: (int position) => {setState(() => _currentIndex = position)},
-//        ),
-//      ),
-//    );
-//  }
+/// @override
+/// Widget build(BuildContext context) {
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Navigation Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       stickyFrontLayer: true,
+///       frontLayer: _pages[_currentIndex],
+///       backLayer: BackdropNavigationBackLayer(
+///         items: [
+///           ListTile(title: Text("Widget 1")),
+///           ListTile(title: Text("Widget 2")),
+///         ],
+///         onTap: (int position) => {setState(() => _currentIndex = position)},
+///       ),
+///     ),
+///   );
+/// }
 /// ```
 class BackdropNavigationBackLayer extends StatelessWidget {
   /// The items to be inserted into the underlying [ListView] of the
