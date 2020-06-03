@@ -200,7 +200,7 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
     this.onExpand,
-    this.onCollapse
+    this.onCollapse,
   });
 
   @override
