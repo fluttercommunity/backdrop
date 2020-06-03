@@ -261,13 +261,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   void showBackLayer() {
-    if (isTopPanelVisible) controller.animateBack(-1.0);
-    widget.onCollapse?.call();
+    if (isTopPanelVisible) {
+    	controller.animateBack(-1.0);
+	    widget.onCollapse?.call();
+    }
   }
 
   void showFrontLayer() {
-    if (isBackPanelVisible) controller.animateTo(1.0);
-    widget.onExpand?.call();
+    if (isBackPanelVisible) {
+    	controller.animateTo(1.0);
+	    widget.onExpand?.call();
+    }
   }
 
   double _getBackPanelHeight() =>
