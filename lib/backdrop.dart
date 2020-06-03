@@ -199,8 +199,8 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
-	  this.onExpand,
-	  this.onCollapse
+    this.onExpand,
+    this.onCollapse
   });
 
   @override
@@ -262,15 +262,15 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   void showBackLayer() {
     if (isTopPanelVisible) {
-    	controller.animateBack(-1.0);
-	    widget.onCollapse?.call();
+      controller.animateBack(-1.0);
+      widget.onCollapse?.call();
     }
   }
 
   void showFrontLayer() {
     if (isBackPanelVisible) {
-    	controller.animateTo(1.0);
-	    widget.onExpand?.call();
+      controller.animateTo(1.0);
+      widget.onExpand?.call();
     }
   }
 
