@@ -199,8 +199,8 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
-    this.onExpand,
-    this.onCollapse,
+    this.onFrontLayerVisible,
+    this.onBackLayerVisible,
   });
 
   @override
