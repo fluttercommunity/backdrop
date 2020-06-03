@@ -165,10 +165,10 @@ class BackdropScaffold extends StatefulWidget {
   final Color inactiveOverlayColor;
 
   /// Will be called when front layer expands
-  final VoidCallback onExpand;
+  final VoidCallback onFrontLayerVisible;
 
   /// Will be called when front layer collapses
-  final VoidCallback onCollapse;
+  final VoidCallback onBackLayerVisible;
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
