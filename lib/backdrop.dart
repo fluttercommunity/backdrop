@@ -270,7 +270,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   void showFrontLayer() {
     if (isBackPanelVisible) {
       controller.animateTo(1.0);
-      widget.onExpand?.call();
+      widget.onFrontLayerVisible?.call();
     }
   }
 
