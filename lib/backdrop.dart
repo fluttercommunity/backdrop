@@ -164,6 +164,12 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `const Color(0xFFEEEEEE)`.
   final Color inactiveOverlayColor;
 
+  /// Will be called when front layer expands
+  final VoidCallback onExpand;
+
+  /// Will be called when front layer collapses
+  final VoidCallback onCollapse;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -192,7 +198,9 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator
+    this.floatingActionButtonAnimator,
+	  this.onExpand,
+	  this.onCollapse
   });
 
   @override
@@ -254,10 +262,12 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   void showBackLayer() {
     if (isTopPanelVisible) controller.animateBack(-1.0);
+    widget.onCollapse?.call();
   }
 
   void showFrontLayer() {
     if (isBackPanelVisible) controller.animateTo(1.0);
+    widget.onExpand?.call();
   }
 
   double _getBackPanelHeight() =>
