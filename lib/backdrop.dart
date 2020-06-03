@@ -263,7 +263,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   void showBackLayer() {
     if (isTopPanelVisible) {
       controller.animateBack(-1.0);
-      widget.onCollapse?.call();
+      widget.onBackLayerVisible?.call();
     }
   }
 
