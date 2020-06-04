@@ -374,13 +374,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
                 DefaultTextStyle(
                   key: _subHeaderKey,
                   style: Theme.of(context).textTheme.subtitle1,
-                  child: widget.subHeader != null
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 12.0),
-                          child: widget.subHeader,
-                        )
-                      : Container(),
+                  child: widget.subHeader ?? Container(),
                 ),
                 // frontLayer
                 Flexible(child: widget.frontLayer),
@@ -704,6 +698,11 @@ class BackdropSubHeader extends StatelessWidget {
   /// The divider that should be shown at the bottom of the sub-header.
   final Widget divider;
 
+  /// Padding that will be applied to the sub-header.
+  ///
+  /// Defaults to `EdgeInsets.all(16.0)`.
+  final EdgeInsets padding;
+
   /// Flag indicating whether the leading widget for the sub-header should be
   /// automatically determined by [BackdropSubHeader].
   ///
@@ -737,6 +736,7 @@ class BackdropSubHeader extends StatelessWidget {
     Key key,
     @required this.title,
     this.divider,
+    this.padding = const EdgeInsets.all(16.0),
     this.automaticallyImplyLeading = false,
     this.automaticallyImplyTrailing = true,
     this.leading,
@@ -753,29 +753,29 @@ class BackdropSubHeader extends StatelessWidget {
           child: Icon(Icons.keyboard_arrow_up),
         );
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            leading ??
-                (automaticallyImplyLeading
-                    ? _buildAutomaticLeadingOrTrailing(context)
-                    : Container()),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+    return Padding(
+      padding: padding,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              leading ??
+                  (automaticallyImplyLeading
+                      ? _buildAutomaticLeadingOrTrailing(context)
+                      : Container()),
+              Expanded(
                 child: title,
               ),
-            ),
-            trailing ??
-                (automaticallyImplyTrailing
-                    ? _buildAutomaticLeadingOrTrailing(context)
-                    : Container()),
-          ],
-        ),
-        divider ?? Divider(height: 4.0, indent: 16.0),
-      ],
+              trailing ??
+                  (automaticallyImplyTrailing
+                      ? _buildAutomaticLeadingOrTrailing(context)
+                      : Container()),
+            ],
+          ),
+          divider ?? Divider(height: 4.0, indent: 16.0),
+        ],
+      ),
     );
   }
 }
