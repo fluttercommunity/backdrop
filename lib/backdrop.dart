@@ -40,26 +40,26 @@ class Backdrop extends InheritedWidget {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        backLayer: Center(
-//          child: Text("Back Layer"),
-//        ),
-//        frontLayer: Center(
-//          child: Text("Front Layer"),
-//        ),
-//      ),
-//    );
-//  }
+///    return MaterialApp(
+///      title: 'Backdrop Demo',
+///      home: BackdropScaffold(
+///        appBar: BackdropAppBar(
+///          title: Text("Backdrop Example"),
+///          actions: <Widget>[
+///            BackdropToggleButton(
+///              icon: AnimatedIcons.list_view,
+///            )
+///          ],
+///        ),
+///        backLayer: Center(
+///          child: Text("Back Layer"),
+///        ),
+///        frontLayer: Center(
+///          child: Text("Front Layer"),
+///        ),
+///      ),
+///    );
+///  }
 /// ```
 ///
 /// See also:
@@ -506,21 +506,21 @@ enum BackdropIconPosition {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        ...
-//      ),
-//    );
-//  }
+///    return MaterialApp(
+///      title: 'Backdrop Demo',
+///      home: BackdropScaffold(
+///        appBar: BackdropAppBar(
+///          title: Text("Backdrop Example"),
+///          actions: <Widget>[
+///            BackdropToggleButton(
+///              icon: AnimatedIcons.list_view,
+///            )
+///          ],
+///        ),
+///        ...
+///      ),
+///    );
+///  }
 /// ```
 ///
 /// See also:
@@ -667,33 +667,33 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
 /// Usage example:
 /// ```dart
 /// int _currentIndex = 0;
-//  final List<Widget> _pages = [Widget1(), Widget2()];
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Navigation Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        stickyFrontLayer: true,
-//        frontLayer: _pages[_currentIndex],
-//        backLayer: BackdropNavigationBackLayer(
-//          items: [
-//            ListTile(title: Text("Widget 1")),
-//            ListTile(title: Text("Widget 2")),
-//          ],
-//          onTap: (int position) => {setState(() => _currentIndex = position)},
-//        ),
-//      ),
-//    );
-//  }
+///  final List<Widget> _pages = [Widget1(), Widget2()];
+///
+///  @override
+///  Widget build(BuildContext context) {
+///    return MaterialApp(
+///      title: 'Backdrop Demo',
+///      home: BackdropScaffold(
+///        appBar: BackdropAppBar(
+///          title: Text("Navigation Example"),
+///          actions: <Widget>[
+///            BackdropToggleButton(
+///              icon: AnimatedIcons.list_view,
+///            )
+///          ],
+///        ),
+///        stickyFrontLayer: true,
+///        frontLayer: _pages[_currentIndex],
+///        backLayer: BackdropNavigationBackLayer(
+///          items: [
+///            ListTile(title: Text("Widget 1")),
+///            ListTile(title: Text("Widget 2")),
+///          ],
+///          onTap: (int position) => {setState(() => _currentIndex = position)},
+///        ),
+///      ),
+///    );
+///  }
 /// ```
 class BackdropNavigationBackLayer extends StatelessWidget {
   /// The items to be inserted into the underlying [ListView] of the
