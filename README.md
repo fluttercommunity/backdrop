@@ -100,6 +100,8 @@ Widget build(BuildContext context) {
 For more information, check out sample code in the [example directory](https://github.com/fluttercommunity/backdrop/tree/master/example)
 
 ## Contribute
+Check proposal documents for [v1.0](https://github.com/fluttercommunity/backdrop/issues/5) and [web&desktop](https://github.com/fluttercommunity/backdrop/issues/34) milestones before you begin with any contibution.
+
 1. You'll need a GitHub account.
 2. Fork the [repository](https://github.com/fluttercommunity/backdrop).
 3. Pick an issue to work on from [issue tracker](https://github.com/fluttercommunity/backdrop/issues).
