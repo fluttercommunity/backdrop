@@ -753,12 +753,12 @@ class BackdropSubHeader extends StatelessWidget {
           child: Icon(Icons.keyboard_arrow_up),
         );
 
-    return Padding(
-      padding: padding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Padding(
+          padding: padding,
+          child: Row(
             children: <Widget>[
               leading ??
                   (automaticallyImplyLeading
@@ -773,9 +773,9 @@ class BackdropSubHeader extends StatelessWidget {
                       : Container()),
             ],
           ),
-          divider ?? Divider(height: 4.0, indent: 16.0),
-        ],
-      ),
+        ),
+        divider ?? Divider(height: 4.0, indent: 16.0),
+      ],
     );
   }
 }
