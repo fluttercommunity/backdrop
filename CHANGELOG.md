@@ -1,3 +1,8 @@
+## [0.3.3] - 4 June 2020
+
+* refactor `showFrontLayer` to `concealBackLayer` and `showBackLayer` to `revealBackLayer` [https://github.com/fluttercommunity/backdrop/pull/30]
+* added `onBackLayerConcealed` and `onBackLayerRevealed` callbacks [https://github.com/fluttercommunity/backdrop/pull/30]
+ 
 ## [0.3.2] - 28 May 2020
 
 * fix typo [https://github.com/fluttercommunity/backdrop/pull/27]

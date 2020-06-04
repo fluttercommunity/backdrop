@@ -242,7 +242,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   @Deprecated("Replace by the use of `isBackLayerConcealed`."
-      "This feature was deprecated after v0.3.3.")
+      "This feature was deprecated after v0.3.2.")
   bool get isTopPanelVisible => isBackLayerConcealed;
 
   bool get isBackLayerConcealed =>
@@ -250,7 +250,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       controller.status == AnimationStatus.forward;
 
   @Deprecated("Replace by the use of `isBackLayerRevealed`."
-      "This feature was deprecated after v0.3.3.")
+      "This feature was deprecated after v0.3.2.")
   bool get isBackPanelVisible => isBackLayerRevealed;
 
   bool get isBackLayerRevealed =>
@@ -267,7 +267,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   @Deprecated("Replace by the use of `revealBackLayer`."
-      "This feature was deprecated after v0.3.3.")
+      "This feature was deprecated after v0.3.2.")
   void showBackLayer() => revealBackLayer();
 
   void revealBackLayer() {
@@ -278,7 +278,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   @Deprecated("Replace by the use of `concealBackLayer`."
-      "This feature was deprecated after v0.3.3.")
+      "This feature was deprecated after v0.3.2.")
   void showFrontLayer() => concealBackLayer();
 
   void concealBackLayer() {
