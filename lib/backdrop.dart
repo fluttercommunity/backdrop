@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// [_BackdropScaffoldState] to be accessed from anywhere below the widget tree.
 ///
 /// It can be used to explicitly call backdrop functionality like fling,
-/// showBackLayer, showFrontLayer, etc.
+/// concealBackLayer, revealBackLayer, etc.
 ///
 /// Example:
 /// ```dart
@@ -157,12 +157,12 @@ class BackdropScaffold extends StatefulWidget {
 
   /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
   ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation].
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
   final FloatingActionButtonLocation floatingActionButtonLocation;
 
   /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
   ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator].
+  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
   /// Defines the color for the inactive front layer.
@@ -170,6 +170,12 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Defaults to `const Color(0xFFEEEEEE)`.
   final Color inactiveOverlayColor;
+
+  /// Will be called when [backLayer] have been concealed.
+  final VoidCallback onBackLayerConcealed;
+
+  /// Will be called when [backLayer] have been revealed.
+  final VoidCallback onBackLayerRevealed;
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
@@ -202,6 +208,8 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
+    this.onBackLayerConcealed,
+    this.onBackLayerRevealed,
   });
 
   @override
@@ -245,31 +253,51 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (_shouldDisposeController) _controller.dispose();
   }
 
-  bool get isTopPanelVisible =>
+  @Deprecated("Replace by the use of `isBackLayerConcealed`."
+      "This feature was deprecated after v0.3.2.")
+  bool get isTopPanelVisible => isBackLayerConcealed;
+
+  bool get isBackLayerConcealed =>
       controller.status == AnimationStatus.completed ||
       controller.status == AnimationStatus.forward;
 
-  bool get isBackPanelVisible {
-    final AnimationStatus status = controller.status;
-    return status == AnimationStatus.dismissed ||
-        status == AnimationStatus.reverse;
-  }
+  @Deprecated("Replace by the use of `isBackLayerRevealed`."
+      "This feature was deprecated after v0.3.2.")
+  bool get isBackPanelVisible => isBackLayerRevealed;
+
+  bool get isBackLayerRevealed =>
+      controller.status == AnimationStatus.dismissed ||
+      controller.status == AnimationStatus.reverse;
 
   void fling() {
     FocusScope.of(context)?.unfocus();
-    if (isTopPanelVisible) {
-      showBackLayer();
+    if (isBackLayerConcealed) {
+      revealBackLayer();
     } else {
-      showFrontLayer();
+      concealBackLayer();
     }
   }
 
-  void showBackLayer() {
-    if (isTopPanelVisible) controller.animateBack(-1.0);
+  @Deprecated("Replace by the use of `revealBackLayer`."
+      "This feature was deprecated after v0.3.2.")
+  void showBackLayer() => revealBackLayer();
+
+  void revealBackLayer() {
+    if (isBackLayerConcealed) {
+      controller.animateBack(-1.0);
+      widget.onBackLayerRevealed?.call();
+    }
   }
 
-  void showFrontLayer() {
-    if (isBackPanelVisible) controller.animateTo(1.0);
+  @Deprecated("Replace by the use of `concealBackLayer`."
+      "This feature was deprecated after v0.3.2.")
+  void showFrontLayer() => concealBackLayer();
+
+  void concealBackLayer() {
+    if (isBackLayerRevealed) {
+      controller.animateTo(1.0);
+      widget.onBackLayerConcealed?.call();
+    }
   }
 
   double _getHeaderHeight() {
@@ -344,7 +372,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildBackPanel() {
     return FocusScope(
-      canRequestFocus: isBackPanelVisible,
+      canRequestFocus: isBackLayerRevealed,
       child: Material(
         color: this.widget.backLayerBackgroundColor ??
             Theme.of(context).primaryColor,
@@ -388,8 +416,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Future<bool> _willPopCallback(BuildContext context) async {
-    if (isBackPanelVisible) {
-      showFrontLayer();
+    if (isBackLayerRevealed) {
+      concealBackLayer();
       return null;
     }
     return true;

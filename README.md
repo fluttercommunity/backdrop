@@ -4,7 +4,7 @@
 
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
 [![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg)](#contributors-)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
 [![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/stargazers)
@@ -131,6 +131,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/felixwortmann"><img src="https://avatars0.githubusercontent.com/u/45035656?v=4" width="100px;" alt=""/><br /><sub><b>Felix Wortmann</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=felixwortmann" title="Code">💻</a></td>      
     <td align="center"><a href="https://github.com/pgrimaud"><img src="https://avatars0.githubusercontent.com/u/1866496?v=4" width="100px;" alt=""/><br /><sub><b>Pierre Grimaud</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=pgrimaud" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/vlytvyne"><img src="https://avatars0.githubusercontent.com/u/44924680?v=4" width="100px;" alt=""/><br /><sub><b>Вадим</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=vlytvyne" title="Code">💻</a></td>      
   </tr>
 </table>
 
