@@ -40,26 +40,26 @@ class Backdrop extends InheritedWidget {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        backLayer: Center(
-//          child: Text("Back Layer"),
-//        ),
-//        frontLayer: Center(
-//          child: Text("Front Layer"),
-//        ),
-//      ),
-//    );
-//  }
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Backdrop Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       backLayer: Center(
+///         child: Text("Back Layer"),
+///       ),
+///       frontLayer: Center(
+///         child: Text("Front Layer"),
+///       ),
+///     ),
+///   );
+/// }
 /// ```
 ///
 /// See also:
@@ -79,8 +79,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
-  /// The widget that is shown on the front layer .
+  /// The widget that is shown on the front layer.
   final Widget frontLayer;
+
+  /// The widget that is shown as sub-header on top of the front layer.
+  final Widget subHeader;
+
+  /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
+  final bool subHeaderAlwaysActive;
 
   /// Deprecated. Use [BackdropAppBar.actions].
   ///
@@ -98,7 +104,8 @@ class BackdropScaffold extends StatefulWidget {
   /// part, when being opened. The back layer's height corresponds to
   /// [BoxConstraints.biggest.height]-[headerHeight].
   ///
-  /// Defaults to 32.0.
+  ///
+  /// If [subHeader] is defined then height of subHeader otherwise defaults to 32.0.
   final double headerHeight;
 
   /// Defines the [BorderRadius] applied to the front layer.
@@ -145,7 +152,7 @@ class BackdropScaffold extends StatefulWidget {
 
   /// [FloatingActionButton] for the [Scaffold]
   ///
-  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton]
+  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton].
   final Widget floatingActionButton;
 
   /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
@@ -179,10 +186,12 @@ class BackdropScaffold extends StatefulWidget {
     this.appBar,
     this.backLayer,
     this.frontLayer,
+    this.subHeader,
+    this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
         "This feature was deprecated after v0.2.17.")
         this.actions = const <Widget>[],
-    this.headerHeight = 32.0,
+    this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
@@ -212,8 +221,10 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   bool _shouldDisposeController = false;
   AnimationController _controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  GlobalKey _backLayerKey = GlobalKey();
+  GlobalKey _backLayerKey = GlobalKey(debugLabel: "backdrop:backLayer");
   double _backPanelHeight = 0;
+  GlobalKey _subHeaderKey = GlobalKey(debugLabel: "backdrop:subHeader");
+  double _headerHeight = 0;
 
   AnimationController get controller => _controller;
 
@@ -231,6 +242,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _backPanelHeight = _getBackPanelHeight();
+        _headerHeight = _getHeaderHeight();
       });
     });
   }
@@ -288,6 +300,20 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
+  double _getHeaderHeight() {
+    // if defined then use it
+    if (widget.headerHeight != null) return widget.headerHeight;
+
+    // if no subHeader then 32.0
+    if (widget.subHeader == null) return 32.0;
+
+    // if subHeader then height of subHeader
+    return ((_subHeaderKey.currentContext?.findRenderObject() as RenderBox)
+            ?.size
+            ?.height) ??
+        32.0;
+  }
+
   double _getBackPanelHeight() =>
       ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
           ?.size
@@ -299,14 +325,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     double backPanelHeight, frontPanelHeight;
 
     if (widget.stickyFrontLayer &&
-        _backPanelHeight < constraints.biggest.height - widget.headerHeight) {
+        _backPanelHeight < constraints.biggest.height - _headerHeight) {
       // height is adapted to the height of the back panel
       backPanelHeight = _backPanelHeight;
       frontPanelHeight = -_backPanelHeight;
     } else {
       // height is set to fixed value defined in widget.headerHeight
       final height = constraints.biggest.height;
-      backPanelHeight = height - widget.headerHeight;
+      backPanelHeight = height - _headerHeight;
       frontPanelHeight = -backPanelHeight;
     }
     return RelativeRectTween(
@@ -326,13 +352,18 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
-          child: SizedBox.expand(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: widget.frontLayerBorderRadius,
-                color: widget.inactiveOverlayColor.withOpacity(0.7),
+          child: Column(
+            children: <Widget>[
+              // if subHeaderAlwaysActive then do not apply inactiveOverlayColor for area with _headerHeight
+              widget.subHeader != null && widget.subHeaderAlwaysActive
+                  ? Container(height: _headerHeight)
+                  : Container(),
+              Expanded(
+                child: Container(
+                  color: widget.inactiveOverlayColor.withOpacity(0.7),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
@@ -363,7 +394,20 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         borderRadius: widget.frontLayerBorderRadius,
         child: Stack(
           children: <Widget>[
-            widget.frontLayer,
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // subHeader
+                DefaultTextStyle(
+                  key: _subHeaderKey,
+                  style: Theme.of(context).textTheme.subtitle1,
+                  child: widget.subHeader ?? Container(),
+                ),
+                // frontLayer
+                Flexible(child: widget.frontLayer),
+              ],
+            ),
             _buildInactiveLayer(context),
           ],
         ),
@@ -506,21 +550,21 @@ enum BackdropIconPosition {
 /// Usage example:
 /// ```dart
 /// Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Backdrop Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        ...
-//      ),
-//    );
-//  }
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Backdrop Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       ...
+///     ),
+///   );
+/// }
 /// ```
 ///
 /// See also:
@@ -659,6 +703,113 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+/// A wrapper for adding a sub-header to the used backdrop front layer(s).
+/// This class can be passed to [BackdropScaffold] to specify the sub-header
+/// that should be shown while the front layer is "inactive" (the back layer is
+/// "showing").
+///
+/// Usage example:
+/// ```dart
+/// BackdropScaffold(
+///   appBar: ...,
+///   backLayer: ...,
+///   subHeader: BackdropSubHeader(
+///     title: Text("Sub Header"),
+///   ),
+///   frontLayer: ...,
+/// )
+/// ```
+class BackdropSubHeader extends StatelessWidget {
+  /// The primary content of the sub-header.
+  final Widget title;
+
+  /// The divider that should be shown at the bottom of the sub-header.
+  ///
+  /// Defaults to `Divider(height: 4.0, indent: 16.0, endIndent: 16.0)`.
+  final Widget divider;
+
+  /// Padding that will be applied to the sub-header.
+  ///
+  /// Defaults to `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`.
+  final EdgeInsets padding;
+
+  /// Flag indicating whether the leading widget for the sub-header should be
+  /// automatically determined by [BackdropSubHeader].
+  ///
+  /// If set to `true`, a leading `Icon(Icons.keyboard_arrow_up)` is added to
+  /// the sub-header.
+  ///
+  /// Defaults to `false`.
+  final bool automaticallyImplyLeading;
+
+  /// Flag indicating whether the trailing widget for the sub-header should be
+  /// automatically determined by [BackdropSubHeader].
+  ///
+  /// If set to `true`, a trailing `Icon(Icons.keyboard_arrow_up)` is added to
+  /// the sub-header.
+  ///
+  /// Defaults to `true`.
+  final bool automaticallyImplyTrailing;
+
+  /// Widget to be shown as leading element to the sub-header. If set, the value
+  /// of [automaticallyImplyLeading] is ignored.
+  final Widget leading;
+
+  /// Widget to be shown as trailing element to the sub-header. If set, the value
+  /// of [automaticallyImplyTrailing] is ignored.
+  final Widget trailing;
+
+  /// Creates a [BackdropSubHeader] instance.
+  ///
+  /// The [title] argument must not be `null`.
+  const BackdropSubHeader({
+    Key key,
+    @required this.title,
+    this.divider,
+    this.padding = const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+    this.automaticallyImplyLeading = false,
+    this.automaticallyImplyTrailing = true,
+    this.leading,
+    this.trailing,
+  })  : assert(title != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Widget _buildAutomaticLeadingOrTrailing(BuildContext context) =>
+        FadeTransition(
+          opacity: Tween(begin: 1.0, end: 0.0)
+              .animate(Backdrop.of(context).controller),
+          child: Icon(Icons.keyboard_arrow_up),
+        );
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Padding(
+          padding: padding,
+          child: Row(
+            children: <Widget>[
+              leading ??
+                  (automaticallyImplyLeading
+                      ? _buildAutomaticLeadingOrTrailing(context)
+                      : Container()),
+              Expanded(
+                child: title,
+              ),
+              trailing ??
+                  (automaticallyImplyTrailing
+                      ? _buildAutomaticLeadingOrTrailing(context)
+                      : Container()),
+            ],
+          ),
+        ),
+        divider ?? const Divider(height: 4.0, indent: 16.0, endIndent: 16.0),
+      ],
+    );
+  }
+}
+
 /// Implements the back layer to be used for navigation.
 ///
 /// This class can be used as a back layer for [BackdropScaffold]. It enables to
@@ -667,33 +818,33 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
 /// Usage example:
 /// ```dart
 /// int _currentIndex = 0;
-//  final List<Widget> _pages = [Widget1(), Widget2()];
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Backdrop Demo',
-//      home: BackdropScaffold(
-//        appBar: BackdropAppBar(
-//          title: Text("Navigation Example"),
-//          actions: <Widget>[
-//            BackdropToggleButton(
-//              icon: AnimatedIcons.list_view,
-//            )
-//          ],
-//        ),
-//        stickyFrontLayer: true,
-//        frontLayer: _pages[_currentIndex],
-//        backLayer: BackdropNavigationBackLayer(
-//          items: [
-//            ListTile(title: Text("Widget 1")),
-//            ListTile(title: Text("Widget 2")),
-//          ],
-//          onTap: (int position) => {setState(() => _currentIndex = position)},
-//        ),
-//      ),
-//    );
-//  }
+/// final List<Widget> _pages = [Widget1(), Widget2()];
+///
+/// @override
+/// Widget build(BuildContext context) {
+///   return MaterialApp(
+///     title: 'Backdrop Demo',
+///     home: BackdropScaffold(
+///       appBar: BackdropAppBar(
+///         title: Text("Navigation Example"),
+///         actions: <Widget>[
+///           BackdropToggleButton(
+///             icon: AnimatedIcons.list_view,
+///           )
+///         ],
+///       ),
+///       stickyFrontLayer: true,
+///       frontLayer: _pages[_currentIndex],
+///       backLayer: BackdropNavigationBackLayer(
+///         items: [
+///           ListTile(title: Text("Widget 1")),
+///           ListTile(title: Text("Widget 2")),
+///         ],
+///         onTap: (int position) => {setState(() => _currentIndex = position)},
+///       ),
+///     ),
+///   );
+/// }
 /// ```
 class BackdropNavigationBackLayer extends StatelessWidget {
   /// The items to be inserted into the underlying [ListView] of the
