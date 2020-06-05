@@ -724,11 +724,13 @@ class BackdropSubHeader extends StatelessWidget {
   final Widget title;
 
   /// The divider that should be shown at the bottom of the sub-header.
+  ///
+  /// Defaults to `Divider(height: 4.0, indent: 16.0, endIndent: 16.0)`.
   final Widget divider;
 
   /// Padding that will be applied to the sub-header.
   ///
-  /// Defaults to `EdgeInsets.all(16.0)`.
+  /// Defaults to `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`.
   final EdgeInsets padding;
 
   /// Flag indicating whether the leading widget for the sub-header should be
@@ -764,7 +766,7 @@ class BackdropSubHeader extends StatelessWidget {
     Key key,
     @required this.title,
     this.divider,
-    this.padding = const EdgeInsets.all(16.0),
+    this.padding = const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
     this.automaticallyImplyLeading = false,
     this.automaticallyImplyTrailing = true,
     this.leading,
@@ -802,7 +804,7 @@ class BackdropSubHeader extends StatelessWidget {
             ],
           ),
         ),
-        divider ?? Divider(height: 4.0, indent: 16.0),
+        divider ?? const Divider(height: 4.0, indent: 16.0, endIndent: 16.0),
       ],
     );
   }
@@ -817,7 +819,7 @@ class BackdropSubHeader extends StatelessWidget {
 /// ```dart
 /// int _currentIndex = 0;
 /// final List<Widget> _pages = [Widget1(), Widget2()];
-//
+///
 /// @override
 /// Widget build(BuildContext context) {
 ///   return MaterialApp(
