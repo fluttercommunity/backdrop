@@ -1,3 +1,8 @@
+## [0.3.4] - 5 June 2020
+
+* `subHeader` attribute added to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/29]
+* `BackdropSubHeader` provided to implement sub header following MDG [https://github.com/fluttercommunity/backdrop/pull/29]
+
 ## [0.3.3] - 4 June 2020
 
 * refactor `showFrontLayer` to `concealBackLayer` and `showBackLayer` to `revealBackLayer` [https://github.com/fluttercommunity/backdrop/pull/30]
