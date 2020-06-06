@@ -1,3 +1,7 @@
+## [0.4.1] - 6 June 2020
+
+* making `_BackdropScaffoldState` class public [https://github.com/fluttercommunity/backdrop/pull/36] 
+
 ## [0.4.0] - 6 June 2020
 
 * refactor `backdrop.dart` to smaller dart files [https://github.com/fluttercommunity/backdrop/pull/32]
