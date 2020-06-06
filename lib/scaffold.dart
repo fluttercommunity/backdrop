@@ -3,7 +3,7 @@ import 'package:backdrop/button.dart';
 import 'package:flutter/material.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
-/// [_BackdropScaffoldState] to be accessed from anywhere below the widget tree.
+/// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
 ///
 /// It can be used to explicitly call backdrop functionality like fling,
 /// concealBackLayer, revealBackLayer, etc.
@@ -14,14 +14,14 @@ import 'package:flutter/material.dart';
 /// ```
 class Backdrop extends InheritedWidget {
   /// Holds the state of this widget.
-  final _BackdropScaffoldState data;
+  final BackdropScaffoldState data;
 
   /// Creates a [Backdrop] instance.
   Backdrop({Key key, @required this.data, @required Widget child})
       : super(key: key, child: child);
 
   /// Provides access to the state from everywhere in the widget tree.
-  static _BackdropScaffoldState of(BuildContext context) =>
+  static BackdropScaffoldState of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
 
   @override
@@ -211,19 +211,37 @@ class BackdropScaffold extends StatefulWidget {
   });
 
   @override
-  _BackdropScaffoldState createState() => _BackdropScaffoldState();
+  BackdropScaffoldState createState() => BackdropScaffoldState();
 }
 
-class _BackdropScaffoldState extends State<BackdropScaffold>
+/// This class is used to represent the internal state of [BackdropScaffold].
+/// It provides access to the functionality for triggering backdrop. As well it
+/// offers ways to retrieve the current state of the [BackdropScaffold]'s front-
+/// or back layers (concealed/revealed).
+///
+/// An instance of this class is automatically created with the use of
+/// [BackdropScaffold] and can be accessed using `Backdrop.of(context)` from
+/// within the widget tree below [BackdropScaffold].
+class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeController = false;
   AnimationController _controller;
+
+  /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
+  /// used [Scaffold].
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey _backLayerKey = GlobalKey(debugLabel: "backdrop:backLayer");
   double _backPanelHeight = 0;
   GlobalKey _subHeaderKey = GlobalKey(debugLabel: "backdrop:subHeader");
   double _headerHeight = 0;
 
+  /// [AnimationController] used for the backdrop animation.
+  ///
+  /// Defaults to
+  /// ```dart
+  /// AnimationController(
+  ///         vsync: this, duration: Duration(milliseconds: 200), value: 1.0)
+  /// ```
   AnimationController get controller => _controller;
 
   @override
@@ -251,22 +269,35 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (_shouldDisposeController) _controller.dispose();
   }
 
+  /// Deprecated. Use [isBackLayerConcealed] instead.
+  ///
+  /// Wether the back layer is concealed or not.
   @Deprecated("Replace by the use of `isBackLayerConcealed`."
       "This feature was deprecated after v0.3.2.")
   bool get isTopPanelVisible => isBackLayerConcealed;
 
+  /// Wether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
       controller.status == AnimationStatus.completed ||
           controller.status == AnimationStatus.forward;
 
+  /// Deprecated. Use [isBackLayerRevealed] instead.
+  ///
+  /// Whether the back layer is revealed or not.
   @Deprecated("Replace by the use of `isBackLayerRevealed`."
       "This feature was deprecated after v0.3.2.")
   bool get isBackPanelVisible => isBackLayerRevealed;
 
+  /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
       controller.status == AnimationStatus.dismissed ||
           controller.status == AnimationStatus.reverse;
 
+  /// Toggles the backdrop functionality.
+  ///
+  /// If the back layer was concealed, it is animated to the "revealed" state
+  /// by this function. If it was revealed, this function will animate it to
+  /// the "concealed" state.
   void fling() {
     FocusScope.of(context)?.unfocus();
     if (isBackLayerConcealed) {
@@ -276,10 +307,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
+  /// Deprecated. Use [revealBackLayer] instead.
+  ///
+  /// Animates the back layer to the "revealed" state.
   @Deprecated("Replace by the use of `revealBackLayer`."
       "This feature was deprecated after v0.3.2.")
   void showBackLayer() => revealBackLayer();
 
+  /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
       controller.animateBack(-1.0);
@@ -287,10 +322,14 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
+  /// Deprecated. Use [concealBackLayer] instead.
+  ///
+  /// Animates the back layer to the "concealed" state.
   @Deprecated("Replace by the use of `concealBackLayer`."
       "This feature was deprecated after v0.3.2.")
   void showFrontLayer() => concealBackLayer();
 
+  /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
     if (isBackLayerRevealed) {
       controller.animateTo(1.0);
@@ -318,7 +357,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
           ?.height) ??
           0.0;
 
-  Animation<RelativeRect> getPanelAnimation(
+  Animation<RelativeRect> _getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     double backPanelHeight, frontPanelHeight;
 
@@ -446,7 +485,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
                 children: <Widget>[
                   _buildBackPanel(),
                   PositionedTransition(
-                    rect: getPanelAnimation(context, constraints),
+                    rect: _getPanelAnimation(context, constraints),
                     child: _buildFrontPanel(context),
                   ),
                 ],
