@@ -3,7 +3,7 @@ import 'package:backdrop/button.dart';
 import 'package:flutter/material.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
-/// [_BackdropScaffoldState] to be accessed from anywhere below the widget tree.
+/// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
 ///
 /// It can be used to explicitly call backdrop functionality like fling,
 /// concealBackLayer, revealBackLayer, etc.
@@ -14,14 +14,14 @@ import 'package:flutter/material.dart';
 /// ```
 class Backdrop extends InheritedWidget {
   /// Holds the state of this widget.
-  final _BackdropScaffoldState data;
+  final BackdropScaffoldState data;
 
   /// Creates a [Backdrop] instance.
   Backdrop({Key key, @required this.data, @required Widget child})
       : super(key: key, child: child);
 
   /// Provides access to the state from everywhere in the widget tree.
-  static _BackdropScaffoldState of(BuildContext context) =>
+  static BackdropScaffoldState of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
 
   @override
@@ -211,10 +211,10 @@ class BackdropScaffold extends StatefulWidget {
   });
 
   @override
-  _BackdropScaffoldState createState() => _BackdropScaffoldState();
+  BackdropScaffoldState createState() => BackdropScaffoldState();
 }
 
-class _BackdropScaffoldState extends State<BackdropScaffold>
+class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeController = false;
   AnimationController _controller;
