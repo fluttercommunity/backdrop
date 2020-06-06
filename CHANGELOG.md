@@ -1,3 +1,7 @@
+## [0.4.0] - 6 June 2020
+
+* refactor `backdrop.dart` to smaller dart files [https://github.com/fluttercommunity/backdrop/pull/32]
+
 ## [0.3.4] - 5 June 2020
 
 * `subHeader` attribute added to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/29]
