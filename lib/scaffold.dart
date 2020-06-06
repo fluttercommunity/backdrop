@@ -226,6 +226,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeController = false;
   AnimationController _controller;
+
+  /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
+  /// used [Scaffold].
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey _backLayerKey = GlobalKey(debugLabel: "backdrop:backLayer");
   double _backPanelHeight = 0;
@@ -354,7 +357,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           ?.height) ??
           0.0;
 
-  Animation<RelativeRect> getPanelAnimation(
+  Animation<RelativeRect> _getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     double backPanelHeight, frontPanelHeight;
 
@@ -482,7 +485,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 children: <Widget>[
                   _buildBackPanel(),
                   PositionedTransition(
-                    rect: getPanelAnimation(context, constraints),
+                    rect: _getPanelAnimation(context, constraints),
                     child: _buildFrontPanel(context),
                   ),
                 ],
