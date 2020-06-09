@@ -15,7 +15,7 @@
 
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
-This widget is in active development. Wait for the stable [v1.0](https://github.com/fluttercommunity/backdrop/milestone/1). 
+This widget is in active development. 
 ___Any contribution, idea, criticism or feedback is welcomed.___
 
 ## Quick links
