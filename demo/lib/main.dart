@@ -1,3 +1,4 @@
+import 'package:demo/theme_data.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -7,9 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Backdrop Gallery",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: GalleryThemeData.darkThemeData,
       home: MyHomePage(),
     );
   }
