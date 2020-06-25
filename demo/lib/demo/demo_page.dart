@@ -30,6 +30,7 @@ class _DemoPageState extends State<DemoPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.info),
+            color: _current is Info ? null : Colors.white,
             onPressed: () {
               setState(() {
                 _current = Info();
@@ -38,6 +39,7 @@ class _DemoPageState extends State<DemoPage> {
           ),
           IconButton(
             icon: Icon(Icons.visibility),
+            color: _current is Preview ? null : Colors.white,
             onPressed: () {
               setState(() {
                 _current = Preview();
@@ -46,6 +48,7 @@ class _DemoPageState extends State<DemoPage> {
           ),
           IconButton(
             icon: Icon(Icons.code),
+            color: _current is Code ? null : Colors.white,
             onPressed: () {
               setState(() {
                 _current = Code();
