@@ -21,8 +21,20 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Backdrop Gallery"),
       ),
-      body: Center(
-        child: Text("Backdrop Gallery content"),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 16.0),
+            child: Text(
+                "This app shows some use cases for the backdrop widget."),
+          ),
+          ListView(
+            shrinkWrap: true,
+            children: [
+            ListTile(title: Text("Use case 1"), onTap: () {},),
+            ListTile(title: Text("Use case 2"), onTap: () {},)
+          ],),
+        ],
       ),
     );
   }
