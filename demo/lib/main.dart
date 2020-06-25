@@ -1,3 +1,5 @@
+import 'package:demo/data/test_use_case_1.dart';
+import 'package:demo/data/use_case.dart';
 import 'package:demo/demo/demo_page.dart';
 import 'package:demo/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  List<UseCase> _useCases = [UseCase1()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,26 +33,21 @@ class MyHomePage extends StatelessWidget {
             child:
                 Text("This app shows some use cases for the backdrop widget."),
           ),
-          ListView(
+          ListView.builder(
+            itemCount: _useCases.length,
+            itemBuilder: (BuildContext context, int index) => ListTile(
+              title: Text(_useCases[index].name),
+              onTap: () => _openDemoPage(context, _useCases[index]),
+            ),
             shrinkWrap: true,
-            children: [
-              ListTile(
-                title: Text("Use case 1"),
-                onTap: () => _openDemoPage(context, "Use case 1"),
-              ),
-              ListTile(
-                title: Text("Use case 2"),
-                onTap: () => _openDemoPage(context, "Use case 2"),
-              )
-            ],
           ),
         ],
       ),
     );
   }
 
-  _openDemoPage(BuildContext context, String name) {
+  _openDemoPage(BuildContext context, UseCase useCase) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DemoPage(name)));
+        context, MaterialPageRoute(builder: (context) => DemoPage(useCase)));
   }
 }

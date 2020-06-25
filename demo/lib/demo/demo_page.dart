@@ -1,3 +1,4 @@
+import 'package:demo/data/use_case.dart';
 import 'package:demo/demo/code.dart';
 import 'package:demo/demo/info.dart';
 import 'package:demo/demo/preview.dart';
@@ -5,9 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DemoPage extends StatefulWidget {
-  String name;
+  UseCase useCase;
 
-  DemoPage(this.name);
+  DemoPage(this.useCase);
 
   @override
   _DemoPageState createState() => _DemoPageState();
@@ -18,7 +19,7 @@ class _DemoPageState extends State<DemoPage> {
 
   @override
   void initState() {
-    _current = Info();
+    _current = Info(widget.useCase.name, widget.useCase.description);
     super.initState();
   }
 
@@ -26,14 +27,15 @@ class _DemoPageState extends State<DemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Demo " + widget.name),
+        title: Text(widget.useCase.name),
         actions: [
           IconButton(
             icon: Icon(Icons.info),
             color: _current is Info ? null : Colors.white,
             onPressed: () {
               setState(() {
-                _current = Info();
+                _current =
+                    Info(widget.useCase.name, widget.useCase.description);
               });
             },
           ),
@@ -42,7 +44,7 @@ class _DemoPageState extends State<DemoPage> {
             color: _current is Preview ? null : Colors.white,
             onPressed: () {
               setState(() {
-                _current = Preview();
+                _current = Preview(widget.useCase.preview);
               });
             },
           ),
@@ -51,7 +53,7 @@ class _DemoPageState extends State<DemoPage> {
             color: _current is Code ? null : Colors.white,
             onPressed: () {
               setState(() {
-                _current = Code();
+                _current = Code(widget.useCase.code);
               });
             },
           ),
