@@ -1,5 +1,5 @@
-import 'package:demo/data/test_use_case_1.dart';
 import 'package:demo/data/use_case.dart';
+import 'package:demo/data/use_cases/navigation/navigation_use_case.dart';
 import 'package:demo/demo/demo_page.dart';
 import 'package:demo/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  List<UseCase> _useCases = [UseCase1()];
+  List<UseCase> _useCases = [NavigationUseCase()];
 
   @override
   Widget build(BuildContext context) {

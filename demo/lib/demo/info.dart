@@ -15,9 +15,13 @@ class Info extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.headline3,
+            textAlign: TextAlign.center,
           ),
         ),
-        Text(description),
+        Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }

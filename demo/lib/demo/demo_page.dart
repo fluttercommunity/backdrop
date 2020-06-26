@@ -53,7 +53,7 @@ class _DemoPageState extends State<DemoPage> {
             color: _current is Code ? null : Colors.white,
             onPressed: () {
               setState(() {
-                _current = Code(widget.useCase.code);
+                _current = Code(widget.useCase.codeFile);
               });
             },
           ),
