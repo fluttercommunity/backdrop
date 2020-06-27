@@ -4,20 +4,22 @@ import 'package:demo/demo/demo_page.dart';
 import 'package:demo/theme_data.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(DemoApp());
 
-class MyApp extends StatelessWidget {
+/// Demo app that provides a show-case of different backdrop use cases.
+class DemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Backdrop Gallery",
       theme: GalleryThemeData.darkThemeData,
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+/// The home page of the demo app showing a selection of use cases.
+class HomePage extends StatelessWidget {
   List<UseCase> _useCases = [NavigationUseCase()];
 
   @override
