@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/dracula.dart';
 
+/// Class for presenting the source code of a given use case.
 class Code extends StatefulWidget {
+  /// The path to the file to be read.
   String codeFile;
 
+  /// Creates an instance of [Code].
   Code(this.codeFile);
 
   @override

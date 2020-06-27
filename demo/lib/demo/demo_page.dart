@@ -5,9 +5,13 @@ import 'package:demo/demo/preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Class for presenting a entire use case to the user. The user can switch bet-
+/// ween info, preview and source code pages concerning the given use case.
 class DemoPage extends StatefulWidget {
+  /// The use case to be presented to the user.
   UseCase useCase;
 
+  /// Creates an instance of [DemoPage].
   DemoPage(this.useCase);
 
   @override
