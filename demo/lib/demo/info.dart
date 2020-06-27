@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Info extends StatelessWidget {
@@ -12,15 +11,21 @@ class Info extends StatelessWidget {
     return Column(
       children: [
         Center(
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.headline3,
-            textAlign: TextAlign.center,
+          child: Container(
+            margin: EdgeInsets.all(16.0),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headline3,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
-        Text(
-          description,
-          textAlign: TextAlign.center,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );

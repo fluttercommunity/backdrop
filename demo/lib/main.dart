@@ -29,17 +29,20 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 16.0),
+            margin: EdgeInsets.all(16.0),
             child:
-                Text("This app shows some use cases for the backdrop widget."),
+                Text("This app shows some use cases for the backdrop widget. "
+                    "Open any one to show information about it, preview it and "
+                    "look at its code."),
           ),
-          ListView.builder(
+          ListView.separated(
             itemCount: _useCases.length,
             itemBuilder: (BuildContext context, int index) => ListTile(
               title: Text(_useCases[index].name),
               onTap: () => _openDemoPage(context, _useCases[index]),
             ),
             shrinkWrap: true,
+            separatorBuilder: (context, index) => Divider(),
           ),
         ],
       ),
