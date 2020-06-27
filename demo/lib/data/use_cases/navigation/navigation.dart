@@ -8,12 +8,13 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [Widget1(), Widget2()];
+  final List<Widget> _pages = [HomePage(), ArticlesPage()];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Backdrop Demo',
+      title: 'Navigation',
+      debugShowCheckedModeBanner: false,
       home: BackdropScaffold(
         appBar: BackdropAppBar(
           title: Text("Navigation Example"),
@@ -27,26 +28,56 @@ class _NavigationState extends State<Navigation> {
         frontLayer: _pages[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
           items: [
-            ListTile(title: Text("Widget 1")),
-            ListTile(title: Text("Widget 2")),
+            ListTile(title: Text("Home")),
+            ListTile(title: Text("Articles")),
           ],
           onTap: (int position) => {setState(() => _currentIndex = position)},
+          separator: Divider(),
         ),
+        subHeader: _currentIndex == 0
+            ? null // no subHeader for home-page
+            : BackdropSubHeader(
+                title: Text("Our articles"),
+              ),
       ),
     );
   }
 }
 
-class Widget1 extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Widget 1"));
+    return Center(
+        child: Text(
+      "Welcome to the online shop!",
+      style: Theme.of(context).textTheme.headline6,
+    ));
   }
 }
 
-class Widget2 extends StatelessWidget {
+class ArticlesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Widget 2"));
+    return ListView(
+      children: [
+        ListTile(
+          leading: Icon(Icons.computer),
+          title: Text("Laptop"),
+        ),
+        ListTile(
+          leading: Icon(Icons.child_friendly),
+          title: Text("Stroller"),
+        ),
+        ListTile(
+          leading: Icon(Icons.tv),
+          title: Text("TV"),
+        ),
+        ListTile(
+          leading: Icon(Icons.directions_car),
+          title: Text("Car"),
+        ),
+      ],
+      shrinkWrap: true,
+    );
   }
 }
