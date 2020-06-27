@@ -28,8 +28,16 @@ class _NavigationState extends State<Navigation> {
         frontLayer: _pages[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
           items: [
-            ListTile(title: Text("Home")),
-            ListTile(title: Text("Articles")),
+            ListTile(
+                title: Text(
+              "Home",
+              style: TextStyle(color: Colors.white),
+            )),
+            ListTile(
+                title: Text(
+              "Articles",
+              style: TextStyle(color: Colors.white),
+            )),
           ],
           onTap: (int position) => {setState(() => _currentIndex = position)},
           separator: Divider(),
@@ -44,17 +52,27 @@ class _NavigationState extends State<Navigation> {
   }
 }
 
+/// Home page of the online shop.
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
-      "Welcome to the online shop!",
-      style: Theme.of(context).textTheme.headline6,
-    ));
+    return Container(
+      margin: EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Welcome to the online shop!",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Text("Please navigate to the articles page to choose your product.")
+        ],
+      ),
+    );
   }
 }
 
+/// Articles page showing the online shop's products.
 class ArticlesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
