@@ -25,14 +25,16 @@ class _CodeState extends State<Code> {
         future: DefaultAssetBundle.of(context).loadString(widget.codeFile),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            return SingleChildScrollView(
-              child: HighlightView(
-                snapshot.data,
-                language: "dart",
-                theme: draculaTheme,
-                padding: EdgeInsets.all(8.0),
-                textStyle: TextStyle(
-                  fontSize: 11,
+            return SizedBox.expand(
+              child: SingleChildScrollView(
+                child: HighlightView(
+                  snapshot.data,
+                  language: "dart",
+                  theme: draculaTheme,
+                  padding: EdgeInsets.all(8.0),
+                  textStyle: TextStyle(
+                    fontSize: 11,
+                  ),
                 ),
               ),
             );
