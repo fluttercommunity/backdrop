@@ -1,5 +1,6 @@
 import 'package:demo/data/use_case.dart';
 import 'package:demo/data/use_cases/contextual_controls/contextual_controls_use_case.dart';
+import 'package:demo/data/use_cases/filter/filter_use_case.dart';
 import 'package:demo/data/use_cases/navigation/navigation_use_case.dart';
 import 'package:demo/demo/demo_page.dart';
 import 'package:demo/theme_data.dart';
@@ -26,7 +27,8 @@ class HomePage extends StatelessWidget {
   List<UseCase> _useCases = [
     ContextualInfoUseCase(),
     ContextualControlsUseCase(),
-    NavigationUseCase()
+    NavigationUseCase(),
+    FilterUseCase(),
   ];
 
   @override
