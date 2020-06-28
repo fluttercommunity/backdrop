@@ -1,6 +1,7 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
+/// Navigation preview app.
 class Navigation extends StatefulWidget {
   @override
   _NavigationState createState() => _NavigationState();
@@ -18,11 +19,6 @@ class _NavigationState extends State<Navigation> {
       home: BackdropScaffold(
         appBar: BackdropAppBar(
           title: Text("Navigation Example"),
-          actions: <Widget>[
-            BackdropToggleButton(
-              icon: AnimatedIcons.list_view,
-            )
-          ],
         ),
         stickyFrontLayer: true,
         frontLayer: _pages[_currentIndex],

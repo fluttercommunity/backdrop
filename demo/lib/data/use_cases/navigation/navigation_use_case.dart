@@ -1,6 +1,7 @@
 import 'package:demo/data/use_case.dart';
 import 'package:demo/data/use_cases/navigation/navigation.dart';
 
+/// Navigation use case description.
 class NavigationUseCase extends UseCase {
   /// Creates a Navigation use case instance
   NavigationUseCase() {
