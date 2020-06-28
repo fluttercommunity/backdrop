@@ -1,8 +1,11 @@
 import 'package:demo/data/use_case.dart';
+import 'package:demo/data/use_cases/contextual_controls/contextual_controls_use_case.dart';
 import 'package:demo/data/use_cases/navigation/navigation_use_case.dart';
 import 'package:demo/demo/demo_page.dart';
 import 'package:demo/theme_data.dart';
 import 'package:flutter/material.dart';
+
+import 'data/use_cases/contextual_info/contextual_info_use_case.dart';
 
 void main() => runApp(DemoApp());
 
@@ -20,7 +23,11 @@ class DemoApp extends StatelessWidget {
 
 /// The home page of the demo app showing a selection of use cases.
 class HomePage extends StatelessWidget {
-  List<UseCase> _useCases = [NavigationUseCase()];
+  List<UseCase> _useCases = [
+    ContextualInfoUseCase(),
+    ContextualControlsUseCase(),
+    NavigationUseCase()
+  ];
 
   @override
   Widget build(BuildContext context) {
