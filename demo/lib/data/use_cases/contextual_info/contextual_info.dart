@@ -10,11 +10,9 @@ class ContextualInfo extends StatefulWidget {
 }
 
 class _ContextualInfoState extends State<ContextualInfo> {
-  Widget _selectedProduct;
 
   @override
   void initState() {
-    _selectedProduct = null;
     super.initState();
   }
 
