@@ -4,18 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 
 /// Contextual info preview app.
-class ContextualInfo extends StatefulWidget {
-  @override
-  _ContextualInfoState createState() => _ContextualInfoState();
-}
-
-class _ContextualInfoState extends State<ContextualInfo> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class ContextualInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,14 +15,14 @@ class _ContextualInfoState extends State<ContextualInfo> {
           title: Text("Contextual Info Example"),
           automaticallyImplyLeading: false,
         ),
-        backLayer: _createBackLayer(),
-        frontLayer: _createFrontLayer(),
+        backLayer: _createBackLayer(context),
+        frontLayer: _createFrontLayer(context),
         stickyFrontLayer: true,
       ),
     );
   }
 
-  Widget _createBackLayer() => ListView(
+  Widget _createBackLayer(BuildContext context) => ListView(
         children: [
           ListTile(
             leading: Column(
@@ -89,7 +78,7 @@ class _ContextualInfoState extends State<ContextualInfo> {
         shrinkWrap: true,
       );
 
-  Widget _createFrontLayer() => Container(
+  Widget _createFrontLayer(BuildContext context) => Container(
         margin: EdgeInsets.all(16.0),
         child: Column(
           children: [
