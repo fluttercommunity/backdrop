@@ -91,9 +91,20 @@ class _ContextualControlsState extends State<ContextualControls> {
                 Text("RAM"),
               ],
             ),
-            title: Text(
-              "USA",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: DropdownButton<int>(
+              isExpanded: true,
+              value: _ram,
+              items: _RAM_CHOICES.map<DropdownMenuItem<int>>((int r) {
+                return DropdownMenuItem<int>(
+                  value: r,
+                  child: Text("${r.toString()} GB"),
+                );
+              }).toList(),
+              onChanged: (int newValue) {
+                setState(() {
+                  _ram = newValue;
+                });
+              },
             ),
           ),
           Builder(
