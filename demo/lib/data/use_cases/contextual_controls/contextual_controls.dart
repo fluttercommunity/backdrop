@@ -14,11 +14,10 @@ class _ContextualControlsState extends State<ContextualControls> {
     Colors.green,
     Colors.blue
   ];
-  static const _RESOLUTION_CHOICES = [13, 14, 15, 17];
   static const _RAM_CHOICES = [4, 8, 16];
 
   Color _color = _COLOR_CHOICES.first;
-  int _resolution = _RESOLUTION_CHOICES.first;
+  double _resolution = 15.0;
   int _ram = _RAM_CHOICES.first;
 
   @override
@@ -55,17 +54,25 @@ class _ContextualControlsState extends State<ContextualControls> {
             ),
           ),
           ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Resolution"),
-              ],
-            ),
-            title: Text(
-              "2019",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Resolution"),
+                ],
+              ),
+              title: Slider(
+                  activeColor: Colors.white,
+                  inactiveColor: Colors.lightBlue,
+                  value: _resolution,
+                  min: 14,
+                  max: 17,
+                  label: "$_resolution\"",
+                  divisions: 3,
+                  onChanged: (value) {
+                    setState(() {
+                      _resolution = value;
+                    });
+                  })),
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
