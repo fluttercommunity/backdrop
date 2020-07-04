@@ -8,15 +8,15 @@ class ContextualControls extends StatefulWidget {
 }
 
 class _ContextualControlsState extends State<ContextualControls> {
-  static const _COLOR_CHOICES = [
-    Colors.black,
-    Colors.red,
-    Colors.green,
-    Colors.blue
-  ];
+  static final _COLOR_MAP = {
+    Colors.black: "Black",
+    Colors.red: "Red",
+    Colors.green: "Green",
+    Colors.blue: "Blue"
+  };
   static const _RAM_CHOICES = [4, 8, 16];
 
-  Color _color = _COLOR_CHOICES.first;
+  Color _color = _COLOR_MAP.keys.first;
   double _resolution = 15.0;
   int _ram = _RAM_CHOICES.first;
 
@@ -48,9 +48,20 @@ class _ContextualControlsState extends State<ContextualControls> {
                 ),
               ],
             ),
-            title: Text(
-              "Laptop Model X",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: DropdownButton<Color>(
+              isExpanded: true,
+              value: _color,
+              items: _COLOR_MAP.keys.map<DropdownMenuItem<Color>>((Color c) {
+                return DropdownMenuItem<Color>(
+                  value: c,
+                  child: Text(_COLOR_MAP[c]),
+                );
+              }).toList(),
+              onChanged: (Color newValue) {
+                setState(() {
+                  _color = newValue;
+                });
+              },
             ),
           ),
           ListTile(
@@ -105,6 +116,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                 Icon(
                   Icons.computer,
                   size: 64.0,
+                  color: _color,
                 ),
                 Text(
                   "Laptop",
