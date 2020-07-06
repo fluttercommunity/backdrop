@@ -1,5 +1,5 @@
 import 'package:demo/data/use_case.dart';
-import 'package:demo/data/use_cases/contextual_info/contextual_info.dart';
+import 'package:demo/use_cases/contextual_info/contextual_info.dart';
 
 /// Contextual info use case description.
 class ContextualInfoUseCase extends UseCase {

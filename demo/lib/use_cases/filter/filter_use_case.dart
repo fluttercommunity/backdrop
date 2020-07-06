@@ -1,5 +1,5 @@
 import 'package:demo/data/use_case.dart';
-import 'package:demo/data/use_cases/filter/filter.dart';
+import 'package:demo/use_cases/filter/filter.dart';
 
 /// Filter use case description.
 class FilterUseCase extends UseCase {

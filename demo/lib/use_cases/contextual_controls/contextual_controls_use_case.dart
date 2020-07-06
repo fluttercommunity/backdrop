@@ -1,5 +1,5 @@
 import 'package:demo/data/use_case.dart';
-import 'package:demo/data/use_cases/contextual_controls/contextual_controls.dart';
+import 'package:demo/use_cases/contextual_controls/contextual_controls.dart';
 
 /// Contextual controls use case description.
 class ContextualControlsUseCase extends UseCase {
@@ -9,7 +9,8 @@ class ContextualControlsUseCase extends UseCase {
     description =
         "The backdrop's back layer can be used to control the content that is being "
         "shown on the front layer";
-    codeFile = "lib/data/use_cases/contextual_controls/contextual_controls.dart";
+    codeFile =
+        "lib/data/use_cases/contextual_controls/contextual_controls.dart";
     preview = ContextualControls();
   }
 }
