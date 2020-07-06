@@ -52,18 +52,26 @@ class _NavigationState extends State<Navigation> {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Welcome to the online shop!",
-            style: Theme.of(context).textTheme.headline6,
+    return Column(
+      children: [
+        Center(
+          child: Container(
+            margin: EdgeInsets.all(16.0),
+            child: Text(
+              "Welcome to the online shop!",
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
+            ),
           ),
-          Text("Please navigate to the articles page to choose your product.")
-        ],
-      ),
+        ),
+        Container(
+          margin: EdgeInsets.all(16.0),
+          child: Text(
+            "Please navigate to the articles page to choose your product.",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }
