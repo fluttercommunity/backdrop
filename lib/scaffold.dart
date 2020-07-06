@@ -261,6 +261,16 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         _headerHeight = _getHeaderHeight();
       });
     });
+
+    _controller.addStatusListener((status) {
+      setState(() {
+        // This is intentionally left empty. The state change itself takes
+        // place inside the AnimationController, so there's nothing to update.
+        // All we want is for the widget to rebuild and read the new animation
+        // state from the AnimationController.
+        // see https://github.com/flutter/flutter/pull/55414/commits/72d7d365be6639271a5e88ee3043b92833facb79
+      });
+    });
   }
 
   @override
