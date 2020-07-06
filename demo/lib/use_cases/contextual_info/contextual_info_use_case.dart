@@ -9,7 +9,7 @@ class ContextualInfoUseCase extends UseCase {
     description =
         "The backdrop's back layer can be used to show contextual information "
         "in addition to the content shown on the front layer.";
-    codeFile = "lib/data/use_cases/contextual_info/contextual_info.dart";
+    codeFile = "lib/use_cases/contextual_info/contextual_info.dart";
     preview = ContextualInfo();
   }
 }
