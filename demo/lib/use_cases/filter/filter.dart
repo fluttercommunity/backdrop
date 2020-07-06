@@ -41,6 +41,7 @@ class _FilterState extends State<Filter> {
           title: Text("Filter Example"),
         ),
         backLayer: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               padding: EdgeInsets.all(16.0),
@@ -73,6 +74,7 @@ class _FilterState extends State<Filter> {
           ),
           shrinkWrap: true,
         ),
+        stickyFrontLayer: true,
       ),
     );
   }
