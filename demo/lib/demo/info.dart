@@ -26,7 +26,7 @@ class Info extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          margin: EdgeInsets.all(16.0),
           child: Text(
             description,
             textAlign: TextAlign.center,
