@@ -49,10 +49,10 @@ flutter:
   # To add Flutter specific assets to your application, add an assets section, 
   # like this:
   assets:
-    - lib/data/use_cases/navigation/navigation.dart
-    - lib/data/use_cases/contextual_info/contextual_info.dart
-    - lib/data/use_cases/contextual_controls/contextual_controls.dart
-    - lib/data/use_cases/filter/filter.dart
+    - lib/use_cases/navigation/navigation.dart
+    - lib/use_cases/contextual_info/contextual_info.dart
+    - lib/use_cases/contextual_controls/contextual_controls.dart
+    - lib/use_cases/filter/filter.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
