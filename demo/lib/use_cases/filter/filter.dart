@@ -1,4 +1,5 @@
 import 'package:backdrop/backdrop.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Filter preview app.
@@ -16,7 +17,9 @@ class _FilterState extends State<Filter> {
     Item(Icons.computer, "Laptop", ItemCategory.Electronics),
     Item(Icons.child_friendly, "Stroller", ItemCategory.Transportation),
     Item(Icons.tv, "TV", ItemCategory.Electronics),
+    Item(Icons.smartphone, "Smartphone", ItemCategory.Electronics),
     Item(Icons.directions_car, "Car", ItemCategory.Transportation),
+    Item(Icons.motorcycle, "Motorcycle", ItemCategory.Transportation),
   ];
   Set<ItemCategory> _filteredCategories =
       Set.from([ItemCategory.Electronics, ItemCategory.Transportation]);
@@ -37,15 +40,27 @@ class _FilterState extends State<Filter> {
         appBar: BackdropAppBar(
           title: Text("Filter Example"),
         ),
-        backLayer: ListView.builder(
-          itemCount: _CATEGORIES.length,
-          itemBuilder: (context, index) => CheckboxListTile(
-            onChanged: (bool checked) =>
-                _addOrRemoveFilterCategory(checked, _CATEGORIES[index]),
-            value: _filteredCategories.contains(_CATEGORIES[index]),
-            title: Text(_CATEGORIES[index].toString()),
-          ),
-          shrinkWrap: true,
+        backLayer: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "Check/uncheck categories to show/hide them on the front layer",
+              ),
+            ),
+            ListView.builder(
+              itemCount: _CATEGORIES.length,
+              itemBuilder: (context, index) => CheckboxListTile(
+                onChanged: (bool checked) =>
+                    _addOrRemoveFilterCategory(checked, _CATEGORIES[index]),
+                value: _filteredCategories.contains(_CATEGORIES[index]),
+                title: Text(describeEnum(_CATEGORIES[index].toString())),
+                activeColor: Colors.white,
+                checkColor: Theme.of(context).primaryColor,
+              ),
+              shrinkWrap: true,
+            ),
+          ],
         ),
         subHeader: BackdropSubHeader(
           title: Text("${_shownItems.length} Items"),
