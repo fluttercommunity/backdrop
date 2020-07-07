@@ -13,10 +13,9 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Navigation',
-      debugShowCheckedModeBanner: false,
-      home: BackdropScaffold(
+    return Theme(
+      data: ThemeData.light(),
+      child: BackdropScaffold(
         appBar: BackdropAppBar(
           title: Text("Navigation Example"),
         ),
@@ -33,21 +32,19 @@ class _NavigationState extends State<Navigation> {
   }
 
   Widget _createBackLayer() => BackdropNavigationBackLayer(
-    items: [
-      ListTile(
-          title: Text(
+        items: [
+          ListTile(
+              title: Text(
             "Home",
-            style: TextStyle(color: Colors.white),
           )),
-      ListTile(
-          title: Text(
+          ListTile(
+              title: Text(
             "Products",
-            style: TextStyle(color: Colors.white),
           )),
-    ],
-    onTap: (int position) => {setState(() => _currentIndex = position)},
-    separator: Divider(),
-  );
+        ],
+        onTap: (int position) => {setState(() => _currentIndex = position)},
+        separator: Divider(),
+      );
 }
 
 /// Home page of the online shop.

@@ -33,10 +33,9 @@ class _FilterState extends State<Filter> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Filter',
-      debugShowCheckedModeBanner: false,
-      home: BackdropScaffold(
+    return Theme(
+      data: ThemeData.light(),
+      child: BackdropScaffold(
         appBar: BackdropAppBar(
           title: Text("Filter Example"),
         ),

@@ -7,10 +7,9 @@ import 'package:flutter/rendering.dart';
 class ContextualInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Contextual Info',
-      debugShowCheckedModeBanner: false,
-      home: BackdropScaffold(
+    return Theme(
+      data: ThemeData.light(),
+      child: BackdropScaffold(
         appBar: BackdropAppBar(
           title: Text("Contextual Info Example"),
           automaticallyImplyLeading: false,
