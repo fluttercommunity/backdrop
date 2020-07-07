@@ -40,44 +40,48 @@ class _FilterState extends State<Filter> {
         appBar: BackdropAppBar(
           title: Text("Filter Example"),
         ),
-        backLayer: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "Check/uncheck categories to show/hide them on the front layer",
-              ),
-            ),
-            ListView.builder(
-              itemCount: _CATEGORIES.length,
-              itemBuilder: (context, index) => CheckboxListTile(
-                onChanged: (bool checked) =>
-                    _addOrRemoveFilterCategory(checked, _CATEGORIES[index]),
-                value: _filteredCategories.contains(_CATEGORIES[index]),
-                title: Text(describeEnum(_CATEGORIES[index].toString())),
-                activeColor: Colors.white,
-                checkColor: Theme.of(context).primaryColor,
-              ),
-              shrinkWrap: true,
-            ),
-          ],
-        ),
+        backLayer: _createBackLayer(),
         subHeader: BackdropSubHeader(
           title: Text("${_shownItems.length} Items"),
         ),
-        frontLayer: ListView.builder(
-          itemCount: _shownItems.length,
-          itemBuilder: (context, index) => ListTile(
-            leading: Icon(_shownItems[index].icon),
-            title: Text(_shownItems[index].name),
-          ),
-          shrinkWrap: true,
-        ),
+        frontLayer: _createFrontLayer(context),
         stickyFrontLayer: true,
       ),
     );
   }
+
+  Widget _createFrontLayer(BuildContext context) => ListView.builder(
+        itemCount: _shownItems.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: Icon(_shownItems[index].icon),
+          title: Text(_shownItems[index].name),
+        ),
+        shrinkWrap: true,
+      );
+
+  Widget _createBackLayer() => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Check/uncheck categories to show/hide them on the front layer",
+            ),
+          ),
+          ListView.builder(
+            itemCount: _CATEGORIES.length,
+            itemBuilder: (context, index) => CheckboxListTile(
+              onChanged: (bool checked) =>
+                  _addOrRemoveFilterCategory(checked, _CATEGORIES[index]),
+              value: _filteredCategories.contains(_CATEGORIES[index]),
+              title: Text(describeEnum(_CATEGORIES[index].toString())),
+              activeColor: Colors.white,
+              checkColor: Theme.of(context).primaryColor,
+            ),
+            shrinkWrap: true,
+          ),
+        ],
+      );
 
   void _filterItems() {
     setState(() {

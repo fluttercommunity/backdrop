@@ -22,22 +22,7 @@ class _NavigationState extends State<Navigation> {
         ),
         stickyFrontLayer: true,
         frontLayer: _pages[_currentIndex],
-        backLayer: BackdropNavigationBackLayer(
-          items: [
-            ListTile(
-                title: Text(
-              "Home",
-              style: TextStyle(color: Colors.white),
-            )),
-            ListTile(
-                title: Text(
-              "Products",
-              style: TextStyle(color: Colors.white),
-            )),
-          ],
-          onTap: (int position) => {setState(() => _currentIndex = position)},
-          separator: Divider(),
-        ),
+        backLayer: _createBackLayer(),
         subHeader: _currentIndex == 0
             ? null // no subHeader for home-page
             : BackdropSubHeader(
@@ -46,6 +31,23 @@ class _NavigationState extends State<Navigation> {
       ),
     );
   }
+
+  Widget _createBackLayer() => BackdropNavigationBackLayer(
+    items: [
+      ListTile(
+          title: Text(
+            "Home",
+            style: TextStyle(color: Colors.white),
+          )),
+      ListTile(
+          title: Text(
+            "Products",
+            style: TextStyle(color: Colors.white),
+          )),
+    ],
+    onTap: (int position) => {setState(() => _currentIndex = position)},
+    separator: Divider(),
+  );
 }
 
 /// Home page of the online shop.
