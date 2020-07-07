@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 /// Class for presenting information about a use case to the user.
 class Info extends StatelessWidget {
   /// The title of the use case.
-  String title;
+  final String title;
 
   /// The description of the use case.
-  String description;
+  final String description;
 
   /// Creates an instance of [Info].
   Info(this.title, this.description);

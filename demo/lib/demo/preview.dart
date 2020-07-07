@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 /// Class for showing a preview of the given use case as an actual widget.
 class Preview extends StatelessWidget {
   /// The preview widget that is shown within the preview area.
-  Widget preview;
+  final Widget preview;
 
   /// Creates an instance of [Preview].
   Preview(this.preview);

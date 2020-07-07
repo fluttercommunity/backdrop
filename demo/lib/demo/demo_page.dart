@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 /// ween info, preview and source code pages concerning the given use case.
 class DemoPage extends StatefulWidget {
   /// The use case to be presented to the user.
-  UseCase useCase;
+  final UseCase useCase;
 
   /// Creates an instance of [DemoPage].
   DemoPage(this.useCase);
