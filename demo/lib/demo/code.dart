@@ -32,9 +32,7 @@ class _CodeState extends State<Code> {
                   language: "dart",
                   theme: draculaTheme,
                   padding: EdgeInsets.all(8.0),
-                  textStyle: TextStyle(
-                    fontSize: 11,
-                  ),
+                  textStyle: TextStyle(fontSize: 12, height: 1.3),
                 ),
               ),
             );
