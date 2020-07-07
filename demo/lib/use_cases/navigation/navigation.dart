@@ -9,7 +9,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [HomePage(), ArticlesPage()];
+  final List<Widget> _pages = [HomePage(), ItemsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _NavigationState extends State<Navigation> {
             )),
             ListTile(
                 title: Text(
-              "Articles",
+              "Products",
               style: TextStyle(color: Colors.white),
             )),
           ],
@@ -41,7 +41,7 @@ class _NavigationState extends State<Navigation> {
         subHeader: _currentIndex == 0
             ? null // no subHeader for home-page
             : BackdropSubHeader(
-                title: Text("Our articles"),
+                title: Text("Our products"),
               ),
       ),
     );
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
         Container(
           margin: EdgeInsets.all(16.0),
           child: Text(
-            "Please navigate to the articles page to choose your product.",
+            "Please navigate to the products page to choose your product.",
             textAlign: TextAlign.center,
           ),
         ),
@@ -76,8 +76,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-/// Articles page showing the online shop's products.
-class ArticlesPage extends StatelessWidget {
+/// Items page showing the online shop's products.
+class ItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
