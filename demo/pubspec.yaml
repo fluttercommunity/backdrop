@@ -39,7 +39,7 @@ dev_dependencies:
   flutter_launcher_icons: "^0.7.3"
 
 flutter_icons:
-  android: "ic_launcher"
+  android: false
   ios: true
   image_path: "assets/icon.png"
 
