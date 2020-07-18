@@ -177,6 +177,7 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
+    Key key,
     this.controller,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
@@ -208,7 +209,7 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButtonAnimator,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
-  });
+  }) : super(key: key);
 
   @override
   BackdropScaffoldState createState() => BackdropScaffoldState();
