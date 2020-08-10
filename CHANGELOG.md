@@ -1,3 +1,7 @@
+## [0.4.2] - 10 August 2020
+
+* fix toggle from front layer bug [https://github.com/fluttercommunity/backdrop/pull/41]
+
 ## [0.4.1] - 6 June 2020
 
 * making `_BackdropScaffoldState` class public [https://github.com/fluttercommunity/backdrop/pull/36] 
