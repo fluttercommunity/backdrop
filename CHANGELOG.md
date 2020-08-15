@@ -1,3 +1,8 @@
+## [0.4.3] - 15 August 2020
+
+* Demo app with use cases [https://github.com/fluttercommunity/backdrop/pull/37]
+* `BackdropNavigationBackLayer`: directly expose `separatorBuilder` instead of `separator` [https://github.com/fluttercommunity/backdrop/pull/44]
+
 ## [0.4.2] - 10 August 2020
 
 * fix toggle from front layer bug [https://github.com/fluttercommunity/backdrop/pull/41]
