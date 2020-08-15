@@ -47,7 +47,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
 
   /// Customizable separator used with [ListView.separated].
   @Deprecated("Replace by use of `separatorBuilder`."
-      "This feature was deprecated after v0.4.1.")
+      "This feature was deprecated after v0.4.2.")
   final Widget separator;
 
   /// Customizable separatorBuilder used with [ListView.separated].
