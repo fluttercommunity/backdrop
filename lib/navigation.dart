@@ -45,6 +45,11 @@ class BackdropNavigationBackLayer extends StatelessWidget {
   /// Callback that is called whenever a list item is tapped by the user.
   final ValueChanged<int> onTap;
 
+  /// Customizable separator used with [ListView.separated].
+  @Deprecated("Replace by use of `separatorBuilder`."
+      "This feature was deprecated after v0.4.1.")
+  final Widget separator;
+
   /// Customizable separatorBuilder used with [ListView.separated].
   final IndexedWidgetBuilder separatorBuilder;
 
@@ -56,6 +61,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
     Key key,
     @required this.items,
     this.onTap,
+    this.separator,
     this.separatorBuilder,
   })  : assert(items != null),
         assert(items.isNotEmpty),
@@ -76,7 +82,8 @@ class BackdropNavigationBackLayer extends StatelessWidget {
           onTap?.call(position);
         },
       ),
-      separatorBuilder: separatorBuilder ?? (builder, position) => Container(),
+      separatorBuilder:
+          separatorBuilder ?? (builder, position) => separator ?? Container(),
     );
   }
 }
