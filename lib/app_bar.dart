@@ -162,6 +162,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: leading ??
           (automaticallyImplyLeading ? BackdropToggleButton() : null),
+      automaticallyImplyLeading: automaticallyImplyLeading,
       title: title,
       actions: actions,
       flexibleSpace: flexibleSpace,
