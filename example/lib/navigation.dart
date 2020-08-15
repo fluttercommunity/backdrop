@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
             ListTile(title: Text("Widget 2")),
           ],
           onTap: (int position) => {setState(() => _currentIndex = position)},
+          separatorBuilder: (context, index) => Divider(),
         ),
       ),
     );
