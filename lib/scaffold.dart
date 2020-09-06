@@ -22,7 +22,9 @@ class Backdrop extends InheritedWidget {
 
   /// Provides access to the state from everywhere in the widget tree.
   static BackdropScaffoldState of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
+      context
+          .dependOnInheritedWidgetOfExactType<Backdrop>()
+          .data;
 
   @override
   bool updateShouldNotify(Backdrop old) => true;
@@ -82,6 +84,9 @@ class BackdropScaffold extends StatefulWidget {
 
   /// The widget that is shown as sub-header on top of the front layer.
   final Widget subHeader;
+
+  /// The bottom navigation bar that is used for [Scaffold.bottomNavigationBar].
+  final Widget bottomNavigationBar;
 
   /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
   final bool subHeaderAlwaysActive;
@@ -179,16 +184,16 @@ class BackdropScaffold extends StatefulWidget {
   BackdropScaffold({
     this.controller,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
-        "This feature was deprecated after v0.2.17.")
-    this.title,
+        "This feature was deprecated after v0.2.17.") this.title,
     this.appBar,
     this.backLayer,
     this.frontLayer,
     this.subHeader,
+    this.bottomNavigationBar,
     this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
-        "This feature was deprecated after v0.2.17.")
-    this.actions = const <Widget>[],
+        "This feature was deprecated after v0.2.17.") this.actions = const <
+        Widget>[],
     this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
@@ -196,8 +201,8 @@ class BackdropScaffold extends StatefulWidget {
     ),
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
         "and BackdropAppBar.automaticallyImplyLeading."
-        "This feature was deprecated after v0.2.17.")
-    this.iconPosition = BackdropIconPosition.leading,
+        "This feature was deprecated after v0.2.17.") this.iconPosition = BackdropIconPosition
+        .leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.resizeToAvoidBottomInset = true,
@@ -367,8 +372,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           ?.height) ??
           0.0;
 
-  Animation<RelativeRect> _getPanelAnimation(
-      BuildContext context, BoxConstraints constraints) {
+  Animation<RelativeRect> _getPanelAnimation(BuildContext context,
+      BoxConstraints constraints) {
     double backPanelHeight, frontPanelHeight;
 
     if (widget.stickyFrontLayer &&
@@ -422,7 +427,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       canRequestFocus: isBackLayerRevealed,
       child: Material(
         color: this.widget.backLayerBackgroundColor ??
-            Theme.of(context).primaryColor,
+            Theme
+                .of(context)
+                .primaryColor,
         child: Column(
           children: <Widget>[
             Flexible(
@@ -448,7 +455,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 // subHeader
                 DefaultTextStyle(
                   key: _subHeaderKey,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle1,
                   child: widget.subHeader ?? Container(),
                 ),
                 // frontLayer
@@ -505,6 +515,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         ),
         floatingActionButton: this.widget.floatingActionButton,
         resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+        bottomNavigationBar: widget.bottomNavigationBar,
       ),
     );
   }
