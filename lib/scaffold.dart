@@ -180,6 +180,11 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] have been revealed.
   final VoidCallback onBackLayerRevealed;
 
+  /// Refer to [Scaffold.extendBody].
+  ///
+  /// Defaults to `false`.
+  final bool extendBody;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -213,6 +218,7 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButtonAnimator,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.extendBody = false,
   });
 
   @override
@@ -516,6 +522,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         floatingActionButton: this.widget.floatingActionButton,
         resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
         bottomNavigationBar: widget.bottomNavigationBar,
+        extendBody: widget.extendBody,
       ),
     );
   }
