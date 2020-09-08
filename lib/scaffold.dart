@@ -141,10 +141,21 @@ class BackdropScaffold extends StatefulWidget {
   final Color backLayerBackgroundColor;
 
   /// Defines the color for the inactive front layer.
-  /// Implicitly an opacity of 0.7 is applied to the passed color.
+  /// A default opacity of 0.7 is applied to the passed color.
+  /// See [inactiveOverlayOpacity].
   ///
   /// Defaults to `const Color(0xFFEEEEEE)`.
   final Color inactiveOverlayColor;
+
+  /// The opacity value applied to [inactiveOverlayColor] when used on the
+  /// inactive layer.
+  ///
+  /// The inactive layer overlays the [frontLayer] when the back layer is
+  /// revealed and the front layer is in a concealed state.
+  ///
+  /// Must be a value between `0.0` and `1.0`.
+  /// Defaults to `0.7`.
+  final double inactiveOverlayOpacity;
 
   /// Will be called when [backLayer] have been concealed.
   final VoidCallback onBackLayerConcealed;
@@ -251,6 +262,7 @@ class BackdropScaffold extends StatefulWidget {
     this.animationCurve = Curves.easeInOut,
     this.backLayerBackgroundColor,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
+    this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
     this.appBar,
@@ -263,7 +275,7 @@ class BackdropScaffold extends StatefulWidget {
     this.bottomNavigationBar,
     this.bottomSheet,
     this.backgroundColor,
-    this.resizeToAvoidBottomInset, // = true
+    this.resizeToAvoidBottomInset,
     this.primary = true,
     this.drawerDragStartBehavior = DragStartBehavior.start,
     this.extendBody = false,
@@ -272,7 +284,7 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-  });
+  }) : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0);
 
   @override
   BackdropScaffoldState createState() => BackdropScaffoldState();
@@ -471,7 +483,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   : Container(),
               Expanded(
                 child: Container(
-                  color: widget.inactiveOverlayColor.withOpacity(0.7),
+                  color: widget.inactiveOverlayColor
+                      .withOpacity(widget.inactiveOverlayOpacity),
                 ),
               ),
             ],
