@@ -1,5 +1,6 @@
 import 'package:backdrop/app_bar.dart';
 import 'package:backdrop/button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
@@ -22,9 +23,7 @@ class Backdrop extends InheritedWidget {
 
   /// Provides access to the state from everywhere in the widget tree.
   static BackdropScaffoldState of(BuildContext context) =>
-      context
-          .dependOnInheritedWidgetOfExactType<Backdrop>()
-          .data;
+      context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
 
   @override
   bool updateShouldNotify(Backdrop old) => true;
@@ -73,9 +72,6 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
   final Widget title;
 
-  /// App bar used for [BackdropScaffold].
-  final PreferredSizeWidget appBar;
-
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
@@ -84,9 +80,6 @@ class BackdropScaffold extends StatefulWidget {
 
   /// The widget that is shown as sub-header on top of the front layer.
   final Widget subHeader;
-
-  /// The bottom navigation bar that is used for [Scaffold.bottomNavigationBar].
-  final Widget bottomNavigationBar;
 
   /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
   final bool subHeaderAlwaysActive;
@@ -142,37 +135,27 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to [Curves.easeInOut].
   final Curve animationCurve;
 
-  /// Passed to the [Scaffold] underlying [BackdropScaffold].
-  /// See [Scaffold.resizeToAvoidBottomInset].
-  ///
-  /// Defaults to `true`.
-  final bool resizeToAvoidBottomInset;
-
   /// Background [Color] for the back layer.
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
   final Color backLayerBackgroundColor;
 
-  /// [FloatingActionButton] for the [Scaffold]
-  ///
-  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton].
-  final Widget floatingActionButton;
-
-  /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
-  ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-
-  /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
-  ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
-
   /// Defines the color for the inactive front layer.
-  /// Implicitly an opacity of 0.7 is applied to the passed color.
+  /// A default opacity of 0.7 is applied to the passed color.
+  /// See [inactiveOverlayOpacity].
   ///
   /// Defaults to `const Color(0xFFEEEEEE)`.
   final Color inactiveOverlayColor;
+
+  /// The opacity value applied to [inactiveOverlayColor] when used on the
+  /// inactive layer.
+  ///
+  /// The inactive layer overlays the [frontLayer] when the back layer is
+  /// revealed and the front layer is in a concealed state.
+  ///
+  /// Must be a value between `0.0` and `1.0`.
+  /// Defaults to `0.7`.
+  final double inactiveOverlayOpacity;
 
   /// Will be called when [backLayer] have been concealed.
   final VoidCallback onBackLayerConcealed;
@@ -180,25 +163,92 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] have been revealed.
   final VoidCallback onBackLayerRevealed;
 
-  /// Refer to [Scaffold.extendBody].
+  // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
+
+  /// See [Scaffold.appBar].
+  final PreferredSizeWidget appBar;
+
+  /// See [Scaffold.extendBody].
   ///
   /// Defaults to `false`.
   final bool extendBody;
+
+  /// See [Scaffold.extendBodyBehindAppBar].
+  ///
+  /// Defaults to `false`.
+  final bool extendBodyBehindAppBar;
+
+  /// See [Scaffold.floatingActionButton].
+  final Widget floatingActionButton;
+
+  /// See [Scaffold.floatingActionButtonLocation].
+  final FloatingActionButtonLocation floatingActionButtonLocation;
+
+  /// See [Scaffold.floatingActionButtonAnimator].
+  final FloatingActionButtonAnimator floatingActionButtonAnimator;
+
+  /// See [Scaffold.persistentFooterButtons].
+  final List<Widget> persistentFooterButtons;
+
+  /// See [Scaffold.drawer].
+  final Widget drawer;
+
+  /// See [Scaffold.endDrawer].
+  final Widget endDrawer;
+
+  /// See [Scaffold.drawerScrimColor].
+  final Color drawerScrimColor;
+
+  /// See [Scaffold.backgroundColor].
+  final Color backgroundColor;
+
+  /// See [Scaffold.bottomNavigationBar].
+  final Widget bottomNavigationBar;
+
+  /// See [Scaffold.bottomSheet].
+  final Widget bottomSheet;
+
+  /// See [Scaffold.resizeToAvoidBottomInset].
+  ///
+  /// Defaults to `true`.
+  final bool resizeToAvoidBottomInset;
+
+  /// See [Scaffold.primary].
+  ///
+  /// Defaults to `true`.
+  final bool primary;
+
+  /// See [Scaffold.drawerDragStartBehavior].
+  ///
+  /// Defaults to `DragStartBehavior.start`.
+  final DragStartBehavior drawerDragStartBehavior;
+
+  /// See [Scaffold.drawerEdgeDragWidth].
+  final double drawerEdgeDragWidth;
+
+  /// See [Scaffold.drawerEnableOpenDragGesture].
+  ///
+  /// Defaults to `true`.
+  final bool drawerEnableOpenDragGesture;
+
+  /// See [Scaffold.endDrawerEnableOpenDragGesture].
+  ///
+  /// Defaults to `true`.
+  final bool endDrawerEnableOpenDragGesture;
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
-        "This feature was deprecated after v0.2.17.") this.title,
-    this.appBar,
+        "This feature was deprecated after v0.2.17.")
+        this.title,
     this.backLayer,
     this.frontLayer,
     this.subHeader,
-    this.bottomNavigationBar,
     this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
-        "This feature was deprecated after v0.2.17.") this.actions = const <
-        Widget>[],
+        "This feature was deprecated after v0.2.17.")
+        this.actions = const <Widget>[],
     this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
@@ -206,20 +256,35 @@ class BackdropScaffold extends StatefulWidget {
     ),
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
         "and BackdropAppBar.automaticallyImplyLeading."
-        "This feature was deprecated after v0.2.17.") this.iconPosition = BackdropIconPosition
-        .leading,
+        "This feature was deprecated after v0.2.17.")
+        this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
-    this.resizeToAvoidBottomInset = true,
     this.backLayerBackgroundColor,
-    this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
-    this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator,
+    this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.appBar,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator,
+    this.persistentFooterButtons,
+    this.drawer,
+    this.endDrawer,
+    this.bottomNavigationBar,
+    this.bottomSheet,
+    this.backgroundColor,
+    this.resizeToAvoidBottomInset,
+    this.primary = true,
+    this.drawerDragStartBehavior = DragStartBehavior.start,
     this.extendBody = false,
-  });
+    this.extendBodyBehindAppBar = false,
+    this.drawerScrimColor,
+    this.drawerEdgeDragWidth,
+    this.drawerEnableOpenDragGesture = true,
+    this.endDrawerEnableOpenDragGesture = true,
+  }) : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0);
 
   @override
   BackdropScaffoldState createState() => BackdropScaffoldState();
@@ -300,7 +365,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Wether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
       controller.status == AnimationStatus.completed ||
-          controller.status == AnimationStatus.forward;
+      controller.status == AnimationStatus.forward;
 
   /// Deprecated. Use [isBackLayerRevealed] instead.
   ///
@@ -312,7 +377,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
       controller.status == AnimationStatus.dismissed ||
-          controller.status == AnimationStatus.reverse;
+      controller.status == AnimationStatus.reverse;
 
   /// Toggles the backdrop functionality.
   ///
@@ -367,8 +432,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
     // if subHeader then height of subHeader
     return ((_subHeaderKey.currentContext?.findRenderObject() as RenderBox)
-        ?.size
-        ?.height) ??
+            ?.size
+            ?.height) ??
         32.0;
   }
 
@@ -376,10 +441,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
           ?.size
           ?.height) ??
-          0.0;
+      0.0;
 
-  Animation<RelativeRect> _getPanelAnimation(BuildContext context,
-      BoxConstraints constraints) {
+  Animation<RelativeRect> _getPanelAnimation(
+      BuildContext context, BoxConstraints constraints) {
     double backPanelHeight, frontPanelHeight;
 
     if (widget.stickyFrontLayer &&
@@ -418,7 +483,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   : Container(),
               Expanded(
                 child: Container(
-                  color: widget.inactiveOverlayColor.withOpacity(0.7),
+                  color: widget.inactiveOverlayColor
+                      .withOpacity(widget.inactiveOverlayOpacity),
                 ),
               ),
             ],
@@ -433,9 +499,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       canRequestFocus: isBackLayerRevealed,
       child: Material(
         color: this.widget.backLayerBackgroundColor ??
-            Theme
-                .of(context)
-                .primaryColor,
+            Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
             Flexible(
@@ -461,10 +525,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 // subHeader
                 DefaultTextStyle(
                   key: _subHeaderKey,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle1,
+                  style: Theme.of(context).textTheme.subtitle1,
                   child: widget.subHeader ?? Container(),
                 ),
                 // frontLayer
@@ -491,8 +552,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
-        floatingActionButtonLocation: this.widget.floatingActionButtonLocation,
-        floatingActionButtonAnimator: this.widget.floatingActionButtonAnimator,
         appBar: widget.appBar ??
             AppBar(
               title: widget.title,
@@ -519,10 +578,24 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
-        floatingActionButton: this.widget.floatingActionButton,
-        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+        floatingActionButton: widget.floatingActionButton,
+        floatingActionButtonLocation: widget.floatingActionButtonLocation,
+        floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+        persistentFooterButtons: widget.persistentFooterButtons,
+        drawer: widget.drawer,
+        endDrawer: widget.endDrawer,
         bottomNavigationBar: widget.bottomNavigationBar,
+        bottomSheet: widget.bottomSheet,
+        backgroundColor: widget.backgroundColor,
+        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+        primary: widget.primary,
+        drawerDragStartBehavior: widget.drawerDragStartBehavior,
         extendBody: widget.extendBody,
+        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+        drawerScrimColor: widget.drawerScrimColor,
+        drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+        drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+        endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
       ),
     );
   }
