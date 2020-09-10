@@ -9,8 +9,7 @@ class ContextualControlsUseCase extends UseCase {
     description =
         "The backdrop's back layer can be used to control the content that is being "
         "shown on the front layer.";
-    codeFile =
-        "lib/use_cases/contextual_controls/contextual_controls.dart";
+    codeFile = "lib/use_cases/contextual_controls/contextual_controls.dart";
     preview = ContextualControls();
   }
 }
