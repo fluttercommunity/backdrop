@@ -1,3 +1,9 @@
+## [0.4.4] - 10 September 2020
+
+* `BackdropToggleButton`: exposed `color` property of `AnimatedIcon` [https://github.com/fluttercommunity/backdrop/issues/48]
+* `BackdropScaffold`: added all missing properties from material `Scaffold` [https://github.com/fluttercommunity/backdrop/pull/51]
+* `BackdropScaffold`: added property `inactiveOverlayOpacity`.[https://github.com/fluttercommunity/backdrop/pull/51]
+
 ## [0.4.3] - 15 August 2020
 
 * Demo app with use cases [https://github.com/fluttercommunity/backdrop/pull/37]
