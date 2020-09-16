@@ -239,6 +239,7 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
+    Key key,
     this.controller,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
@@ -285,7 +286,8 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-  }) : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0);
+  })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
+        super(key: key);
 
   @override
   BackdropScaffoldState createState() => BackdropScaffoldState();
