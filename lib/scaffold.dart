@@ -2,6 +2,7 @@ import 'package:backdrop/app_bar.dart';
 import 'package:backdrop/button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
 /// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
@@ -306,10 +307,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  GlobalKey _backLayerKey = GlobalKey(debugLabel: "backdrop:backLayer");
   double _backPanelHeight = 0;
-  GlobalKey _subHeaderKey = GlobalKey(debugLabel: "backdrop:subHeader");
-  double _headerHeight = 0;
+  double _subHeaderHeight = 0;
 
   /// [AnimationController] used for the backdrop animation.
   ///
@@ -323,20 +322,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void initState() {
     super.initState();
-    if (widget.controller == null) {
-      _shouldDisposeController = true;
-      _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
-    } else {
-      _controller = widget.controller;
-    }
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _backPanelHeight = _getBackPanelHeight();
-        _headerHeight = _getHeaderHeight();
-      });
-    });
+    _controller = widget.controller ??
+        AnimationController(
+            vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
+    if (widget.controller == null) _shouldDisposeController = true;
 
     _controller.addStatusListener((status) {
       setState(() {
@@ -423,7 +412,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
-  double _getHeaderHeight() {
+  double get _headerHeight {
     // if defined then use it
     if (widget.headerHeight != null) return widget.headerHeight;
 
@@ -431,17 +420,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     if (widget.subHeader == null) return 32.0;
 
     // if subHeader then height of subHeader
-    return ((_subHeaderKey.currentContext?.findRenderObject() as RenderBox)
-            ?.size
-            ?.height) ??
-        32.0;
+    return _subHeaderHeight;
   }
-
-  double _getBackPanelHeight() =>
-      ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
-          ?.size
-          ?.height) ??
-      0.0;
 
   Animation<RelativeRect> _getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
@@ -502,8 +482,11 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
-            Flexible(
-                key: _backLayerKey, child: widget.backLayer ?? Container()),
+            _MeasureSize(
+              onChange: (size) =>
+                  setState(() => _backPanelHeight = size.height),
+              child: Flexible(child: widget.backLayer ?? Container()),
+            ),
           ],
         ),
       ),
@@ -523,10 +506,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // subHeader
-                DefaultTextStyle(
-                  key: _subHeaderKey,
-                  style: Theme.of(context).textTheme.subtitle1,
-                  child: widget.subHeader ?? Container(),
+                _MeasureSize(
+                  onChange: (size) =>
+                      setState(() => _subHeaderHeight = size.height),
+                  child: DefaultTextStyle(
+                    style: Theme.of(context).textTheme.subtitle1,
+                    child: widget.subHeader ?? Container(),
+                  ),
                 ),
                 // frontLayer
                 Flexible(child: widget.frontLayer),
@@ -607,6 +593,47 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       child: Builder(
         builder: (context) => _buildBody(context),
       ),
+    );
+  }
+}
+
+typedef void _OnWidgetSizeChange(Size size);
+
+/// Widget to get size of child widget
+/// Credit: https://stackoverflow.com/a/60868972/2554745
+class _MeasureSize extends StatefulWidget {
+  final Widget child;
+  final _OnWidgetSizeChange onChange;
+
+  const _MeasureSize({
+    Key key,
+    @required this.onChange,
+    @required this.child,
+  }) : super(key: key);
+
+  @override
+  _MeasureSizeState createState() => _MeasureSizeState();
+}
+
+class _MeasureSizeState extends State<_MeasureSize> {
+  final widgetKey = GlobalKey();
+  Size oldSize;
+
+  @override
+  Widget build(BuildContext context) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final context = widgetKey.currentContext;
+      if (context == null) return;
+
+      final newSize = context.size;
+      if (oldSize == newSize) return;
+
+      oldSize = newSize;
+      widget.onChange(newSize);
+    });
+    return Container(
+      key: widgetKey,
+      child: widget.child,
     );
   }
 }
