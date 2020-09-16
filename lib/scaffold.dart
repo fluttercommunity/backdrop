@@ -285,7 +285,8 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-  }) : : super(key: key), assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0);
+  })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
+        super(key: key);
 
   @override
   BackdropScaffoldState createState() => BackdropScaffoldState();
