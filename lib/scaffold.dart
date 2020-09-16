@@ -322,13 +322,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void initState() {
     super.initState();
-    if (widget.controller == null) {
-      _shouldDisposeController = true;
-      _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
-    } else {
-      _controller = widget.controller;
-    }
+    _controller = widget.controller ??
+        AnimationController(
+            vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
+    if (widget.controller == null) _shouldDisposeController = true;
 
     _controller.addStatusListener((status) {
       setState(() {
