@@ -1,3 +1,8 @@
+## [0.4.5] - 16 September 2020
+
+* `BackdropScaffold`: exposed `key` property [https://github.com/fluttercommunity/backdrop/pull/53]
+* `BackdropScaffold`: fix: `headerHeight` not updating once built [https://github.com/fluttercommunity/backdrop/pull/52]
+
 ## [0.4.4] - 10 September 2020
 
 * `BackdropToggleButton`: exposed `color` property of `AnimatedIcon` [https://github.com/fluttercommunity/backdrop/issues/48]
