@@ -1,3 +1,18 @@
+## [0.4.4] - 10 September 2020
+
+* `BackdropToggleButton`: exposed `color` property of `AnimatedIcon` [https://github.com/fluttercommunity/backdrop/issues/48]
+* `BackdropScaffold`: added all missing properties from material `Scaffold` [https://github.com/fluttercommunity/backdrop/pull/51]
+* `BackdropScaffold`: added property `inactiveOverlayOpacity`.[https://github.com/fluttercommunity/backdrop/pull/51]
+
+## [0.4.3] - 15 August 2020
+
+* Demo app with use cases [https://github.com/fluttercommunity/backdrop/pull/37]
+* `BackdropNavigationBackLayer`: directly expose `separatorBuilder` instead of `separator` [https://github.com/fluttercommunity/backdrop/pull/44]
+
+## [0.4.2] - 10 August 2020
+
+* fix toggle from front layer bug [https://github.com/fluttercommunity/backdrop/pull/41]
+
 ## [0.4.1] - 6 June 2020
 
 * making `_BackdropScaffoldState` class public [https://github.com/fluttercommunity/backdrop/pull/36] 
