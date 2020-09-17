@@ -240,8 +240,8 @@ class BackdropScaffold extends StatefulWidget {
   ///
   ///
   ///
-  ///Khaniel outis edit starts from here
-  final GlobalKey<ScaffoldState> backDropScaffoldkey;
+  ///it uses the default GlobalKey if null
+  final Key backDropScaffoldKey;
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
@@ -292,9 +292,7 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-
-    ///Khaniel outis
-    this.backDropScaffoldkey,
+    this.backDropScaffoldKey,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
         super(key: key);
 
@@ -548,7 +546,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
-        key: widget.backDropScaffoldkey ?? scaffoldKey,
+        key: widget.backDropScaffoldKey ?? scaffoldKey,
         appBar: widget.appBar ??
             AppBar(
               title: widget.title,
