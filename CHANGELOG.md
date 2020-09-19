@@ -1,3 +1,9 @@
+## [0.4.6] - 19 September 2020
+
+* `_MeasureSize`: removed `_OnWidgetSizeChange` in favour of `ValueChanged<Size>`
+* `_MeasureSize`: fix: not working properly with Animation [https://github.com/fluttercommunity/backdrop/pull/57]
+* `BackdropScaffold`: fix: layout issue for strict constraint `backLayer` [https://github.com/fluttercommunity/backdrop/pull/58]
+
 ## [0.4.5] - 16 September 2020
 
 * `BackdropScaffold`: exposed `key` property [https://github.com/fluttercommunity/backdrop/pull/53]
