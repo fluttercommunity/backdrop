@@ -484,10 +484,12 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
-            _MeasureSize(
-              onChange: (size) =>
-                  setState(() => _backPanelHeight = size.height),
-              child: Flexible(child: widget.backLayer ?? Container()),
+            Flexible(
+              child: _MeasureSize(
+                onChange: (size) =>
+                    setState(() => _backPanelHeight = size.height),
+                child: widget.backLayer ?? Container(),
+              ),
             ),
           ],
         ),
@@ -619,21 +621,31 @@ class _MeasureSizeState extends State<_MeasureSize> {
   final widgetKey = GlobalKey();
   Size oldSize;
 
+  void _notify() {
+    final context = widgetKey.currentContext;
+    if (context == null) return;
+
+    final newSize = context.size;
+    if (oldSize == newSize) return;
+
+    oldSize = newSize;
+    widget.onChange(newSize);
+  }
+
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      final context = widgetKey.currentContext;
-      if (context == null) return;
-
-      final newSize = context.size;
-      if (oldSize == newSize) return;
-
-      oldSize = newSize;
-      widget.onChange(newSize);
-    });
-    return Container(
-      key: widgetKey,
-      child: widget.child,
+    SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
+    return NotificationListener<SizeChangedLayoutNotification>(
+      onNotification: (_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
+        return true;
+      },
+      child: SizeChangedLayoutNotifier(
+        child: Container(
+          key: widgetKey,
+          child: widget.child,
+        ),
+      ),
     );
   }
 }
