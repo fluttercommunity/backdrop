@@ -599,13 +599,11 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 }
 
-typedef void _OnWidgetSizeChange(Size size);
-
 /// Widget to get size of child widget
 /// Credit: https://stackoverflow.com/a/60868972/2554745
 class _MeasureSize extends StatefulWidget {
   final Widget child;
-  final _OnWidgetSizeChange onChange;
+  final ValueChanged<Size> onChange;
 
   const _MeasureSize({
     Key key,
