@@ -2,9 +2,12 @@
 
 # backdrop
 
-[![pub.dev](https://img.shields.io/pub/v/backdrop?logo=flutter)](https://pub.dev/packages/backdrop)
 [![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg)](#contributors-)
+[![pub.dev](https://img.shields.io/pub/v/backdrop?logo=dart)](https://pub.dev/packages/backdrop)
+[![pub points](https://badges.bar/backdrop/pub%20points)](https://pub.dev/packages/backdrop/score)
+[![popularity](https://badges.bar/backdrop/popularity)](https://pub.dev/packages/backdrop/score)
+[![likes](https://badges.bar/backdrop/likes)](https://pub.dev/packages/backdrop/score) |
 [![analysis](https://github.com/fluttercommunity/backdrop/workflows/analysis/badge.svg)](https://github.com/fluttercommunity/backdrop/actions?query=workflow%3Aanalysis)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
