@@ -2,7 +2,7 @@
 
 # backdrop
 
-[![Demo](https://img.shields.io/badge/check-demo-blueviolet)](https://fluttecommunity.github.com/backdrop/demo/)
+[![Demo](https://img.shields.io/badge/check-demo-blueviolet)](https://fluttercommunity.github.io/backdrop/demo/#/)
 [![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg)](#contributors-)
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=dart)](https://pub.dev/packages/backdrop)
