@@ -140,6 +140,8 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
   final Color backLayerBackgroundColor;
+  
+  final Color frontLayerBackgroundColor;
 
   /// Defines the color for the inactive front layer.
   /// A default opacity of 0.7 is applied to the passed color.
@@ -262,6 +264,7 @@ class BackdropScaffold extends StatefulWidget {
         this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
+    this.frontLayerBackgroundColor,
     this.backLayerBackgroundColor,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.inactiveOverlayOpacity = 0.7,
@@ -499,6 +502,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
+      color: this.widget.frontLayerBackgroundColor?? Colors.white,
       elevation: 1.0,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
