@@ -165,6 +165,9 @@ class BackdropScaffold extends StatefulWidget {
   final VoidCallback onBackLayerRevealed;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
+  
+   /// A key to use when building the [Scaffold].
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   /// See [Scaffold.appBar].
   final PreferredSizeWidget appBar;
@@ -237,11 +240,6 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool endDrawerEnableOpenDragGesture;
 
-  ///
-  ///
-  ///Uses the default scaffoldkey if null
-  final GlobalKey<ScaffoldState> backdropScaffoldKey;
-
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key key,
@@ -272,6 +270,7 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.scaffoldKey,
     this.appBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
@@ -291,7 +290,6 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-    this.backdropScaffoldKey,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
         super(key: key);
 
@@ -314,7 +312,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
@@ -547,7 +545,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
-        key: widget.backdropScaffoldKey ?? scaffoldKey,
+        key: scaffoldKey,
         appBar: widget.appBar ??
             AppBar(
               title: widget.title,
