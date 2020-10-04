@@ -312,7 +312,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
-  final scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey;
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
@@ -328,6 +328,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void initState() {
     super.initState();
+    // initialize scaffoldKey
+    scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
+    // initialize _controller
     _controller = widget.controller ??
         AnimationController(
             vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
