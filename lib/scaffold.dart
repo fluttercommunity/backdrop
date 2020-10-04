@@ -165,6 +165,9 @@ class BackdropScaffold extends StatefulWidget {
   final VoidCallback onBackLayerRevealed;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
+  
+   /// A key to use when building the [Scaffold].
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   /// See [Scaffold.appBar].
   final PreferredSizeWidget appBar;
@@ -267,6 +270,7 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.scaffoldKey,
     this.appBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
@@ -308,7 +312,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey;
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
@@ -324,6 +328,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void initState() {
     super.initState();
+    // initialize scaffoldKey
+    scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
+    // initialize _controller
     _controller = widget.controller ??
         AnimationController(
             vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
