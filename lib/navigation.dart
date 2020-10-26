@@ -53,6 +53,15 @@ class BackdropNavigationBackLayer extends StatelessWidget {
   /// Customizable separatorBuilder used with [ListView.separated].
   final IndexedWidgetBuilder separatorBuilder;
 
+  /// Allows to set a [Padding] for each item of the list.
+  final EdgeInsetsGeometry itemPadding;
+
+  /// Sets a custom border on the list items. See [InkWell.customBorder].
+  final ShapeBorder itemCustomBorder;
+
+  /// Sets a custom splash color on the list items. See [InkWell.splashColor].
+  final Color itemSplashColor;
+
   /// Creates an instance of [BackdropNavigationBackLayer] to be used with
   /// [BackdropScaffold].
   ///
@@ -63,6 +72,9 @@ class BackdropNavigationBackLayer extends StatelessWidget {
     this.onTap,
     this.separator,
     this.separatorBuilder,
+    this.itemPadding,
+    this.itemCustomBorder,
+    this.itemSplashColor,
   })  : assert(items != null),
         assert(items.isNotEmpty),
         super(key: key);
@@ -72,6 +84,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       itemCount: items.length,
+      padding: itemPadding,
       itemBuilder: (context, position) => InkWell(
         child: items[position],
         onTap: () {
@@ -81,6 +94,8 @@ class BackdropNavigationBackLayer extends StatelessWidget {
           // call onTap function and pass new selected index
           onTap?.call(position);
         },
+        customBorder: itemCustomBorder,
+        splashColor: itemSplashColor,
       ),
       separatorBuilder:
           separatorBuilder ?? (builder, position) => separator ?? Container(),
