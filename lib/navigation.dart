@@ -56,10 +56,10 @@ class BackdropNavigationBackLayer extends StatelessWidget {
   /// Allows to set a [Padding] for each item of the list.
   final EdgeInsetsGeometry itemPadding;
 
-  /// Sets a custom border on the list items. See [InkWell.customBorder].
+  /// Sets a custom border on the list items. See [InkResponse.customBorder].
   final ShapeBorder itemCustomBorder;
 
-  /// Sets a custom splash color on the list items. See [InkWell.splashColor].
+  /// Sets a custom splash color on the list items. See [InkResponse.splashColor].
   final Color itemSplashColor;
 
   /// Creates an instance of [BackdropNavigationBackLayer] to be used with
