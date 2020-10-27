@@ -140,7 +140,10 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
   final Color backLayerBackgroundColor;
-  
+
+  /// Background [Color] for the front layer.
+  ///
+  /// If null, the color is handled automatically according to the theme.
   final Color frontLayerBackgroundColor;
 
   /// Defines the color for the inactive front layer.
@@ -502,7 +505,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
-      color: this.widget.frontLayerBackgroundColor?? Colors.white,
+      color: this.widget.frontLayerBackgroundColor,
       elevation: 1.0,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
