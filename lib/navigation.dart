@@ -56,8 +56,9 @@ class BackdropNavigationBackLayer extends StatelessWidget {
   /// Allows to set a [Padding] for each item of the list.
   final EdgeInsetsGeometry itemPadding;
 
-  /// Sets a custom border on the list items. See [InkResponse.customBorder].
-  final ShapeBorder itemCustomBorder;
+  /// Sets a custom border on the list items' [InkWell].
+  /// See [InkResponse.customBorder].
+  final ShapeBorder itemSplashBorder;
 
   /// Sets a custom splash color on the list items. See [InkResponse.splashColor].
   final Color itemSplashColor;
@@ -73,7 +74,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
     this.separator,
     this.separatorBuilder,
     this.itemPadding,
-    this.itemCustomBorder,
+    this.itemSplashBorder,
     this.itemSplashColor,
   })  : assert(items != null),
         assert(items.isNotEmpty),
@@ -94,7 +95,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
           // call onTap function and pass new selected index
           onTap?.call(position);
         },
-        customBorder: itemCustomBorder,
+        customBorder: itemSplashBorder,
         splashColor: itemSplashColor,
       ),
       separatorBuilder:
