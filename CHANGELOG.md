@@ -1,3 +1,9 @@
+## [0.4.7] - 28 October 2020
+
+* `BackdropScaffold`: added `scaffoldKey` [https://github.com/fluttercommunity/backdrop/pull/64]
+* `BackdropScaffold`: added `frontLayerBackgroundColor` [https://github.com/fluttercommunity/backdrop/pull/63, https://github.com/fluttercommunity/backdrop/pull/66]
+* `BackdropNavigationBackLayer`: added `itemPadding`, `itemSplashColor`, `itemSplashBorder` [https://github.com/fluttercommunity/backdrop/pull/65]
+
 ## [0.4.6] - 19 September 2020
 
 * `_MeasureSize`: removed `_OnWidgetSizeChange` in favour of `ValueChanged<Size>`

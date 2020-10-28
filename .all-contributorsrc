@@ -139,6 +139,24 @@
         "bug"
       ]
     },
+    {
+      "login": "kannel-outis",
+      "name": "Enikuomehin Adejuwon",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32224274?v=4",
+      "profile": "https://github.com/kannel-outis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "farmery",
+      "name": "Nwachi ifeanyichukwu Victor",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/56759256?v=4",
+      "profile": "https://github.com/farmery",
+      "contributions": [
+        "code"
+      ]
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "backdrop",
