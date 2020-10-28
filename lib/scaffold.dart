@@ -170,8 +170,8 @@ class BackdropScaffold extends StatefulWidget {
   final VoidCallback onBackLayerRevealed;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
-  
-   /// A key to use when building the [Scaffold].
+
+  /// A key to use when building the [Scaffold].
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   /// See [Scaffold.appBar].
