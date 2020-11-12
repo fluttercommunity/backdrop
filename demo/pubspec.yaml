@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.3
   google_fonts: ^1.1.0
   flutter_highlight: ^0.6.0
+  gallerize: ^0.0.2
   # Add backdrop dependency here
   backdrop:
     path: "../"
