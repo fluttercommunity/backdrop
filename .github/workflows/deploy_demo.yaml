@@ -1,0 +1,28 @@
+name: Deploy Demo
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy-for-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: beta
+      - run: flutter config --enable-web
+      - run: flutter pub get
+      - name: Build for web
+        working-directory: example/
+        run: flutter build web --release
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: demo/build/web # The folder the action should deploy.
+          TARGET_FOLDER: demo/  # Target folder within gh-pages branch
+          CLEAN: true # Automatically remove deleted files from the deploy branch
