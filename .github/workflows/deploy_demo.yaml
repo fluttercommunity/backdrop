@@ -16,7 +16,7 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - name: Build for web
-        working-directory: example/
+        working-directory: demo/
         run: flutter build web --release
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
