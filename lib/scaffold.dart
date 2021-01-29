@@ -146,6 +146,15 @@ class BackdropScaffold extends StatefulWidget {
   /// If null, the color is handled automatically according to the theme.
   final Color frontLayerBackgroundColor;
 
+  /// Fraction of the available height the front layer will occupy,
+  /// when active.  Clamped to (0, 1).
+  ///
+  /// Note the front layer will not fully conceal the back layer when
+  /// this value is less than 1.
+  ///
+  /// Defaults to 1.0.
+  final double frontLayerActiveFactor;
+
   /// Defines the color for the inactive front layer.
   /// A default opacity of 0.7 is applied to the passed color.
   /// See [inactiveOverlayOpacity].
@@ -271,6 +280,7 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.frontLayerBackgroundColor,
+    double frontLayerActiveFactor = 1.0,
     this.backLayerBackgroundColor,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.inactiveOverlayOpacity = 0.7,
@@ -297,6 +307,7 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
+        frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
         super(key: key);
 
   @override
@@ -453,7 +464,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     }
     return RelativeRectTween(
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
-      end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      end: RelativeRect.fromLTRB(
+          0.0, availableHeight * (1 - widget.frontLayerActiveFactor), 0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: controller,
       curve: widget.animationCurve,
