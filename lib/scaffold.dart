@@ -441,16 +441,14 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   Animation<RelativeRect> _getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
     double backPanelHeight, frontPanelHeight;
-
-    if (widget.stickyFrontLayer &&
-        _backPanelHeight < constraints.biggest.height - _headerHeight) {
+    final availableHeight = constraints.biggest.height - _headerHeight;
+    if (widget.stickyFrontLayer && _backPanelHeight < availableHeight) {
       // height is adapted to the height of the back panel
       backPanelHeight = _backPanelHeight;
       frontPanelHeight = -_backPanelHeight;
     } else {
       // height is set to fixed value defined in widget.headerHeight
-      final height = constraints.biggest.height;
-      backPanelHeight = height - _headerHeight;
+      backPanelHeight = availableHeight;
       frontPanelHeight = -backPanelHeight;
     }
     return RelativeRectTween(
