@@ -150,7 +150,8 @@ class BackdropScaffold extends StatefulWidget {
   /// when active.  Clamped to (0, 1).
   ///
   /// Note the front layer will not fully conceal the back layer when
-  /// this value is less than 1.
+  /// this value is less than 1.  A scrim will cover the
+  /// partially concealed back layer if [drawerScrimColor] is provided.
   ///
   /// Defaults to 1.0.
   final double frontLayerActiveFactor;
@@ -584,6 +585,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 fit: StackFit.expand,
                 children: <Widget>[
                   _buildBackPanel(),
+                  if (isBackLayerConcealed && widget.frontLayerActiveFactor < 1)
+                    Container(
+                        color: widget.drawerScrimColor,
+                        height: _backPanelHeight),
                   PositionedTransition(
                     rect: _getPanelAnimation(context, constraints),
                     child: _buildFrontPanel(context),
