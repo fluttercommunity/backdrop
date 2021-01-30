@@ -327,6 +327,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeController = false;
   AnimationController _controller;
+  ColorTween _scrimColorTween;
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
@@ -354,6 +355,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
     if (widget.controller == null) _shouldDisposeController = true;
 
+    _scrimColorTween = _buildScrimColorTween();
+
+    _controller.addListener(() => setState(() {}));
     _controller.addStatusListener((status) {
       setState(() {
         // This is intentionally left empty. The state change itself takes
@@ -363,6 +367,14 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         // see https://github.com/flutter/flutter/pull/55414/commits/72d7d365be6639271a5e88ee3043b92833facb79
       });
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant BackdropScaffold oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.drawerScrimColor != widget.drawerScrimColor) {
+      _scrimColorTween = _buildScrimColorTween();
+    }
   }
 
   @override
@@ -562,6 +574,11 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return true;
   }
 
+  ColorTween _buildScrimColorTween() => ColorTween(
+        begin: Colors.transparent,
+        end: widget.drawerScrimColor ?? Colors.black54,
+      );
+
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
@@ -587,7 +604,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   _buildBackPanel(),
                   if (isBackLayerConcealed && widget.frontLayerActiveFactor < 1)
                     Container(
-                        color: widget.drawerScrimColor,
+                        color: _scrimColorTween.evaluate(controller),
                         height: _backPanelHeight),
                   PositionedTransition(
                     rect: _getPanelAnimation(context, constraints),
