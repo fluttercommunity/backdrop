@@ -130,11 +130,16 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `false`.
   final bool stickyFrontLayer;
 
-  /// The animation curve passed to [Tween.animate]() when triggering
+  /// The animation curve passed to [Tween.animate] when triggering
   /// the backdrop animation.
   ///
-  /// Defaults to [Curves.easeInOut].
+  /// Defaults to [Curves.ease].
   final Curve animationCurve;
+
+  /// The reverse animation curve passed to [Tween.animate].
+  ///
+  /// If not set, [animationCurve.flipped] is used.
+  final Curve reverseAnimationCurve;
 
   /// Background [Color] for the back layer.
   ///
@@ -269,7 +274,8 @@ class BackdropScaffold extends StatefulWidget {
         "This feature was deprecated after v0.2.17.")
         this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
-    this.animationCurve = Curves.easeInOut,
+    this.animationCurve = Curves.ease,
+    this.reverseAnimationCurve,
     this.frontLayerBackgroundColor,
     this.backLayerBackgroundColor,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
@@ -457,9 +463,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     ).animate(CurvedAnimation(
-      parent: controller,
-      curve: widget.animationCurve,
-    ));
+        parent: controller,
+        curve: widget.animationCurve,
+        reverseCurve:
+            widget.reverseAnimationCurve ?? widget.animationCurve.flipped));
   }
 
   Widget _buildInactiveLayer(BuildContext context) {
