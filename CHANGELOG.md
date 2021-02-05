@@ -1,3 +1,10 @@
+## [0.5.0]
+
+* **BREAKING**: requires Dart >= 2.3
+* `BackdropScaffold`: added `frontLayerActiveFactor` [#73][]
+
+[#73]: https://github.com/fluttercommunity/backdrop/pull/73
+
 ## [0.4.7] - 28 October 2020
 
 * `BackdropScaffold`: added `scaffoldKey` [https://github.com/fluttercommunity/backdrop/pull/64]
