@@ -508,9 +508,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           behavior: HitTestBehavior.opaque,
           child: Column(
             children: <Widget>[
-              // if subHeaderAlwaysActive then do not apply inactiveOverlayColor for area with _headerHeight
+              // if subHeaderAlwaysActive then do not apply frontLayerScrim for area with _subHeaderHeight
               widget.subHeader != null && widget.subHeaderAlwaysActive
-                  ? Container(height: _headerHeight)
+                  ? Container(height: _subHeaderHeight)
                   : Container(),
               Expanded(
                 child: Container(
