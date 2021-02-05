@@ -113,8 +113,8 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to
   /// ```dart
   /// const BorderRadius.only(
-  ///     topLeft: Radius.circular(16.0),
-  ///     topRight: Radius.circular(16.0),
+  ///     topLeft: Radius.circular(16),
+  ///     topRight: Radius.circular(16),
   /// )
   /// ```
   final BorderRadius frontLayerBorderRadius;
@@ -158,7 +158,7 @@ class BackdropScaffold extends StatefulWidget {
   /// this value is less than 1.  A scrim will cover the
   /// partially concealed back layer if [drawerScrimColor] is provided.
   ///
-  /// Defaults to 1.0.
+  /// Defaults to 1.
   final double frontLayerActiveFactor;
 
   /// Defines the color for the inactive front layer.
@@ -276,8 +276,8 @@ class BackdropScaffold extends StatefulWidget {
         this.actions = const <Widget>[],
     this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
+      topLeft: Radius.circular(16),
+      topRight: Radius.circular(16),
     ),
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
         "and BackdropAppBar.automaticallyImplyLeading."
@@ -286,7 +286,7 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.frontLayerBackgroundColor,
-    double frontLayerActiveFactor = 1.0,
+    double frontLayerActiveFactor = 1,
     this.backLayerBackgroundColor,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
     this.inactiveOverlayOpacity = 0.7,
@@ -345,7 +345,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Defaults to
   /// ```dart
   /// AnimationController(
-  ///         vsync: this, duration: Duration(milliseconds: 200), value: 1.0)
+  ///         vsync: this, duration: Duration(milliseconds: 200), value: 1)
   /// ```
   AnimationController get controller => _controller;
 
@@ -357,7 +357,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // initialize _controller
     _controller = widget.controller ??
         AnimationController(
-            vsync: this, duration: Duration(milliseconds: 200), value: 1.0);
+            vsync: this, duration: Duration(milliseconds: 200), value: 1);
     if (widget.controller == null) _shouldDisposeController = true;
 
     _scrimColorTween = _buildScrimColorTween();
@@ -436,7 +436,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
-      controller.animateBack(-1.0);
+      controller.animateBack(-1);
       widget.onBackLayerRevealed?.call();
     }
   }
@@ -451,7 +451,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
     if (isBackLayerRevealed) {
-      controller.animateTo(1.0);
+      controller.animateTo(1);
       widget.onBackLayerConcealed?.call();
     }
   }
@@ -460,8 +460,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // if defined then use it
     if (widget.headerHeight != null) return widget.headerHeight;
 
-    // if no subHeader then 32.0
-    if (widget.subHeader == null) return 32.0;
+    // if no subHeader then 32
+    if (widget.subHeader == null) return 32;
 
     // if subHeader then height of subHeader
     return _subHeaderHeight;
@@ -481,9 +481,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       frontPanelHeight = -backPanelHeight;
     }
     return RelativeRectTween(
-      begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
+      begin: RelativeRect.fromLTRB(0, backPanelHeight, 0, frontPanelHeight),
       end: RelativeRect.fromLTRB(
-          0.0, availableHeight * (1 - widget.frontLayerActiveFactor), 0.0, 0.0),
+          0, availableHeight * (1 - widget.frontLayerActiveFactor), 0, 0),
     ).animate(CurvedAnimation(
       parent: controller,
       curve: widget.animationCurve,
@@ -494,7 +494,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return Offstage(
       offstage: controller.status == AnimationStatus.completed,
       child: FadeTransition(
-        opacity: Tween(begin: 1.0, end: 0.0).animate(controller),
+        opacity: Tween<double>(begin: 1, end: 0).animate(controller),
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
@@ -541,7 +541,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
       color: this.widget.frontLayerBackgroundColor,
-      elevation: 1.0,
+      elevation: 1,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
         borderRadius: widget.frontLayerBorderRadius,
@@ -595,7 +595,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               actions: widget.iconPosition == BackdropIconPosition.action
                   ? <Widget>[BackdropToggleButton()] + widget.actions
                   : widget.actions,
-              elevation: 0.0,
+              elevation: 0,
               leading: widget.iconPosition == BackdropIconPosition.leading
                   ? BackdropToggleButton()
                   : null,
