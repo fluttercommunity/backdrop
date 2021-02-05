@@ -80,9 +80,15 @@ class BackdropScaffold extends StatefulWidget {
   final Widget frontLayer;
 
   /// The widget that is shown as sub-header on top of the front layer.
+  ///
+  /// When the front layer is minimized, the entire [subHeader] will be visible unless
+  /// [headerHeight] is specified.
   final Widget subHeader;
 
-  /// This boolean flag keeps subHeader active when [backLayer] is visible. Defaults to true.
+  /// If false, a scrim will cover the front layer when it is minimized.
+  /// See [inactiveOverlayColor].
+  ///
+  /// Defaults to true.
   final bool subHeaderAlwaysActive;
 
   /// Deprecated. Use [BackdropAppBar.actions].
@@ -90,19 +96,16 @@ class BackdropScaffold extends StatefulWidget {
   /// Actions passed to [AppBar.actions].
   final List<Widget> actions;
 
-  /// Defines the height of the front layer when it is in the opened state.
+  /// Defines the front layer's height when minimized (revealing the back layer).
+  /// If this value is omitted but [subHeader] is provided, its measured height is used.
+  /// Defaults to 32 otherwise.
   ///
-  /// This height value is only applied, if [stickyFrontLayer]
-  /// is set to `false` or if [stickyFrontLayer] is set to `true` and the back
-  /// layer's height is less than
-  /// [BoxConstraints.biggest.height]-[headerHeight].
+  /// To automatically use the difference of the screen height and back layer's height,
+  /// see [stickyFrontLayer].  Note [headerHeight] is ignored if it is less
+  /// than the available size and [stickyFrontLayer] is `true`.
   ///
-  /// [headerHeight] is interpreted as the height of the front layer's visible
-  /// part, when being opened. The back layer's height corresponds to
-  /// [BoxConstraints.biggest.height]-[headerHeight].
-  ///
-  ///
-  /// If [subHeader] is defined then height of subHeader otherwise defaults to 32.0.
+  /// To vary the front layer's height when active (concealing the back layer),
+  /// see [frontLayerActiveFactor].
   final double headerHeight;
 
   /// Defines the [BorderRadius] applied to the front layer.
@@ -124,10 +127,12 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to [BackdropIconPosition.leading].
   final BackdropIconPosition iconPosition;
 
-  /// A flag indicating whether the front layer should stick to the height of
-  /// the back layer when being opened.
-  ///
+  /// Indicates the front layer should minimize to the back layer's
+  /// bottom edge.  Otherwise, see [headerHeight] to specify this value.
   /// Defaults to `false`.
+  ///
+  /// This parameter has no effect if the back layer's measured height
+  /// is greater than or equal to the screen height.
   final bool stickyFrontLayer;
 
   /// The animation curve passed to [Tween.animate]() when triggering
@@ -147,7 +152,7 @@ class BackdropScaffold extends StatefulWidget {
   final Color frontLayerBackgroundColor;
 
   /// Fraction of the available height the front layer will occupy,
-  /// when active.  Clamped to (0, 1).
+  /// when active (concealing the back layer).  Clamped to (0, 1).
   ///
   /// Note the front layer will not fully conceal the back layer when
   /// this value is less than 1.  A scrim will cover the
