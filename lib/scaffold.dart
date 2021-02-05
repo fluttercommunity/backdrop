@@ -79,14 +79,14 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget that is shown on the front layer.
   final Widget frontLayer;
 
-  /// The widget that is shown as sub-header on top of the front layer.
+  /// The widget shown at the top of the front layer.
   ///
   /// When the front layer is minimized, the entire [subHeader] will be visible unless
   /// [headerHeight] is specified.
   final Widget subHeader;
 
-  /// If false, a scrim will cover the front layer when it is minimized.
-  /// See [inactiveOverlayColor].
+  /// If true, the scrim applied to the front layer while minimized will not
+  /// cover the [subHeader].  See [frontLayerScrim].
   ///
   /// Defaults to true.
   final bool subHeaderAlwaysActive;
@@ -156,32 +156,36 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Note the front layer will not fully conceal the back layer when
   /// this value is less than 1.  A scrim will cover the
-  /// partially concealed back layer if [drawerScrimColor] is provided.
+  /// partially concealed back layer; see [backLayerScrim].
   ///
   /// Defaults to 1.
   final double frontLayerActiveFactor;
 
-  /// Defines the color for the inactive front layer.
-  /// A default opacity of 0.7 is applied to the passed color.
-  /// See [inactiveOverlayOpacity].
-  ///
-  /// Defaults to `const Color(0xFFEEEEEE)`.
+  /// Deprecated.  Use [frontLayerScrim] instead.
+  @Deprecated('Replace with frontLayerScrim.')
   final Color inactiveOverlayColor;
 
-  /// The opacity value applied to [inactiveOverlayColor] when used on the
-  /// inactive layer.
-  ///
-  /// The inactive layer overlays the [frontLayer] when the back layer is
-  /// revealed and the front layer is in a concealed state.
-  ///
-  /// Must be a value between `0.0` and `1.0`.
-  /// Defaults to `0.7`.
+  /// Deprecated.  Use [frontLayerScrim] instead.
+  @Deprecated('Replace with frontLayerScrim.  Use Color#withOpacity, or pass'
+      'the opacity value in the Color constructor.')
   final double inactiveOverlayOpacity;
 
-  /// Will be called when [backLayer] have been concealed.
+  /// Defines the scrim color for the front layer when minimized
+  /// (revealing the back layer) and animating.  Defaults to [Colors.white70].
+  ///
+  /// See [subHeaderAlwaysActive] to leave the [subHeader] outside the scrim.
+  final Color frontLayerScrim;
+
+  /// Defines the scrim color for the back layer when partially concealed
+  /// (with [frontLayerActiveFactor] less than 1).
+  ///
+  /// Defaults to [Colors.black54].
+  final Color backLayerScrim;
+
+  /// Will be called when [backLayer] has been concealed.
   final VoidCallback onBackLayerConcealed;
 
-  /// Will be called when [backLayer] have been revealed.
+  /// Will be called when [backLayer] has been revealed.
   final VoidCallback onBackLayerRevealed;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
@@ -288,8 +292,12 @@ class BackdropScaffold extends StatefulWidget {
     this.frontLayerBackgroundColor,
     double frontLayerActiveFactor = 1,
     this.backLayerBackgroundColor,
-    this.inactiveOverlayColor = const Color(0xFFEEEEEE),
-    this.inactiveOverlayOpacity = 0.7,
+    @Deprecated('See frontLayerScrim. This was deprecated after v0.4.7.')
+        this.inactiveOverlayColor = const Color(0xFFEEEEEE),
+    @Deprecated('See frontLayerScrim. This was deprecated after v0.4.7.')
+        this.inactiveOverlayOpacity = 0.7,
+    this.frontLayerScrim = Colors.white70,
+    this.backLayerScrim = Colors.black54,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
     this.scaffoldKey,
@@ -332,7 +340,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeController = false;
   AnimationController _controller;
-  ColorTween _scrimColorTween;
+  ColorTween _backLayerScrimColorTween;
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
@@ -360,7 +368,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             vsync: this, duration: Duration(milliseconds: 200), value: 1);
     if (widget.controller == null) _shouldDisposeController = true;
 
-    _scrimColorTween = _buildScrimColorTween();
+    _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
     _controller.addListener(() => setState(() {}));
     _controller.addStatusListener((status) {
@@ -377,8 +385,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void didUpdateWidget(covariant BackdropScaffold oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.drawerScrimColor != widget.drawerScrimColor) {
-      _scrimColorTween = _buildScrimColorTween();
+    if (oldWidget.backLayerScrim != widget.backLayerScrim) {
+      _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
     }
   }
 
@@ -506,9 +514,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   : Container(),
               Expanded(
                 child: Container(
-                  color: widget.inactiveOverlayColor
-                      .withOpacity(widget.inactiveOverlayOpacity),
-                ),
+                    color: widget.frontLayerScrim ??
+                        widget.inactiveOverlayColor
+                            .withOpacity(widget.inactiveOverlayOpacity)),
               ),
             ],
           ),
@@ -579,9 +587,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return true;
   }
 
-  ColorTween _buildScrimColorTween() => ColorTween(
+  ColorTween _buildBackLayerScrimColorTween() => ColorTween(
         begin: Colors.transparent,
-        end: widget.drawerScrimColor ?? Colors.black54,
+        end: widget.backLayerScrim,
       );
 
   Widget _buildBody(BuildContext context) {
@@ -609,7 +617,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   _buildBackPanel(),
                   if (isBackLayerConcealed && widget.frontLayerActiveFactor < 1)
                     Container(
-                        color: _scrimColorTween.evaluate(controller),
+                        color: _backLayerScrimColorTween.evaluate(controller),
                         height: _backPanelHeight),
                   PositionedTransition(
                     rect: _getPanelAnimation(context, constraints),
