@@ -398,12 +398,12 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Deprecated. Use [isBackLayerConcealed] instead.
   ///
-  /// Wether the back layer is concealed or not.
+  /// Whether the back layer is concealed or not.
   @Deprecated("Replace by the use of `isBackLayerConcealed`."
       "This feature was deprecated after v0.3.2.")
   bool get isTopPanelVisible => isBackLayerConcealed;
 
-  /// Wether the back layer is concealed or not.
+  /// Whether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
       controller.status == AnimationStatus.completed ||
       controller.status == AnimationStatus.forward;
