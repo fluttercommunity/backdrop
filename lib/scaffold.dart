@@ -521,8 +521,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return FocusScope(
       canRequestFocus: isBackLayerRevealed,
       child: Material(
-        color: this.widget.backLayerBackgroundColor ??
-            Theme.of(context).primaryColor,
+        color:
+            widget.backLayerBackgroundColor ?? Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
             Flexible(
@@ -540,7 +540,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
-      color: this.widget.frontLayerBackgroundColor,
+      color: widget.frontLayerBackgroundColor,
       elevation: 1,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
