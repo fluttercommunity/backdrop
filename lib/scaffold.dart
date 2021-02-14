@@ -614,10 +614,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 fit: StackFit.expand,
                 children: <Widget>[
                   _buildBackPanel(),
-                  if (isBackLayerConcealed && widget.frontLayerActiveFactor < 1)
-                    Container(
-                        color: _backLayerScrimColorTween.evaluate(controller),
-                        height: _backPanelHeight),
+                  if (_hasBackLayerScrim) _buildBackLayerScrim(),
                   PositionedTransition(
                     rect: _getPanelAnimation(context, constraints),
                     child: _buildFrontPanel(context),
@@ -648,6 +645,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       ),
     );
   }
+
+  Container _buildBackLayerScrim() => Container(
+      color: _backLayerScrimColorTween.evaluate(controller),
+      height: _backPanelHeight);
+
+  bool get _hasBackLayerScrim =>
+      isBackLayerConcealed && widget.frontLayerActiveFactor < 1;
 
   @override
   Widget build(BuildContext context) {
