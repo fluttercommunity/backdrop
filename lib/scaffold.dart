@@ -81,11 +81,11 @@ class BackdropScaffold extends StatefulWidget {
 
   /// The widget shown at the top of the front layer.
   ///
-  /// When the front layer is minimized, the entire [subHeader] will be visible unless
+  /// When the front layer is minimized (back layer revealed), the entire [subHeader] will be visible unless
   /// [headerHeight] is specified.
   final Widget subHeader;
 
-  /// If true, the scrim applied to the front layer while minimized will not
+  /// If true, the scrim applied to the front layer while minimized (back layer revealed) will not
   /// cover the [subHeader].  See [frontLayerScrim].
   ///
   /// Defaults to true.
@@ -96,15 +96,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Actions passed to [AppBar.actions].
   final List<Widget> actions;
 
-  /// Defines the front layer's height when minimized (revealing the back layer).
-  /// If this value is omitted but [subHeader] is provided, its measured height is used.
-  /// Defaults to 32 otherwise.
+  /// Defines the front layer's height when minimized (back layer revealed)).
+  /// Defaults to measured height of [subHeader] if provided, else 32.
   ///
   /// To automatically use the difference of the screen height and back layer's height,
   /// see [stickyFrontLayer].  Note [headerHeight] is ignored if it is less
   /// than the available size and [stickyFrontLayer] is `true`.
   ///
-  /// To vary the front layer's height when active (concealing the back layer),
+  /// To vary the front layer's height when active (back layer concealed),
   /// see [frontLayerActiveFactor].
   final double headerHeight;
 
@@ -152,7 +151,7 @@ class BackdropScaffold extends StatefulWidget {
   final Color frontLayerBackgroundColor;
 
   /// Fraction of the available height the front layer will occupy,
-  /// when active (concealing the back layer).  Clamped to (0, 1).
+  /// when active (back layer concealed).  Clamped to (0, 1).
   ///
   /// Note the front layer will not fully conceal the back layer when
   /// this value is less than 1.  A scrim will cover the
