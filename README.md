@@ -102,7 +102,7 @@ Widget build(BuildContext context) {
 </div>
 
 ### Accessing underlying backdrop functionalities
-To access backdrop related functionalities, use `Backdrop.of(context)` to get `BackdropScaffoldState`.
+To access backdrop related functionalities, use `Backdrop.of(context)` to get underlying `BackdropScaffoldState`.
 
 `BackdropScaffoldState` exposes various properties and methods like:
 - properties
