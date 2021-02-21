@@ -522,23 +522,28 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildBackPanel() {
-    return FocusScope(
-      canRequestFocus: isBackLayerRevealed,
-      child: Material(
-        color:
-            widget.backLayerBackgroundColor ?? Theme.of(context).primaryColor,
-        child: Column(
-          children: <Widget>[
-            Flexible(
-              child: _MeasureSize(
-                onChange: (size) =>
-                    setState(() => _backPanelHeight = size.height),
-                child: widget.backLayer ?? Container(),
-              ),
+    return Stack(
+      children: [
+        FocusScope(
+          canRequestFocus: isBackLayerRevealed,
+          child: Material(
+            color: widget.backLayerBackgroundColor ??
+                Theme.of(context).primaryColor,
+            child: Column(
+              children: <Widget>[
+                Flexible(
+                  child: _MeasureSize(
+                    onChange: (size) =>
+                        setState(() => _backPanelHeight = size.height),
+                    child: widget.backLayer ?? Container(),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        if (_hasBackLayerScrim) _buildBackLayerScrim(),
+      ],
     );
   }
 
@@ -611,7 +616,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                 fit: StackFit.expand,
                 children: <Widget>[
                   _buildBackPanel(),
-                  if (_hasBackLayerScrim) _buildBackLayerScrim(),
                   PositionedTransition(
                     rect: _getPanelAnimation(context, constraints),
                     child: _buildFrontPanel(context),
