@@ -1,3 +1,7 @@
+## [0.5.1] - 23 February 2021
+
+* `readme`: minor fix
+
 ## [0.5.0] - 23 February 2021
 
 * `demo`: use `gallerize` package [[#67](https://github.com/fluttercommunity/backdrop/issues/67)]
