@@ -25,7 +25,9 @@
         "code",
         "doc",
         "bug",
-        "review"
+        "review",
+        "example",
+        "infra"
       ]
     },
     {
@@ -155,6 +157,25 @@
       "profile": "https://github.com/farmery",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "mockturtl",
+      "name": "mockturtl",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/705804?v=4",
+      "profile": "https://github.com/mockturtl",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "rtr-dnd",
+      "name": "ritar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19490811?v=4",
+      "profile": "https://github.com/rtr-dnd",
+      "contributions": [
+        "bug"
       ]
     },
   ],
