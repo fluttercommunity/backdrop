@@ -134,6 +134,13 @@ class BackdropScaffold extends StatefulWidget {
   /// is greater than or equal to the screen height.
   final bool stickyFrontLayer;
 
+  /// Flag indicating whether the back layer should be revealed at the beginning
+  /// or not. Setting [revealBackLayerAtStart] to `true` reveals the back layer
+  /// at start. This property has no effect if a custom [controller] is set.
+  ///
+  /// Defaults to `false`.
+  final bool revealBackLayerAtStart;
+
   /// The animation curve passed to [Tween.animate] when triggering
   /// the backdrop animation.
   ///
@@ -292,6 +299,7 @@ class BackdropScaffold extends StatefulWidget {
         "This feature was deprecated after v0.2.17.")
         this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
+    this.revealBackLayerAtStart = false,
     this.animationCurve = Curves.ease,
     this.reverseAnimationCurve,
     this.frontLayerBackgroundColor,
@@ -370,7 +378,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // initialize _controller
     _controller = widget.controller ??
         AnimationController(
-            vsync: this, duration: Duration(milliseconds: 200), value: 1);
+          vsync: this,
+          duration: Duration(milliseconds: 200),
+          value: widget.revealBackLayerAtStart ? 0 : 1,
+        );
     if (widget.controller == null) _shouldDisposeController = true;
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
