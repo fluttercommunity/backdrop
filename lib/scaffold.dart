@@ -66,7 +66,7 @@ class Backdrop extends InheritedWidget {
 ///  * [Scaffold], which is the plain scaffold used in material apps.
 class BackdropScaffold extends StatefulWidget {
   /// Can be used to customize the behaviour of the backdrop animation.
-  final AnimationController controller;
+  final AnimationController animationController;
 
   /// Deprecated. Use [BackdropAppBar.title].
   ///
@@ -136,7 +136,8 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Flag indicating whether the back layer should be revealed at the beginning
   /// or not. Setting [revealBackLayerAtStart] to `true` reveals the back layer
-  /// at start. This property has no effect if a custom [controller] is set.
+  /// at start. This property has no effect if a custom [animationController] 
+  /// is set.
   ///
   /// Defaults to `false`.
   final bool revealBackLayerAtStart;
@@ -278,7 +279,7 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key key,
-    this.controller,
+    this.animationController,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
         this.title,
@@ -368,7 +369,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// AnimationController(
   ///         vsync: this, duration: Duration(milliseconds: 200), value: 1)
   /// ```
-  AnimationController get controller => _controller;
+  AnimationController get animationController => _controller;
 
   @override
   void initState() {
@@ -376,13 +377,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // initialize scaffoldKey
     scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
     // initialize _controller
-    _controller = widget.controller ??
+    _controller = widget.animationController ??
         AnimationController(
           vsync: this,
           duration: Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
-    if (widget.controller == null) _shouldDisposeController = true;
+    if (widget.animationController == null) _shouldDisposeController = true;
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
@@ -418,8 +419,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
-      controller.status == AnimationStatus.completed ||
-      controller.status == AnimationStatus.forward;
+      animationController.status == AnimationStatus.completed ||
+      animationController.status == AnimationStatus.forward;
 
   /// Deprecated. Use [isBackLayerRevealed] instead.
   ///
@@ -430,8 +431,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
-      controller.status == AnimationStatus.dismissed ||
-      controller.status == AnimationStatus.reverse;
+      animationController.status == AnimationStatus.dismissed ||
+      animationController.status == AnimationStatus.reverse;
 
   /// Toggles the backdrop functionality.
   ///
@@ -457,7 +458,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
-      controller.animateBack(-1);
+      animationController.animateBack(-1);
       widget.onBackLayerRevealed?.call();
     }
   }
@@ -472,7 +473,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
     if (isBackLayerRevealed) {
-      controller.animateTo(1);
+      animationController.animateTo(1);
       widget.onBackLayerConcealed?.call();
     }
   }
@@ -506,7 +507,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       end: RelativeRect.fromLTRB(
           0, availableHeight * (1 - widget.frontLayerActiveFactor), 0, 0),
     ).animate(CurvedAnimation(
-        parent: controller,
+        parent: animationController,
         curve: widget.animationCurve,
         reverseCurve:
             widget.reverseAnimationCurve ?? widget.animationCurve.flipped));
@@ -514,9 +515,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: controller.status == AnimationStatus.completed,
+      offstage: animationController.status == AnimationStatus.completed,
       child: FadeTransition(
-        opacity: Tween<double>(begin: 1, end: 0).animate(controller),
+        opacity: Tween<double>(begin: 1, end: 0).animate(animationController),
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
@@ -666,7 +667,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Container _buildBackLayerScrim() => Container(
-      color: _backLayerScrimColorTween.evaluate(controller),
+      color: _backLayerScrimColorTween.evaluate(animationController),
       height: _backPanelHeight);
 
   bool get _hasBackLayerScrim =>
