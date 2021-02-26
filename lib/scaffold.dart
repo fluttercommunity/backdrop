@@ -65,8 +65,14 @@ class Backdrop extends InheritedWidget {
 /// See also:
 ///  * [Scaffold], which is the plain scaffold used in material apps.
 class BackdropScaffold extends StatefulWidget {
+  /// Deprecated. Use [animationController].
+  ///
   /// Can be used to customize the behaviour of the backdrop animation.
+  @Deprecated("See animationController. This was deprecated after v0.5.1")
   final AnimationController controller;
+
+  /// Can be used to customize the behaviour of the backdrop animation.
+  final AnimationController animationController;
 
   /// Deprecated. Use [BackdropAppBar.title].
   ///
@@ -133,6 +139,14 @@ class BackdropScaffold extends StatefulWidget {
   /// This parameter has no effect if the back layer's measured height
   /// is greater than or equal to the screen height.
   final bool stickyFrontLayer;
+
+  /// Flag indicating whether the back layer should be revealed at the beginning
+  /// or not. Setting [revealBackLayerAtStart] to `true` reveals the back layer
+  /// at start. This property has no effect if a custom [animationController]
+  /// is set.
+  ///
+  /// Defaults to `false`.
+  final bool revealBackLayerAtStart;
 
   /// The animation curve passed to [Tween.animate] when triggering
   /// the backdrop animation.
@@ -271,7 +285,9 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key key,
-    this.controller,
+    @Deprecated("See animationController. This was deprecated after v0.5.1")
+        this.controller,
+    this.animationController,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
         this.title,
@@ -292,6 +308,7 @@ class BackdropScaffold extends StatefulWidget {
         "This feature was deprecated after v0.2.17.")
         this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
+    this.revealBackLayerAtStart = false,
     this.animationCurve = Curves.ease,
     this.reverseAnimationCurve,
     this.frontLayerBackgroundColor,
@@ -343,8 +360,8 @@ class BackdropScaffold extends StatefulWidget {
 /// within the widget tree below [BackdropScaffold].
 class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  bool _shouldDisposeController = false;
-  AnimationController _controller;
+  bool _shouldDisposeAnimationController = false;
+  AnimationController _animationController;
   ColorTween _backLayerScrimColorTween;
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
@@ -353,6 +370,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
+  /// Deprecated. Use [animationController] instead.
+  ///
+  /// [AnimationController] used for the backdrop animation.
+  @Deprecated("Replace by the use of `animationController`."
+      "This feature was deprecated after v0.5.1.")
+  AnimationController get controller => _animationController;
+
   /// [AnimationController] used for the backdrop animation.
   ///
   /// Defaults to
@@ -360,7 +384,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// AnimationController(
   ///         vsync: this, duration: Duration(milliseconds: 200), value: 1)
   /// ```
-  AnimationController get controller => _controller;
+  AnimationController get animationController => _animationController;
 
   @override
   void initState() {
@@ -368,14 +392,20 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // initialize scaffoldKey
     scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
     // initialize _controller
-    _controller = widget.controller ??
+    _animationController = widget.animationController ??
+        widget.controller ??
         AnimationController(
-            vsync: this, duration: Duration(milliseconds: 200), value: 1);
-    if (widget.controller == null) _shouldDisposeController = true;
+          vsync: this,
+          duration: Duration(milliseconds: 200),
+          value: widget.revealBackLayerAtStart ? 0 : 1,
+        );
+    if (widget.animationController == null && widget.controller == null) {
+      _shouldDisposeAnimationController = true;
+    }
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
-    _controller.addListener(() => setState(() {
+    _animationController.addListener(() => setState(() {
           // This is intentionally left empty. The state change itself takes
           // place inside the AnimationController, so there's nothing to update.
           // All we want is for the widget to rebuild and read the new animation
@@ -395,7 +425,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void dispose() {
     super.dispose();
-    if (_shouldDisposeController) _controller.dispose();
+    if (_shouldDisposeAnimationController) _animationController.dispose();
   }
 
   /// Deprecated. Use [isBackLayerConcealed] instead.
@@ -407,8 +437,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
-      controller.status == AnimationStatus.completed ||
-      controller.status == AnimationStatus.forward;
+      animationController.status == AnimationStatus.completed ||
+      animationController.status == AnimationStatus.forward;
 
   /// Deprecated. Use [isBackLayerRevealed] instead.
   ///
@@ -419,8 +449,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
-      controller.status == AnimationStatus.dismissed ||
-      controller.status == AnimationStatus.reverse;
+      animationController.status == AnimationStatus.dismissed ||
+      animationController.status == AnimationStatus.reverse;
 
   /// Toggles the backdrop functionality.
   ///
@@ -446,7 +476,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
-      controller.animateBack(-1);
+      animationController.animateBack(-1);
       widget.onBackLayerRevealed?.call();
     }
   }
@@ -461,7 +491,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
     if (isBackLayerRevealed) {
-      controller.animateTo(1);
+      animationController.animateTo(1);
       widget.onBackLayerConcealed?.call();
     }
   }
@@ -495,7 +525,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       end: RelativeRect.fromLTRB(
           0, availableHeight * (1 - widget.frontLayerActiveFactor), 0, 0),
     ).animate(CurvedAnimation(
-        parent: controller,
+        parent: animationController,
         curve: widget.animationCurve,
         reverseCurve:
             widget.reverseAnimationCurve ?? widget.animationCurve.flipped));
@@ -503,9 +533,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: controller.status == AnimationStatus.completed,
+      offstage: animationController.status == AnimationStatus.completed,
       child: FadeTransition(
-        opacity: Tween<double>(begin: 1, end: 0).animate(controller),
+        opacity: Tween<double>(begin: 1, end: 0).animate(animationController),
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
@@ -655,7 +685,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Container _buildBackLayerScrim() => Container(
-      color: _backLayerScrimColorTween.evaluate(controller),
+      color: _backLayerScrimColorTween.evaluate(animationController),
       height: _backPanelHeight);
 
   bool get _hasBackLayerScrim =>
