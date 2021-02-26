@@ -65,6 +65,12 @@ class Backdrop extends InheritedWidget {
 /// See also:
 ///  * [Scaffold], which is the plain scaffold used in material apps.
 class BackdropScaffold extends StatefulWidget {
+  /// Deprecated. Use [animationController].
+  ///
+  /// Can be used to customize the behaviour of the backdrop animation.
+  @Deprecated("See animationController. This was deprecated after v0.5.1")
+  final AnimationController controller;
+
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController animationController;
 
@@ -136,7 +142,7 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Flag indicating whether the back layer should be revealed at the beginning
   /// or not. Setting [revealBackLayerAtStart] to `true` reveals the back layer
-  /// at start. This property has no effect if a custom [animationController] 
+  /// at start. This property has no effect if a custom [animationController]
   /// is set.
   ///
   /// Defaults to `false`.
@@ -279,6 +285,8 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key key,
+    @Deprecated("See animationController. This was deprecated after v0.5.1")
+        this.controller,
     this.animationController,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
@@ -352,8 +360,8 @@ class BackdropScaffold extends StatefulWidget {
 /// within the widget tree below [BackdropScaffold].
 class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  bool _shouldDisposeController = false;
-  AnimationController _controller;
+  bool _shouldDisposeAnimationController = false;
+  AnimationController _animationController;
   ColorTween _backLayerScrimColorTween;
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
@@ -362,6 +370,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
+  /// Deprecated. Use [animationController] instead.
+  ///
+  /// [AnimationController] used for the backdrop animation.
+  @Deprecated("Replace by the use of `animationController`."
+      "This feature was deprecated after v0.5.1.")
+  AnimationController get controller => _animationController;
+
   /// [AnimationController] used for the backdrop animation.
   ///
   /// Defaults to
@@ -369,7 +384,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// AnimationController(
   ///         vsync: this, duration: Duration(milliseconds: 200), value: 1)
   /// ```
-  AnimationController get animationController => _controller;
+  AnimationController get animationController => _animationController;
 
   @override
   void initState() {
@@ -377,17 +392,20 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     // initialize scaffoldKey
     scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
     // initialize _controller
-    _controller = widget.animationController ??
+    _animationController = widget.animationController ??
+        widget.controller ??
         AnimationController(
           vsync: this,
           duration: Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
-    if (widget.animationController == null) _shouldDisposeController = true;
+    if (widget.animationController == null && widget.controller == null) {
+      _shouldDisposeAnimationController = true;
+    }
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
-    _controller.addListener(() => setState(() {
+    _animationController.addListener(() => setState(() {
           // This is intentionally left empty. The state change itself takes
           // place inside the AnimationController, so there's nothing to update.
           // All we want is for the widget to rebuild and read the new animation
@@ -407,7 +425,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   @override
   void dispose() {
     super.dispose();
-    if (_shouldDisposeController) _controller.dispose();
+    if (_shouldDisposeAnimationController) _animationController.dispose();
   }
 
   /// Deprecated. Use [isBackLayerConcealed] instead.
