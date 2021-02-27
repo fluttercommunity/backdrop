@@ -1,3 +1,11 @@
+## [0.5.2] - 27 February 2021
+
+* `example`: referring "live demo" so that it shows up in pub.dev
+* `example`: proper sdk constraints and migrated to Flutter Android Embedding v2
+* `ci-cd`: `deploy_demo` fix
+* `BackdropScaffold`: added `revealBackLayerAtStart` property [[#82](https://github.com/fluttercommunity/backdrop/pull/82)]
+* `BackdropScaffold`: renamed `controller` -> `animationController` property and state "getter" [[#82](https://github.com/fluttercommunity/backdrop/pull/82)]
+
 ## [0.5.1] - 23 February 2021
 
 * `readme`: minor fix
