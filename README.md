@@ -27,6 +27,7 @@ ___Any contribution, idea, criticism or feedback is welcomed.___
 | | |
 |-|-|
 | __package__ | https://pub.dev/packages/backdrop |
+| __Live Demo__ | https://fluttercommunity.github.io/backdrop/demo/#/ |
 | __Git Repo__  | https://github.com/fluttercommunity/backdrop |
 | __Issue Tracker__ | https://github.com/fluttercommunity/backdrop/issues |
 | __Chat Room__ | https://gitter.im/flutter-backdrop |
