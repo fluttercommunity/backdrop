@@ -360,7 +360,6 @@ class BackdropScaffold extends StatefulWidget {
 /// within the widget tree below [BackdropScaffold].
 class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
-  bool _shouldDisposeAnimationController = true;
   AnimationController _animationController;
   ColorTween _backLayerScrimColorTween;
 
@@ -399,9 +398,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           duration: Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
-    if (widget.animationController == null && widget.controller == null) {
-      _shouldDisposeAnimationController = false;
-    }
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
@@ -424,7 +420,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   void dispose() {
-    if (_shouldDisposeAnimationController) _animationController.dispose();
+    if(_animationController != null) _animationController.dispose();
     super.dispose();
   }
 
