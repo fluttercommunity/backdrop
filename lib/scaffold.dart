@@ -420,7 +420,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   void dispose() {
-    if(_animationController != null) _animationController.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
