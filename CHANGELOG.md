@@ -1,4 +1,4 @@
-## [0.5.3] - 2 March 2021
+## [0.5.3] - Coming soon
 
 * Fix bug where `_animationController.dispose()` is not called correctly in `BackdropScaffold`[[#83](https://github.com/fluttercommunity/backdrop/pull/83)]
 
