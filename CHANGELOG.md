@@ -1,6 +1,8 @@
-## [0.5.3] - Coming soon
+## [0.5.3] - 2 March 2021
 
-* Fix bug where `_animationController.dispose()` is not called correctly in `BackdropScaffold`[[#83](https://github.com/fluttercommunity/backdrop/pull/83)]
+* `pubspec`: set `https://fluttercommunity.github.io/backdrop/` as "Home Page"
+* `readme`: added "Live Demo" to "Quick links"
+* `BackdropScaffold`: fix bug where `_animationController.dispose()` is not called correctly [[#83](https://github.com/fluttercommunity/backdrop/pull/83)]
 
 ## [0.5.2] - 27 February 2021
 
