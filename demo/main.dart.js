@@ -34504,8 +34504,8 @@ a.toString
 s.a.toString
 if(!C.A.l(0,C.A)){s.a.toString
 s.f=new R.dJ(C.b5,C.A)}},
-q:function(a){this.MM(0)
-if(this.d)this.e.q(0)},
+q:function(a){if(this.d)this.e.q(0)
+this.MM(0)},
 gy7:function(){return this.e.gec()===C.R||this.e.gec()===C.ag},
 gy8:function(){return this.e.gec()===C.r||this.e.gec()===C.ab},
 kW:function(){var s=this,r=s.c
