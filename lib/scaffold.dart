@@ -399,9 +399,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           duration: Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
-    if (widget.animationController == null && widget.controller == null) {
-      _shouldDisposeAnimationController = false;
-    }
+
+    // should only dispose of `_animationController`, if it was initialised inside this widget.
+    _shouldDisposeAnimationController =
+        (widget.animationController ?? widget.controller) == null;
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
