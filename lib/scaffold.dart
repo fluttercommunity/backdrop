@@ -19,12 +19,12 @@ class Backdrop extends InheritedWidget {
   final BackdropScaffoldState data;
 
   /// Creates a [Backdrop] instance.
-  Backdrop({Key key, @required this.data, @required Widget child})
+  Backdrop({Key? key, required this.data, required Widget child})
       : super(key: key, child: child);
 
   /// Provides access to the state from everywhere in the widget tree.
   static BackdropScaffoldState of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<Backdrop>().data;
+      context.dependOnInheritedWidgetOfExactType<Backdrop>()!.data;
 
   @override
   bool updateShouldNotify(Backdrop old) => true;
@@ -69,15 +69,15 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Can be used to customize the behaviour of the backdrop animation.
   @Deprecated("See animationController. This was deprecated after v0.5.1")
-  final AnimationController controller;
+  final AnimationController? controller;
 
   /// Can be used to customize the behaviour of the backdrop animation.
-  final AnimationController animationController;
+  final AnimationController? animationController;
 
   /// Deprecated. Use [BackdropAppBar.title].
   ///
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
-  final Widget title;
+  final Widget? title;
 
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
@@ -89,7 +89,7 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// When the front layer is minimized (back layer revealed), the entire [subHeader] will be visible unless
   /// [headerHeight] is specified.
-  final Widget subHeader;
+  final Widget? subHeader;
 
   /// If true, the scrim applied to the front layer while minimized (back layer revealed) will not
   /// cover the [subHeader].  See [frontLayerScrim].
@@ -111,7 +111,7 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// To vary the front layer's height when active (back layer concealed),
   /// see [frontLayerActiveFactor].
-  final double headerHeight;
+  final double? headerHeight;
 
   /// Defines the [BorderRadius] applied to the front layer.
   ///
@@ -157,17 +157,17 @@ class BackdropScaffold extends StatefulWidget {
   /// The reverse animation curve passed to [Tween.animate].
   ///
   /// If not set, [animationCurve.flipped] is used.
-  final Curve reverseAnimationCurve;
+  final Curve? reverseAnimationCurve;
 
   /// Background [Color] for the back layer.
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
-  final Color backLayerBackgroundColor;
+  final Color? backLayerBackgroundColor;
 
   /// Background [Color] for the front layer.
   ///
   /// If null, the color is handled automatically according to the theme.
-  final Color frontLayerBackgroundColor;
+  final Color? frontLayerBackgroundColor;
 
   /// Fraction of the available height the front layer will occupy,
   /// when active (back layer concealed).  Clamped to (0, 1).
@@ -201,18 +201,18 @@ class BackdropScaffold extends StatefulWidget {
   final Color backLayerScrim;
 
   /// Will be called when [backLayer] has been concealed.
-  final VoidCallback onBackLayerConcealed;
+  final VoidCallback? onBackLayerConcealed;
 
   /// Will be called when [backLayer] has been revealed.
-  final VoidCallback onBackLayerRevealed;
+  final VoidCallback? onBackLayerRevealed;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
 
   /// A key to use when building the [Scaffold].
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
 
   /// See [Scaffold.appBar].
-  final PreferredSizeWidget appBar;
+  final PreferredSizeWidget? appBar;
 
   /// See [Scaffold.extendBody].
   ///
@@ -225,39 +225,39 @@ class BackdropScaffold extends StatefulWidget {
   final bool extendBodyBehindAppBar;
 
   /// See [Scaffold.floatingActionButton].
-  final Widget floatingActionButton;
+  final Widget? floatingActionButton;
 
   /// See [Scaffold.floatingActionButtonLocation].
-  final FloatingActionButtonLocation floatingActionButtonLocation;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   /// See [Scaffold.floatingActionButtonAnimator].
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
+  final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
   /// See [Scaffold.persistentFooterButtons].
-  final List<Widget> persistentFooterButtons;
+  final List<Widget>? persistentFooterButtons;
 
   /// See [Scaffold.drawer].
-  final Widget drawer;
+  final Widget? drawer;
 
   /// See [Scaffold.endDrawer].
-  final Widget endDrawer;
+  final Widget? endDrawer;
 
   /// See [Scaffold.drawerScrimColor].
-  final Color drawerScrimColor;
+  final Color? drawerScrimColor;
 
   /// See [Scaffold.backgroundColor].
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// See [Scaffold.bottomNavigationBar].
-  final Widget bottomNavigationBar;
+  final Widget? bottomNavigationBar;
 
   /// See [Scaffold.bottomSheet].
-  final Widget bottomSheet;
+  final Widget? bottomSheet;
 
   /// See [Scaffold.resizeToAvoidBottomInset].
   ///
   /// Defaults to `true`.
-  final bool resizeToAvoidBottomInset;
+  final bool? resizeToAvoidBottomInset;
 
   /// See [Scaffold.primary].
   ///
@@ -270,7 +270,7 @@ class BackdropScaffold extends StatefulWidget {
   final DragStartBehavior drawerDragStartBehavior;
 
   /// See [Scaffold.drawerEdgeDragWidth].
-  final double drawerEdgeDragWidth;
+  final double? drawerEdgeDragWidth;
 
   /// See [Scaffold.drawerEnableOpenDragGesture].
   ///
@@ -284,15 +284,15 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
-    Key key,
+    Key? key,
     @Deprecated("See animationController. This was deprecated after v0.5.1")
         this.controller,
     this.animationController,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
         this.title,
-    this.backLayer,
-    this.frontLayer,
+    required this.backLayer,
+    required this.frontLayer,
     this.subHeader,
     this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
@@ -361,12 +361,12 @@ class BackdropScaffold extends StatefulWidget {
 class BackdropScaffoldState extends State<BackdropScaffold>
     with SingleTickerProviderStateMixin {
   bool _shouldDisposeAnimationController = false;
-  AnimationController _animationController;
-  ColorTween _backLayerScrimColorTween;
+  AnimationController? _animationController;
+  late ColorTween _backLayerScrimColorTween;
 
   /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
   /// used [Scaffold].
-  GlobalKey<ScaffoldState> scaffoldKey;
+  GlobalKey<ScaffoldState>? scaffoldKey;
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
@@ -375,7 +375,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// [AnimationController] used for the backdrop animation.
   @Deprecated("Replace by the use of `animationController`."
       "This feature was deprecated after v0.5.1.")
-  AnimationController get controller => _animationController;
+  AnimationController? get controller => _animationController;
 
   /// [AnimationController] used for the backdrop animation.
   ///
@@ -384,7 +384,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// AnimationController(
   ///         vsync: this, duration: Duration(milliseconds: 200), value: 1)
   /// ```
-  AnimationController get animationController => _animationController;
+  AnimationController? get animationController => _animationController;
 
   @override
   void initState() {
@@ -406,7 +406,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
-    _animationController.addListener(() => setState(() {
+    _animationController!.addListener(() => setState(() {
           // This is intentionally left empty. The state change itself takes
           // place inside the AnimationController, so there's nothing to update.
           // All we want is for the widget to rebuild and read the new animation
@@ -425,7 +425,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   void dispose() {
-    if (_shouldDisposeAnimationController) _animationController.dispose();
+    if (_shouldDisposeAnimationController) _animationController!.dispose();
     super.dispose();
   }
 
@@ -438,8 +438,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
-      animationController.status == AnimationStatus.completed ||
-      animationController.status == AnimationStatus.forward;
+      animationController!.status == AnimationStatus.completed ||
+      animationController!.status == AnimationStatus.forward;
 
   /// Deprecated. Use [isBackLayerRevealed] instead.
   ///
@@ -450,8 +450,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
-      animationController.status == AnimationStatus.dismissed ||
-      animationController.status == AnimationStatus.reverse;
+      animationController!.status == AnimationStatus.dismissed ||
+      animationController!.status == AnimationStatus.reverse;
 
   /// Toggles the backdrop functionality.
   ///
@@ -477,7 +477,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
-      animationController.animateBack(-1);
+      animationController!.animateBack(-1);
       widget.onBackLayerRevealed?.call();
     }
   }
@@ -492,14 +492,14 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
     if (isBackLayerRevealed) {
-      animationController.animateTo(1);
+      animationController!.animateTo(1);
       widget.onBackLayerConcealed?.call();
     }
   }
 
   double get _headerHeight {
     // if defined then use it
-    if (widget.headerHeight != null) return widget.headerHeight;
+    if (widget.headerHeight != null) return widget.headerHeight!;
 
     // if no subHeader then 32
     if (widget.subHeader == null) return 32;
@@ -526,7 +526,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       end: RelativeRect.fromLTRB(
           0, availableHeight * (1 - widget.frontLayerActiveFactor), 0, 0),
     ).animate(CurvedAnimation(
-        parent: animationController,
+        parent: animationController!,
         curve: widget.animationCurve,
         reverseCurve:
             widget.reverseAnimationCurve ?? widget.animationCurve.flipped));
@@ -534,9 +534,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildInactiveLayer(BuildContext context) {
     return Offstage(
-      offstage: animationController.status == AnimationStatus.completed,
+      offstage: animationController!.status == AnimationStatus.completed,
       child: FadeTransition(
-        opacity: Tween<double>(begin: 1, end: 0).animate(animationController),
+        opacity: Tween<double>(begin: 1, end: 0).animate(animationController!),
         child: GestureDetector(
           onTap: () => fling(),
           behavior: HitTestBehavior.opaque,
@@ -571,8 +571,11 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               children: <Widget>[
                 Flexible(
                   child: _MeasureSize(
-                    onChange: (size) =>
-                        setState(() => _backPanelHeight = size.height),
+                    onChange: (size) {
+                      if (size != null) {
+                        setState(() => _backPanelHeight = size.height);
+                      }
+                    },
                     child: widget.backLayer ?? Container(),
                   ),
                 ),
@@ -600,10 +603,13 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               children: <Widget>[
                 // subHeader
                 _MeasureSize(
-                  onChange: (size) =>
-                      setState(() => _subHeaderHeight = size.height),
+                  onChange: (size) {
+                    if (size != null) {
+                      setState(() => _subHeaderHeight = size.height);
+                    }
+                  },
                   child: DefaultTextStyle(
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.subtitle1!,
                     child: widget.subHeader ?? Container(),
                   ),
                 ),
@@ -618,7 +624,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  Future<bool> _willPopCallback(BuildContext context) async {
+  Future<bool?> _willPopCallback(BuildContext context) async {
     if (isBackLayerRevealed) {
       concealBackLayer();
       return null;
@@ -633,7 +639,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _willPopCallback(context),
+      onWillPop: (() => _willPopCallback(context) as Future<bool>)
+          as Future<bool> Function()?,
       child: Scaffold(
         key: scaffoldKey,
         appBar: widget.appBar ??
@@ -686,7 +693,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Container _buildBackLayerScrim() => Container(
-      color: _backLayerScrimColorTween.evaluate(animationController),
+      color: _backLayerScrimColorTween.evaluate(animationController!),
       height: _backPanelHeight);
 
   bool get _hasBackLayerScrim =>
@@ -707,12 +714,12 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 /// Credit: https://stackoverflow.com/a/60868972/2554745
 class _MeasureSize extends StatefulWidget {
   final Widget child;
-  final ValueChanged<Size> onChange;
+  final ValueChanged<Size?> onChange;
 
   const _MeasureSize({
-    Key key,
-    @required this.onChange,
-    @required this.child,
+    Key? key,
+    required this.onChange,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -721,7 +728,7 @@ class _MeasureSize extends StatefulWidget {
 
 class _MeasureSizeState extends State<_MeasureSize> {
   final widgetKey = GlobalKey();
-  Size oldSize;
+  Size? oldSize;
 
   void _notify() {
     final context = widgetKey.currentContext;
@@ -736,10 +743,10 @@ class _MeasureSizeState extends State<_MeasureSize> {
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
+    SchedulerBinding.instance!.addPostFrameCallback((_) => _notify());
     return NotificationListener<SizeChangedLayoutNotification>(
       onNotification: (_) {
-        SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
+        SchedulerBinding.instance!.addPostFrameCallback((_) => _notify());
         return true;
       },
       child: SizeChangedLayoutNotifier(

@@ -24,7 +24,7 @@ class BackdropSubHeader extends StatelessWidget {
   /// The divider that should be shown at the bottom of the sub-header.
   ///
   /// Defaults to `Divider(height: 4.0, indent: 16.0, endIndent: 16.0)`.
-  final Widget divider;
+  final Widget? divider;
 
   /// Padding that will be applied to the sub-header.
   ///
@@ -51,18 +51,18 @@ class BackdropSubHeader extends StatelessWidget {
 
   /// Widget to be shown as leading element to the sub-header. If set, the value
   /// of [automaticallyImplyLeading] is ignored.
-  final Widget leading;
+  final Widget? leading;
 
   /// Widget to be shown as trailing element to the sub-header. If set, the value
   /// of [automaticallyImplyTrailing] is ignored.
-  final Widget trailing;
+  final Widget? trailing;
 
   /// Creates a [BackdropSubHeader] instance.
   ///
   /// The [title] argument must not be `null`.
   const BackdropSubHeader({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
     this.divider,
     this.padding = const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
     this.automaticallyImplyLeading = false,
@@ -77,7 +77,7 @@ class BackdropSubHeader extends StatelessWidget {
     Widget _buildAutomaticLeadingOrTrailing(BuildContext context) =>
         FadeTransition(
           opacity: Tween(begin: 1.0, end: 0.0)
-              .animate(Backdrop.of(context).animationController),
+              .animate(Backdrop.of(context).animationController!),
           child: Icon(Icons.keyboard_arrow_up),
         );
 

@@ -49,7 +49,7 @@ class BackdropToggleButton extends StatelessWidget {
       icon: AnimatedIcon(
         icon: icon,
         color: color,
-        progress: Backdrop.of(context).animationController.view,
+        progress: Backdrop.of(context).animationController!.view,
       ),
       onPressed: () => Backdrop.of(context).fling(),
     );
