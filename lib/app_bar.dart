@@ -154,7 +154,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
         preferredSize = Size.fromHeight(
-            kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
+            kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
         super(key: key);
 
   @override

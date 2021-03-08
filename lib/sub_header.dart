@@ -77,7 +77,7 @@ class BackdropSubHeader extends StatelessWidget {
     Widget _buildAutomaticLeadingOrTrailing(BuildContext context) =>
         FadeTransition(
           opacity: Tween(begin: 1.0, end: 0.0)
-              .animate(Backdrop.of(context).animationController!),
+              .animate(Backdrop.of(context).animationController),
           child: Icon(Icons.keyboard_arrow_up),
         );
 
