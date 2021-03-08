@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 
 @Deprecated('Replace with frontLayerScrim.')
 const _kInactiveOverlayOpacity = 0.7;
+@Deprecated('Replace with frontLayerScrim.')
 const _kInactiveOverlayColor = Color(0xFFEEEEEE);
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
