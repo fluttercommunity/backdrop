@@ -590,12 +590,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               children: <Widget>[
                 Flexible(
                   child: _MeasureSize(
-                    onChange: (size) {
-                      if (size != null) {
-                        setState(() => _backPanelHeight = size.height);
-                      }
-                    },
-                    child: widget.backLayer,
+                    onChange: (size) =>
+                        setState(() => _backPanelHeight = size.height),
+                    child: widget.backLayer ?? Container(),
                   ),
                 ),
               ],
@@ -622,11 +619,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
               children: <Widget>[
                 // subHeader
                 _MeasureSize(
-                  onChange: (size) {
-                    if (size != null) {
-                      setState(() => _subHeaderHeight = size.height);
-                    }
-                  },
+                  onChange: (size) =>
+                      setState(() => _subHeaderHeight = size.height),
                   child: DefaultTextStyle(
                     style: Theme.of(context).textTheme.subtitle1!,
                     child: widget.subHeader ?? Container(),
@@ -658,7 +652,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
-      onWillPop: (() => _willPopCallback(context)),
+      onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
         appBar: widget.appBar ??
@@ -732,7 +726,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 /// Credit: https://stackoverflow.com/a/60868972/2554745
 class _MeasureSize extends StatefulWidget {
   final Widget child;
-  final ValueChanged<Size?> onChange;
+  final ValueChanged<Size> onChange;
 
   const _MeasureSize({
     Key? key,
@@ -756,7 +750,7 @@ class _MeasureSizeState extends State<_MeasureSize> {
     if (oldSize == newSize) return;
 
     oldSize = newSize;
-    widget.onChange(newSize);
+    if (newSize != null) widget.onChange(newSize);
   }
 
   @override
