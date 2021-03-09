@@ -618,10 +618,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  Future<bool?> _willPopCallback(BuildContext context) async {
+  Future<bool> _willPopCallback(BuildContext context) async {
     if (isBackLayerRevealed) {
       concealBackLayer();
-      return null;
+      return false;
     }
     return true;
   }
@@ -633,8 +633,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
-      onWillPop: (() => _willPopCallback(context) as Future<bool>)
-          as Future<bool> Function()?,
+      onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
         appBar: widget.appBar ??
