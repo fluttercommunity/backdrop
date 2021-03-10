@@ -592,7 +592,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   child: _MeasureSize(
                     onChange: (size) =>
                         setState(() => _backPanelHeight = size.height),
-                    child: widget.backLayer ?? Container(),
+                    child: widget.backLayer,
                   ),
                 ),
               ],
