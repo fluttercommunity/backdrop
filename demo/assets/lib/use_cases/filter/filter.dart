@@ -23,7 +23,7 @@ class _FilterState extends State<Filter> {
   ];
   Set<ItemCategory> _filteredCategories =
       Set.from([ItemCategory.Electronics, ItemCategory.Transportation]);
-  List<Item> _shownItems;
+  late List<Item> _shownItems;
 
   @override
   void initState() {
@@ -70,8 +70,8 @@ class _FilterState extends State<Filter> {
           ListView.builder(
             itemCount: _CATEGORIES.length,
             itemBuilder: (context, index) => CheckboxListTile(
-              onChanged: (bool checked) =>
-                  _addOrRemoveFilterCategory(checked, _CATEGORIES[index]),
+              onChanged: (bool? checked) =>
+                  _addOrRemoveFilterCategory(checked!, _CATEGORIES[index]),
               value: _filteredCategories.contains(_CATEGORIES[index]),
               title: Text(describeEnum(_CATEGORIES[index].toString())),
               activeColor: Colors.white,
