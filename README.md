@@ -22,6 +22,8 @@
 This widget is in active development. 
 ___Any contribution, idea, criticism or feedback is welcomed.___
 
+__NOTE: If using Flutter v1.x.x, use v0.5.x pub version.__
+
 ## Quick links
 
 | | |
