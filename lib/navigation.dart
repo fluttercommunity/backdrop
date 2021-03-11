@@ -43,33 +43,33 @@ class BackdropNavigationBackLayer extends StatelessWidget {
   final List<Widget> items;
 
   /// Callback that is called whenever a list item is tapped by the user.
-  final ValueChanged<int> onTap;
+  final ValueChanged<int>? onTap;
 
   /// Customizable separator used with [ListView.separated].
   @Deprecated("Replace by use of `separatorBuilder`."
       "This feature was deprecated after v0.4.2.")
-  final Widget separator;
+  final Widget? separator;
 
   /// Customizable separatorBuilder used with [ListView.separated].
-  final IndexedWidgetBuilder separatorBuilder;
+  final IndexedWidgetBuilder? separatorBuilder;
 
   /// Allows to set a [Padding] for each item of the list.
-  final EdgeInsetsGeometry itemPadding;
+  final EdgeInsetsGeometry? itemPadding;
 
   /// Sets a custom border on the list items' [InkWell].
   /// See [InkResponse.customBorder].
-  final ShapeBorder itemSplashBorder;
+  final ShapeBorder? itemSplashBorder;
 
   /// Sets a custom splash color on the list items. See [InkResponse.splashColor].
-  final Color itemSplashColor;
+  final Color? itemSplashColor;
 
   /// Creates an instance of [BackdropNavigationBackLayer] to be used with
   /// [BackdropScaffold].
   ///
   /// The argument [items] is required and must not be `null` and not empty.
   BackdropNavigationBackLayer({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
     this.onTap,
     this.separator,
     this.separatorBuilder,

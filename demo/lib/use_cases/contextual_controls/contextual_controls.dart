@@ -53,12 +53,12 @@ class _ContextualControlsState extends State<ContextualControls> {
               items: _COLOR_MAP.keys.map<DropdownMenuItem<Color>>((Color c) {
                 return DropdownMenuItem<Color>(
                   value: c,
-                  child: Text(_COLOR_MAP[c]),
+                  child: Text(_COLOR_MAP[c]!),
                 );
               }).toList(),
-              onChanged: (Color newValue) {
+              onChanged: (Color? newValue) {
                 setState(() {
-                  _color = newValue;
+                  _color = newValue!;
                 });
               },
             ),
@@ -99,9 +99,9 @@ class _ContextualControlsState extends State<ContextualControls> {
                   child: Text("${r.toString()} GB"),
                 );
               }).toList(),
-              onChanged: (int newValue) {
+              onChanged: (int? newValue) {
                 setState(() {
-                  _ram = newValue;
+                  _ram = newValue!;
                 });
               },
             ),
@@ -132,7 +132,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                   "Laptop",
                   style: Theme.of(context)
                       .textTheme
-                      .headline3
+                      .headline3!
                       .apply(color: Colors.black),
                 ),
               ],

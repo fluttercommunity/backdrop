@@ -55,7 +55,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// If this is `null` and if [BackdropAppBar.automaticallyImplyLeading] is
   /// set to `true`, [BackdropAppBar] sets the underlying [AppBar.leading] to
   /// [BackdropToggleButton].
-  final Widget leading;
+  final Widget? leading;
 
   /// See [AppBar.automaticallyImplyLeading].
   ///
@@ -67,16 +67,16 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
 
   /// The widget that should be displayed as the [AppBar] title.
-  final Widget title;
+  final Widget? title;
 
   /// See [AppBar.actions].
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   /// See [AppBar.flexibleSpace].
-  final Widget flexibleSpace;
+  final Widget? flexibleSpace;
 
   /// See [AppBar.bottom].
-  final PreferredSizeWidget bottom;
+  final PreferredSizeWidget? bottom;
 
   /// See [AppBar.elevation].
   ///
@@ -84,28 +84,28 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double elevation;
 
   /// See [AppBar.shape]
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// See [AppBar.backgroundColor].
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// See [AppBar.brightness].
-  final Brightness brightness;
+  final Brightness? brightness;
 
   /// See [AppBar.iconTheme].
-  final IconThemeData iconTheme;
+  final IconThemeData? iconTheme;
 
   /// See [AppBar.actionsIconTheme].
-  final IconThemeData actionsIconTheme;
+  final IconThemeData? actionsIconTheme;
 
   /// See [AppBar.textTheme].
-  final TextTheme textTheme;
+  final TextTheme? textTheme;
 
   /// See [AppBar.primary].
   final bool primary;
 
   /// See [AppBar.centerTitle].
-  final bool centerTitle;
+  final bool? centerTitle;
 
   /// See [AppBar.excludeHeaderSemantics].
   final bool excludeHeaderSemantics;
@@ -127,7 +127,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   ///
   /// For more information see [AppBar].
   BackdropAppBar({
-    Key key,
+    Key? key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
@@ -154,7 +154,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
         preferredSize = Size.fromHeight(
-            kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
+            kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
         super(key: key);
 
   @override
