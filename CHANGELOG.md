@@ -1,3 +1,9 @@
+## [0.6.0] - 11 March 2021
+
+* `pubspec`: revert `homepage` to github repo
+* `dart`: requires Dart >= 2.12 **BREAKING** [[#86](https://github.com/fluttercommunity/backdrop/pull/86)]
+* `dart`: opt-in for null safety [[#86](https://github.com/fluttercommunity/backdrop/pull/86)]
+
 ## [0.5.3] - 2 March 2021
 
 * `pubspec`: set `https://fluttercommunity.github.io/backdrop/` as "Home Page"
