@@ -211,6 +211,16 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] has been revealed.
   final VoidCallback? onBackLayerRevealed;
 
+  /// Specifies whether the state of the [backLayer] is maintained when it is
+  /// revealed and concealed.
+  ///
+  /// When true (default), the [backLayer] is kept in the tree while concealed.
+  /// When false, the [backLayer] is removed from the tree when concealed and
+  /// recreated when revealed.
+  ///
+  /// Defaults to `true`.
+  final bool maintainState;
+
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
 
   /// A key to use when building the [Scaffold].
@@ -327,6 +337,7 @@ class BackdropScaffold extends StatefulWidget {
     this.backLayerScrim = Colors.black54,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.maintainState = true,
     this.scaffoldKey,
     this.appBar,
     this.floatingActionButton,
@@ -592,7 +603,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   child: _MeasureSize(
                     onChange: (size) =>
                         setState(() => _backPanelHeight = size.height),
-                    child: widget.backLayer,
+                    child: !widget.maintainState && isBackLayerConcealed
+                        ? Container()
+                        : widget.backLayer,
                   ),
                 ),
               ],
