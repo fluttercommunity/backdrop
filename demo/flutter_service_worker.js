@@ -3,22 +3,22 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "manifest.json": "271b8530d16dbb3be037bb42fc624afd",
-"icons/Icon-192.png": "aea6534b0efc7a70aab2c16e6e2f984f",
+  "version.json": "1adda355e5f75eaa39a291a2f53fcffe",
 "icons/favicon.png": "ea4941744fe81b497d6b95490b622446",
+"icons/Icon-192.png": "aea6534b0efc7a70aab2c16e6e2f984f",
 "icons/Icon-512.png": "897db7c5bd562966057efd28ae8a8431",
-"assets/NOTICES": "f8b1d8a3c215ffa14c3ff5c28f658476",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/AssetManifest.json": "366165885791173c223e0ab1faa6b81c",
-"assets/lib/use_cases/contextual_info/contextual_info.dart": "1be6a01d9d88f7feccf50b68067e053d",
-"assets/lib/use_cases/contextual_controls/contextual_controls.dart": "ebaeb0898105c82033fc263d43ef8ad2",
-"assets/lib/use_cases/navigation/navigation.dart": "e270be145e21cdab8d11a12a9e918133",
+"manifest.json": "271b8530d16dbb3be037bb42fc624afd",
+"main.dart.js": "ef54b25c14abf333a5fe1eca2804e1b8",
+"assets/NOTICES": "f4fc4998c3f98c5132844831d8f184a9",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/lib/use_cases/filter/filter.dart": "f7e5c5e2b54632f227f657be531d0b18",
+"assets/lib/use_cases/contextual_controls/contextual_controls.dart": "ebaeb0898105c82033fc263d43ef8ad2",
+"assets/lib/use_cases/contextual_info/contextual_info.dart": "1be6a01d9d88f7feccf50b68067e053d",
+"assets/lib/use_cases/navigation/navigation.dart": "e270be145e21cdab8d11a12a9e918133",
+"assets/AssetManifest.json": "366165885791173c223e0ab1faa6b81c",
 "assets/FontManifest.json": "7b2a36307916a9721811788013e65289",
-"index.html": "ed0434fb9973872e0aaaa4a1ffd9ff68",
-"/": "ed0434fb9973872e0aaaa4a1ffd9ff68",
-"main.dart.js": "d183b693be835aa6978f81a84c8caf87",
-"version.json": "1adda355e5f75eaa39a291a2f53fcffe"
+"index.html": "629dcfd545886854a93fa3416823352b",
+"/": "629dcfd545886854a93fa3416823352b"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -36,7 +36,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
