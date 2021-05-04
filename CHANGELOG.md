@@ -1,3 +1,7 @@
+## [0.6.1] - 4 May 2021
+
+* `BackdropScaffold`: added `maintainBackLayerState` argument [[#93](https://github.com/fluttercommunity/backdrop/pull/93)]
+
 ## [0.6.0] - 11 March 2021
 
 * `pubspec`: revert `homepage` to github repo

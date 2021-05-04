@@ -4,7 +4,7 @@
 
 [![Demo](https://img.shields.io/badge/check-demo-blueviolet)](https://fluttercommunity.github.io/backdrop/demo/#/)
 [![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg)](#contributors-)
 [![pub.dev](https://img.shields.io/pub/v/backdrop?logo=dart)](https://pub.dev/packages/backdrop)
 [![pub points](https://badges.bar/backdrop/pub%20points)](https://pub.dev/packages/backdrop/score)
 [![popularity](https://badges.bar/backdrop/popularity)](https://pub.dev/packages/backdrop/score)
@@ -169,6 +169,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mockturtl"><img src="https://avatars0.githubusercontent.com/u/705804?v=4" width="100px;" alt=""/><br /><sub><b>mockturtl</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=mockturtl" title="Code">💻</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=mockturtl" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/rtr-dnd"><img src="https://avatars0.githubusercontent.com/u/19490811?v=4" width="100px;" alt=""/><br /><sub><b>ritar</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=is%3Aissue+rtr-dnd" title="Bug reports">🐛</a></td>  
     <td align="center"><a href="https://github.com/LorenzoVianello"><img src="https://avatars0.githubusercontent.com/u/32164824?v=4" width="100px;" alt=""/><br /><sub><b>LorenzoVianello</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=is%3Aissue+LorenzoVianello" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/ScottMacDougall"><img src="https://avatars0.githubusercontent.com/u/1026653?v=4" width="100px;" alt=""/><br /><sub><b>Scott</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=ScottMacDougall" title="Code">💻</a></td>
   </tr>
 </table>
 
