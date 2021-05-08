@@ -213,6 +213,16 @@
       "symbol": "🐛",
       "description": "Bug",
       "link": "https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=<%= contributor.login %>"
+    },
+    "example": {
+      "symbol": "💡",
+      "description": "Examples",
+      "link": "https://fluttercommunity.github.io/backdrop/demo/#/"
+    },
+    "infra": {
+      "symbol": "🚇",
+      "description": "Infrastructure",
+      "link": "https://github.com/fluttercommunity/backdrop/tree/master/.github/workflows/"
     }
   }
 }
