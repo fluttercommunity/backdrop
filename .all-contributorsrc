@@ -36,7 +36,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/64806665?v=4",
       "profile": "https://bringmos.com/",
       "contributions": [
-        "bug"
+        "bug_gitlab"
       ]
     },
     {
@@ -45,7 +45,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/8867023?v=4",
       "profile": "https://github.com/gspencergoog",
       "contributions": [
-        "bug"
+        "bug_gitlab"
       ]
     },
     {
@@ -64,7 +64,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/8888204?v=4",
       "profile": "https://github.com/heath3n",
       "contributions": [
-        "bug"
+        "bug_gitlab"
       ]
     },
     {
@@ -189,6 +189,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "ScottMacDougall",
+      "name": "Scott",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1026653?v=4",
+      "profile": "https://github.com/ScottMacDougall",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -198,5 +207,12 @@
   "repoHost": "https://github.com",
   "badgeTemplate": "<a href=\"#contributors-\"><img src=\"https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg\" alt=\"All Contributors\" /></a>",
   "skipCi": true,
-  "commitConvention": "none"
+  "commitConvention": "none",
+  "types": {
+    "bug_gitlab": {
+      "symbol": "🐛",
+      "description": "Bug",
+      "link": "https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=<%= contributor.login %>"
+    }
+  }
 }
