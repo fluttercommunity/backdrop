@@ -2,23 +2,25 @@
 
 # backdrop
 
-[![Demo](https://img.shields.io/badge/check-demo-blueviolet)](https://fluttercommunity.github.io/backdrop/demo/#/)
-[![Gitter](https://badges.gitter.im/flutter-backdrop/community.svg)](https://gitter.im/flutter-backdrop/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<p>
+<a href="https://fluttercommunity.github.io/backdrop/demo/#/"><img src="https://img.shields.io/badge/check-demo-blueviolet" alt="Demo"></a>
+<a href="https://gitter.im/flutter-backdrop/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/flutter-backdrop/community.svg" alt="Gitter"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg)](#contributors-)
+<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square" alt="All Contributors" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg)](#contributors-)
-[![pub.dev](https://img.shields.io/pub/v/backdrop?logo=dart)](https://pub.dev/packages/backdrop)
-[![pub points](https://badges.bar/backdrop/pub%20points)](https://pub.dev/packages/backdrop/score)
-[![popularity](https://badges.bar/backdrop/popularity)](https://pub.dev/packages/backdrop/score)
-[![likes](https://badges.bar/backdrop/likes)](https://pub.dev/packages/backdrop/score)
-[![analysis](https://github.com/fluttercommunity/backdrop/workflows/analysis/badge.svg)](https://github.com/fluttercommunity/backdrop/actions?query=workflow%3Aanalysis)
-[![GitHub issues](https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/issues)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github)](https://github.com/fluttercommunity/backdrop/milestone/1)
-[![GitHub stars](https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/fluttercommunity/backdrop?logo=github)](https://github.com/fluttercommunity/backdrop/network)
-[![Gitlab stars](https://img.shields.io/badge/dynamic/json?label=stars&query=%24.star_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/starrers)
-[![Gitlab forks](https://img.shields.io/badge/dynamic/json?label=forks&query=%24.forks_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&logo=gitlab)](https://gitlab.com/daadu/backdrop/-/forks)
+<a href="https://pub.dev/packages/backdrop"><img src="https://img.shields.io/pub/v/backdrop?logo=dart" alt="pub.dev"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/pub%20points" alt="pub points"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/popularity" alt="popularity"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/likes" alt="likes"></a>
+<a href="https://github.com/fluttercommunity/backdrop/actions?query=workflow%3Aanalysis"><img src="https://github.com/fluttercommunity/backdrop/workflows/analysis/badge.svg" alt="analysis"></a>
+<a href="https://github.com/fluttercommunity/backdrop/issues"><img src="https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github" alt="GitHub issues"></a>
+<a href="https://github.com/fluttercommunity/backdrop/milestone/1"><img src="https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github" alt="GitHub milestone"></a>
+<a href="https://github.com/fluttercommunity/backdrop/stargazers"><img src="https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github" alt="GitHub stars"></a>
+<a href="https://github.com/fluttercommunity/backdrop/network"><img src="https://img.shields.io/github/forks/fluttercommunity/backdrop?logo=github" alt="GitHub forks"></a>
+<a href="https://gitlab.com/daadu/backdrop/-/starrers"><img src="https://img.shields.io/badge/dynamic/json?label=stars&amp;query=%24.star_count&amp;url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&amp;logo=gitlab" alt="Gitlab stars"></a>
+<a href="https://gitlab.com/daadu/backdrop/-/forks"><img src="https://img.shields.io/badge/dynamic/json?label=forks&amp;query=%24.forks_count&amp;url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&amp;logo=gitlab" alt="Gitlab forks"></a>
+</p>
+
 
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
@@ -151,10 +153,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://bhikadia.com"><img src="https://avatars1.githubusercontent.com/u/4963236?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harsh Bhikadia</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=daadu" title="Code">💻</a> <a href="#ideas-daadu" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/fluttercommunity/backdrop/pulls?q=is%3Apr+reviewed-by%3Adaadu" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/WieFel"><img src="https://avatars0.githubusercontent.com/u/8345062?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Felix</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=WieFel" title="Code">💻</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=WieFel" title="Documentation">📖</a> <a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3AWieFel" title="Bug reports">🐛</a> <a href="https://github.com/fluttercommunity/backdrop/pulls?q=is%3Apr+reviewed-by%3AWieFel" title="Reviewed Pull Requests">👀</a> <a href="#example-WieFel" title="Examples">💡</a> <a href="#infra-WieFel" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://bringmos.com/"><img src="https://avatars0.githubusercontent.com/u/64806665?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bringmos</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=bringmos" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/gspencergoog"><img src="https://avatars0.githubusercontent.com/u/8867023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Greg Spencer</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=gspencergoog" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://bringmos.com/"><img src="https://avatars0.githubusercontent.com/u/64806665?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bringmos</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Abringmos" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/gspencergoog"><img src="https://avatars0.githubusercontent.com/u/8867023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Greg Spencer</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Agspencergoog" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/cicelcup"><img src="https://avatars0.githubusercontent.com/u/48078472?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jorge A Peroza M</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Acicelcup" title="Bug reports">🐛</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=cicelcup" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/heath3n"><img src="https://avatars0.githubusercontent.com/u/8888204?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matt Newell</b></sub></a><br /><a href="https://gitlab.com/daadu/backdrop/-/issues?scope=all&utf8=%E2%9C%93&state=all&author_username=heath3n" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/heath3n"><img src="https://avatars0.githubusercontent.com/u/8888204?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matt Newell</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Aheath3n" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://danielborges93.com/"><img src="https://avatars0.githubusercontent.com/u/1283243?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Borges</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Adanielborges93" title="Bug reports">🐛</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=danielborges93" title="Code">💻</a></td>
   </tr>
   <tr>
@@ -172,7 +174,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mockturtl"><img src="https://avatars0.githubusercontent.com/u/705804?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mockturtl</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=mockturtl" title="Code">💻</a> <a href="https://github.com/fluttercommunity/backdrop/commits?author=mockturtl" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/rtr-dnd"><img src="https://avatars0.githubusercontent.com/u/19490811?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ritar</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Artr-dnd" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/LorenzoVianello"><img src="https://avatars0.githubusercontent.com/u/32164824?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LorenzoVianello</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3ALorenzoVianello" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/ScottMacDougall"><img src="https://avatars0.githubusercontent.com/u/1026653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Scott</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=ScottMacDougall" title="Code">💻</a></td>
   </tr>
 </table>
 
