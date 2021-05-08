@@ -9,7 +9,7 @@
       "login": "daadu",
       "name": "Harsh Bhikadia",
       "avatar_url": "https://avatars1.githubusercontent.com/u/4963236?v=4",
-      "profile": "http://bhikadia.com",
+      "profile": "https://bhikadia.com",
       "contributions": [
         "code",
         "ideas",
@@ -18,7 +18,7 @@
     },
     {
       "login": "WieFel",
-      "name": "WieFel",
+      "name": "Felix",
       "avatar_url": "https://avatars0.githubusercontent.com/u/8345062?v=4",
       "profile": "https://github.com/WieFel",
       "contributions": [
@@ -31,19 +31,19 @@
       ]
     },
     {
-      "login": "gspencergoog",
-      "name": "Greg Spencer",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/8867023?v=4",
-      "profile": "https://github.com/gspencergoog",
+      "login": "bringmos",
+      "name": "Bringmos",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/64806665?v=4",
+      "profile": "https://bringmos.com/",
       "contributions": [
         "bug"
       ]
     },
     {
-      "login": "bringmos",
-      "name": "Bringmos",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/64806665?v=4",
-      "profile": "https://bringmos.com/",
+      "login": "gspencergoog",
+      "name": "Greg Spencer",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8867023?v=4",
+      "profile": "https://github.com/gspencergoog",
       "contributions": [
         "bug"
       ]
@@ -71,7 +71,7 @@
       "login": "danielborges93",
       "name": "Daniel Borges",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1283243?v=4",
-      "profile": "http://danielborges93.com/",
+      "profile": "https://danielborges93.com/",
       "contributions": [
         "bug",
         "code"
@@ -108,7 +108,7 @@
     },
     {
       "login": "iLDA1997",
-      "name": "PembaTamang",
+      "name": "Danial Agh",
       "avatar_url": "https://avatars0.githubusercontent.com/u/27288368?v=4",
       "profile": "https://github.com/iLDA1997",
       "contributions": [
@@ -198,12 +198,14 @@
       "contributions": [
         "code"
       ]
-    },
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "backdrop",
   "projectOwner": "fluttercommunity",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg)](#contributors-)",
+  "skipCi": true,
+  "commitConvention": "none"
 }
