@@ -198,6 +198,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sachin-dahal",
+      "name": "Sachin Dahal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56621935?v=4",
+      "profile": "https://github.com/sachin-dahal",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
