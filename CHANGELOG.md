@@ -1,3 +1,10 @@
+## [0.6.2] - 28 June 2021
+
+* doc: "all-contributors" generated through CLI
+* doc(readme): minor - using HTML badges instead of MD
+* ci(analysis): upgraded analyzer action to v3
+* doc(readme): GIF for `BackdropScaffold` example updated 
+
 ## [0.6.1] - 4 May 2021
 
 * `BackdropScaffold`: added `maintainBackLayerState` argument [[#93](https://github.com/fluttercommunity/backdrop/pull/93)]
