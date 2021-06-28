@@ -6,7 +6,7 @@
 <a href="https://fluttercommunity.github.io/backdrop/demo/#/"><img src="https://img.shields.io/badge/check-demo-blueviolet" alt="Demo"></a>
 <a href="https://gitter.im/flutter-backdrop/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/flutter-backdrop/community.svg" alt="Gitter"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-20-orange.svg" alt="All Contributors" /></a>
+<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-21-orange.svg" alt="All Contributors" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://pub.dev/packages/backdrop"><img src="https://img.shields.io/pub/v/backdrop?logo=dart" alt="pub.dev"></a>
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/pub%20points" alt="pub points"></a>
@@ -175,6 +175,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/rtr-dnd"><img src="https://avatars0.githubusercontent.com/u/19490811?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ritar</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Artr-dnd" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/LorenzoVianello"><img src="https://avatars0.githubusercontent.com/u/32164824?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LorenzoVianello</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3ALorenzoVianello" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/ScottMacDougall"><img src="https://avatars0.githubusercontent.com/u/1026653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Scott</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=ScottMacDougall" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sachin-dahal"><img src="https://avatars.githubusercontent.com/u/56621935?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sachin Dahal</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=sachin-dahal" title="Documentation">📖</a></td>
   </tr>
 </table>
 
