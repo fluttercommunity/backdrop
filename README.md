@@ -3,16 +3,17 @@
 # backdrop
 
 <p>
+<a href="https://pub.dev/packages/backdrop"><img src="https://img.shields.io/pub/v/backdrop?logo=dart" alt="pub.dev"></a>
+<a href="https://github.com/fluttercommunity/backdrop/actions?query=workflow%3Aanalysis"><img src="https://github.com/fluttercommunity/backdrop/workflows/analysis/badge.svg" alt="analysis"></a>
 <a href="https://fluttercommunity.github.io/backdrop/demo/#/"><img src="https://img.shields.io/badge/check-demo-blueviolet" alt="Demo"></a>
+<a href="https://github.com/Solido/awesome-flutter"><img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true" /></a>  
 <a href="https://gitter.im/flutter-backdrop/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/flutter-backdrop/community.svg" alt="Gitter"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-21-orange.svg" alt="All Contributors" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-<a href="https://pub.dev/packages/backdrop"><img src="https://img.shields.io/pub/v/backdrop?logo=dart" alt="pub.dev"></a>
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/pub%20points" alt="pub points"></a>
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/popularity" alt="popularity"></a>
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/likes" alt="likes"></a>
-<a href="https://github.com/fluttercommunity/backdrop/actions?query=workflow%3Aanalysis"><img src="https://github.com/fluttercommunity/backdrop/workflows/analysis/badge.svg" alt="analysis"></a>
 <a href="https://github.com/fluttercommunity/backdrop/issues"><img src="https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github" alt="GitHub issues"></a>
 <a href="https://github.com/fluttercommunity/backdrop/milestone/1"><img src="https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github" alt="GitHub milestone"></a>
 <a href="https://github.com/fluttercommunity/backdrop/stargazers"><img src="https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github" alt="GitHub stars"></a>
