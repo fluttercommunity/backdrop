@@ -682,17 +682,15 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             ),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return Container(
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  _buildBackPanel(),
-                  PositionedTransition(
-                    rect: _getPanelAnimation(context, constraints),
-                    child: _buildFrontPanel(context),
-                  ),
-                ],
-              ),
+            return Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                _buildBackPanel(),
+                PositionedTransition(
+                  rect: _getPanelAnimation(context, constraints),
+                  child: _buildFrontPanel(context),
+                ),
+              ],
             );
           },
         ),
