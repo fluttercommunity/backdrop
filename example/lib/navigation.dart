@@ -1,16 +1,18 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [Widget1(), Widget2()];
+  final List<Widget> _pages = [const Widget1(), const Widget2()];
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class Widget1 extends StatelessWidget {
+  const Widget1({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const Center(child: Text("Widget 1"));
@@ -48,6 +52,8 @@ class Widget1 extends StatelessWidget {
 }
 
 class Widget2 extends StatelessWidget {
+  const Widget2({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const Center(child: Text("Widget 2"));

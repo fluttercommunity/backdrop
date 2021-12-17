@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 
 /// Contextual info preview app.
 class ContextualInfo extends StatelessWidget {
+  const ContextualInfo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Theme(

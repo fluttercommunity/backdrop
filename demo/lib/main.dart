@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:gallerize/gallerize.dart';
 import 'package:gallerize/themes/gallerize_theme_data.dart';
 
-void main() => runApp(DemoApp());
+void main() => runApp(const DemoApp());
 
 /// Demo app that provides a show-case of different backdrop use cases.
 class DemoApp extends StatelessWidget {
+  const DemoApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +25,8 @@ class DemoApp extends StatelessWidget {
 
 /// The home page of the demo app showing a selection of use cases.
 class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
+
   List<UseCase> _useCases = [
     ContextualInfoUseCase(),
     ContextualControlsUseCase(),

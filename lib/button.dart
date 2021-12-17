@@ -39,9 +39,10 @@ class BackdropToggleButton extends StatelessWidget {
 
   /// Creates an instance of [BackdropToggleButton].
   const BackdropToggleButton({
+    Key? key,
     this.icon = AnimatedIcons.close_menu,
     this.color = Colors.white,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

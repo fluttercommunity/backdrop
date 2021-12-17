@@ -1,10 +1,12 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 /// Showcase for a Material Backdrop acting as a menu.
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }

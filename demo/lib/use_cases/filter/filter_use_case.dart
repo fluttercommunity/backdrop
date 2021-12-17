@@ -10,6 +10,6 @@ class FilterUseCase extends UseCase {
         "The backdrop's back layer can be used to filter the content displayed "
         "on the front layer.";
     codeFile = "lib/use_cases/filter/filter.dart";
-    preview = Filter();
+    preview = const Filter();
   }
 }

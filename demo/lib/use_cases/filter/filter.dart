@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 /// Filter preview app.
 class Filter extends StatefulWidget {
+  const Filter({Key? key}) : super(key: key);
+
   @override
   _FilterState createState() => _FilterState();
 }
