@@ -69,8 +69,7 @@ class BackdropSubHeader extends StatelessWidget {
     this.automaticallyImplyTrailing = true,
     this.leading,
     this.trailing,
-  })  : assert(title != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
