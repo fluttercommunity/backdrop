@@ -11,6 +11,7 @@ void main() => runApp(const DemoApp());
 
 /// Demo app that provides a show-case of different backdrop use cases.
 class DemoApp extends StatelessWidget {
+  /// Default constructor for [DemoApp].
   const DemoApp({Key? key}) : super(key: key);
 
   @override
@@ -18,14 +19,14 @@ class DemoApp extends StatelessWidget {
     return MaterialApp(
       title: "Backdrop Gallery",
       theme: GallerizeThemeData.darkThemeData,
-      home: HomePage(),
+      home: _HomePage(),
     );
   }
 }
 
 /// The home page of the demo app showing a selection of use cases.
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+class _HomePage extends StatelessWidget {
+  _HomePage({Key? key}) : super(key: key);
 
   List<UseCase> _useCases = [
     ContextualInfoUseCase(),

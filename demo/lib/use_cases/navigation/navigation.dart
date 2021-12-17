@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Navigation preview app.
 class Navigation extends StatefulWidget {
+  /// Default constructor for [Navigation].
   const Navigation({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +12,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [const HomePage(), const ItemsPage()];
+  final List<Widget> _pages = [const _HomePage(), const _ItemsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +51,8 @@ class _NavigationState extends State<Navigation> {
 }
 
 /// Home page of the online shop.
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class _HomePage extends StatelessWidget {
+  const _HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +81,8 @@ class HomePage extends StatelessWidget {
 }
 
 /// Items page showing the online shop's products.
-class ItemsPage extends StatelessWidget {
-  const ItemsPage({Key? key}) : super(key: key);
+class _ItemsPage extends StatelessWidget {
+  const _ItemsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ void main() => runApp(const MyApp());
 
 /// Showcase for a Material Backdrop acting as a menu.
 class MyApp extends StatefulWidget {
+  /// Default constructor for [MyApp].
   const MyApp({Key? key}) : super(key: key);
 
   @override

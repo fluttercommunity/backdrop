@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
+/// Example app for demoing [BackdropScaffold]
 class MyApp extends StatelessWidget {
+  /// Default constructor for [MyApp].
   const MyApp({Key? key}) : super(key: key);
 
   @override

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
+/// Example app for demoing [BackdropNavigationBackLayer]
 class MyApp extends StatefulWidget {
+  /// Default constructor for [MyApp].
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -12,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [const Widget1(), const Widget2()];
+  final List<Widget> _pages = [const _Widget1(), const _Widget2()];
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,8 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Widget1 extends StatelessWidget {
-  const Widget1({Key? key}) : super(key: key);
+class _Widget1 extends StatelessWidget {
+  const _Widget1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,8 @@ class Widget1 extends StatelessWidget {
   }
 }
 
-class Widget2 extends StatelessWidget {
-  const Widget2({Key? key}) : super(key: key);
+class _Widget2 extends StatelessWidget {
+  const _Widget2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

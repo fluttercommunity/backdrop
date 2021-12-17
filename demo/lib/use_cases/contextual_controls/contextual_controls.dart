@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Contextual controls preview app.
 class ContextualControls extends StatefulWidget {
+  /// Default constructor for [ContextualControls].
   const ContextualControls({Key? key}) : super(key: key);
 
   @override
