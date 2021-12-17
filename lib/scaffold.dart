@@ -24,7 +24,7 @@ class Backdrop extends InheritedWidget {
   final BackdropScaffoldState data;
 
   /// Creates a [Backdrop] instance.
-  Backdrop({Key? key, required this.data, required Widget child})
+  const Backdrop({Key? key, required this.data, required Widget child})
       : super(key: key, child: child);
 
   /// Provides access to the state from everywhere in the widget tree.
@@ -32,7 +32,7 @@ class Backdrop extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<Backdrop>()!.data;
 
   @override
-  bool updateShouldNotify(Backdrop old) => true;
+  bool updateShouldNotify(Backdrop oldWidget) => true;
 }
 
 /// Implements the basic functionality of backdrop.
@@ -153,15 +153,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `false`.
   final bool revealBackLayerAtStart;
 
-  /// The animation curve passed to [Tween.animate] when triggering
-  /// the backdrop animation.
+  /// The animation curve used for the backdrop animation.
   ///
   /// Defaults to [Curves.ease].
   final Curve animationCurve;
 
-  /// The reverse animation curve passed to [Tween.animate].
+  /// The reverse animation curve used for the backdrop animation.
   ///
-  /// If not set, [animationCurve.flipped] is used.
+  /// If not set, [Curve.flipped] member of [animationCurve] is used.
   final Curve? reverseAnimationCurve;
 
   /// Background [Color] for the back layer.
@@ -413,7 +412,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         widget.controller ??
         AnimationController(
           vsync: this,
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
 
@@ -673,26 +672,24 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             AppBar(
               title: widget.title,
               actions: widget.iconPosition == BackdropIconPosition.action
-                  ? <Widget>[BackdropToggleButton()] + widget.actions
+                  ? <Widget>[const BackdropToggleButton()] + widget.actions
                   : widget.actions,
               elevation: 0,
               leading: widget.iconPosition == BackdropIconPosition.leading
-                  ? BackdropToggleButton()
+                  ? const BackdropToggleButton()
                   : null,
             ),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return Container(
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  _buildBackPanel(),
-                  PositionedTransition(
-                    rect: _getPanelAnimation(context, constraints),
-                    child: _buildFrontPanel(context),
-                  ),
-                ],
-              ),
+            return Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                _buildBackPanel(),
+                PositionedTransition(
+                  rect: _getPanelAnimation(context, constraints),
+                  child: _buildFrontPanel(context),
+                ),
+              ],
             );
           },
         ),

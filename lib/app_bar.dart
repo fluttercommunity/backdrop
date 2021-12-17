@@ -1,4 +1,5 @@
 import 'package:backdrop/button.dart';
+import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 
 /// Deprecated. Not needed anymore when [BackdropAppBar] is used.
@@ -25,7 +26,7 @@ enum BackdropIconPosition {
 /// [AppBar] class.
 ///
 /// What differs from the [AppBar] implementation is the behaviour of
-/// [BackdropScaffold.leading] and [BackdropScaffold.automaticallyImplyLeading].
+/// [BackdropAppBar.leading] and [BackdropAppBar.automaticallyImplyLeading].
 ///
 /// Usage example:
 /// ```dart
@@ -147,12 +148,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
-  })  : assert(automaticallyImplyLeading != null),
-        assert(elevation == null || elevation >= 0.0),
-        assert(primary != null),
-        assert(titleSpacing != null),
-        assert(toolbarOpacity != null),
-        assert(bottomOpacity != null),
+  })  : assert(elevation >= 0.0),
         preferredSize = Size.fromHeight(
             kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
         super(key: key);
@@ -161,7 +157,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: leading ??
-          (automaticallyImplyLeading ? BackdropToggleButton() : null),
+          (automaticallyImplyLeading ? const BackdropToggleButton() : null),
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: title,
       actions: actions,

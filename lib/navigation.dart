@@ -76,8 +76,7 @@ class BackdropNavigationBackLayer extends StatelessWidget {
     this.itemPadding,
     this.itemSplashBorder,
     this.itemSplashColor,
-  })  : assert(items != null),
-        assert(items.isNotEmpty),
+  })  : assert(items.isNotEmpty),
         super(key: key);
 
   @override

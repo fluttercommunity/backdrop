@@ -11,6 +11,6 @@ class NavigationUseCase extends UseCase {
         "The back layer shows the navigation options and upon selecting any "
         "one, the front layer changes its content.";
     codeFile = "lib/use_cases/navigation/navigation.dart";
-    preview = Navigation();
+    preview = const Navigation();
   }
 }

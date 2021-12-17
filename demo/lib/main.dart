@@ -7,23 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:gallerize/gallerize.dart';
 import 'package:gallerize/themes/gallerize_theme_data.dart';
 
-void main() => runApp(DemoApp());
+void main() => runApp(const DemoApp());
 
 /// Demo app that provides a show-case of different backdrop use cases.
 class DemoApp extends StatelessWidget {
+  /// Default constructor for [DemoApp].
+  const DemoApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Backdrop Gallery",
       theme: GallerizeThemeData.darkThemeData,
-      home: HomePage(),
+      home: _HomePage(),
     );
   }
 }
 
 /// The home page of the demo app showing a selection of use cases.
-class HomePage extends StatelessWidget {
-  List<UseCase> _useCases = [
+class _HomePage extends StatelessWidget {
+  _HomePage({Key? key}) : super(key: key);
+
+  final _useCases = <UseCase>[
     ContextualInfoUseCase(),
     ContextualControlsUseCase(),
     NavigationUseCase(),
@@ -34,16 +39,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Backdrop Gallery"),
+        title: const Text("Backdrop Gallery"),
       ),
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(16.0),
-            child:
-                Text("This app shows some use cases for the backdrop widget. "
-                    "Open any one to show information about it, preview it and "
-                    "look at its code."),
+            margin: const EdgeInsets.all(16.0),
+            child: const Text(
+                "This app shows some use cases for the backdrop widget. "
+                "Open any one to show information about it, preview it and "
+                "look at its code."),
           ),
           ListView.separated(
             itemCount: _useCases.length,
@@ -52,7 +57,7 @@ class HomePage extends StatelessWidget {
               onTap: () => _openDemoPage(context, _useCases[index]),
             ),
             shrinkWrap: true,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => const Divider(),
           ),
         ],
       ),

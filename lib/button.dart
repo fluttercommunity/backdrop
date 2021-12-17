@@ -1,3 +1,4 @@
+import 'package:backdrop/app_bar.dart';
 import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -39,9 +40,10 @@ class BackdropToggleButton extends StatelessWidget {
 
   /// Creates an instance of [BackdropToggleButton].
   const BackdropToggleButton({
+    Key? key,
     this.icon = AnimatedIcons.close_menu,
     this.color = Colors.white,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
