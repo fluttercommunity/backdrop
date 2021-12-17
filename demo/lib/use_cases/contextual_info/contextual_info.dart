@@ -1,7 +1,5 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 
 /// Contextual info preview app.
 class ContextualInfo extends StatelessWidget {
