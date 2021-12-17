@@ -135,10 +135,9 @@ Check proposal documents for [v1.0](https://github.com/fluttercommunity/backdrop
 2. Fork the [repository](https://github.com/fluttercommunity/backdrop).
 3. Pick an issue to work on from [issue tracker](https://github.com/fluttercommunity/backdrop/issues).
 4. Implement it.
-5. Add your name and email in `authors` section in `pubspec.yaml` file.
-6. Send merge request.
-7. Star this project.
-8. Become a hero!!
+5. Send merge request.
+6. Star this project.
+7. Become a hero!!
 
 ## Features and bugs
 Please file feature requests and bugs at the [issue tracker](https://github.com/fluttercommunity/backdrop/issues).
