@@ -145,7 +145,7 @@ class ContextualInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Builder(
-                    builder: (context) => RaisedButton(
+                    builder: (context) => ElevatedButton(
                       child: const Text("More about this product"),
                       onPressed: () => Backdrop.of(context).fling(),
                     ),

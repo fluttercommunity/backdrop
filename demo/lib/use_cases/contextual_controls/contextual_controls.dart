@@ -222,7 +222,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Builder(
-                    builder: (context) => RaisedButton(
+                    builder: (context) => ElevatedButton(
                       child: const Text("Configure"),
                       onPressed: () => Backdrop.of(context).fling(),
                     ),
