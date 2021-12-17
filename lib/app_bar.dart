@@ -1,4 +1,5 @@
 import 'package:backdrop/button.dart';
+import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 
 /// Deprecated. Not needed anymore when [BackdropAppBar] is used.
@@ -25,7 +26,7 @@ enum BackdropIconPosition {
 /// [AppBar] class.
 ///
 /// What differs from the [AppBar] implementation is the behaviour of
-/// [BackdropScaffold.leading] and [BackdropScaffold.automaticallyImplyLeading].
+/// [BackdropAppBar.leading] and [BackdropAppBar.automaticallyImplyLeading].
 ///
 /// Usage example:
 /// ```dart

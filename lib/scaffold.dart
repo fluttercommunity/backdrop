@@ -153,15 +153,14 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `false`.
   final bool revealBackLayerAtStart;
 
-  /// The animation curve passed to [Tween.animate] when triggering
-  /// the backdrop animation.
+  /// The animation curve used for the backdrop animation.
   ///
   /// Defaults to [Curves.ease].
   final Curve animationCurve;
 
-  /// The reverse animation curve passed to [Tween.animate].
+  /// The reverse animation curve used for the backdrop animation.
   ///
-  /// If not set, [animationCurve.flipped] is used.
+  /// If not set, [Curve.flipped] member of [animationCurve] is used.
   final Curve? reverseAnimationCurve;
 
   /// Background [Color] for the back layer.
