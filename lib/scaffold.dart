@@ -24,7 +24,7 @@ class Backdrop extends InheritedWidget {
   final BackdropScaffoldState data;
 
   /// Creates a [Backdrop] instance.
-  Backdrop({Key? key, required this.data, required Widget child})
+  const Backdrop({Key? key, required this.data, required Widget child})
       : super(key: key, child: child);
 
   /// Provides access to the state from everywhere in the widget tree.
@@ -413,7 +413,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         widget.controller ??
         AnimationController(
           vsync: this,
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
 
@@ -673,11 +673,11 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             AppBar(
               title: widget.title,
               actions: widget.iconPosition == BackdropIconPosition.action
-                  ? <Widget>[BackdropToggleButton()] + widget.actions
+                  ? <Widget>[const BackdropToggleButton()] + widget.actions
                   : widget.actions,
               elevation: 0,
               leading: widget.iconPosition == BackdropIconPosition.leading
-                  ? BackdropToggleButton()
+                  ? const BackdropToggleButton()
                   : null,
             ),
         body: LayoutBuilder(

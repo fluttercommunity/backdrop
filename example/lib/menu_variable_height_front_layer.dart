@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       10,
       (i) => ListTile(
           title: Text('Menu: open page #$i',
-              style: TextStyle(color: Colors.white))));
+              style: const TextStyle(color: Colors.white))));
 
   double get _heightFactor => _currentIndex == 0 ? 1 : (.1 * _currentIndex);
 
@@ -29,18 +29,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-          appBar: BackdropAppBar(title: Text("AppBar is OK 👍")),
+          appBar: BackdropAppBar(title: const Text("AppBar is OK 👍")),
           frontLayer: _pages[_currentIndex],
           stickyFrontLayer: true,
           backLayerScrim: Colors.red.withOpacity(0.5),
           frontLayerScrim: Colors.green.withOpacity(0.5),
           frontLayerActiveFactor: _heightFactor,
-          subHeader: BackdropSubHeader(title: Text('Subheader')),
+          subHeader: const BackdropSubHeader(title: Text('Subheader')),
           backLayer: BackdropNavigationBackLayer(
               items: _nav,
               onTap: (int position) =>
                   {setState(() => _currentIndex = position)},
-              separatorBuilder: (_, __) => _MyDivider())));
+              separatorBuilder: (_, __) => const _MyDivider())));
 }
 
 class _MyDivider extends StatelessWidget {
@@ -48,7 +48,7 @@ class _MyDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Divider(indent: 16, endIndent: 16, color: Colors.white);
+      const Divider(indent: 16, endIndent: 16, color: Colors.white);
 }
 
 /// When the front layer doesn't have much content, its height while revealed
@@ -56,7 +56,7 @@ class _MyDivider extends StatelessWidget {
 class _ShortPage extends StatelessWidget {
   final int index;
 
-  _ShortPage(this.index);
+  const _ShortPage(this.index);
 
   @override
   Widget build(BuildContext context) => Center(
@@ -66,9 +66,9 @@ class _ShortPage extends StatelessWidget {
               children: [
             Text("Page #$index is open with desired height."),
             const Flexible(child: FractionallySizedBox(heightFactor: 0.1)),
-            Text("It looks better! 😄"),
+            const Text("It looks better! 😄"),
             const Flexible(child: FractionallySizedBox(heightFactor: 0.1)),
-            Text("But Page #0 still needs to be tall."),
+            const Text("But Page #0 still needs to be tall."),
           ]));
 }
 
@@ -78,7 +78,7 @@ class _TallPage extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
       children: List.generate(
           20,
-          (index) => Padding(
-              padding: const EdgeInsets.all(16),
+          (index) => const Padding(
+              padding: EdgeInsets.all(16),
               child: Text("Tall page #0, lots of content 👍"))));
 }

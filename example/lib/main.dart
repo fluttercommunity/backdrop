@@ -16,20 +16,20 @@ class MyApp extends StatelessWidget {
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Backdrop Example"),
-          actions: <Widget>[
+          title: const Text("Backdrop Example"),
+          actions: const <Widget>[
             BackdropToggleButton(
               icon: AnimatedIcons.list_view,
             )
           ],
         ),
-        backLayer: Center(
+        backLayer: const Center(
           child: Text("Back Layer"),
         ),
-        subHeader: BackdropSubHeader(
+        subHeader: const BackdropSubHeader(
           title: Text("Sub Header"),
         ),
-        frontLayer: Center(
+        frontLayer: const Center(
           child: Text("Front Layer"),
         ),
       ),

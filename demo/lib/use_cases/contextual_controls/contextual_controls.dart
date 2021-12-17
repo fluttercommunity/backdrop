@@ -26,7 +26,7 @@ class _ContextualControlsState extends State<ContextualControls> {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Contextual Controls Example"),
+          title: const Text("Contextual Controls Example"),
           automaticallyImplyLeading: false,
         ),
         backLayer: _createBackLayer(context),
@@ -41,7 +41,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Color",
                 ),
@@ -66,7 +66,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
               leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text("Resolution"),
                 ],
               ),
@@ -86,7 +86,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("RAM"),
               ],
             ),
@@ -108,7 +108,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ),
           Builder(
               builder: (context) => MaterialButton(
-                    child: Text("Return to product page"),
+                    child: const Text("Return to product page"),
                     onPressed: () => Backdrop.of(context).fling(),
                   ))
         ],
@@ -116,7 +116,7 @@ class _ContextualControlsState extends State<ContextualControls> {
       );
 
   Widget _createFrontLayer(BuildContext context) => Container(
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Row(
@@ -138,13 +138,13 @@ class _ContextualControlsState extends State<ContextualControls> {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
@@ -152,7 +152,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                       Icon(Icons.star_half, color: Colors.grey),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "73 Reviews",
                     style: TextStyle(color: Colors.grey),
                   )
@@ -163,13 +163,13 @@ class _ContextualControlsState extends State<ContextualControls> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Price",
                   style: TextStyle(color: Colors.grey),
                 ),
                 Container(
-                  margin: EdgeInsets.all(8.0),
-                  child: Text(
+                  margin: const EdgeInsets.all(8.0),
+                  child: const Text(
                     "\$999",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -177,7 +177,7 @@ class _ContextualControlsState extends State<ContextualControls> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: 32.0, left: 8.0, right: 8.0, bottom: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -185,17 +185,17 @@ class _ContextualControlsState extends State<ContextualControls> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Resolution")],
+                    children: const [Text("Resolution")],
                   ),
                   Text(
                     "${_resolution.toString()}\"",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: 8.0, left: 8.0, right: 8.0, bottom: 32.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -203,24 +203,24 @@ class _ContextualControlsState extends State<ContextualControls> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("RAM")],
+                    children: const [Text("RAM")],
                   ),
                   Text(
                     "${_ram.toString()} GB",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Builder(
                     builder: (context) => RaisedButton(
-                      child: Text("Configure"),
+                      child: const Text("Configure"),
                       onPressed: () => Backdrop.of(context).fling(),
                     ),
                   )

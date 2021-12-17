@@ -18,8 +18,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Navigation Example"),
-          actions: <Widget>[
+          title: const Text("Navigation Example"),
+          actions: const <Widget>[
             BackdropToggleButton(
               icon: AnimatedIcons.list_view,
             )
@@ -28,12 +28,12 @@ class _MyAppState extends State<MyApp> {
         stickyFrontLayer: true,
         frontLayer: _pages[_currentIndex],
         backLayer: BackdropNavigationBackLayer(
-          items: [
+          items: const [
             ListTile(title: Text("Widget 1")),
             ListTile(title: Text("Widget 2")),
           ],
           onTap: (int position) => {setState(() => _currentIndex = position)},
-          separatorBuilder: (context, index) => Divider(),
+          separatorBuilder: (context, index) => const Divider(),
         ),
       ),
     );
@@ -43,13 +43,13 @@ class _MyAppState extends State<MyApp> {
 class Widget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Widget 1"));
+    return const Center(child: Text("Widget 1"));
   }
 }
 
 class Widget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Widget 2"));
+    return const Center(child: Text("Widget 2"));
   }
 }

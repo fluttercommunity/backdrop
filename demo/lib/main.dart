@@ -34,16 +34,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Backdrop Gallery"),
+        title: const Text("Backdrop Gallery"),
       ),
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(16.0),
-            child:
-                Text("This app shows some use cases for the backdrop widget. "
-                    "Open any one to show information about it, preview it and "
-                    "look at its code."),
+            margin: const EdgeInsets.all(16.0),
+            child: const Text(
+                "This app shows some use cases for the backdrop widget. "
+                "Open any one to show information about it, preview it and "
+                "look at its code."),
           ),
           ListView.separated(
             itemCount: _useCases.length,
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               onTap: () => _openDemoPage(context, _useCases[index]),
             ),
             shrinkWrap: true,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => const Divider(),
           ),
         ],
       ),

@@ -37,7 +37,7 @@ class _FilterState extends State<Filter> {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Filter Example"),
+          title: const Text("Filter Example"),
         ),
         backLayer: _createBackLayer(),
         subHeader: BackdropSubHeader(
@@ -62,8 +62,8 @@ class _FilterState extends State<Filter> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
+            padding: const EdgeInsets.all(16.0),
+            child: const Text(
               "Check/uncheck categories to show/hide them on the front layer",
             ),
           ),

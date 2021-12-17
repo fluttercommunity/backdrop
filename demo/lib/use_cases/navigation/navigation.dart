@@ -17,14 +17,14 @@ class _NavigationState extends State<Navigation> {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Navigation Example"),
+          title: const Text("Navigation Example"),
         ),
         stickyFrontLayer: true,
         frontLayer: _pages[_currentIndex],
         backLayer: _createBackLayer(),
         subHeader: _currentIndex == 0
             ? null // no subHeader for home-page
-            : BackdropSubHeader(
+            : const BackdropSubHeader(
                 title: Text("Our products"),
               ),
       ),
@@ -32,7 +32,7 @@ class _NavigationState extends State<Navigation> {
   }
 
   Widget _createBackLayer() => BackdropNavigationBackLayer(
-        items: [
+        items: const [
           ListTile(
               title: Text(
             "Home",
@@ -43,7 +43,7 @@ class _NavigationState extends State<Navigation> {
           )),
         ],
         onTap: (int position) => {setState(() => _currentIndex = position)},
-        separator: Divider(),
+        separator: const Divider(),
       );
 }
 
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.all(16.0),
+            margin: const EdgeInsets.all(16.0),
             child: Text(
               "Welcome to the online shop!",
               style: Theme.of(context).textTheme.headline6,
@@ -64,8 +64,8 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.all(16.0),
-          child: Text(
+          margin: const EdgeInsets.all(16.0),
+          child: const Text(
             "Please navigate to the products page to choose your product.",
             textAlign: TextAlign.center,
           ),
@@ -80,7 +80,7 @@ class ItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
+      children: const [
         ListTile(
           leading: Icon(Icons.computer),
           title: Text("Laptop"),

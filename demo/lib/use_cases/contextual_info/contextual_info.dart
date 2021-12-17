@@ -11,7 +11,7 @@ class ContextualInfo extends StatelessWidget {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Contextual Info Example"),
+          title: const Text("Contextual Info Example"),
           automaticallyImplyLeading: false,
         ),
         backLayer: _createBackLayer(context),
@@ -26,13 +26,13 @@ class ContextualInfo extends StatelessWidget {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Name",
                 ),
               ],
             ),
-            title: Text(
+            title: const Text(
               "Laptop Model X",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -40,11 +40,11 @@ class ContextualInfo extends StatelessWidget {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("Year of production"),
               ],
             ),
-            title: Text(
+            title: const Text(
               "2019",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -52,11 +52,11 @@ class ContextualInfo extends StatelessWidget {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("Place of Manufacture"),
               ],
             ),
-            title: Text(
+            title: const Text(
               "USA",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -64,11 +64,11 @@ class ContextualInfo extends StatelessWidget {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("Price"),
               ],
             ),
-            title: Text(
+            title: const Text(
               "\$999",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -78,14 +78,14 @@ class ContextualInfo extends StatelessWidget {
       );
 
   Widget _createFrontLayer(BuildContext context) => Container(
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(
+                const Icon(
                   Icons.computer,
                   size: 64.0,
                 ),
@@ -102,13 +102,13 @@ class ContextualInfo extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Price",
                   style: TextStyle(color: Colors.grey),
                 ),
                 Container(
-                  margin: EdgeInsets.all(8.0),
-                  child: Text(
+                  margin: const EdgeInsets.all(8.0),
+                  child: const Text(
                     "\$999",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -116,13 +116,13 @@ class ContextualInfo extends StatelessWidget {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
@@ -130,7 +130,7 @@ class ContextualInfo extends StatelessWidget {
                       Icon(Icons.star_half, color: Colors.grey),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "73 Reviews",
                     style: TextStyle(color: Colors.grey),
                   )
@@ -138,14 +138,14 @@ class ContextualInfo extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Builder(
                     builder: (context) => RaisedButton(
-                      child: Text("More about this product"),
+                      child: const Text("More about this product"),
                       onPressed: () => Backdrop.of(context).fling(),
                     ),
                   )
@@ -159,13 +159,13 @@ class ContextualInfo extends StatelessWidget {
                       .headline6!
                       .apply(color: Colors.black)),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.account_box),
               title: Text("Really satisfied!"),
               subtitle: Text("John Doe"),
               trailing: Text("5/5"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.account_box),
               title: Text("Good price!"),
               subtitle: Text("Jane Doe"),
