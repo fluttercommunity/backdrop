@@ -11,17 +11,17 @@ class ContextualControls extends StatefulWidget {
 }
 
 class _ContextualControlsState extends State<ContextualControls> {
-  static final _COLOR_MAP = {
+  static final _colorMap = {
     Colors.black: "Black",
     Colors.red: "Red",
     Colors.green: "Green",
     Colors.blue: "Blue"
   };
-  static const _RAM_CHOICES = [4, 8, 16];
+  static const _ramChoices = [4, 8, 16];
 
-  Color _color = _COLOR_MAP.keys.first;
+  Color _color = _colorMap.keys.first;
   double _resolution = 15.0;
-  int _ram = _RAM_CHOICES.first;
+  int _ram = _ramChoices.first;
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +53,10 @@ class _ContextualControlsState extends State<ContextualControls> {
             title: DropdownButton<Color>(
               isExpanded: true,
               value: _color,
-              items: _COLOR_MAP.keys.map<DropdownMenuItem<Color>>((Color c) {
+              items: _colorMap.keys.map<DropdownMenuItem<Color>>((Color c) {
                 return DropdownMenuItem<Color>(
                   value: c,
-                  child: Text(_COLOR_MAP[c]!),
+                  child: Text(_colorMap[c]!),
                 );
               }).toList(),
               onChanged: (Color? newValue) {
@@ -96,7 +96,7 @@ class _ContextualControlsState extends State<ContextualControls> {
             title: DropdownButton<int>(
               isExpanded: true,
               value: _ram,
-              items: _RAM_CHOICES.map<DropdownMenuItem<int>>((int r) {
+              items: _ramChoices.map<DropdownMenuItem<int>>((int r) {
                 return DropdownMenuItem<int>(
                   value: r,
                   child: Text("${r.toString()} GB"),

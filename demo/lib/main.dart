@@ -28,7 +28,7 @@ class DemoApp extends StatelessWidget {
 class _HomePage extends StatelessWidget {
   _HomePage({Key? key}) : super(key: key);
 
-  List<UseCase> _useCases = [
+  final _useCases = <UseCase>[
     ContextualInfoUseCase(),
     ContextualControlsUseCase(),
     NavigationUseCase(),
