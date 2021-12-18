@@ -1,4 +1,4 @@
-import 'package:backdrop/scaffold.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
 /// A wrapper for adding a sub-header to the used backdrop front layer(s).

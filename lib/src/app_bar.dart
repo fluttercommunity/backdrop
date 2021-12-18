@@ -1,5 +1,4 @@
-import 'package:backdrop/button.dart';
-import 'package:backdrop/scaffold.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
 /// A material app bar that offers functionality for triggering the

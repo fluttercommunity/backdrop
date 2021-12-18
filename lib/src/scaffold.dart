@@ -1,4 +1,4 @@
-import 'package:backdrop/button.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
