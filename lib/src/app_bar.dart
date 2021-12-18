@@ -1,12 +1,13 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// A material app bar that offers functionality for triggering the
 /// [BackdropScaffold]'s functionality. It is internally implemented using the
 /// [AppBar] class.
 ///
 /// What differs from the [AppBar] implementation is the behaviour of
-/// [BackdropAppBar.leading] and [BackdropAppBar.automaticallyImplyLeading].
+/// [leading], [automaticallyImplyLeading] and [elevation].
 ///
 /// Usage example:
 /// ```dart
@@ -62,7 +63,10 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.elevation].
   ///
   /// Defaults to 0.0. This differs from [AppBar.elevation].
-  final double elevation;
+  final double? elevation;
+
+  /// See [AppBar.shadowColor].
+  final Color? shadowColor;
 
   /// See [AppBar.shape]
   final ShapeBorder? shape;
@@ -70,7 +74,14 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.backgroundColor].
   final Color? backgroundColor;
 
+  /// See [AppBar.foregroundColor].
+  final Color? foregroundColor;
+
   /// See [AppBar.brightness].
+  @Deprecated(
+    'This property is no longer used, please use systemOverlayStyle instead. '
+    'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
+  )
   final Brightness? brightness;
 
   /// See [AppBar.iconTheme].
@@ -80,6 +91,10 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconThemeData? actionsIconTheme;
 
   /// See [AppBar.textTheme].
+  @Deprecated(
+    'This property is no longer used, please use toolbarTextStyle and titleTextStyle instead. '
+    'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
+  )
   final TextTheme? textTheme;
 
   /// See [AppBar.primary].
@@ -92,7 +107,7 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool excludeHeaderSemantics;
 
   /// See [AppBar.iconTheme].titleSpacing
-  final double titleSpacing;
+  final double? titleSpacing;
 
   /// See [AppBar.toolbarOpacity].
   final double toolbarOpacity;
@@ -103,6 +118,21 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.preferredSize].
   @override
   final Size preferredSize;
+
+  /// See [AppBar.toolbarHeight].
+  final double? toolbarHeight;
+
+  /// See [AppBar.leadingWidth].
+  final double? leadingWidth;
+
+  /// See [AppBar.toolbarTextStyle].
+  final TextStyle? toolbarTextStyle;
+
+  /// See [AppBar.titleTextStyle].
+  final TextStyle? titleTextStyle;
+
+  /// See [AppBar.systemOverlayStyle].
+  final SystemUiOverlayStyle? systemOverlayStyle;
 
   /// Creates a backdrop app bar.
   ///
@@ -116,21 +146,36 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.flexibleSpace,
     this.bottom,
     this.elevation = 0.0,
+    this.shadowColor,
     this.shape,
     this.backgroundColor,
-    this.brightness,
+    this.foregroundColor,
+    @Deprecated(
+      'This property is no longer used, please use systemOverlayStyle instead. '
+      'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
+    )
+        this.brightness,
     this.iconTheme,
     this.actionsIconTheme,
-    this.textTheme,
+    @Deprecated(
+      'This property is no longer used, please use toolbarTextStyle and titleTextStyle instead. '
+      'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
+    )
+        this.textTheme,
     this.primary = true,
     this.centerTitle,
     this.excludeHeaderSemantics = false,
-    this.titleSpacing = NavigationToolbar.kMiddleSpacing,
+    this.titleSpacing,
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
-  })  : assert(elevation >= 0.0),
-        preferredSize = Size.fromHeight(
-            kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
+    this.toolbarHeight,
+    this.leadingWidth,
+    this.toolbarTextStyle,
+    this.titleTextStyle,
+    this.systemOverlayStyle,
+  })  : assert(elevation == null || elevation >= 0.0),
+        preferredSize = Size.fromHeight((toolbarHeight ?? kToolbarHeight) +
+            (bottom?.preferredSize.height ?? 0)),
         super(key: key);
 
   @override
@@ -144,11 +189,15 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: flexibleSpace,
       bottom: bottom,
       elevation: elevation,
+      shadowColor: shadowColor,
       shape: shape,
       backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      // ignore: deprecated_member_use, deprecated_member_use_from_same_package
       brightness: brightness,
       iconTheme: iconTheme,
       actionsIconTheme: actionsIconTheme,
+      // ignore: deprecated_member_use, deprecated_member_use_from_same_package
       textTheme: textTheme,
       primary: primary,
       centerTitle: centerTitle,
@@ -156,6 +205,11 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: titleSpacing,
       toolbarOpacity: toolbarOpacity,
       bottomOpacity: bottomOpacity,
+      toolbarHeight: toolbarHeight,
+      leadingWidth: leadingWidth,
+      toolbarTextStyle: toolbarTextStyle,
+      titleTextStyle: titleTextStyle,
+      systemOverlayStyle: systemOverlayStyle,
     );
   }
 }
