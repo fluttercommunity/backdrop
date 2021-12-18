@@ -310,6 +310,7 @@ class BackdropScaffold extends StatefulWidget {
 }
 
 /// This class is used to represent the internal state of [BackdropScaffold].
+///
 /// It provides access to the functionality for triggering backdrop. As well it
 /// offers ways to retrieve the current state of the [BackdropScaffold]'s front-
 /// or back layers (concealed/revealed).
@@ -465,10 +466,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           behavior: HitTestBehavior.opaque,
           child: Column(
             children: <Widget>[
-              // if subHeaderAlwaysActive then do not apply frontLayerScrim for area with _subHeaderHeight
-              widget.subHeader != null && widget.subHeaderAlwaysActive
-                  ? Container(height: _subHeaderHeight)
-                  : Container(),
+              // if subHeaderAlwaysActive then do not apply frontLayerScrim for
+              // area with _subHeaderHeight
+              if (widget.subHeader != null && widget.subHeaderAlwaysActive)
+                Container(height: _subHeaderHeight),
               Expanded(
                 child: Container(
                   color: widget.frontLayerScrim,
