@@ -41,9 +41,6 @@ __NOTE: If using Flutter v1.x.x, use v0.5.x pub version.__
 | __Issue Tracker__ | https://github.com/fluttercommunity/backdrop/issues |
 | __Chat Room__ | https://gitter.im/flutter-backdrop |
 
-## Getting started
-Follow the medium article to [__Quickly Implement Backdrop in Flutter.__](https://medium.com/@daadu/backdrop-with-flutter-acfa9fee7d2f)
-
 ## Usage
 ### BackdropScaffold
 Use `BackdropScaffold` instead of the standard `Scaffold` in your app.
