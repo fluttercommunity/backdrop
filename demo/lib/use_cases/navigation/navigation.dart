@@ -46,7 +46,7 @@ class _NavigationState extends State<Navigation> {
           )),
         ],
         onTap: (int position) => {setState(() => _currentIndex = position)},
-        separator: const Divider(),
+        separatorBuilder: (context, position) => const Divider(),
       );
 }
 

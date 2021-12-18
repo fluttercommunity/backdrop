@@ -2,25 +2,6 @@ import 'package:backdrop/button.dart';
 import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 
-/// Deprecated. Not needed anymore when [BackdropAppBar] is used.
-///
-/// This enum is used to specify where [BackdropToggleButton] should appear
-/// within [AppBar].
-@Deprecated("Replace by the use of BackdropAppBar."
-    "This feature was deprecated after v0.2.17.")
-enum BackdropIconPosition {
-  /// Indicates that [BackdropToggleButton] should not appear at all.
-  none,
-
-  /// Indicates that [BackdropToggleButton] should appear at the start of
-  /// [AppBar].
-  leading,
-
-  /// Indicates that [BackdropToggleButton] should appear as an action within
-  /// [AppBar.actions].
-  action
-}
-
 /// A material app bar that offers functionality for triggering the
 /// [BackdropScaffold]'s functionality. It is internally implemented using the
 /// [AppBar] class.
