@@ -1,12 +1,14 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
-/// A material app bar that offers functionality for triggering the
-/// [BackdropScaffold]'s functionality. It is internally implemented using the
-/// [AppBar] class.
+/// A material app bar with backdrop related functionality.
 ///
-/// What differs from the [AppBar] implementation is the behaviour of
-/// [BackdropAppBar.leading] and [BackdropAppBar.automaticallyImplyLeading].
+/// It offers functionality for triggering the [BackdropScaffold]'s
+/// functionality.
+///
+/// It is internally implemented using the [AppBar] class. What differs from
+/// the [AppBar] implementation is the behaviour of [BackdropAppBar.leading] and
+/// [BackdropAppBar.automaticallyImplyLeading].
 ///
 /// Usage example:
 /// ```dart

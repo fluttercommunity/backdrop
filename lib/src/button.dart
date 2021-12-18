@@ -1,8 +1,9 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
-/// An animated button that can be used to trigger the backdrop functionality of
-/// [BackdropScaffold].
+/// An animated button with backdrop related functionality.
+///
+/// It can be used to trigger the backdrop functionality of [BackdropScaffold].
 ///
 /// This button is implicitly used within [BackdropAppBar].
 /// This button can also be passed to the [BackdropAppBar.actions].

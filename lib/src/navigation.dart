@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Implements the back layer to be used for navigation.
 ///
-/// This class can be used as a back layer for [BackdropScaffold]. It enables to
+/// This class can be used as [BackdropScaffold.backLayer]. It enables to
 /// use the back layer as a navigation list, similar to a [Drawer].
 ///
 /// Usage example:

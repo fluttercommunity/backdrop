@@ -3,11 +3,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-/// This class is an InheritedWidget that exposes state of [BackdropScaffold]
-/// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
+/// [InheritedWidget] that exposes state of [BackdropScaffold].
 ///
-/// It can be used to explicitly call backdrop functionality like fling,
-/// concealBackLayer, revealBackLayer, etc.
+/// [Backdrop.of] can be used to access [BackdropScaffoldState] from anywhere
+/// below the widget tree.
+///
+/// It can be used to explicitly call backdrop functionality like
+/// [BackdropScaffoldState.fling], [BackdropScaffoldState.concealBackLayer],
+/// [BackdropScaffoldState.revealBackLayer], etc.
 ///
 /// Example:
 /// ```dart
@@ -75,22 +78,25 @@ class BackdropScaffold extends StatefulWidget {
 
   /// The widget shown at the top of the front layer.
   ///
-  /// When the front layer is minimized (back layer revealed), the entire [subHeader] will be visible unless
-  /// [headerHeight] is specified.
+  /// When the front layer is minimized (back layer revealed), the entire
+  /// [subHeader] will be visible unless [headerHeight] is specified.
   final Widget? subHeader;
 
-  /// If true, the scrim applied to the front layer while minimized (back layer revealed) will not
-  /// cover the [subHeader].  See [frontLayerScrim].
+  /// Keeps [subHeader] active when minimized (back layer revealed).
+  ///
+  /// If true, the scrim applied to the front layer while minimized (back layer
+  /// revealed) will not cover the [subHeader].  See [frontLayerScrim].
   ///
   /// Defaults to true.
   final bool subHeaderAlwaysActive;
 
-  /// Defines the front layer's height when minimized (back layer revealed)).
+  /// Defines the front layer's height when minimized (back layer revealed).
+  ///
   /// Defaults to measured height of [subHeader] if provided, else 32.
   ///
-  /// To automatically use the difference of the screen height and back layer's height,
-  /// see [stickyFrontLayer].  Note [headerHeight] is ignored if it is less
-  /// than the available size and [stickyFrontLayer] is `true`.
+  /// To automatically use the difference of the screen height and back layer's
+  /// height, see [stickyFrontLayer].  Note [headerHeight] is ignored if it is
+  /// less than the available size and [stickyFrontLayer] is `true`.
   ///
   /// To vary the front layer's height when active (back layer concealed),
   /// see [frontLayerActiveFactor].
@@ -107,18 +113,19 @@ class BackdropScaffold extends StatefulWidget {
   /// ```
   final BorderRadius frontLayerBorderRadius;
 
-  /// Indicates the front layer should minimize to the back layer's
-  /// bottom edge.  Otherwise, see [headerHeight] to specify this value.
+  /// Indicates the front layer should minimize to the back layer's bottom edge.
+  ///
+  /// Otherwise, see [headerHeight] to specify this value.
   /// Defaults to `false`.
   ///
   /// This parameter has no effect if the back layer's measured height
   /// is greater than or equal to the screen height.
   final bool stickyFrontLayer;
 
-  /// Flag indicating whether the back layer should be revealed at the beginning
-  /// or not. Setting [revealBackLayerAtStart] to `true` reveals the back layer
-  /// at start. This property has no effect if a custom [animationController]
-  /// is set.
+  /// Indicates whether the back layer should be revealed at the beginning.
+  ///
+  /// Setting it to `true` reveals the back layer at start. This property has
+  /// no effect if a custom [animationController] is set.
   ///
   /// Defaults to `false`.
   final bool revealBackLayerAtStart;
@@ -143,8 +150,9 @@ class BackdropScaffold extends StatefulWidget {
   /// If null, the color is handled automatically according to the theme.
   final Color? frontLayerBackgroundColor;
 
-  /// Fraction of the available height the front layer will occupy,
-  /// when active (back layer concealed).  Clamped to (0, 1).
+  /// Fraction of available height the [frontLayer] will occupy when active (back layer concealed).
+  ///
+  /// The value is clamped to (0, 1).
   ///
   /// Note the front layer will not fully conceal the back layer when
   /// this value is less than 1.  A scrim will cover the
@@ -153,14 +161,17 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to 1.
   final double frontLayerActiveFactor;
 
-  /// Defines the scrim color for the front layer when minimized
-  /// (revealing the back layer) and animating.  Defaults to [Colors.white70].
+  /// Scrim over [frontLayer] when minimized (back layer revealed) and animating.
+  ///
+  /// Defaults to [Colors.white70].
   ///
   /// See [subHeaderAlwaysActive] to leave the [subHeader] outside the scrim.
   final Color frontLayerScrim;
 
-  /// Defines the scrim color for the back layer when partially concealed
-  /// (with [frontLayerActiveFactor] less than 1).
+  /// Scrim over [backLayer] when active (back layer concealed).
+  ///
+  /// It is only visible when [backLayer] is concealed partially, ie. when
+  /// [frontLayerActiveFactor] is less than 1.
   ///
   /// Defaults to [Colors.black54].
   final Color backLayerScrim;
@@ -171,12 +182,11 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] has been revealed.
   final VoidCallback? onBackLayerRevealed;
 
-  /// Specifies whether the state of the [backLayer] is maintained when it is
-  /// revealed and concealed.
+  /// Specifies whether the state of the [backLayer] should be maintained.
   ///
   /// When true, the [backLayer] is kept in the tree while concealed.
   /// When false, the [backLayer] is removed from the tree when concealed and
-  /// recreated when revealed.
+  /// recreated when revealed. [backLayer] is built everytime it is revealed.
   ///
   /// Defaults to `true`.
   final bool maintainBackLayerState;
@@ -324,8 +334,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   late AnimationController _animationController;
   late ColorTween _backLayerScrimColorTween;
 
-  /// Key for accessing the [ScaffoldState] of [BackdropScaffold]'s internally
-  /// used [Scaffold].
+  /// Key for accessing the underlying [ScaffoldState].
+  ///
+  /// It exposes state of [Scaffold] used internally by [BackdropScaffold].
   GlobalKey<ScaffoldState>? scaffoldKey;
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
@@ -617,7 +628,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 }
 
-/// Widget to get size of child widget
+/// Widget to get size of child widget.
+///
 /// Credit: https://stackoverflow.com/a/60868972/2554745
 class _MeasureSize extends StatefulWidget {
   final Widget child;
