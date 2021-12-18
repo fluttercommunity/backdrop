@@ -30,6 +30,9 @@ linter:
     # pub related: https://dart.dev/tools/linter-rules#pub-rules
     - depend_on_referenced_packages
     - secure_pubspec_urls
+    # import related
+    - always_use_package_imports
+    - implementation_imports
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -1,7 +1,7 @@
 library backdrop;
 
-export 'app_bar.dart';
-export 'button.dart';
-export 'navigation.dart';
-export 'scaffold.dart';
-export 'sub_header.dart';
+export 'src/app_bar.dart';
+export 'src/button.dart';
+export 'src/navigation.dart';
+export 'src/scaffold.dart';
+export 'src/sub_header.dart';
