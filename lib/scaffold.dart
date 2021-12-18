@@ -1,4 +1,4 @@
-import 'package:backdrop/button.dart';
+import 'package:backdrop/app_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -186,7 +186,7 @@ class BackdropScaffold extends StatefulWidget {
   /// A key to use when building the [Scaffold].
   final GlobalKey<ScaffoldState>? scaffoldKey;
 
-  /// See [Scaffold.appBar].
+  /// See [Scaffold.appBar] and [BackdropAppBar].
   final PreferredSizeWidget? appBar;
 
   /// See [Scaffold.extendBody].
@@ -562,8 +562,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
-        appBar: widget.appBar ??
-            AppBar(elevation: 0, leading: const BackdropToggleButton()),
+        appBar: widget.appBar,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Stack(
