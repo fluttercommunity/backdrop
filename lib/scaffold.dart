@@ -1,13 +1,7 @@
-import 'package:backdrop/app_bar.dart';
 import 'package:backdrop/button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-@Deprecated('Replace with frontLayerScrim.')
-const _kInactiveOverlayOpacity = 0.7;
-@Deprecated('Replace with frontLayerScrim.')
-const _kInactiveOverlayColor = Color(0xFFEEEEEE);
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
 /// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
@@ -70,19 +64,8 @@ class Backdrop extends InheritedWidget {
 /// See also:
 ///  * [Scaffold], which is the plain scaffold used in material apps.
 class BackdropScaffold extends StatefulWidget {
-  /// Deprecated. Use [animationController].
-  ///
-  /// Can be used to customize the behaviour of the backdrop animation.
-  @Deprecated("See animationController. This was deprecated after v0.5.1")
-  final AnimationController? controller;
-
   /// Can be used to customize the behaviour of the backdrop animation.
   final AnimationController? animationController;
-
-  /// Deprecated. Use [BackdropAppBar.title].
-  ///
-  /// The widget assigned to the [Scaffold]'s [AppBar.title].
-  final Widget? title;
 
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
@@ -101,11 +84,6 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool subHeaderAlwaysActive;
-
-  /// Deprecated. Use [BackdropAppBar.actions].
-  ///
-  /// Actions passed to [AppBar.actions].
-  final List<Widget> actions;
 
   /// Defines the front layer's height when minimized (back layer revealed)).
   /// Defaults to measured height of [subHeader] if provided, else 32.
@@ -128,14 +106,6 @@ class BackdropScaffold extends StatefulWidget {
   /// )
   /// ```
   final BorderRadius frontLayerBorderRadius;
-
-  /// Deprecated. Use [BackdropAppBar]'s properties [BackdropAppBar.leading] and
-  /// [BackdropAppBar.automaticallyImplyLeading] to achieve the same behaviour.
-  ///
-  /// The position of the icon button that toggles the backdrop functionality.
-  ///
-  /// Defaults to [BackdropIconPosition.leading].
-  final BackdropIconPosition iconPosition;
 
   /// Indicates the front layer should minimize to the back layer's
   /// bottom edge.  Otherwise, see [headerHeight] to specify this value.
@@ -182,15 +152,6 @@ class BackdropScaffold extends StatefulWidget {
   ///
   /// Defaults to 1.
   final double frontLayerActiveFactor;
-
-  /// Deprecated.  Use [frontLayerScrim] instead.
-  @Deprecated('Replace with frontLayerScrim.')
-  final Color? inactiveOverlayColor;
-
-  /// Deprecated.  Use [frontLayerScrim] instead.
-  @Deprecated('Replace with frontLayerScrim.  Use Color#withOpacity, or pass'
-      'the opacity value in the Color constructor.')
-  final double? inactiveOverlayOpacity;
 
   /// Defines the scrim color for the front layer when minimized
   /// (revealing the back layer) and animating.  Defaults to [Colors.white70].
@@ -299,28 +260,16 @@ class BackdropScaffold extends StatefulWidget {
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key? key,
-    @Deprecated("See animationController. This was deprecated after v0.5.1")
-        this.controller,
     this.animationController,
-    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
-        "This feature was deprecated after v0.2.17.")
-        this.title,
     required this.backLayer,
     required this.frontLayer,
     this.subHeader,
     this.subHeaderAlwaysActive = true,
-    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
-        "This feature was deprecated after v0.2.17.")
-        this.actions = const <Widget>[],
     this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16),
       topRight: Radius.circular(16),
     ),
-    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
-        "and BackdropAppBar.automaticallyImplyLeading."
-        "This feature was deprecated after v0.2.17.")
-        this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.revealBackLayerAtStart = false,
     this.animationCurve = Curves.ease,
@@ -328,10 +277,6 @@ class BackdropScaffold extends StatefulWidget {
     this.frontLayerBackgroundColor,
     double frontLayerActiveFactor = 1,
     this.backLayerBackgroundColor,
-    @Deprecated('See frontLayerScrim. This was deprecated after v0.4.7.')
-        this.inactiveOverlayColor,
-    @Deprecated('See frontLayerScrim. This was deprecated after v0.4.7.')
-        this.inactiveOverlayOpacity,
     this.frontLayerScrim = Colors.white70,
     this.backLayerScrim = Colors.black54,
     this.onBackLayerConcealed,
@@ -357,9 +302,7 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
-  })  : assert(inactiveOverlayOpacity == null ||
-            inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
-        frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
+  })  : frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
         super(key: key);
 
   @override
@@ -386,13 +329,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
-  /// Deprecated. Use [animationController] instead.
-  ///
-  /// [AnimationController] used for the backdrop animation.
-  @Deprecated("Replace by the use of `animationController`."
-      "This feature was deprecated after v0.5.1.")
-  AnimationController get controller => _animationController;
-
   /// [AnimationController] used for the backdrop animation.
   ///
   /// Defaults to
@@ -409,16 +345,15 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     scaffoldKey = widget.scaffoldKey ?? GlobalKey<ScaffoldState>();
     // initialize _controller
     _animationController = widget.animationController ??
-        widget.controller ??
         AnimationController(
           vsync: this,
           duration: const Duration(milliseconds: 200),
           value: widget.revealBackLayerAtStart ? 0 : 1,
         );
 
-    // should only dispose of `_animationController`, if it was initialised inside this widget.
-    _shouldDisposeAnimationController =
-        (widget.animationController ?? widget.controller) == null;
+    // should only dispose of `_animationController`,
+    // if it was initialised inside this widget.
+    _shouldDisposeAnimationController = widget.animationController == null;
 
     _backLayerScrimColorTween = _buildBackLayerScrimColorTween();
 
@@ -445,24 +380,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     super.dispose();
   }
 
-  /// Deprecated. Use [isBackLayerConcealed] instead.
-  ///
-  /// Whether the back layer is concealed or not.
-  @Deprecated("Replace by the use of `isBackLayerConcealed`."
-      "This feature was deprecated after v0.3.2.")
-  bool get isTopPanelVisible => isBackLayerConcealed;
-
   /// Whether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
       animationController.status == AnimationStatus.completed ||
       animationController.status == AnimationStatus.forward;
-
-  /// Deprecated. Use [isBackLayerRevealed] instead.
-  ///
-  /// Whether the back layer is revealed or not.
-  @Deprecated("Replace by the use of `isBackLayerRevealed`."
-      "This feature was deprecated after v0.3.2.")
-  bool get isBackPanelVisible => isBackLayerRevealed;
 
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
@@ -483,13 +404,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     }
   }
 
-  /// Deprecated. Use [revealBackLayer] instead.
-  ///
-  /// Animates the back layer to the "revealed" state.
-  @Deprecated("Replace by the use of `revealBackLayer`."
-      "This feature was deprecated after v0.3.2.")
-  void showBackLayer() => revealBackLayer();
-
   /// Animates the back layer to the "revealed" state.
   void revealBackLayer() {
     if (isBackLayerConcealed) {
@@ -497,13 +411,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       widget.onBackLayerRevealed?.call();
     }
   }
-
-  /// Deprecated. Use [concealBackLayer] instead.
-  ///
-  /// Animates the back layer to the "concealed" state.
-  @Deprecated("Replace by the use of `concealBackLayer`."
-      "This feature was deprecated after v0.3.2.")
-  void showFrontLayer() => concealBackLayer();
 
   /// Animates the back layer to the "concealed" state.
   void concealBackLayer() {
@@ -549,20 +456,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildInactiveLayer(BuildContext context) {
-    Color? frontLayerScrim;
-    if (widget.inactiveOverlayColor == null &&
-        widget.inactiveOverlayOpacity == null) {
-      frontLayerScrim = widget.frontLayerScrim;
-    } else if (widget.inactiveOverlayOpacity == null) {
-      frontLayerScrim = widget.inactiveOverlayColor!.withOpacity(
-        _kInactiveOverlayOpacity,
-      );
-    } else if (widget.inactiveOverlayColor == null) {
-      frontLayerScrim = _kInactiveOverlayColor.withOpacity(
-        widget.inactiveOverlayOpacity!,
-      );
-    }
-
     return Offstage(
       offstage: animationController.status == AnimationStatus.completed,
       child: FadeTransition(
@@ -578,7 +471,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   : Container(),
               Expanded(
                 child: Container(
-                  color: frontLayerScrim,
+                  color: widget.frontLayerScrim,
                 ),
               ),
             ],
@@ -669,16 +562,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       child: Scaffold(
         key: scaffoldKey,
         appBar: widget.appBar ??
-            AppBar(
-              title: widget.title,
-              actions: widget.iconPosition == BackdropIconPosition.action
-                  ? <Widget>[const BackdropToggleButton()] + widget.actions
-                  : widget.actions,
-              elevation: 0,
-              leading: widget.iconPosition == BackdropIconPosition.leading
-                  ? const BackdropToggleButton()
-                  : null,
-            ),
+            AppBar(elevation: 0, leading: const BackdropToggleButton()),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Stack(
