@@ -34,7 +34,8 @@ __NOTE: If using Flutter v1.x.x, use v0.5.x pub version.__
 
 | | |
 |-|-|
-| __package__ | https://pub.dev/packages/backdrop |
+| __Package__ | https://pub.dev/packages/backdrop |
+| __API Docs__ | https://pub.dev/documentation/backdrop/latest/backdrop/backdrop-library.html |
 | __Live Demo__ | https://fluttercommunity.github.io/backdrop/demo/#/ |
 | __Git Repo__  | https://github.com/fluttercommunity/backdrop |
 | __Issue Tracker__ | https://github.com/fluttercommunity/backdrop/issues |
