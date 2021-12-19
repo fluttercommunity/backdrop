@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 
 /// Contextual controls preview app.
 class ContextualControls extends StatefulWidget {
+  /// Default constructor for [ContextualControls].
+  const ContextualControls({Key? key}) : super(key: key);
+
   @override
   _ContextualControlsState createState() => _ContextualControlsState();
 }
 
 class _ContextualControlsState extends State<ContextualControls> {
-  static final _COLOR_MAP = {
+  static final _colorMap = {
     Colors.black: "Black",
     Colors.red: "Red",
     Colors.green: "Green",
     Colors.blue: "Blue"
   };
-  static const _RAM_CHOICES = [4, 8, 16];
+  static const _ramChoices = [4, 8, 16];
 
-  Color _color = _COLOR_MAP.keys.first;
+  Color _color = _colorMap.keys.first;
   double _resolution = 15.0;
-  int _ram = _RAM_CHOICES.first;
+  int _ram = _ramChoices.first;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _ContextualControlsState extends State<ContextualControls> {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Contextual Controls Example"),
+          title: const Text("Contextual Controls Example"),
           automaticallyImplyLeading: false,
         ),
         backLayer: _createBackLayer(context),
@@ -41,7 +44,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Color",
                 ),
@@ -50,10 +53,10 @@ class _ContextualControlsState extends State<ContextualControls> {
             title: DropdownButton<Color>(
               isExpanded: true,
               value: _color,
-              items: _COLOR_MAP.keys.map<DropdownMenuItem<Color>>((Color c) {
+              items: _colorMap.keys.map<DropdownMenuItem<Color>>((Color c) {
                 return DropdownMenuItem<Color>(
                   value: c,
-                  child: Text(_COLOR_MAP[c]!),
+                  child: Text(_colorMap[c]!),
                 );
               }).toList(),
               onChanged: (Color? newValue) {
@@ -66,7 +69,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
               leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text("Resolution"),
                 ],
               ),
@@ -86,14 +89,14 @@ class _ContextualControlsState extends State<ContextualControls> {
           ListTile(
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("RAM"),
               ],
             ),
             title: DropdownButton<int>(
               isExpanded: true,
               value: _ram,
-              items: _RAM_CHOICES.map<DropdownMenuItem<int>>((int r) {
+              items: _ramChoices.map<DropdownMenuItem<int>>((int r) {
                 return DropdownMenuItem<int>(
                   value: r,
                   child: Text("${r.toString()} GB"),
@@ -108,7 +111,7 @@ class _ContextualControlsState extends State<ContextualControls> {
           ),
           Builder(
               builder: (context) => MaterialButton(
-                    child: Text("Return to product page"),
+                    child: const Text("Return to product page"),
                     onPressed: () => Backdrop.of(context).fling(),
                   ))
         ],
@@ -116,7 +119,7 @@ class _ContextualControlsState extends State<ContextualControls> {
       );
 
   Widget _createFrontLayer(BuildContext context) => Container(
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Row(
@@ -138,13 +141,13 @@ class _ContextualControlsState extends State<ContextualControls> {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
@@ -152,7 +155,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                       Icon(Icons.star_half, color: Colors.grey),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "73 Reviews",
                     style: TextStyle(color: Colors.grey),
                   )
@@ -163,13 +166,13 @@ class _ContextualControlsState extends State<ContextualControls> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Price",
                   style: TextStyle(color: Colors.grey),
                 ),
                 Container(
-                  margin: EdgeInsets.all(8.0),
-                  child: Text(
+                  margin: const EdgeInsets.all(8.0),
+                  child: const Text(
                     "\$999",
                     style: TextStyle(fontSize: 18),
                   ),
@@ -177,7 +180,7 @@ class _ContextualControlsState extends State<ContextualControls> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: 32.0, left: 8.0, right: 8.0, bottom: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -185,17 +188,17 @@ class _ContextualControlsState extends State<ContextualControls> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Resolution")],
+                    children: const [Text("Resolution")],
                   ),
                   Text(
                     "${_resolution.toString()}\"",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: 8.0, left: 8.0, right: 8.0, bottom: 32.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -203,24 +206,24 @@ class _ContextualControlsState extends State<ContextualControls> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("RAM")],
+                    children: const [Text("RAM")],
                   ),
                   Text(
                     "${_ram.toString()} GB",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Builder(
-                    builder: (context) => RaisedButton(
-                      child: Text("Configure"),
+                    builder: (context) => ElevatedButton(
+                      child: const Text("Configure"),
                       onPressed: () => Backdrop.of(context).fling(),
                     ),
                   )

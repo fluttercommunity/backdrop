@@ -4,25 +4,30 @@ import 'package:flutter/material.dart';
 
 /// Filter preview app.
 class Filter extends StatefulWidget {
+  /// Default constructor for [Filter].
+  const Filter({Key? key}) : super(key: key);
+
   @override
   _FilterState createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
-  static const List<ItemCategory> _CATEGORIES = [
-    ItemCategory.Electronics,
-    ItemCategory.Transportation
+  static const List<ItemCategory> _categories = [
+    ItemCategory.electronics,
+    ItemCategory.transportation
   ];
-  static const List<Item> _ITEMS = [
-    Item(Icons.computer, "Laptop", ItemCategory.Electronics),
-    Item(Icons.child_friendly, "Stroller", ItemCategory.Transportation),
-    Item(Icons.tv, "TV", ItemCategory.Electronics),
-    Item(Icons.smartphone, "Smartphone", ItemCategory.Electronics),
-    Item(Icons.directions_car, "Car", ItemCategory.Transportation),
-    Item(Icons.motorcycle, "Motorcycle", ItemCategory.Transportation),
+  static const List<Item> _items = [
+    Item(Icons.computer, "Laptop", ItemCategory.electronics),
+    Item(Icons.child_friendly, "Stroller", ItemCategory.transportation),
+    Item(Icons.tv, "TV", ItemCategory.electronics),
+    Item(Icons.smartphone, "Smartphone", ItemCategory.electronics),
+    Item(Icons.directions_car, "Car", ItemCategory.transportation),
+    Item(Icons.motorcycle, "Motorcycle", ItemCategory.transportation),
   ];
-  Set<ItemCategory> _filteredCategories =
-      Set.from([ItemCategory.Electronics, ItemCategory.Transportation]);
+  final _filteredCategories = <ItemCategory>{
+    ItemCategory.electronics,
+    ItemCategory.transportation
+  };
   late List<Item> _shownItems;
 
   @override
@@ -37,7 +42,7 @@ class _FilterState extends State<Filter> {
       data: ThemeData.light(),
       child: BackdropScaffold(
         appBar: BackdropAppBar(
-          title: Text("Filter Example"),
+          title: const Text("Filter Example"),
         ),
         backLayer: _createBackLayer(),
         subHeader: BackdropSubHeader(
@@ -62,18 +67,18 @@ class _FilterState extends State<Filter> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
+            padding: const EdgeInsets.all(16.0),
+            child: const Text(
               "Check/uncheck categories to show/hide them on the front layer",
             ),
           ),
           ListView.builder(
-            itemCount: _CATEGORIES.length,
+            itemCount: _categories.length,
             itemBuilder: (context, index) => CheckboxListTile(
               onChanged: (bool? checked) =>
-                  _addOrRemoveFilterCategory(checked!, _CATEGORIES[index]),
-              value: _filteredCategories.contains(_CATEGORIES[index]),
-              title: Text(describeEnum(_CATEGORIES[index].toString())),
+                  _addOrRemoveFilterCategory(checked!, _categories[index]),
+              value: _filteredCategories.contains(_categories[index]),
+              title: Text(describeEnum(_categories[index].toString())),
               activeColor: Colors.white,
               checkColor: Theme.of(context).primaryColor,
             ),
@@ -84,7 +89,7 @@ class _FilterState extends State<Filter> {
 
   void _filterItems() {
     setState(() {
-      _shownItems = _ITEMS
+      _shownItems = _items
           .where((element) => _filteredCategories.contains(element.category))
           .toList();
     });
@@ -108,10 +113,10 @@ class _FilterState extends State<Filter> {
 /// Enum defining the different item categories we have.
 enum ItemCategory {
   /// Electronics item category.
-  Electronics,
+  electronics,
 
   /// Transportation item category.
-  Transportation
+  transportation
 }
 
 /// Class representing an online shop item.
