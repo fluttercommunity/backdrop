@@ -225,8 +225,14 @@ class BackdropScaffold extends StatefulWidget {
   /// See [Scaffold.drawer].
   final Widget? drawer;
 
+  /// See [Scaffold.onDrawerChanged].
+  final DrawerCallback? onDrawerChanged;
+
   /// See [Scaffold.endDrawer].
   final Widget? endDrawer;
+
+  /// See [Scaffold.onEndDrawerChanged].
+  final DrawerCallback? onEndDrawerChanged;
 
   /// See [Scaffold.drawerScrimColor].
   final Color? drawerScrimColor;
@@ -268,6 +274,9 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool endDrawerEnableOpenDragGesture;
 
+  /// See [Scaffold.restorationId].
+  final String? restorationId;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     Key? key,
@@ -300,7 +309,9 @@ class BackdropScaffold extends StatefulWidget {
     this.floatingActionButtonAnimator,
     this.persistentFooterButtons,
     this.drawer,
+    this.onDrawerChanged,
     this.endDrawer,
+    this.onEndDrawerChanged,
     this.bottomNavigationBar,
     this.bottomSheet,
     this.backgroundColor,
@@ -313,6 +324,7 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEdgeDragWidth,
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
+    this.restorationId,
   })  : frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
         super(key: key);
 
@@ -594,7 +606,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
         persistentFooterButtons: widget.persistentFooterButtons,
         drawer: widget.drawer,
+        onDrawerChanged: widget.onDrawerChanged,
         endDrawer: widget.endDrawer,
+        onEndDrawerChanged: widget.onEndDrawerChanged,
         bottomNavigationBar: widget.bottomNavigationBar,
         bottomSheet: widget.bottomSheet,
         backgroundColor: widget.backgroundColor,
@@ -607,6 +621,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
         drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
         endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+        restorationId: widget.restorationId,
       ),
     );
   }
