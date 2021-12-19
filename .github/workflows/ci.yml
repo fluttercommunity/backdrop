@@ -10,9 +10,9 @@ jobs:
       - name: "Checkout repo"
         uses: actions/checkout@v2
       - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: subosito/flutter-action@v1
       - name: "Install dependencies"
-        run: ./.github/workflows/scripts/install-dependencies.sh
+        run: flutter pub get && (cd demo && flutter pub get)
       - name: "Analyze Dart code"
         run: flutter analyze . --fatal-infos
 
@@ -23,9 +23,9 @@ jobs:
       - name: "Checkout repo"
         uses: actions/checkout@v2
       - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: subosito/flutter-action@v1
       - name: "Install dependencies"
-        run: ./.github/workflows/scripts/install-dependencies.sh
+        run: flutter pub get && (cd demo && flutter pub get)
       - name: "Pub Check"
         run: pub publish --dry-run
 
@@ -36,9 +36,9 @@ jobs:
       - name: "Checkout repo"
         uses: actions/checkout@v2
       - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: subosito/flutter-action@v1
       - name: "Install dependencies"
-        run: ./.github/workflows/scripts/install-dependencies.sh
+        run: flutter pub get && (cd demo && flutter pub get)
       - name: "Validate Dart formatting"
         run: |
           flutter format .
