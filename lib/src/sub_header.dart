@@ -32,7 +32,7 @@ class BackdropSubHeader extends StatelessWidget {
   /// Defaults to `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`.
   final EdgeInsets padding;
 
-  /// Flag for adding default leading widget.
+  /// Flag indicating whether to add default leading widget.
   ///
   /// If set to `true`, a leading `Icon(Icons.keyboard_arrow_up)` is added to
   /// the sub-header.
@@ -40,7 +40,7 @@ class BackdropSubHeader extends StatelessWidget {
   /// Defaults to `false`.
   final bool automaticallyImplyLeading;
 
-  /// Flag for adding default trailing widget.
+  /// Flag indicating whether to add default trailing widget.
   ///
   /// If set to `true`, a trailing `Icon(Icons.keyboard_arrow_up)` is added to
   /// the sub-header.
