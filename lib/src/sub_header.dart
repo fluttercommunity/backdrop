@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
 /// A wrapper for adding a sub-header to the used backdrop front layer(s).
+///
 /// This class can be passed to [BackdropScaffold] to specify the sub-header
 /// that should be shown while the front layer is "inactive" (the back layer is
 /// "showing").
@@ -31,8 +32,7 @@ class BackdropSubHeader extends StatelessWidget {
   /// Defaults to `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`.
   final EdgeInsets padding;
 
-  /// Flag indicating whether the leading widget for the sub-header should be
-  /// automatically determined by [BackdropSubHeader].
+  /// Flag for adding default leading widget.
   ///
   /// If set to `true`, a leading `Icon(Icons.keyboard_arrow_up)` is added to
   /// the sub-header.
@@ -40,8 +40,7 @@ class BackdropSubHeader extends StatelessWidget {
   /// Defaults to `false`.
   final bool automaticallyImplyLeading;
 
-  /// Flag indicating whether the trailing widget for the sub-header should be
-  /// automatically determined by [BackdropSubHeader].
+  /// Flag for adding default trailing widget.
   ///
   /// If set to `true`, a trailing `Icon(Icons.keyboard_arrow_up)` is added to
   /// the sub-header.
@@ -49,12 +48,14 @@ class BackdropSubHeader extends StatelessWidget {
   /// Defaults to `true`.
   final bool automaticallyImplyTrailing;
 
-  /// Widget to be shown as leading element to the sub-header. If set, the value
-  /// of [automaticallyImplyLeading] is ignored.
+  /// Widget to be shown as leading element to the sub-header.
+  ///
+  /// If set, the value of [automaticallyImplyLeading] is ignored.
   final Widget? leading;
 
-  /// Widget to be shown as trailing element to the sub-header. If set, the value
-  /// of [automaticallyImplyTrailing] is ignored.
+  /// Widget to be shown as trailing element to the sub-header.
+  ///
+  /// If set, the value of [automaticallyImplyTrailing] is ignored.
   final Widget? trailing;
 
   /// Creates a [BackdropSubHeader] instance.
