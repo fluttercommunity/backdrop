@@ -1,3 +1,7 @@
+## [0.7.1] - 19 December 2021
+
+- **DOCS**: proper(short) first sentence of doc-comments ([#110](https://github.com/fluttercommunity/backdrop/pull/110))
+
 ## [0.7.0] - 19 December 2021
 
 - **DOCS**: added "Awesome Flutter" shield
