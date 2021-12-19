@@ -1,4 +1,4 @@
-name: Deploy Demo
+name: cd
 
 on:
   push:
@@ -8,20 +8,17 @@ on:
 
 jobs:
   deploy-demo:
-    name: Deploy demo app
+    name: "Deploy demo app"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: "Checkout repo"
         uses: actions/checkout@v2
-
-      - name: Setup Flutter
+      - name: "Setup Flutter"
         uses: subosito/flutter-action@v1
-
-      - name: Build demo app for web
+      - name: "Build demo app for web"
         working-directory: demo/
         run: flutter build web --release
-
-      - name: Deploy demo app to Github Pages
+      - name: "Deploy demo app to Github Pages"
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
