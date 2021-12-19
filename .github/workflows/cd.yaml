@@ -13,8 +13,10 @@ jobs:
     steps:
       - name: "Checkout repo"
         uses: actions/checkout@v2
-      - name: "Setup Flutter"
-        uses: subosito/flutter-action@v1
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh stable
+      - name: "Install dependencies"
+        run: ./.github/workflows/scripts/install-dependencies.sh
       - name: "Build demo app for web"
         working-directory: demo/
         run: flutter build web --release

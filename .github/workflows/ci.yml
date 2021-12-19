@@ -4,19 +4,43 @@ on: [push, pull_request]
 
 jobs:
   analyze:
-    name: "Analyze dart code"
+    name: "Flutter Analyze"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repo"
         uses: actions/checkout@v2
-      - name: "Setup Flutter"
-        uses: subosito/flutter-action@v1
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh stable
       - name: "Install dependencies"
-        run: |
-          flutter pub get
-          (cd demo && flutter pub get)
+        run: ./.github/workflows/scripts/install-dependencies.sh
       - name: "Analyze Dart code"
         run: flutter analyze . --fatal-infos
+
+  pub_dev_publish_check:
+    name: "Check pub.dev requirements"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh stable
+      - name: "Install dependencies"
+        run: ./.github/workflows/scripts/install-dependencies.sh
+      - name: "Pub Check"
+        run: |
+          melos exec -c 1 --no-private --ignore="*example*" -- \
+            pub publish --dry-run
+
+  check_formatting:
+    name: "Check code formatting"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh stable
+      - name: "Install dependencies"
+        run: ./.github/workflows/scripts/install-dependencies.sh
       - name: "Validate Dart formatting"
         run: |
           flutter format .
