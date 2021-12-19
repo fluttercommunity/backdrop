@@ -1,0 +1,45 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  analyze:
+    name: "Flutter Analyze"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v1
+      - name: "Install dependencies"
+        run: flutter pub get && (cd demo && flutter pub get)
+      - name: "Analyze Dart code"
+        run: flutter analyze . --fatal-infos
+
+  pub_dev_publish_check:
+    name: "Check pub.dev requirements"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v1
+      - name: "Install dependencies"
+        run: flutter pub get && (cd demo && flutter pub get)
+      - name: "Pub Check"
+        run: pub publish --dry-run
+
+  check_formatting:
+    name: "Check code formatting"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v1
+      - name: "Install dependencies"
+        run: flutter pub get && (cd demo && flutter pub get)
+      - name: "Validate Dart formatting"
+        run: |
+          flutter format .
+          ./.github/workflows/scripts/validate-formatting.sh
