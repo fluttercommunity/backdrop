@@ -29,7 +29,8 @@ linter:
     - slash_for_doc_comments
     # pub related: https://dart.dev/tools/linter-rules#pub-rules
     - depend_on_referenced_packages
-    - secure_pubspec_urls
+    # TODO: this is currently not available in flutter-stable, uncomment once available
+    #- secure_pubspec_urls
     # import related
     - always_use_package_imports
     - implementation_imports

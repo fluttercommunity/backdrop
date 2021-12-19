@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 /// functionality.
 ///
 /// It is internally implemented using the [AppBar] class. What differs from
-/// the [AppBar] implementation is the behaviour of [leading], 
+/// the [AppBar] implementation is the behaviour of [leading],
 /// [automaticallyImplyLeading] and [elevation].
 ///
 /// Usage example:

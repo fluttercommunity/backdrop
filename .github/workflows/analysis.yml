@@ -5,10 +5,21 @@ jobs:
   package-analysis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # required
-      - uses: axel-op/dart-package-analyzer@v3
-        with:
-          # Required:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          # Optional:
-          #relativePath: packages/mypackage/
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+          (cd demo && flutter pub get)
+
+      - name: Analyze Dart
+        run: flutter analyze . --fatal-infos
+
+      - name: Validate Dart formatting
+        run: |
+          flutter format .
+          ./.github/workflows/scripts/validate-formatting.sh
