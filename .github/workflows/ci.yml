@@ -27,9 +27,7 @@ jobs:
       - name: "Install dependencies"
         run: ./.github/workflows/scripts/install-dependencies.sh
       - name: "Pub Check"
-        run: |
-          melos exec -c 1 --no-private --ignore="*example*" -- \
-            pub publish --dry-run
+        run: pub publish --dry-run
 
   check_formatting:
     name: "Check code formatting"
