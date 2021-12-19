@@ -113,6 +113,11 @@ class BackdropScaffold extends StatefulWidget {
   /// ```
   final BorderRadius frontLayerBorderRadius;
 
+  /// Defines the elevation applied to the front layer.
+  ///
+  /// Defaults to 1.
+  final double frontLayerElevation;
+
   /// Indicates the front layer should minimize to the back layer's bottom edge.
   ///
   /// Otherwise, see [headerHeight] to specify this value.
@@ -290,6 +295,7 @@ class BackdropScaffold extends StatefulWidget {
       topLeft: Radius.circular(16),
       topRight: Radius.circular(16),
     ),
+    this.frontLayerElevation = 1,
     this.stickyFrontLayer = false,
     this.revealBackLayerAtStart = false,
     this.animationCurve = Curves.ease,
@@ -538,7 +544,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildFrontPanel(BuildContext context) {
     return Material(
       color: widget.frontLayerBackgroundColor,
-      elevation: 1,
+      elevation: widget.frontLayerElevation,
       borderRadius: widget.frontLayerBorderRadius,
       child: ClipRRect(
         borderRadius: widget.frontLayerBorderRadius,
