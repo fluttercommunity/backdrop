@@ -11,10 +11,15 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
 
-      - run: flutter pub get
-      - run: (cd demo && flutter pub get)
+      - name: Running pub get
+        run: |
+          flutter pub get
+          (cd demo && flutter pub get)
 
       - name: Analyze Dart
-        uses: zgosalvez/github-actions-analyze-dart@v1
-        with:
-          fail-on-warnings: true
+        run: flutter anayze . --fatal-infos
+
+      - name: Validate Formatting
+        run: |
+          flutter format .
+          ./validate-formatting.sh
