@@ -17,7 +17,7 @@ jobs:
           (cd demo && flutter pub get)
 
       - name: Analyze Dart
-        run: flutter anayze . --fatal-infos
+        run: flutter analyze . --fatal-infos
 
       - name: Validate Dart formatting
         run: |
