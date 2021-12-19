@@ -11,7 +11,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
 
-      - name: Running pub get
+      - name: Install dependencies
         run: |
           flutter pub get
           (cd demo && flutter pub get)
@@ -19,7 +19,7 @@ jobs:
       - name: Analyze Dart
         run: flutter anayze . --fatal-infos
 
-      - name: Validate Dart Formatting
+      - name: Validate Dart formatting
         run: |
           flutter format .
           ./validate-formatting.sh
