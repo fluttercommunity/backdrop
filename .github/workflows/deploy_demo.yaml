@@ -10,16 +10,17 @@ jobs:
   deploy-for-web:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: beta
-      - run: flutter config --enable-web
-      - run: flutter pub get
-      - name: Build for web
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+
+      - name: Build demo app for web
         working-directory: demo/
         run: flutter build web --release
-      - name: Deploy
+
+      - name: Deploy demo app to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
