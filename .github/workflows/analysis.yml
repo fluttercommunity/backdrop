@@ -19,7 +19,7 @@ jobs:
       - name: Analyze Dart
         run: flutter anayze . --fatal-infos
 
-      - name: Validate Formatting
+      - name: Validate Dart Formatting
         run: |
           flutter format .
           ./validate-formatting.sh
