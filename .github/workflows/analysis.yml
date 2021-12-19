@@ -22,4 +22,4 @@ jobs:
       - name: Validate Dart formatting
         run: |
           flutter format .
-          ./validate-formatting.sh
+          ./.github/workflows/scripts/validate-formatting.sh
