@@ -150,12 +150,13 @@ class BackdropScaffold extends StatefulWidget {
   /// If null, the color is handled automatically according to the theme.
   final Color? frontLayerBackgroundColor;
 
-  /// Fraction of available height the [frontLayer] will occupy when active (back layer concealed).
+  /// Fraction of available height the [frontLayer] will occupy when active
+  /// (back layer concealed).
   ///
   /// The value is clamped to (0, 1).
   ///
   /// Note the front layer will not fully conceal the back layer when
-  /// this value is less than 1.  A scrim will cover the
+  /// this value is less than 1. A scrim will cover the
   /// partially concealed back layer; see [backLayerScrim].
   ///
   /// Defaults to 1.
