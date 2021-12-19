@@ -1,3 +1,20 @@
+## [0.7.0] - 19 December 2021
+
+- **DOCS**: added "Awesome Flutter" shield
+- **CHORE**: migrated to flutter_lints with additional rules ([#99](https://github.com/fluttercommunity/backdrop/pull/99))
+- **CI**: added check for proper PR title based on conventionalcommits.org ([#101](https://github.com/fluttercommunity/backdrop/pull/101))
+- **STYLE**: fix all lint issues ([#100](https://github.com/fluttercommunity/backdrop/pull/100))
+- **DOCS**: added api-doc links to quick links section
+- **BREAKING** **REFACTOR**: removed all deprecated members ([#102](https://github.com/fluttercommunity/backdrop/pull/102))
+- **BREAKING** **REFACTOR**: moved all files to src/ dir ([#103](https://github.com/fluttercommunity/backdrop/pull/103))
+- **DOCS**: remove note for flutter v1 and minor formatting
+- **FEAT**: synced members of Scaffold and AppBar ([#104](https://github.com/fluttercommunity/backdrop/pull/104))
+- **DOCS**: start doc-comments with a single sentence summary ([#105](https://github.com/fluttercommunity/backdrop/pull/105))
+- **CI**: using flutter analyze and checking correct formatting ([#107](https://github.com/fluttercommunity/backdrop/pull/107))
+- **FEAT**: added double `frontLayerElevation` member ([#109](https://github.com/fluttercommunity/backdrop/pull/109))
+- **CI**: restructured, cleaned, added pub.dev checks ([#108](https://github.com/fluttercommunity/backdrop/pull/108))
+- **CHORE**: default gitignore for idea added
+
 ## [0.6.2] - 28 June 2021
 
 * doc: "all-contributors" generated through CLI

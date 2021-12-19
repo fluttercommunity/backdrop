@@ -13,7 +13,10 @@
       "contributions": [
         "code",
         "ideas",
-        "review"
+        "review",
+        "doc",
+        "infra",
+        "maintenance"
       ]
     },
     {
@@ -27,7 +30,8 @@
         "bug",
         "review",
         "example",
-        "infra"
+        "infra",
+        "maintenance"
       ]
     },
     {
@@ -206,6 +210,24 @@
       "profile": "https://github.com/sachin-dahal",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "hendrychjan",
+      "name": "Jan Hendrych",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61143018?v=4",
+      "profile": "https://github.com/hendrychjan",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "pascalwild",
+      "name": "Pascal Wild",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14974414?v=4",
+      "profile": "https://www.sportalliance.com/",
+      "contributions": [
+        "bug"
       ]
     }
   ],
