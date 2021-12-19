@@ -2,7 +2,8 @@ name: analysis
 on: [push, pull_request]
 
 jobs:
-  package-analysis:
+  analyze:
+    name: Analyze dart code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
