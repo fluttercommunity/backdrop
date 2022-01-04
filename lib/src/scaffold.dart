@@ -120,7 +120,7 @@ class BackdropScaffold extends StatefulWidget {
 
   /// Defines the shadow surrounding the front layer (cast upon the app bar).
   ///
-  /// Defaults to an empty list in constructor.
+  /// Defaults to null.
   final List<BoxShadow>? frontLayerBoxShadow;
 
   /// Indicates the front layer should minimize to the back layer's bottom edge.
@@ -301,7 +301,7 @@ class BackdropScaffold extends StatefulWidget {
       topRight: Radius.circular(16),
     ),
     this.frontLayerElevation = 1,
-    this.frontLayerBoxShadow = [],
+    this.frontLayerBoxShadow,
     this.stickyFrontLayer = false,
     this.revealBackLayerAtStart = false,
     this.animationCurve = Curves.ease,
@@ -578,10 +578,14 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         ),
       ),
     );
-    if (widget.frontLayerBoxShadow.isEmpty) {
+    if (widget.frontLayerBoxShadow == null ||
+        widget.frontLayerBoxShadow!.isEmpty) {
       return frontPanel;
     }
-    // wrap in shadow if one is provided
+    return _wrapInShadow(frontPanel);
+  }
+
+  Widget _wrapInShadow(Widget frontPanel) {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(boxShadow: widget.frontLayerBoxShadow),
