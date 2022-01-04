@@ -586,12 +586,10 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _wrapInShadow(Widget frontPanel) {
-    return Stack(children: <Widget>[
-      Container(
-        decoration: BoxDecoration(boxShadow: widget.frontLayerBoxShadow),
-      ),
-      frontPanel,
-    ]);
+    return Container(
+      decoration: BoxDecoration(boxShadow: widget.frontLayerBoxShadow),
+      child: frontPanel,
+    );
   }
 
   Future<bool> _willPopCallback(BuildContext context) async {
