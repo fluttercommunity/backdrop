@@ -356,7 +356,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Key for accessing the underlying [ScaffoldState].
   ///
   /// It exposes state of [Scaffold] used internally by [BackdropScaffold].
-  GlobalKey<ScaffoldState>? scaffoldKey;
+  late GlobalKey<ScaffoldState> scaffoldKey;
   double _backPanelHeight = 0;
   double _subHeaderHeight = 0;
 
