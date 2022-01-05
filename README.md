@@ -111,7 +111,7 @@ To access backdrop related functionalities, use `Backdrop.of(context)` to get un
 
 `BackdropScaffoldState` exposes various properties and methods like:
 - properties
-  - `controller -> AnimationController`
+  - `animationController -> AnimationController`
   - `scaffoldKey -> GlobalKey<ScaffoldState> `
   - `isBackLayerConcealed -> bool`
   - `isBackLayerRevealed -> bool`
