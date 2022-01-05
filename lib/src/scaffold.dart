@@ -578,10 +578,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         ),
       ),
     );
-    if (widget.frontLayerBoxShadow == null ||
-        widget.frontLayerBoxShadow!.isEmpty) {
-      return frontPanel;
-    }
+    if (widget.frontLayerBoxShadow == null) return frontPanel;
+    
     return _wrapInShadow(frontPanel);
   }
 
