@@ -580,11 +580,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       ),
     );
     if (widget.frontLayerBoxShadow == null) return frontPanel;
-    
-    return _wrapInShadow(frontPanel);
-  }
-
-  Widget _wrapInShadow(Widget frontPanel) {
     return Container(
       decoration: BoxDecoration(boxShadow: widget.frontLayerBoxShadow),
       child: frontPanel,
