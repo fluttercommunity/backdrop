@@ -549,7 +549,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   }
 
   Widget _buildFrontPanel(BuildContext context) {
-    var frontPanel = Material(
+    final frontPanel = Material(
       color: widget.frontLayerBackgroundColor,
       elevation: widget.frontLayerElevation,
       borderRadius: widget.frontLayerBorderRadius,
@@ -579,10 +579,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         ),
       ),
     );
-    if (widget.frontLayerBoxShadow == null ||
-        widget.frontLayerBoxShadow!.isEmpty) {
-      return frontPanel;
-    }
+    if (widget.frontLayerBoxShadow == null) return frontPanel;
+    
     return _wrapInShadow(frontPanel);
   }
 
