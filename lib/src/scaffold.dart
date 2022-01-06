@@ -111,7 +111,27 @@ class BackdropScaffold extends StatefulWidget {
   ///     topRight: Radius.circular(16),
   /// )
   /// ```
-  final BorderRadius frontLayerBorderRadius;
+  ///
+  /// > NOTE: This is deprecated and will be removed in future. Use
+  /// > [frontLayerShape] instead.
+  @Deprecated(
+      "This member is deprecated since v0.7.1 and will be removed in future. "
+      "Use `frontLayerShape` instead.")
+  final BorderRadius? frontLayerBorderRadius;
+
+  /// Defines the [ShapeBorder] applied to the front layer.
+  ///
+  ///
+  /// Defaults to
+  /// ```dart
+  /// const RoundedRectangleBorder(
+  ///     borderRadius: BorderRadius.only(
+  ///         topLeft: Radius.circular(16),
+  ///         topRight: Radius.circular(16),
+  ///     ),
+  /// )
+  /// ```
+  final ShapeBorder frontLayerShape;
 
   /// Defines the elevation applied to the front layer.
   ///
@@ -291,10 +311,13 @@ class BackdropScaffold extends StatefulWidget {
     this.subHeader,
     this.subHeaderAlwaysActive = true,
     this.headerHeight,
-    this.frontLayerBorderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(16),
-      topRight: Radius.circular(16),
+    ShapeBorder frontLayerShape = const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
     ),
+    this.frontLayerBorderRadius,
     this.frontLayerElevation = 1,
     this.stickyFrontLayer = false,
     this.revealBackLayerAtStart = false,
@@ -331,7 +354,10 @@ class BackdropScaffold extends StatefulWidget {
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
     this.restorationId,
-  })  : frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
+  })  : frontLayerShape = frontLayerBorderRadius != null
+            ? RoundedRectangleBorder(borderRadius: frontLayerBorderRadius)
+            : frontLayerShape,
+        frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
         super(key: key);
 
   @override
@@ -545,9 +571,9 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     return Material(
       color: widget.frontLayerBackgroundColor,
       elevation: widget.frontLayerElevation,
-      borderRadius: widget.frontLayerBorderRadius,
-      child: ClipRRect(
-        borderRadius: widget.frontLayerBorderRadius,
+      shape: widget.frontLayerShape,
+      child: ClipPath(
+        clipper: ShapeBorderClipper(shape: widget.frontLayerShape),
         child: Stack(
           children: <Widget>[
             Column(
