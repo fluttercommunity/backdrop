@@ -338,7 +338,6 @@ class BackdropScaffold extends StatefulWidget {
     this.endDrawerEnableOpenDragGesture = true,
     this.restorationId,
   })  : frontLayerActiveFactor = frontLayerActiveFactor.clamp(0, 1).toDouble(),
-        assert(frontLayerBoxShadow == null || frontLayerBoxShadow!.isNotEmpty),
         super(key: key);
 
   @override
