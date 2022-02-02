@@ -29,7 +29,7 @@ class Backdrop extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<Backdrop>()!.data;
 
   @override
-  bool updateShouldNotify(Backdrop oldWidget) => true;
+  bool updateShouldNotify(Backdrop oldWidget) => oldWidget.data != data;
 }
 
 /// Implements the basic functionality of backdrop.
