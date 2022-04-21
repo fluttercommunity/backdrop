@@ -31,7 +31,7 @@ jobs:
       - name: "Install dependencies"
         run: flutter pub get && (cd demo && flutter pub get)
       - name: "Pub Check"
-        run: pub publish --dry-run
+        run: dart pub publish --dry-run
 
   check_formatting:
     name: "Check code formatting"
