@@ -1,3 +1,10 @@
+## [0.7.2] - 3 May 2022
+
+- **DOCS**: remove mention of deprecated member
+- **REFACTOR**: making BackdropScaffoldState.scaffoldKey non-null with `late` ([#114](https://github.com/fluttercommunity/backdrop/pull/114))
+- **FEAT**: added frontLayerShape in-place of frontLayerBorderRadius in `BackdropScaffold` ([#116](https://github.com/fluttercommunity/backdrop/pull/116))
+- **perf**: only rebuild widgets when BackdropScaffoldState changed ([#119](https://github.com/fluttercommunity/backdrop/pull/119))
+
 ## [0.7.1] - 19 December 2021
 
 - **DOCS**: proper(short) first sentence of doc-comments ([#110](https://github.com/fluttercommunity/backdrop/pull/110))
