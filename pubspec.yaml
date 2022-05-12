@@ -1,6 +1,6 @@
 name: backdrop
 description: Backdrop implementation in dart. (https://material.io/design/components/backdrop.html)
-version: 0.7.2
+version: 0.8.0
 homepage: https://github.com/fluttercommunity/backdrop
 documentation: https://github.com/fluttercommunity/backdrop
 maintainer: Harsh Bhikadia (@daadu)
@@ -16,7 +16,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
