@@ -710,10 +710,10 @@ class _MeasureSizeState extends State<_MeasureSize> {
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance!.addPostFrameCallback((_) => _notify());
+    SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
     return NotificationListener<SizeChangedLayoutNotification>(
       onNotification: (_) {
-        SchedulerBinding.instance!.addPostFrameCallback((_) => _notify());
+        SchedulerBinding.instance.addPostFrameCallback((_) => _notify());
         return true;
       },
       child: SizeChangedLayoutNotifier(
