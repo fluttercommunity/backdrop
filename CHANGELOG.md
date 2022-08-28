@@ -1,3 +1,8 @@
+## [0.8.1] - 28 August 2022
+
+- **DOCS**: fix badge links
+- **CHORE**: move to OSI-approved license
+
 ## [0.8.0] - 12 May 2022
 
 - **FIX**: SchedulerBinding.instance is now null-safe ([#124](https://github.com/fluttercommunity/backdrop/pull/124)) ([#125](https://github.com/fluttercommunity/backdrop/pull/125))
