@@ -11,9 +11,9 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-23-orange.svg" alt="All Contributors" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/pub%20points" alt="pub points"></a>
-<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/popularity" alt="popularity"></a>
-<a href="https://pub.dev/packages/backdrop/score"><img src="https://badges.bar/backdrop/likes" alt="likes"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://img.shields.io/pub/points/backdrop?logo=dart" alt="pub points"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://img.shields.io/pub/popularity/backdrop?logo=dart" alt="popularity"></a>
+<a href="https://pub.dev/packages/backdrop/score"><img src="https://img.shields.io/pub/likes/backdrop?logo=dart" alt="likes"></a>
 <a href="https://github.com/fluttercommunity/backdrop/issues"><img src="https://img.shields.io/github/issues/fluttercommunity/backdrop?logo=github" alt="GitHub issues"></a>
 <a href="https://github.com/fluttercommunity/backdrop/milestone/1"><img src="https://img.shields.io/github/milestones/progress-percent/fluttercommunity/backdrop/1?logo=github" alt="GitHub milestone"></a>
 <a href="https://github.com/fluttercommunity/backdrop/stargazers"><img src="https://img.shields.io/github/stars/fluttercommunity/backdrop?logo=github" alt="GitHub stars"></a>
