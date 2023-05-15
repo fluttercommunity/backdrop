@@ -79,13 +79,6 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.foregroundColor].
   final Color? foregroundColor;
 
-  /// See [AppBar.brightness].
-  @Deprecated(
-    'This property is no longer used, please use systemOverlayStyle instead. '
-    'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
-  )
-  final Brightness? brightness;
-
   /// See [AppBar.iconTheme].
   final IconThemeData? iconTheme;
 
