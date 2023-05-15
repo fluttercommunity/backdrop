@@ -85,13 +85,6 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.actionsIconTheme].
   final IconThemeData? actionsIconTheme;
 
-  /// See [AppBar.textTheme].
-  @Deprecated(
-    'This property is no longer used, please use toolbarTextStyle and titleTextStyle instead. '
-    'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
-  )
-  final TextTheme? textTheme;
-
   /// See [AppBar.primary].
   final bool primary;
 
@@ -147,11 +140,6 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.foregroundColor,
     this.iconTheme,
     this.actionsIconTheme,
-    @Deprecated(
-      'This property is no longer used, please use toolbarTextStyle and titleTextStyle instead. '
-      'This feature was deprecated after Flutter v2.4.0-0.0.pre.',
-    )
-        this.textTheme,
     this.primary = true,
     this.centerTitle,
     this.excludeHeaderSemantics = false,
@@ -185,8 +173,6 @@ class BackdropAppBar extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: foregroundColor,
       iconTheme: iconTheme,
       actionsIconTheme: actionsIconTheme,
-      // ignore: deprecated_member_use, deprecated_member_use_from_same_package
-      textTheme: textTheme,
       primary: primary,
       centerTitle: centerTitle,
       excludeHeaderSemantics: excludeHeaderSemantics,
