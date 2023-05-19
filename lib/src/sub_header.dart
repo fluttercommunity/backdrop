@@ -74,7 +74,7 @@ class BackdropSubHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget _buildAutomaticLeadingOrTrailing(BuildContext context) =>
+    Widget buildAutomaticLeadingOrTrailing(BuildContext context) =>
         FadeTransition(
           opacity: Tween(begin: 1.0, end: 0.0)
               .animate(Backdrop.of(context).animationController),
@@ -90,14 +90,14 @@ class BackdropSubHeader extends StatelessWidget {
             children: <Widget>[
               leading ??
                   (automaticallyImplyLeading
-                      ? _buildAutomaticLeadingOrTrailing(context)
+                      ? buildAutomaticLeadingOrTrailing(context)
                       : Container()),
               Expanded(
                 child: title,
               ),
               trailing ??
                   (automaticallyImplyTrailing
-                      ? _buildAutomaticLeadingOrTrailing(context)
+                      ? buildAutomaticLeadingOrTrailing(context)
                       : Container()),
             ],
           ),

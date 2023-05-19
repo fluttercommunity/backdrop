@@ -135,7 +135,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                   "Laptop",
                   style: Theme.of(context)
                       .textTheme
-                      .headline3!
+                      .displaySmall!
                       .apply(color: Colors.black),
                 ),
               ],

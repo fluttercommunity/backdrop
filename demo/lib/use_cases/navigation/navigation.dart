@@ -63,7 +63,7 @@ class _HomePage extends StatelessWidget {
             margin: const EdgeInsets.all(16.0),
             child: Text(
               "Welcome to the online shop!",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
           ),

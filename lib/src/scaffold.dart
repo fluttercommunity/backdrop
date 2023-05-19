@@ -585,7 +585,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
                   onChange: (size) =>
                       setState(() => _subHeaderHeight = size.height),
                   child: DefaultTextStyle(
-                    style: Theme.of(context).textTheme.subtitle1!,
+                    style: Theme.of(context).textTheme.titleMedium!,
                     child: widget.subHeader ?? Container(),
                   ),
                 ),

@@ -94,7 +94,7 @@ class ContextualInfo extends StatelessWidget {
                   "Laptop",
                   style: Theme.of(context)
                       .textTheme
-                      .headline3!
+                      .displaySmall!
                       .apply(color: Colors.black),
                 ),
               ],
@@ -157,7 +157,7 @@ class ContextualInfo extends StatelessWidget {
               title: Text("Reviews",
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleLarge!
                       .apply(color: Colors.black)),
             ),
             const ListTile(
