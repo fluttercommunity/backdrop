@@ -1,3 +1,8 @@
+## [0.9.0] - 19 May 2023
+
+- **CHORE**: upgrade to Flutter 3.10.0
+- **CHORE**: remove deprecated members in BackdropAppBar
+
 ## [0.8.1] - 28 August 2022
 
 - **DOCS**: fix badge links
