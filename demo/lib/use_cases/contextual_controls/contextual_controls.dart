@@ -42,9 +42,9 @@ class _ContextualControlsState extends State<ContextualControls> {
   Widget _createBackLayer(BuildContext context) => ListView(
         children: [
           ListTile(
-            leading: Column(
+            leading: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   "Color",
                 ),
@@ -67,9 +67,9 @@ class _ContextualControlsState extends State<ContextualControls> {
             ),
           ),
           ListTile(
-              leading: Column(
+              leading: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text("Resolution"),
                 ],
               ),
@@ -87,9 +87,9 @@ class _ContextualControlsState extends State<ContextualControls> {
                     });
                   })),
           ListTile(
-            leading: Column(
+            leading: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text("RAM"),
               ],
             ),
@@ -142,12 +142,12 @@ class _ContextualControlsState extends State<ContextualControls> {
             ),
             Container(
               margin: const EdgeInsets.all(8.0),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
                       Icon(Icons.star, color: Colors.grey),
@@ -155,7 +155,7 @@ class _ContextualControlsState extends State<ContextualControls> {
                       Icon(Icons.star_half, color: Colors.grey),
                     ],
                   ),
-                  const Text(
+                  Text(
                     "73 Reviews",
                     style: TextStyle(color: Colors.grey),
                   )
@@ -186,9 +186,9 @@ class _ContextualControlsState extends State<ContextualControls> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [Text("Resolution")],
+                    children: [Text("Resolution")],
                   ),
                   Text(
                     "${_resolution.toString()}\"",
@@ -204,9 +204,9 @@ class _ContextualControlsState extends State<ContextualControls> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [Text("RAM")],
+                    children: [Text("RAM")],
                   ),
                   Text(
                     "${_ram.toString()} GB",
