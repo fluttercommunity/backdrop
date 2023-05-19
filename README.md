@@ -176,6 +176,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/hendrychjan"><img src="https://avatars.githubusercontent.com/u/61143018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hendrych</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Ahendrychjan" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://www.sportalliance.com/"><img src="https://avatars.githubusercontent.com/u/14974414?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pascal Wild</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Apascalwild" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/openWebX"><img src="https://avatars.githubusercontent.com/u/125310?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jens Reinemuth</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/pull/128" title="Code">💻</a></td>
   </tr>
 </table>
 
