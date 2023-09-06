@@ -237,7 +237,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/125310?v=4",
       "profile": "https://github.com/openWebX",
       "contributions": [
-        "bug"
+        "code"
       ]
     },
     {
@@ -245,6 +245,15 @@
       "name": "tobolski",
       "avatar_url": "https://avatars.githubusercontent.com/u/13032980?v=4",
       "profile": "https://github.com/tobolski",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "pishguy",
+      "name": "Mahdi Pishguy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6617583?v=4",
+      "profile": "https://github.com/pishguy",
       "contributions": [
         "bug"
       ]

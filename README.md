@@ -9,7 +9,7 @@
 <a href="https://github.com/Solido/awesome-flutter"><img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true" /></a>  
 <a href="https://gitter.im/flutter-backdrop/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/flutter-backdrop/community.svg" alt="Gitter"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-25-orange.svg" alt="All Contributors" /></a>
+<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-26-orange.svg" alt="All Contributors" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://img.shields.io/pub/points/backdrop?logo=dart" alt="pub points"></a>
 <a href="https://pub.dev/packages/backdrop/score"><img src="https://img.shields.io/pub/popularity/backdrop?logo=dart" alt="popularity"></a>
@@ -177,8 +177,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/hendrychjan"><img src="https://avatars.githubusercontent.com/u/61143018?v=4?s=100" width="100px;" alt="Jan Hendrych"/><br /><sub><b>Jan Hendrych</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Ahendrychjan" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.sportalliance.com/"><img src="https://avatars.githubusercontent.com/u/14974414?v=4?s=100" width="100px;" alt="Pascal Wild"/><br /><sub><b>Pascal Wild</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Apascalwild" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/openWebX"><img src="https://avatars.githubusercontent.com/u/125310?v=4?s=100" width="100px;" alt="Jens Reinemuth"/><br /><sub><b>Jens Reinemuth</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3AopenWebX" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/openWebX"><img src="https://avatars.githubusercontent.com/u/125310?v=4?s=100" width="100px;" alt="Jens Reinemuth"/><br /><sub><b>Jens Reinemuth</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/commits?author=openWebX" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tobolski"><img src="https://avatars.githubusercontent.com/u/13032980?v=4?s=100" width="100px;" alt="tobolski"/><br /><sub><b>tobolski</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Atobolski" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pishguy"><img src="https://avatars.githubusercontent.com/u/6617583?v=4?s=100" width="100px;" alt="Mahdi Pishguy"/><br /><sub><b>Mahdi Pishguy</b></sub></a><br /><a href="https://github.com/fluttercommunity/backdrop/issues?q=author%3Apishguy" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>

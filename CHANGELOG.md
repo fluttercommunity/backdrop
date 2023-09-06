@@ -1,3 +1,7 @@
+## [0.9.1] - 6 September 2023
+
+- **FEAT**: feat: added concealBacklayerOnBackButton option ([#133](https://github.com/fluttercommunity/backdrop/pull/133))
+
 ## [0.9.0] - 19 May 2023
 
 - **CHORE**: upgrade to Flutter 3.10.0
