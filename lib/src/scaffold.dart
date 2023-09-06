@@ -611,6 +611,20 @@ class BackdropScaffoldState extends State<BackdropScaffold>
         end: widget.backLayerScrim,
       );
 
+  Widget _wrapWillPopScope(BuildContext context, {required Widget child}) {
+    if (!widget.concealBacklayerOnBackButton) return child;
+    return WillPopScope(
+      onWillPop: () async {
+        if (isBackLayerRevealed) {
+          concealBackLayer();
+          return false;
+        }
+        return true;
+      },
+      child: child,
+    );
+  }
+
   Widget _buildBody(BuildContext context) => _wrapWillPopScope(
         context,
         child: Scaffold(
@@ -653,20 +667,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
           restorationId: widget.restorationId,
         ),
       );
-
-  Widget _wrapWillPopScope(BuildContext context, {required Widget child}) =>
-      !widget.concealBacklayerOnBackButton
-          ? child
-          : WillPopScope(
-              onWillPop: () async {
-                if (isBackLayerRevealed) {
-                  concealBackLayer();
-                  return false;
-                }
-                return true;
-              },
-              child: child,
-            );
 
   Container _buildBackLayerScrim() => Container(
       color: _backLayerScrimColorTween.evaluate(animationController),
