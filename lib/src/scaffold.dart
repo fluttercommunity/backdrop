@@ -606,67 +606,67 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  Future<bool> _willPopCallback(BuildContext context) async {
-    if (widget.concealBacklayerOnBackButton && isBackLayerRevealed) {
-      concealBackLayer();
-      return false;
-    }
-    return true;
-  }
-
   ColorTween _buildBackLayerScrimColorTween() => ColorTween(
         begin: Colors.transparent,
         end: widget.backLayerScrim,
       );
 
-  Widget _buildBody(BuildContext context) {
-    final bodyWidget = Scaffold(
-      key: scaffoldKey,
-      appBar: widget.appBar,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              _buildBackPanel(),
-              PositionedTransition(
-                rect: _getPanelAnimation(context, constraints),
-                child: _buildFrontPanel(context),
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: widget.floatingActionButton,
-      floatingActionButtonLocation: widget.floatingActionButtonLocation,
-      floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-      persistentFooterButtons: widget.persistentFooterButtons,
-      drawer: widget.drawer,
-      onDrawerChanged: widget.onDrawerChanged,
-      endDrawer: widget.endDrawer,
-      onEndDrawerChanged: widget.onEndDrawerChanged,
-      bottomNavigationBar: widget.bottomNavigationBar,
-      bottomSheet: widget.bottomSheet,
-      backgroundColor: widget.backgroundColor,
-      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-      primary: widget.primary,
-      drawerDragStartBehavior: widget.drawerDragStartBehavior,
-      extendBody: widget.extendBody,
-      extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-      drawerScrimColor: widget.drawerScrimColor,
-      drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-      drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
-      endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
-      restorationId: widget.restorationId,
-    );
+  Widget _buildBody(BuildContext context) => _wrapWillPopScope(
+        context,
+        child: Scaffold(
+          key: scaffoldKey,
+          appBar: widget.appBar,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              return Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  _buildBackPanel(),
+                  PositionedTransition(
+                    rect: _getPanelAnimation(context, constraints),
+                    child: _buildFrontPanel(context),
+                  ),
+                ],
+              );
+            },
+          ),
+          floatingActionButton: widget.floatingActionButton,
+          floatingActionButtonLocation: widget.floatingActionButtonLocation,
+          floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+          persistentFooterButtons: widget.persistentFooterButtons,
+          drawer: widget.drawer,
+          onDrawerChanged: widget.onDrawerChanged,
+          endDrawer: widget.endDrawer,
+          onEndDrawerChanged: widget.onEndDrawerChanged,
+          bottomNavigationBar: widget.bottomNavigationBar,
+          bottomSheet: widget.bottomSheet,
+          backgroundColor: widget.backgroundColor,
+          resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+          primary: widget.primary,
+          drawerDragStartBehavior: widget.drawerDragStartBehavior,
+          extendBody: widget.extendBody,
+          extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+          drawerScrimColor: widget.drawerScrimColor,
+          drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+          drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+          endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+          restorationId: widget.restorationId,
+        ),
+      );
 
-    return widget.concealBacklayerOnBackButton
-        ? WillPopScope(
-            onWillPop: () => _willPopCallback(context),
-            child: bodyWidget,
-          )
-        : bodyWidget;
-  }
+  Widget _wrapWillPopScope(BuildContext context, {required Widget child}) =>
+      !widget.concealBacklayerOnBackButton
+          ? child
+          : WillPopScope(
+              onWillPop: () async {
+                if (isBackLayerRevealed) {
+                  concealBackLayer();
+                  return false;
+                }
+                return true;
+              },
+              child: child,
+            );
 
   Container _buildBackLayerScrim() => Container(
       color: _backLayerScrimColorTween.evaluate(animationController),
