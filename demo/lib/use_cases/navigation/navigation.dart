@@ -7,7 +7,7 @@ class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
 
   @override
-  _NavigationState createState() => _NavigationState();
+  State<Navigation> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
@@ -87,6 +87,7 @@ class _ItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true,
       children: const [
         ListTile(
           leading: Icon(Icons.computer),
@@ -105,7 +106,6 @@ class _ItemsPage extends StatelessWidget {
           title: Text("Car"),
         ),
       ],
-      shrinkWrap: true,
     );
   }
 }

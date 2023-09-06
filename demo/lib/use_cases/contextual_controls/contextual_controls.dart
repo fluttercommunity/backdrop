@@ -7,7 +7,7 @@ class ContextualControls extends StatefulWidget {
   const ContextualControls({Key? key}) : super(key: key);
 
   @override
-  _ContextualControlsState createState() => _ContextualControlsState();
+  State<ContextualControls> createState() => _ContextualControlsState();
 }
 
 class _ContextualControlsState extends State<ContextualControls> {
@@ -40,6 +40,7 @@ class _ContextualControlsState extends State<ContextualControls> {
   }
 
   Widget _createBackLayer(BuildContext context) => ListView(
+        shrinkWrap: true,
         children: [
           ListTile(
             leading: const Column(
@@ -115,7 +116,6 @@ class _ContextualControlsState extends State<ContextualControls> {
                     onPressed: () => Backdrop.of(context).fling(),
                   ))
         ],
-        shrinkWrap: true,
       );
 
   Widget _createFrontLayer(BuildContext context) => Container(

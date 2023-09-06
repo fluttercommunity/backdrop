@@ -8,7 +8,7 @@ class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
 
   @override
-  _FilterState createState() => _FilterState();
+  State<Filter> createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
