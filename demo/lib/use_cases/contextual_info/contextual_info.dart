@@ -23,6 +23,7 @@ class ContextualInfo extends StatelessWidget {
   }
 
   Widget _createBackLayer(BuildContext context) => ListView(
+        shrinkWrap: true,
         children: const [
           ListTile(
             leading: Column(
@@ -75,7 +76,6 @@ class ContextualInfo extends StatelessWidget {
             ),
           ),
         ],
-        shrinkWrap: true,
       );
 
   Widget _createFrontLayer(BuildContext context) => Container(
