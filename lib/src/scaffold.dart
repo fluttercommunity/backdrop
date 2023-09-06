@@ -620,48 +620,52 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       );
 
   Widget _buildBody(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _willPopCallback(context),
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: widget.appBar,
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                _buildBackPanel(),
-                PositionedTransition(
-                  rect: _getPanelAnimation(context, constraints),
-                  child: _buildFrontPanel(context),
-                ),
-              ],
-            );
-          },
-        ),
-        floatingActionButton: widget.floatingActionButton,
-        floatingActionButtonLocation: widget.floatingActionButtonLocation,
-        floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-        persistentFooterButtons: widget.persistentFooterButtons,
-        drawer: widget.drawer,
-        onDrawerChanged: widget.onDrawerChanged,
-        endDrawer: widget.endDrawer,
-        onEndDrawerChanged: widget.onEndDrawerChanged,
-        bottomNavigationBar: widget.bottomNavigationBar,
-        bottomSheet: widget.bottomSheet,
-        backgroundColor: widget.backgroundColor,
-        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-        primary: widget.primary,
-        drawerDragStartBehavior: widget.drawerDragStartBehavior,
-        extendBody: widget.extendBody,
-        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-        drawerScrimColor: widget.drawerScrimColor,
-        drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-        drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
-        endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
-        restorationId: widget.restorationId,
+    final bodyWidget = Scaffold(
+      key: scaffoldKey,
+      appBar: widget.appBar,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              _buildBackPanel(),
+              PositionedTransition(
+                rect: _getPanelAnimation(context, constraints),
+                child: _buildFrontPanel(context),
+              ),
+            ],
+          );
+        },
       ),
+      floatingActionButton: widget.floatingActionButton,
+      floatingActionButtonLocation: widget.floatingActionButtonLocation,
+      floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+      persistentFooterButtons: widget.persistentFooterButtons,
+      drawer: widget.drawer,
+      onDrawerChanged: widget.onDrawerChanged,
+      endDrawer: widget.endDrawer,
+      onEndDrawerChanged: widget.onEndDrawerChanged,
+      bottomNavigationBar: widget.bottomNavigationBar,
+      bottomSheet: widget.bottomSheet,
+      backgroundColor: widget.backgroundColor,
+      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+      primary: widget.primary,
+      drawerDragStartBehavior: widget.drawerDragStartBehavior,
+      extendBody: widget.extendBody,
+      extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+      drawerScrimColor: widget.drawerScrimColor,
+      drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+      drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+      endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+      restorationId: widget.restorationId,
     );
+
+    return widget.concealBacklayerOnBackButton
+        ? WillPopScope(
+            onWillPop: () => _willPopCallback(context),
+            child: bodyWidget,
+          )
+        : bodyWidget;
   }
 
   Container _buildBackLayerScrim() => Container(
