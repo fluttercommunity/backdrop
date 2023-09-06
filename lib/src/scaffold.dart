@@ -217,6 +217,11 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool maintainBackLayerState;
 
+  /// Specifiy whether to conceal [backLayer] when back button pressed.
+  ///
+  /// Default to `true`.
+  final bool concealBacklayerOnBackButton;
+
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
 
   /// A key to use when building the [Scaffold].
@@ -331,6 +336,7 @@ class BackdropScaffold extends StatefulWidget {
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
     this.maintainBackLayerState = true,
+    this.concealBacklayerOnBackButton = true,
     this.scaffoldKey,
     this.appBar,
     this.floatingActionButton,
@@ -600,63 +606,67 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
-  Future<bool> _willPopCallback(BuildContext context) async {
-    if (isBackLayerRevealed) {
-      concealBackLayer();
-      return false;
-    }
-    return true;
-  }
-
   ColorTween _buildBackLayerScrimColorTween() => ColorTween(
         begin: Colors.transparent,
         end: widget.backLayerScrim,
       );
 
-  Widget _buildBody(BuildContext context) {
+  Widget _wrapWillPopScope(BuildContext context, {required Widget child}) {
+    if (!widget.concealBacklayerOnBackButton) return child;
     return WillPopScope(
-      onWillPop: () => _willPopCallback(context),
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: widget.appBar,
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                _buildBackPanel(),
-                PositionedTransition(
-                  rect: _getPanelAnimation(context, constraints),
-                  child: _buildFrontPanel(context),
-                ),
-              ],
-            );
-          },
-        ),
-        floatingActionButton: widget.floatingActionButton,
-        floatingActionButtonLocation: widget.floatingActionButtonLocation,
-        floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-        persistentFooterButtons: widget.persistentFooterButtons,
-        drawer: widget.drawer,
-        onDrawerChanged: widget.onDrawerChanged,
-        endDrawer: widget.endDrawer,
-        onEndDrawerChanged: widget.onEndDrawerChanged,
-        bottomNavigationBar: widget.bottomNavigationBar,
-        bottomSheet: widget.bottomSheet,
-        backgroundColor: widget.backgroundColor,
-        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-        primary: widget.primary,
-        drawerDragStartBehavior: widget.drawerDragStartBehavior,
-        extendBody: widget.extendBody,
-        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-        drawerScrimColor: widget.drawerScrimColor,
-        drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-        drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
-        endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
-        restorationId: widget.restorationId,
-      ),
+      onWillPop: () async {
+        if (isBackLayerRevealed) {
+          concealBackLayer();
+          return false;
+        }
+        return true;
+      },
+      child: child,
     );
   }
+
+  Widget _buildBody(BuildContext context) => _wrapWillPopScope(
+        context,
+        child: Scaffold(
+          key: scaffoldKey,
+          appBar: widget.appBar,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              return Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  _buildBackPanel(),
+                  PositionedTransition(
+                    rect: _getPanelAnimation(context, constraints),
+                    child: _buildFrontPanel(context),
+                  ),
+                ],
+              );
+            },
+          ),
+          floatingActionButton: widget.floatingActionButton,
+          floatingActionButtonLocation: widget.floatingActionButtonLocation,
+          floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+          persistentFooterButtons: widget.persistentFooterButtons,
+          drawer: widget.drawer,
+          onDrawerChanged: widget.onDrawerChanged,
+          endDrawer: widget.endDrawer,
+          onEndDrawerChanged: widget.onEndDrawerChanged,
+          bottomNavigationBar: widget.bottomNavigationBar,
+          bottomSheet: widget.bottomSheet,
+          backgroundColor: widget.backgroundColor,
+          resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+          primary: widget.primary,
+          drawerDragStartBehavior: widget.drawerDragStartBehavior,
+          extendBody: widget.extendBody,
+          extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+          drawerScrimColor: widget.drawerScrimColor,
+          drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+          drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
+          endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
+          restorationId: widget.restorationId,
+        ),
+      );
 
   Container _buildBackLayerScrim() => Container(
       color: _backLayerScrimColorTween.evaluate(animationController),
