@@ -220,7 +220,6 @@ class BackdropScaffold extends StatefulWidget {
   /// Specifiy whether to conceal [backLayer] when back button pressed.
   ///
   /// Default to `true`.
-  final bool concealBacklayerOnBackButton;
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
 
@@ -336,7 +335,6 @@ class BackdropScaffold extends StatefulWidget {
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
     this.maintainBackLayerState = true,
-    this.concealBacklayerOnBackButton = true,
     this.scaffoldKey,
     this.appBar,
     this.floatingActionButton,
@@ -612,17 +610,16 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       );
 
   Widget _wrapWillPopScope(BuildContext context, {required Widget child}) {
-    if (!widget.concealBacklayerOnBackButton) return child;
-    return WillPopScope(
-      onWillPop: () async {
-        if (isBackLayerRevealed) {
-          concealBackLayer();
+    if (!isBackLayerRevealed) {
+      return WillPopScope(
+        onWillPop: () async {
+          revealBackLayer();
           return false;
-        }
-        return true;
-      },
-      child: child,
-    );
+        },
+        child: child,
+      );
+    }
+    return child;
   }
 
   Widget _buildBody(BuildContext context) => _wrapWillPopScope(
