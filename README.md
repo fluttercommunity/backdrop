@@ -22,6 +22,7 @@
 <a href="https://gitlab.com/daadu/backdrop/-/forks"><img src="https://img.shields.io/badge/dynamic/json?label=forks&amp;query=%24.forks_count&amp;url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F7578401&amp;logo=gitlab" alt="Gitlab forks"></a>
 </p>
 
+> **ARCHIVE NOTE**: Backdrop was based on the Material 2 Backdrop specification, which is no longer actively maintained. Material 3 does not include a Backdrop specification. As a result, this package is no longer actively developed and is limited to maintenance and critical fixes.
 
 [Backdrop](https://material.io/design/components/backdrop.html) implementation in flutter. 
 
